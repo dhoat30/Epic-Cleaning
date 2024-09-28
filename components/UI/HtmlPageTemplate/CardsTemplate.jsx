@@ -15,7 +15,6 @@ export default function CardsTemplate({
   const cards = cardsDataArr.map((item, index) => {
     return (
       <BlogCard
-        oneByOneAspectRatio={oneByOneAspectRatio}
         key={index}
         title={item.title}
         image={item.image}
@@ -26,6 +25,7 @@ export default function CardsTemplate({
         authorLastName={item.authorLastName}
         profilePic={item.profilePic}
         publishDate={item.publishDate}
+        categoryDetails={item.categoryDetails}
       />
     );
   });
@@ -34,11 +34,14 @@ export default function CardsTemplate({
       <Section>
         <Container maxWidth="xl">
           <div className="title-wrapper">
-            <Typography variant="h1">{heroData.title}</Typography>
+            <Typography variant="h1" align="center">
+              {heroData.title}
+            </Typography>
             <Typography
+              align="center"
               variant="h6"
               component="div"
-              className="subtitle"
+              className="subtitle mt-24"
               dangerouslySetInnerHTML={{ __html: heroData.description }}
             ></Typography>
           </div>
@@ -54,43 +57,33 @@ export default function CardsTemplate({
 }
 
 const Section = styled.section`
-  border-top: 1px solid var(--dark-outline-variant);
-  border-bottom: 1px solid var(--dark-outline-variant);
-  padding: 180px 0 40px 0;
-  background: var(--black);
+  border-top: 1px solid var(--light-outline-variant);
+  border-bottom: 1px solid var(--light-outline-variant);
+  padding: 120px 0 40px 0;
+  background: var(--light-surface-container);
   @media (max-width: 1020px) {
     padding: 80px 0 40px 0;
   }
   .title-wrapper {
-    max-width: 800px;
-    margin: 0 auto 0 0;
+    max-width: 900px;
+    margin: 0 auto 0 auto;
     .subtitle {
-      margin-top: 16px !important;
+      margin-top: 16px;
     }
-  }
-  .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1300px) {
-      gap: 16px;
-    }
-    @media (max-width: 950px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 600px) {
-      grid-template-columns: 1fr;
-    }
-    gap: 32px;
-    margin-top: 40px;
   }
 `;
 const CardsSection = styled.section`
-  padding: 80px 0;
+  padding: 40px 0;
   .cards-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    @media (max-width: 820px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    @media (max-width: 1100px) {
+      gap: 16px;
+
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 700px) {
       grid-template-columns: 1fr;
     }
   }

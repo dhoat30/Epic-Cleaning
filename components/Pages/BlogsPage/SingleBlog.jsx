@@ -167,6 +167,8 @@ const ContentSection = styled.section`
     ul {
       color: var(--gray-light);
       list-style: disc !important;
+      margin-left: 32px;
+
       li {
         margin-bottom: 8px;
         font-weight: 350 !important;
@@ -180,6 +182,7 @@ const ContentSection = styled.section`
     ol {
       color: var(--gray-light);
       list-style: decimal !important;
+      margin-left: 32px;
       li {
         margin-bottom: 8px;
         font-weight: 400 !important;

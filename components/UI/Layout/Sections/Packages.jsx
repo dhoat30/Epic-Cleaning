@@ -79,7 +79,7 @@ export default function Packages({ title, packagesArray }) {
   });
 
   return (
-    <Section>
+    <Section id="packages">
       <Container>
         <Typography
           variant="h2"

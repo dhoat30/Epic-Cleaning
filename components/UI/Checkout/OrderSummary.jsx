@@ -5,7 +5,6 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
 export default function OrderSummary({ selectedPackages }) {
-  console.log(selectedPackages);
   // Calculate total price
   const totalPrice = selectedPackages.reduce(
     (acc, item) => acc + Number(item.acf.cta_section.service_price),

@@ -11,7 +11,6 @@ export default function USP({
   showTitle = false,
   statsArray,
 }) {
-  console.log(statsArray);
   return (
     <Section>
       <Container maxWidth="xl" className="container">

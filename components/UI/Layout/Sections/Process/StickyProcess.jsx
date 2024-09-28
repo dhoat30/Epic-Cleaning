@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-
+import { theme } from "@/utils/themeSettings";
+import { ThemeProvider } from "@mui/material/styles";
 export default function StickyProcess({ title, description, cards }) {
   if (!cards) return null;
 
@@ -24,7 +25,7 @@ export default function StickyProcess({ title, description, cards }) {
     }).scrollYProgress;
 
     // Use transform to map scroll progress to opacity
-    const opacity = useTransform(scroll, [0, 0.5, 1], [0.4, 1, 0.4]);
+    const opacity = useTransform(scroll, [0, 0.5, 1], [0.4, 1, 1]);
 
     return (
       <Link
@@ -45,7 +46,7 @@ export default function StickyProcess({ title, description, cards }) {
             <Typography
               variant="subtitle1"
               component="h3"
-              color="var(--light-on-primary-fixed-variant)"
+              color="var(--dark-on-secondary-container)"
             >
               {item.title}
             </Typography>
@@ -78,27 +79,29 @@ export default function StickyProcess({ title, description, cards }) {
   ));
 
   return (
-    <Section as={motion.section}>
-      <Container maxWidth="lg" className="container">
-        <div className="title-wrapper">
-          <Typography variant="h2" component="h2" className="title">
-            {title}
-          </Typography>
-          <div
-            className="description body1"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        </div>
-        <div className="steps-wrapper">
-          <div className="links-wrapper">{items}</div>
-          <div className="content-wrapper">{content}</div>
-        </div>
-      </Container>
-    </Section>
+    <ThemeProvider theme={theme}>
+      <Section as={motion.section}>
+        <Container maxWidth="lg" className="container">
+          <div className="title-wrapper">
+            <Typography variant="h2" component="h2" className="title">
+              {title}
+            </Typography>
+            <div
+              className="description body1"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          </div>
+          <div className="steps-wrapper">
+            <div className="links-wrapper">{items}</div>
+            <div className="content-wrapper">{content}</div>
+          </div>
+        </Container>
+      </Section>
+    </ThemeProvider>
   );
 }
 const Section = styled.section`
-  background: var(--light-surface-container-highest);
+  background: var(--dark-secondary-container);
   padding: 40px 0;
   margin-top: 8px;
   .title-wrapper {
@@ -112,6 +115,7 @@ const Section = styled.section`
       font-size: 1.4rem !important;
       p {
         font-size: 1.4rem !important;
+        color: var(--dark-on-surface-variant);
       }
       @media (max-width: 900px) {
         font-size: 1.2rem !important;
@@ -155,7 +159,7 @@ const Section = styled.section`
               gap: 16px;
             }
             .step-number {
-              background: var(--light-on-primary-fixed-variant);
+              background: var(--dark-on-secondary-container);
               display: flex;
               align-items: center;
               justify-content: center;
@@ -163,11 +167,11 @@ const Section = styled.section`
               font-weight: 700;
               justify-content: center;
               align-items: center;
-              border: 2px solid var(--light-on-primary-fixed-variant);
+              border: 2px solid var(--dark-on-secondary-container);
               width: 32px;
               height: 32px;
               border-radius: 50%;
-              color: white !important;
+              color: var(--dark-secondary-container) !important;
               @media (max-width: 500px) {
                 width: 50px;
                 height: 50px;
@@ -178,7 +182,7 @@ const Section = styled.section`
         }
         .border {
           margin-top: 8px;
-          border-top: 2px solid var(--light-on-primary-fixed-variant);
+          border-top: 2px solid var(--dark-on-secondary-container);
           height: 1px;
           @media (max-width: 600px) {
             margin-top: 16px;
@@ -198,7 +202,7 @@ const Section = styled.section`
         }
         .description {
           p {
-            color: var(--light-on-surface-variant);
+            color: var(--dark-on-surface-variant);
             font-size: 1rem;
             font-weight: 400 !important;
             line-height: 1.5rem;

@@ -1,10 +1,34 @@
-import styled from "@emotion/styled";
+"use client";
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-
-import ScrollableTabs from "../../Tabs/ScrollableTabs";
-export default function ServiceTabs({ title, subtitle, description, cards }) {
+import styled from "@emotion/styled";
+import ServiceTabsScrollable from "./ServiceTabsScrollable";
+export default function ServiceSelectorTabs({
+  subtitle = null,
+  title,
+  description,
+  residentialServicesData,
+  commercialServicesData,
+  industrialServicesData,
+}) {
+  const data = [
+    {
+      title: "Residential Cleaning",
+      data: residentialServicesData,
+      slug: "services",
+    },
+    {
+      title: "Commercial Cleaning",
+      data: commercialServicesData,
+      slug: "commercial-cleaning",
+    },
+    {
+      title: "Industrial Cleaning",
+      data: industrialServicesData,
+      slug: "industrial-cleaning",
+    },
+  ];
   return (
     <Section className="mt-8">
       <Container maxWidth="xl">
@@ -20,7 +44,6 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
             component="h2"
             className="title"
             align="center"
-            color="var(--dark-on-surface)"
           >
             {title}
           </Typography>
@@ -29,13 +52,12 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
             component="p"
             className="description"
             align="center"
-            color="var(--dark-on-surface-variant)"
           >
             {description}
           </Typography>
         </div>
         <div className="tabs mt-24">
-          <ScrollableTabs tabsData={cards} />
+          <ServiceTabsScrollable tabsData={data} />
         </div>
       </Container>
     </Section>
@@ -43,7 +65,8 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
 }
 
 const Section = styled.section`
-  background: var(--dark-secondary-container);
+  background: var(--light-surface-container-lowest);
+
   padding: 80px 0;
   @media (max-width: 900px) {
     padding: 40px 0;

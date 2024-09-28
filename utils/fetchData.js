@@ -1,12 +1,7 @@
-export const getPageData = async (slug) => {
-    let response = await fetch(`${process.env.url}/wp-json/wp/v2/pages?slug=${slug}&acf_format=standard`, {
-        next: { revalidate: 60 },
-    });
-    let data = await response.json();
-    return data
-}
+
 
 // new way of doing it 
+//get single post with slug 
 export const getSinglePostData = async (slug, apiRoute) => {
     let response = await fetch(`${process.env.url}/${apiRoute}?slug=${slug}&acf_format=standard`, {
         next: { revalidate: 60 },
@@ -14,6 +9,25 @@ export const getSinglePostData = async (slug, apiRoute) => {
     let data = await response.json();
     return data
 }
+
+// get single post data using post id 
+export const getSinglePostDataWithID = async (id, apiRoute) => {
+    let response = await fetch(`${process.env.url}/${apiRoute}/${id}?acf_format=standard`, {
+        next: { revalidate: 60 },
+    });
+    let data = await response.json();
+    return data
+}
+
+//get all posts 
+export const getAllPosts = async (apiRoute) => {
+    let response = await fetch(`${process.env.url}/${apiRoute}?acf_format=standard&per_page=100`, {
+        next: { revalidate: 60 },
+    });
+    let data = await response.json();
+    return data
+}
+
 
 export const getOptions = async () => {
     let fetchData = await fetch(`${process.env.url}/wp-json/options/all`, {

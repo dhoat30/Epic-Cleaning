@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 
 export default function ServiceSection({ data }) {
-  console.log(data);
   const section = data.map((item, index) => {
     return (
       <Section key={index}>

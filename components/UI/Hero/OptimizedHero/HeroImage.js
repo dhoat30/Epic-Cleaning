@@ -10,7 +10,7 @@ export default async function HeroImage({ image }) {
         }}>
             <Image
                 src={image.sizes.large}
-                alt={image.alt ? image.alt : heroData.title}
+                alt={image.alt}
                 fill
                 priority={true}
                 sizes="(max-width: 1200px) 100vw, 50vw"

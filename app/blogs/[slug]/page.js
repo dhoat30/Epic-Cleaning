@@ -1,4 +1,4 @@
-import { getSingleBlog } from '@/utils/fetchData'
+import { getSingleBlog, getOptions } from '@/utils/fetchData'
 import SingleBlog from '@/components/Pages/BlogsPage/SingleBlog'
 import { Suspense } from 'react'
 import styles from './Blogs.module.css'
@@ -7,6 +7,10 @@ import BlogHero from '@/components/UI/Hero/BlogHero'
 import Skeleton from '@/components/UI/Skeleton/Skeleton'
 import BottomSocialShare from '@/components/UI/SocialShare/BottomSocialShare'
 import BlogTableOfContent from '@/components/UI/TableOfContent/BlogTableOfContent'
+import Header from '@/components/UI/Header/Header'
+import Footer from '@/components/UI/Footer/Footer'
+import BreadCrumb from '@/components/UI/BreadCrumb/BreadCrumb'
+
 export async function generateMetadata({ params, searchParams }, parent) {
     // read route params
     const slug = params.slug
@@ -67,6 +71,8 @@ export default async function singleProject({ params }) {
 
     const slug = params.slug
     const data = await getSingleBlog(slug)
+    const options = await getOptions()
+
     if (!data.length) return null
 
     //meta info 
@@ -129,47 +135,54 @@ export default async function singleProject({ params }) {
     }
 
     return (
-        <main className={styles.blogMain} style={{ background: "var( --light-surface-container-low)" }}>
+        <>
+            <Header />
+            <main className={styles.blogMain} style={{ background: "var( --light-surface-container-low)" }}>
 
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
 
-            <section className={`container max-width-xl ${styles.wrapper}`}>
-                <BlogTableOfContent data={data[0].toc ? data[0].toc : null} />
-                <div className='main-content-wrapper'>
-                    <div className="title-wrapper">
-                        <h1
-                            className="title h1 bold"
-                        >
-                            {data[0].title.rendered}
-                        </h1>
+                <section className={`container max-width-xl ${styles.wrapper}`}>
+                    <BlogTableOfContent data={data[0].toc ? data[0].toc : null} />
+                    <div className='main-content-wrapper'>
+                        <BreadCrumb />
+                        <div className="title-wrapper">
+                            <h1
+                                className="title h1 bold"
+                            >
+                                {data[0].title.rendered}
+                            </h1>
+                        </div>
+
+
+                        <BlogMetaInfo
+                            className='meta mt-16'
+                            authorFirstName={metaData.authorFirstName}
+                            authorLastName={metaData.authorLastName}
+                            publishDate={publishedDate}
+                            categoryDetails={data[0].category_details}
+                        />
+                        {/* hero image */}
+                        <Suspense fallback={<Skeleton className="mt-16" height="56.25%" />}>
+                            <HeroSection slug={slug} />
+                        </Suspense>
+                        <SingleBlog content={data[0].content.rendered} />
+                        <BottomSocialShare
+                            url={postUrl}
+                            title={postTitle}
+                            description={postDescription}
+                        />
                     </div>
 
-
-                    <BlogMetaInfo
-                        className='meta mt-16'
-                        authorFirstName={metaData.authorFirstName}
-                        authorLastName={metaData.authorLastName}
-                        publishDate={publishedDate}
-                    />
-                    {/* hero image */}
-                    <Suspense fallback={<Skeleton className="mt-16" height="56.25%" />}>
-                        <HeroSection slug={slug} />
-                    </Suspense>
-                    <SingleBlog content={data[0].content.rendered} />
-                    <BottomSocialShare
-                        url={postUrl}
-                        title={postTitle}
-                        description={postDescription}
-                    />
-                </div>
-
-            </section>
+                </section>
 
 
-        </main>
+            </main>
+            <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
+        </>
+
     )
 }
 

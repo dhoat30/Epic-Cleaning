@@ -7,10 +7,10 @@ import React from "react";
 
 export default function Copyright() {
   return (
-    <PaperStyle elevation={0}>
+    <PaperStyle>
       <Container maxWidth="lg" className="content-wrapper">
         <Typography variant="body1" component="span">
-          © {new Date().getFullYear()} Webduel. All rights reserved
+          © {new Date().getFullYear()} Epic Cleaning. All rights reserved
         </Typography>
         <Link href="/privacy-policy">
           <Typography variant="body1" component="span">
@@ -26,8 +26,9 @@ export default function Copyright() {
     </PaperStyle>
   );
 }
-const PaperStyle = styled(Paper)`
+const PaperStyle = styled.div`
   padding: 8px 0;
+  background: var(--dark-primary-container);
   .content-wrapper {
     display: flex;
     justify-content: center;

@@ -30,7 +30,7 @@ export const theme = createTheme({
             },
         },
         h2: {
-            fontWeight: 700,
+            fontWeight: 600,
             color: "var(--dark-on-surface)",
             '@media (max-width:600px)': {
                 fontSize: '2.5rem',
@@ -121,7 +121,7 @@ export const lightTheme = createTheme({
             },
         },
         h2: {
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: '3rem',
             lineHeight: "3.4rem",
             color: "var(--light-on-surface)",
@@ -136,6 +136,11 @@ export const lightTheme = createTheme({
             fontWeight: 600,
             letterSpacing: "0.05rem",
             color: "var(--light-on-surface)",
+            '@media (max-width:600px)': {
+                fontSize: '1.7rem',
+                lineHeight: "2.2rem",
+
+            },
         },
         h4: {
             fontWeight: 500,
@@ -151,10 +156,7 @@ export const lightTheme = createTheme({
         },
 
         h6: {
-            fontWeight: 400,
-            letterSpacing: "0.02rem",
             color: "var(--light-on-surface)",
-
         },
         body1: {
 
@@ -176,7 +178,14 @@ export const lightTheme = createTheme({
                 root: {
                     borderRadius: "50px",
                     color: "var(--light-on-primary)",
-                }
+                    paddingRight: "32px",
+                    paddingLeft: "32px",
+                },
+                outlined: {
+                    border: "1px solid var(--light-primary)",
+                    color: "var(--light-primary)",
+
+                },
             }
         }
     }

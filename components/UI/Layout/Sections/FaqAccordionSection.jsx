@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import styled from "@emotion/styled";
 import CustomAccordion from "../../Accordion/CustomAccordion";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 function FaqAccordionSection({ title, description, qaData }) {
+  if (!qaData) return null;
   return (
     <Section>
       <Container maxWidth="xl">

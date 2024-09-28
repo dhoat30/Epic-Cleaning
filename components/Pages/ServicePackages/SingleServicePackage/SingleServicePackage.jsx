@@ -8,7 +8,6 @@ import Paper from "@mui/material/Paper";
 import ServiceCTA from "@/components/UI/CTA/ServiceCTA";
 import ServiceSection from "./ServiceSection";
 export default function SingleServicePackage({ data }) {
-  console.log(data);
   const heroImage = data?.acf?.hero_section?.image;
   const title = data?.acf?.hero_section?.title;
   const description = data?.acf?.hero_section?.description;

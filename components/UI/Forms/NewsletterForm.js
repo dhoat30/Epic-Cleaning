@@ -120,12 +120,7 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
 export default NewsletterForm
 const Container = styled.div`
 min-height: 114px !important; 
-    .title{ 
-        color: var(--light-on-surface-variant, #4C4639);
-        font-weight: 400;
-        letter-spacing: 2px; 
-        font-size: var(--material-theme--display--large);
-    }
+ 
 `
 
 const LoadingBtnStyle = styled(LoadingBtn)`
@@ -135,9 +130,4 @@ const LoadingBtnStyle = styled(LoadingBtn)`
 `
 const TextFieldStyle = styled(TextField)`
 width: 100% !important; 
-
-label { 
-    color: var(--dark-on-surface-variant, #CEC6B4);
-
-}
 `

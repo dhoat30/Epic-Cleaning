@@ -8,27 +8,16 @@ export default function BlogMetaInfo({
   authorLastName,
   publishDate,
   className,
+  categoryDetails,
 }) {
   return (
     <Wrapper className={`${className}`}>
-      <div className="profile-pic-wrapper">
-        <Image
-          src="https://data.webduel.co.nz/wp-content/uploads/2024/05/IMG_3022-scaled-e1715077130872-300x300-1-e1715560169333.jpg"
-          alt="Gurpreet Singh Dhoat's Photo"
-          fill
-        />
-      </div>
       <div className="text-wrapper">
-        <Typography
-          variant="subtitle1"
-          component="span"
-          className="meta-author-name"
-          color="var(--light-on-surface-variant)"
-        >
-          {authorFirstName} {authorLastName}
+        <Typography variant="body2" component="span">
+          {categoryDetails[0]?.name}
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="body2"
           component="span"
           className="divider"
           color="var(--light-on-surface-variant)"
@@ -36,7 +25,7 @@ export default function BlogMetaInfo({
           |
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="body2"
           component="span"
           color="var(--light-on-surface-variant)"
           className="meta-info"

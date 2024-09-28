@@ -8,8 +8,8 @@ import ProjectsSection from "./Sections/ProjectsSection";
 import ServiceTabs from "./Sections/ServiceTabs";
 import Packages from "./Sections/Packages";
 import FaqAccordionSection from "./Sections/FaqAccordionSection";
+import ServiceChecklist from "./Sections/ServiceChecklist";
 export default function Layout({ sections, projectsData }) {
-  console.log(sections);
   if (!sections) return null;
   const sectionsJSX = sections.map((section, index) => {
     if (section.acf_fc_layout === "zigzag_cards") {
@@ -60,7 +60,6 @@ export default function Layout({ sections, projectsData }) {
     }
 
     if (section.acf_fc_layout === "projects") {
-      console.log(section);
       return (
         <ProjectsSection
           key={index}
@@ -96,9 +95,20 @@ export default function Layout({ sections, projectsData }) {
     if (section.acf_fc_layout === "local_faq") {
       return (
         <FaqAccordionSection
+          key={index}
           title={section.section_title}
           description={section.section_description}
           qaData={section.items}
+        />
+      );
+    }
+    if (section.acf_fc_layout === "service_checklist") {
+      return (
+        <ServiceChecklist
+          key={index}
+          title={section.title}
+          description={section.description}
+          cards={section.items}
         />
       );
     }

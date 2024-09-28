@@ -6,7 +6,6 @@ import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 
 export default function ServicePackagePage({ pageData, servicesPackagesData }) {
-  console.log(servicesPackagesData);
   const heroData = {
     desktopImage: pageData.acf.hero_section.graphic.desktop,
     mobileImage: pageData.acf.hero_section.graphic.mobile,
@@ -14,7 +13,6 @@ export default function ServicePackagePage({ pageData, servicesPackagesData }) {
   };
 
   const servicePackages = servicesPackagesData?.map((item, index) => {
-    console.log(item);
     return (
       <ServicePackageCard
         className="card"

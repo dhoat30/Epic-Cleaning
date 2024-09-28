@@ -6,7 +6,6 @@ import HeroImage from "./HeroImage";
 import Video from "../../Video/Video";
 export default async function OptimizedHero({ data, heroUSP }) {
     if (!data) return null
-    console.log(heroUSP)
     const heroData = {
         subtitle: data.subtitle,
         title: data.title,
@@ -21,9 +20,9 @@ export default async function OptimizedHero({ data, heroUSP }) {
                 graphicComponent = <Video videoID={data.youtube_id} placeholderImage={data.image} showCompressedImage={true} />
             }
         }
-        else {
-            graphicComponent = <HeroImage image={data.image} />
-        }
+    }
+    else {
+        graphicComponent = <HeroImage image={data.image} />
     }
     return (
         <>
@@ -32,7 +31,6 @@ export default async function OptimizedHero({ data, heroUSP }) {
                     <HeroContent title={heroData.title} subtitle={heroData.subtitle} description={heroData.description} ctaArray={heroData.ctaArray} heroUSP={heroUSP} />
                     {graphicComponent}
                 </div>
-
             </section>
 
 

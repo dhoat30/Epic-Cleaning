@@ -73,13 +73,7 @@ function CustomTabPanel(props) {
               {ctaArray.length > 0 &&
                 ctaArray.map((cta, index) => {
                   return (
-                    <Link
-                      key={index}
-                      href={cta.url}
-                      className="cta"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+                    <Link key={index} href={cta.url} className="cta">
                       <Button
                         variant={`${index === 0 ? "contained" : "outlined"}`}
                         color="secondary"

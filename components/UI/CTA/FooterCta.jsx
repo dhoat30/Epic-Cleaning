@@ -6,39 +6,49 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import React from "react";
 
-export default function FooterCta() {
+export default function FooterCta({ title, description, cta }) {
   return (
     <Section component="section">
       <Container maxWidth="lg">
-        <Box className="wrapper">
-          <Typography
-            component="h6"
-            variant="h1"
-            sx={{ fontWeight: 700 }}
-            align="center"
-            color="white"
-            className="title"
-          >
-            Start your journey with webduel
-          </Typography>
-          <div className="button-wrapper">
-            <Link href="/book-consultation">
-              <Button
-                size="large"
-                variant="contained"
-                sx={{
-                  background: "white",
-                  color: "#0000ee",
-                  "&:hover": {
-                    background: "#eaeaea",
-                  },
-                }}
-              >
-                Book free consultation
-              </Button>
-            </Link>
+        <div className="wrapper">
+          <div className="content-wrapper">
+            <Typography
+              component="h2"
+              variant="h2"
+              sx={{ fontWeight: 700 }}
+              align="center"
+              color="white"
+              className="title"
+            >
+              {title}
+            </Typography>
+            <Typography
+              component="p"
+              variant="body1"
+              align="center"
+              color="white"
+              className="description mt-16"
+            >
+              {description}
+            </Typography>
+            <div className="button-wrapper">
+              <Link href={cta.url}>
+                <Button
+                  size="large"
+                  variant="contained"
+                  sx={{
+                    background: "white",
+                    color: "var(--dark-on-primary)",
+                    "&:hover": {
+                      background: "#eaeaea",
+                    },
+                  }}
+                >
+                  {cta.title}
+                </Button>
+              </Link>
 
-            <Link href="/get-a-quote">
+              {/* <Link href="/get-a-quote">
               <Button
                 size="large"
                 variant="outlined"
@@ -50,36 +60,34 @@ export default function FooterCta() {
                   },
                 }}
               >
-                Get instant quote
+                {cta.label}
               </Button>
-            </Link>
+            </Link> */}
+            </div>
           </div>
-        </Box>
+        </div>
       </Container>
     </Section>
   );
 }
 const Section = styled(Box)`
-  padding: 120px 0;
+  padding: 56px 0;
   @media (max-width: 900px) {
-    padding: 56px 0;
+    padding: 24px 0;
   }
   .wrapper {
     padding: 120px 0;
-    background: rgb(85, 24, 167);
-    background: radial-gradient(
-      circle,
-      rgba(85, 24, 167, 1) 0%,
-      rgba(139, 49, 198, 1) 100%
-    );
+    background: linear-gradient(97deg, #147ae7 2.05%, #000872 98.81%);
     border-radius: 32px;
     @media (max-width: 900px) {
       padding: 56px 16px;
     }
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
     .title {
-      @media (max-width: 900px) {
-        font-size: 3rem;
-      }
+      font-weight: 600;
     }
     .button-wrapper {
       display: flex;

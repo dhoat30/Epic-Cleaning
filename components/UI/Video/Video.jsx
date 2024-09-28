@@ -19,7 +19,6 @@ export default function Video({
   useEffect(() => {
     setIsClient(true);
   }, []);
-  console.log(videoID);
   // Function to load and play the video
   const handleImageClick = () => {
     setVideoLoaded(true);

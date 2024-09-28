@@ -79,7 +79,7 @@ export default function TextLink({ label, url, color, className, size }) {
       >
         <Typography
           component={motion.div}
-          variant={size === "sm" ? "body1" : "h6"}
+          variant={size === "sm" ? "body1" : "body1"}
           className="label"
           color={color ? color : "white"}
         >
@@ -93,7 +93,7 @@ export default function TextLink({ label, url, color, className, size }) {
         </Typography>
         {!isHovered ? (
           <svg
-            width={size === "sm" ? "20" : "25"}
+            width={size === "sm" ? "20" : "20"}
             viewBox="0 0 93 66"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

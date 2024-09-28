@@ -18,7 +18,9 @@ export default function BlogCard({
   authorLastName,
   profilePic,
   publishDate,
+  categoryDetails,
 }) {
+  console.log("categoryDetails", categoryDetails);
   let publishedDate = new Date(publishDate);
   // Create an array of abbreviated month names
   const months = [
@@ -55,30 +57,7 @@ export default function BlogCard({
           )}
         </Box>
       </Link>
-      <div className="meta-info-wrapper">
-        <div className="profile-pic-wrapper">
-          <Image
-            src="https://data.webduel.co.nz/wp-content/uploads/2024/05/IMG_3022-scaled-e1715077130872-300x300-1-e1715560169333.jpg"
-            alt="Gurpreet Singh Dhoat's Photo"
-            fill
-          />
-        </div>
-        <div className="text-wrapper">
-          <Typography
-            variant="body2"
-            component="span"
-            className="meta-author-name"
-          >
-            {authorFirstName} {authorLastName}
-          </Typography>
-          <Typography variant="body1" component="span" className="divider">
-            |
-          </Typography>
-          <Typography variant="body2" component="span" className="meta-info">
-            {formattedDate}
-          </Typography>
-        </div>
-      </div>
+
       <Box className="content-wrapper">
         <Typography
           variant="h5"
@@ -88,6 +67,27 @@ export default function BlogCard({
         >
           {title}
         </Typography>
+        <div className="meta-info-wrapper">
+          <Typography variant="body2" component="span">
+            {categoryDetails[0]?.name}
+          </Typography>
+
+          <div className="text-wrapper">
+            <Typography
+              variant="body2"
+              component="span"
+              className="meta-author-name"
+            >
+              {authorFirstName} {authorLastName}
+            </Typography>
+            <Typography variant="body1" component="span" className="divider">
+              |
+            </Typography>
+            <Typography variant="body2" component="span" className="meta-info">
+              {formattedDate}
+            </Typography>
+          </div>
+        </div>
         {description && (
           <Typography
             variant="body1"
@@ -103,7 +103,7 @@ export default function BlogCard({
               url={ctaLink}
               className="cta"
               label={ctaLabel}
-              color="var(--dark-secondary)"
+              color="var(--light-secondary)"
             ></TextLink>
           </Box>
         )}
@@ -113,7 +113,7 @@ export default function BlogCard({
 }
 const ContainerStyled = styled(Paper)`
   border-radius: 12px;
-  background: var(--dark-surface-container-low);
+  background: var(--light-surface-container);
   .image-wrapper {
     position: relative;
     width: 100%;
@@ -133,10 +133,10 @@ const ContainerStyled = styled(Paper)`
   .meta-info-wrapper {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px 24px 0 24px;
-    @media (max-width: 450px) {
-      padding: 16px 16px 0 16px;
+    gap: 2px;
+    @media (max-width: 370px) {
+      flex-direction: column;
+      align-items: flex-start;
     }
     .profile-pic-wrapper {
       position: relative;
@@ -171,10 +171,10 @@ const ContainerStyled = styled(Paper)`
     .title {
     }
     .description {
-      margin-top: 16px;
+      margin-top: 8px;
     }
     .button-wrapper {
-      margin-top: 24px;
+      margin-top: 16px;
     }
   }
 `;

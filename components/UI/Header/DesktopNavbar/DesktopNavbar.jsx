@@ -157,9 +157,9 @@ function DesktopNavbar() {
               >
                 {menuItems}
               </Box>
-              <Link href="/website-design-price-calculator">
+              <Link href="/get-a-quote">
                 <Button size="large" variant="contained">
-                  Website price calculator
+                  GET A QUOTE
                 </Button>
               </Link>
             </div>

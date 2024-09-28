@@ -5,59 +5,51 @@ import Link from "next/link";
 import EmailCircleIcon from "../Icons/EmailCircleIcon";
 import PhoneCircleIcon from "../Icons/PhoneCircleIcon";
 import LocationCircleIcon from "../Icons/LocationCircleIcon";
-export default function ContactInfo() {
-  return (
-    <Container>
-      <div className="info-wrapper">
-        <PhoneCircleIcon />
-        <Link href="tel: 07 572 2255">
-          <Typography variant="body1" component="span">
-            07 572 2255
-          </Typography>
-        </Link>
-      </div>
-      <div className="info-wrapper">
-        <EmailCircleIcon />
-        <Link href="mailto: info@webduel.co.nz">
-          <Typography variant="body1" component="span">
-            info@webduel.co.nz
-          </Typography>
-        </Link>
-      </div>
-      <div className="info-wrapper">
-        <LocationCircleIcon />
-        <Link
-          href="https://www.google.com/search?q=webduel&oq=webduel+&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIKCAEQABiABBiiBDIGCAIQRRg9MgYIAxBFGDwyBggEEEUYPDIGCAUQRRg8MgYIBhBFGD0yBggHEEUYQdIBCDEzNjNqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8"
-          target="_blank"
+import Image from "next/image";
+export default function ContactInfo({ contactInfo }) {
+  if (contactInfo.info.length === 0) return null;
+  const infoComponent = contactInfo.info.map((info, index) => {
+    return (
+      <Link href={info.url} key={index} className="info-wrapper">
+        <span
+          className="image-wrapper"
+          style={{ width: "32px", height: "32px" }}
         >
-          <Typography variant="body1" component="span">
-            <span>558D Papamoa Beach Road</span> <br />
-            <span>Papamoa, Tauranga 3118</span>
-          </Typography>
-        </Link>
-      </div>
-    </Container>
-  );
+          <Image src={info.icon.url} alt={info.icon.alt} fill />
+        </span>
+
+        <Typography variant="body1" component="span" className="label">
+          {info.label}
+        </Typography>
+      </Link>
+    );
+  });
+  return <Container>{infoComponent}</Container>;
 }
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 20px;
+  margin-top: 16px;
   .info-wrapper {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+
     gap: 12px;
     cursor: pointer;
+    .label {
+      position: relative;
+      top: 3px;
+    }
     &:hover {
       svg {
         circle {
-          fill: var(--dark-secondary);
+          fill: var(--light-primary);
         }
       }
       span,
       div {
-        color: var(--dark-secondary);
+        color: var(--light-primary);
       }
     }
   }

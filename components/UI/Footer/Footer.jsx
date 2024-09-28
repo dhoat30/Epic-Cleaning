@@ -14,7 +14,13 @@ import YouTube from "@mui/icons-material/YouTube";
 import Copyright from "./Copyright";
 import ContactInfo from "./ContactInfo";
 import FooterCta from "../CTA/FooterCta";
-export default function Footer({ footerCtaData, showFooterCta = true }) {
+export default function Footer({
+  footerCtaData,
+  showFooterCta = true,
+  certifications,
+  contactInfo,
+  socialData,
+}) {
   return (
     <>
       {showFooterCta && (
@@ -26,34 +32,45 @@ export default function Footer({ footerCtaData, showFooterCta = true }) {
       )}
 
       <FooterSection>
-        <ContainerStyled maxWidth="lg" className="row">
+        <ContainerStyled maxWidth="xl" className="row">
           {/* logo wrapper */}
           <div className="footer-wrapper">
-            <div className="logo-wrapper">
-              <Link href="/">
-                <Image
-                  src="/logo.png"
-                  width="120"
-                  height="120"
-                  alt="Webduel Logo"
-                />
-              </Link>
+            <div className="certification-wrapper">
               <Typography
-                variant="body1"
-                component="p"
-                sx={{ marginTop: "16px" }}
+                variant="h6"
+                component="div"
+                sx={{ marginBottom: "8px" }}
               >
-                A full-cycle digital service agency. We do from design to
-                end-to-end development to maintenance.
+                Certifications
               </Typography>
-              <div className="newsletter-wrapper" style={{ marginTop: "24px" }}>
+              <div className="certification-logos flex flex-wrap gap-8 align-center">
+                {certifications.cards.map((item, index) => {
+                  return (
+                    <Image
+                      key={index}
+                      src={item.certification_image.url}
+                      alt={item.alt}
+                      width={item.certification_image.width}
+                      height={item.certification_image.height}
+                    />
+                  );
+                })}
+              </div>
+              <div className="newsletter-wrapper mt-40">
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{ marginBottom: "8px" }}
+                >
+                  Get cleaning tips & tricks every month
+                </Typography>
                 <NewsletterForm
                   className="newsletter-form"
                   formName="Newsletter Form"
                   formType="newsletter-form"
                   emailRoute={"/api/newsletter-hubspot"}
                   emailTo="designer@webduel.co.nz"
-                  btnLabel="Subscribe to newsletter"
+                  btnLabel="Subscribe"
                 />
               </div>
             </div>
@@ -61,76 +78,97 @@ export default function Footer({ footerCtaData, showFooterCta = true }) {
               <Typography
                 variant="h6"
                 component="div"
-                color="white"
                 sx={{ marginBottom: "8px" }}
               >
-                Useful Links
+                Services
               </Typography>
-              <div component="ul" sx={{ margin: 0, padding: 0 }}>
+              <ul component="ul" sx={{ margin: 0, padding: 0 }}>
                 {footerLinks.map((link, index) => {
                   return (
                     <li key={index}>
-                      <Link href={link.url}>
-                        <Typography
-                          variant="body1"
-                          component="span"
-                          sx={{ padding: "6px 0", display: "block" }}
-                        >
-                          {link.label}
-                        </Typography>
+                      <Link href={link.url} className="body2">
+                        {link.label}
                       </Link>
                     </li>
                   );
                 })}
-              </div>
+              </ul>
+            </div>
+            <div className="footer-useful-links links-container">
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ marginBottom: "8px" }}
+              >
+                Commercial
+              </Typography>
+              <ul component="ul" sx={{ margin: 0, padding: 0 }}>
+                {footerLinks.map((link, index) => {
+                  return (
+                    <li key={index}>
+                      <Link href={link.url} className="body2">
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="footer-useful-links links-container">
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ marginBottom: "8px" }}
+              >
+                Information
+              </Typography>
+              <ul component="ul" sx={{ margin: 0, padding: 0 }}>
+                {footerLinks.map((link, index) => {
+                  return (
+                    <li key={index}>
+                      <Link href={link.url} className="body2">
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
             <div className="contact-wrapper">
               <div className="contact-section">
                 <Typography
                   variant="h6"
                   component="div"
-                  color="white"
                   sx={{ marginBottom: "8px" }}
                 >
                   Contact
                 </Typography>
-                <ContactInfo />
+                <ContactInfo contactInfo={contactInfo} />
               </div>
 
               <div className="social-wrapper">
-                <Typography
-                  variant="h6"
-                  component="div"
-                  color="white"
-                  sx={{ marginBottom: "8px" }}
-                >
+                <Typography variant="h6" component="div">
                   Follow Us
                 </Typography>
-                <div className="social-links">
-                  <Link
-                    aria-label="Facebook Link"
-                    href="https://www.facebook.com/webduel"
-                    target="_blank"
-                  >
-                    <FacebookIcon sx={{ fontSize: 32, color: "#959DA5" }} />
-                  </Link>
-                  {/* <Link href="https://www.facebook.com/webduel">
-                <Instagram sx={{ fontSize: 32, color: "#959DA5" }} />
-              </Link> */}
-                  <Link
-                    aria-label="Youtube Link Link"
-                    href="https://www.youtube.com/@webduel"
-                    target="_blank"
-                  >
-                    <YouTube sx={{ fontSize: 32, color: "#959DA5" }} />
-                  </Link>
-                  <Link
-                    aria-label="Github Link"
-                    href="https://github.com/dhoat30"
-                    target="_blank"
-                  >
-                    <GitHub sx={{ fontSize: 32, color: "#959DA5" }} />
-                  </Link>
+                <div className="social-links mt-8">
+                  {socialData.length > 0 &&
+                    socialData.map((social, index) => {
+                      return (
+                        <Link
+                          key={index}
+                          aria-label={social.social_media_name}
+                          href={social.link}
+                          target="_blank"
+                        >
+                          <Image
+                            src={social.social_media_icon.url}
+                            alt={social.social_media_name}
+                            width="32"
+                            height="32"
+                          />
+                        </Link>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -153,31 +191,41 @@ const ContainerStyled = styled(Container)`
   .footer-wrapper {
     display: grid;
     gap: 40px;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 900px) {
+    justify-content: space-between;
+    grid-template-columns: 250px 200px 200px 200px 250px;
+    @media (max-width: 1366px) {
+      gap: 24px;
+    }
+    @media (max-width: 1250px) {
+      grid-template-columns: 250px 1fr 1fr 1fr;
+    }
+    @media (max-width: 1000px) {
+      gap: 32px;
+      grid-template-columns: 250px 1fr 1fr;
+    }
+    @media (max-width: 800px) {
+      gap: 32px;
       grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
+      gap: 24px;
       grid-template-columns: 1fr;
     }
-    .logo-wrapper {
-      max-width: 300px;
-    }
     .links-container {
-      a {
-        color: var(--dark-on-surface);
-      }
-    }
-  }
-  .footer-useful-links {
-    a {
-      &:hover {
-        span {
-          color: var(--dark-secondary);
+      ul {
+        list-style: none !important;
+        a {
+          display: block;
+          margin: 0;
+          padding: 6px 0;
+          &:hover {
+            color: var(--light-primary);
+          }
         }
       }
     }
   }
+
   .contact-wrapper {
     /* @media (max-width: 900px) {
       grid-column: span 2;
