@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={`${work_sans.variable}`}>
-      <GoogleTagManager gtmId="GTM-N347V98" />
+      <GoogleTagManager gtmId="GTM-NDXM6D" />
       <body >
         <ThemeProvider theme={lightTheme}>
 

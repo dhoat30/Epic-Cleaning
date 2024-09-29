@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import style from "@emotion/styled";
 
+// Styled Accordion components
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -19,6 +20,7 @@ const Accordion = styled((props) => (
     display: "none",
   },
 }));
+
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary expandIcon={<ArrowForwardIosSharpIcon />} {...props} />
 ))(({ theme }) => ({
@@ -26,8 +28,6 @@ const AccordionSummary = styled((props) => (
     theme.palette.mode === "dark"
       ? "rgba(255, 255, 255, .05)"
       : "rgba(0, 0, 0, .03)",
-
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {},
   "& .MuiAccordionSummary-content": {
     marginLeft: theme.spacing(1),
   },
@@ -39,22 +39,24 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function CustomAccordion({ qaData }) {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState(false);
+
   if (!qaData) return null;
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false); // Ensure the correct panel is set
   };
 
   const faqList = qaData.map((item, index) => {
-    const accordionPanel = `panel${index}`;
+    const accordionPanel = `panel${index}`; // Ensure unique panel ID for each accordion
     return (
       <Accordion
+        key={index}
+        expanded={expanded === accordionPanel} // Expanded if the panel is the same as the current state
+        onChange={handleChange(accordionPanel)} // Handle panel change
         sx={{
           background: "background: var(--light-surface-container-low)",
         }}
-        key={index}
-        expanded={expanded === accordionPanel}
-        onChange={handleChange(accordionPanel)}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -69,8 +71,8 @@ export default function CustomAccordion({ qaData }) {
       </Accordion>
     );
   });
+
   return <Container>{faqList}</Container>;
 }
-const Container = style.div`
 
-`;
+const Container = style.div``;

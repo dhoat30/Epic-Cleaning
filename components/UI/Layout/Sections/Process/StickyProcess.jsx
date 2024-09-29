@@ -7,6 +7,21 @@ import Link from "next/link";
 import { theme } from "@/utils/themeSettings";
 import { ThemeProvider } from "@mui/material/styles";
 
+// Custom hook to handle scroll and opacity
+const useScrollAndOpacity = (ref) => {
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start center", "end center"], // Adjust this if needed for better results
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 0.7]);
+
+  // Logging scroll progress for debugging
+  console.log("Scroll progress:", scrollYProgress);
+
+  return { opacity };
+};
+
 export default function StickyProcess({ title, description, cards }) {
   const [linkActive, setLinkActive] = useState({ activeIndex: 0 });
 
@@ -76,13 +91,7 @@ export default function StickyProcess({ title, description, cards }) {
 
 const ScrollAndOpacityWrapper = React.forwardRef(
   ({ item, index, setLinkActive, activeIndex }, ref) => {
-    const { scrollYProgress } = useScroll({
-      target: ref,
-      offset: ["start center", "end center"],
-    });
-
-    // Use transform to map scroll progress to opacity
-    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 1]);
+    const { opacity } = useScrollAndOpacity(ref); // Using the custom hook
 
     return (
       <Link
@@ -211,7 +220,7 @@ const Section = styled.section`
     .content-wrapper {
       .content {
         height: 100vh;
-        padding-top: 30vh;
+        padding-top: 150px;
 
         margin-top: 40px;
         .title {

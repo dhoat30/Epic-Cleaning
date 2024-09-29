@@ -50,7 +50,7 @@ export default function TechLogos({ data }) {
         style={{ objectFit: "cover" }}
         key={index}
         src={item.logo.url}
-        alt={item.logo.alt}
+        alt={item.logo.alt ? item.logo.alt : "logo"}
         width={83}
         height={83}
       />
