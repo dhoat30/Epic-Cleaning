@@ -74,6 +74,8 @@ const Section = styled.section`
 `;
 const CardsSection = styled.section`
   padding: 40px 0;
+  background: var(--light-surface-container-lowest);
+
   .cards-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

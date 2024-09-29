@@ -14,7 +14,8 @@ export default function BreadCrumb() {
     <Nav aria-label="breadcrumb" className="flex mb-8">
       {/* Home Link */}
       <Link href="/">
-        <span className="link-text"> Home </span>
+        <span className="link-text">Home</span>
+        <span>&nbsp;/&nbsp;</span>
       </Link>
 
       {/* Generate breadcrumb items dynamically */}
@@ -37,7 +38,6 @@ export default function BreadCrumb() {
               <span>{name}</span>
             ) : (
               <Link href={href}>
-                <span>&nbsp;/&nbsp;</span>
                 <span className="link-text">{name}</span>
                 <span>&nbsp;/&nbsp;</span>
               </Link>

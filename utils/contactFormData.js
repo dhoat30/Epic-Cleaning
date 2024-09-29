@@ -15,34 +15,11 @@ export const contactFormData = [
         errorMessage: 'Enter a valid email address'
     },
 
-
-
     {
-        id: 'services_needed',
-        label: 'Type of service',
-        type: 'select', // or 'radio' for single selection
-        options: [
-            { value: 'Website Optimization', label: 'Website Optimization' },
-            { value: 'UX', label: 'UX' },
-            { value: 'UI', label: 'UI' },
-            { value: 'Web Development', label: 'Web Development' },
-            { value: 'E-Commerce', label: 'E-Commerce' },
-            { value: 'Cloud Services', label: 'Cloud Services' },
-        ],
-        required: false,
-        multiple: true
+        id: 'phone', label: 'Phone', type: 'text', required: false,
     },
     {
-        id: 'budget',
-        label: 'Budget',
-        type: 'select', // or 'radio' for single selection
-        options: [
-            { value: '$500 - $2,000', label: '$500 - $2,000' },
-            { value: '$2,000 - $5,000', label: '$2,000 - $5,000' },
-            { value: '$5000 - $20,000', label: '$5000 - $20,000' },
-        ],
-        required: false,
-        multiple: false
+        id: 'address', label: 'Address', type: 'text', required: false,
     },
     {
         id: 'message', label: 'Message', type: 'textarea', required: false,

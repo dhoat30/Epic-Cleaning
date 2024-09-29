@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { lightTheme } from "@/utils/themeSettings";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import HeroImage from "@/components/UI/Hero/OptimizedHero/HeroImage";
 import WebsitePriceCalculatorForm from "@/components/UI/Forms/WebsitePriceCalculatorForm";
 import Video from "@/components/UI/Video/Video";
 import USP from "@/components/UI/USP/USP";
@@ -18,68 +19,50 @@ export default function WebsiteDesignPriceCalculator({
   data,
   websitePackageOffer,
 }) {
+  console.log(data.acf.hero_section.youtube_id);
+  let graphicComponent = null;
+  if (data.acf.hero_section.show_video) {
+    if (data.acf.hero_section.video_options === "enter_youtube_id") {
+      if (data.acf.hero_section.youtube_id) {
+        graphicComponent = (
+          <Video
+            videoID={data.acf.hero_section.youtube_id}
+            placeholderImage={data.acf.hero_section.image}
+            showCompressedImage={true}
+          />
+        );
+      }
+    }
+  } else {
+    graphicComponent = <HeroImage image={data.acf.hero_section.image} />;
+  }
   return (
     <ThemeProvider theme={lightTheme}>
       <Section>
         <Container maxWidth="lg" className="container">
-          <div className="form-container">
-            <WebsitePriceCalculatorForm className="row-max form-component" />
-          </div>
           <div className="content-container">
-            <Typography
-              variant="h5"
-              color="secondary.main"
-              component="div"
-              className="subtitle"
-            >
+            <Typography variant="h2" component="h1" className="subtitle">
               {data.acf.hero_section.subtitle}
             </Typography>
-            <Typography
-              variant="h4"
-              color="white"
-              component="h2"
-              className="title"
-            >
-              {data.acf.hero_section.title}
-            </Typography>
+
             <Typography
               variant="body1"
-              color="white"
               component="p"
-              className="description"
+              className="description mt-16"
             >
               {data.acf.hero_section.description}
             </Typography>
-            {data.acf.hero_section.graphic.desktop &&
-            !data.acf.hero_section.has_a_video ? (
-              <div
-                className="image-wrapper"
-                style={{
-                  paddingBottom: `${
-                    (data.acf.hero_section.graphic.desktop.height /
-                      data.acf.hero_section.graphic.desktop.width) *
-                    100
-                  }%`,
-                }}
-              >
-                <Image
-                  src={data.acf.hero_section.graphic.desktop.url}
-                  alt={data.acf.hero_section.graphic.desktop.alt}
-                  fill
-                  priority={true}
-                  sizes="(max-width: 1000px) 100vw, 40vw"
-                />
-              </div>
-            ) : (
-              <Video
-                placeholderImage={data.acf.hero_section.video.thumbnail}
-                videoID={data.acf.hero_section.video.video_id}
-              />
-            )}
+            <div className="graphic-wrapper mt-24">{graphicComponent}</div>
             {/* usp section  */}
             {websitePackageOffer && (
               <USP data={websitePackageOffer} showTitle={true} />
             )}
+          </div>
+          <div className="form-container">
+            <WebsitePriceCalculatorForm
+              className="row-max form-component"
+              title={data.acf.hero_section.title}
+            />
           </div>
         </Container>
       </Section>
@@ -88,7 +71,7 @@ export default function WebsiteDesignPriceCalculator({
 }
 const Section = styled.section`
   background: var(--light-surface-container-low);
-  padding: 120px 0 160px 0;
+  padding: 120px 0 40px 0;
   @media (max-width: 600px) {
     padding: 80px 0 24px 0;
   }
@@ -105,17 +88,21 @@ const Section = styled.section`
       padding: 0;
     }
     .form-container {
-      background: var(--light-surface-container);
-
+      border: 1px solid var(--light-outline-variant);
+      background: var(--light-surface-container-lowest);
       //remove the top border radius
       border-radius: 12px;
     }
     .content-container {
-      position: sticky;
-      top: 80px;
+      @media (min-width: 1000px) {
+        position: sticky;
+        top: 80px;
+      }
+
       padding: 24px;
-      background: var(--dark-surface-container);
+      background: var(--light-surface-container-lowest);
       border-radius: 12px;
+      border: 1px solid var(--light-outline-variant);
       @media (max-width: 600px) {
         padding: 24px 16px;
       }

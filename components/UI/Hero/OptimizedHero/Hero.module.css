@@ -4,7 +4,7 @@
   padding-bottom: 80px;
 }
 
-.container {
+.heroSection .container {
   align-items: center;
   gap: 56px;
   display: grid;
@@ -16,9 +16,24 @@
     padding-top: 80px;
     padding-bottom: 40px;
   }
-  .container {
+  .heroSection .container {
     height: auto;
     gap: 24px;
     grid-template-columns: 1fr;
   }
+}
+
+/* contact hero  */
+.contactHeroSection {
+  background: var(--light-surface-container-low);
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+.contactHeroSection .container {
+  align-items: center;
+  gap: 56px;
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: 600px 600px;
 }

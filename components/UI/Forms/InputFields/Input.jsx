@@ -246,7 +246,7 @@ export default function Input({
               label={option.label}
               onClick={() => handleChipClick(option.value)}
               variant={value.includes(option.value) ? "filled" : "outlined"}
-              color={"primary"}
+              color="secondary"
             />
           ))}
         </div>
@@ -264,7 +264,7 @@ export default function Input({
         label={label}
         type={type}
         value={value}
-        color={lightTheme ? "primary" : "secondary"}
+        color={lightTheme ? "secondary" : "secondary"}
         onChange={onChange}
         onBlur={onBlur}
         required={required}

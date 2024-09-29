@@ -7,7 +7,7 @@ import {
   ReactCompareSliderImage,
 } from "react-compare-slider";
 
-export default function BeforeAfter({ data, showTitle }) {
+export default function BeforeAfterMasonry({ data, showTitle }) {
   if (!data.afterImage || !data.beforeImage) return null;
   return (
     <Container>
@@ -24,16 +24,16 @@ export default function BeforeAfter({ data, showTitle }) {
             (data.beforeImage.height / data.beforeImage.width) * 100
           }%`,
         }}
-        itemOne={
+        itemTwo={
           <Image
-            src={data.beforeImage.sizes.large}
+            src={data.beforeImage.url}
             alt={data.beforeImage.alt ? data.beforeImage.alt : "Before"}
             fill
           />
         }
-        itemTwo={
+        itemOne={
           <Image
-            src={data.afterImage.sizes.large}
+            src={data.afterImage.url}
             alt={data.afterImage.alt ? data.afterImage.alt : "Before"}
             fill
           />
@@ -44,6 +44,8 @@ export default function BeforeAfter({ data, showTitle }) {
 }
 const Container = styled.section`
   .image-wrapper {
+    display: inline-block;
+
     width: 100%;
     position: relative;
     img {

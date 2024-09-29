@@ -6,9 +6,8 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { theme } from "@/utils/themeSettings";
 import { ThemeProvider } from "@mui/material/styles";
-export default function StickyProcess({ title, description, cards }) {
-  if (!cards) return null;
 
+export default function StickyProcess({ title, description, cards }) {
   const [linkActive, setLinkActive] = useState({ activeIndex: 0 });
 
   // Create a ref array for the content sections
@@ -17,45 +16,19 @@ export default function StickyProcess({ title, description, cards }) {
     (_, i) => contentRefs.current[i] ?? React.createRef()
   );
 
-  // Generate scroll progress and opacity for each item
-  const items = cards.map((item, index) => {
-    const scroll = useScroll({
-      target: contentRefs.current[index],
-      offset: ["start center", "end center"],
-    }).scrollYProgress;
+  if (!cards) return null;
 
-    // Use transform to map scroll progress to opacity
-    const opacity = useTransform(scroll, [0, 0.5, 1], [0.4, 1, 1]);
-
-    return (
-      <Link
-        className="step-wrapper link-wrapper"
-        key={index}
-        href={`#${item.title.replace(/\s/g, "-").toLowerCase()}`}
-        onClick={() => setLinkActive({ activeIndex: index })}
-      >
-        <motion.div
-          className="title"
-          style={{
-            opacity: opacity,
-            zIndex: index + 1,
-          }}
-        >
-          <div className="step-title-number-wrapper">
-            <div className="step-number">{index + 1}</div>
-            <Typography
-              variant="subtitle1"
-              component="h3"
-              color="var(--dark-on-secondary-container)"
-            >
-              {item.title}
-            </Typography>
-          </div>
-          <div className="border"></div>
-        </motion.div>
-      </Link>
-    );
-  });
+  // We now return a custom component that contains hooks for each card
+  const items = cards.map((item, index) => (
+    <ScrollAndOpacityWrapper
+      key={index}
+      index={index}
+      item={item}
+      setLinkActive={setLinkActive}
+      activeIndex={linkActive.activeIndex}
+      ref={contentRefs.current[index]}
+    />
+  ));
 
   const content = cards.map((item, index) => (
     <motion.div
@@ -100,6 +73,50 @@ export default function StickyProcess({ title, description, cards }) {
     </ThemeProvider>
   );
 }
+
+const ScrollAndOpacityWrapper = React.forwardRef(
+  ({ item, index, setLinkActive, activeIndex }, ref) => {
+    const { scrollYProgress } = useScroll({
+      target: ref,
+      offset: ["start center", "end center"],
+    });
+
+    // Use transform to map scroll progress to opacity
+    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 1]);
+
+    return (
+      <Link
+        className="step-wrapper link-wrapper"
+        href={`#${item.title.replace(/\s/g, "-").toLowerCase()}`}
+        onClick={() => setLinkActive({ activeIndex: index })}
+      >
+        <motion.div
+          className="title"
+          style={{
+            opacity: opacity,
+            zIndex: index + 1,
+          }}
+        >
+          <div className="step-title-number-wrapper">
+            <div className="step-number">{index + 1}</div>
+            <Typography
+              variant="subtitle1"
+              component="h3"
+              color="var(--dark-on-secondary-container)"
+            >
+              {item.title}
+            </Typography>
+          </div>
+          <div className="border"></div>
+        </motion.div>
+      </Link>
+    );
+  }
+);
+
+// Add display name for debugging
+ScrollAndOpacityWrapper.displayName = "ScrollAndOpacityWrapper";
+
 const Section = styled.section`
   background: var(--dark-secondary-container);
   padding: 40px 0;

@@ -67,8 +67,8 @@ export const headerLinks = [
 
     {
         id: 6,
-        label: "Contact",
-        url: "/contact"
+        label: "Gallery",
+        url: "/gallery"
     },
 ]
 

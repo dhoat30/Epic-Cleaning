@@ -217,7 +217,6 @@ ul {
 }
 .body1 strong {
   font-weight: 600 !important;
-  margin-top: 16px !important;
   display: inline-block;
   letter-spacing: 0;
   margin: 0;
@@ -246,7 +245,6 @@ ul {
   font-size: 0.9rem;
 }
 strong {
-  letter-spacing: 0.1rem;
   font-weight: 500;
 }
 

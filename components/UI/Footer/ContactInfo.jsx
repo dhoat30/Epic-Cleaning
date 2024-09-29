@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
@@ -6,7 +7,7 @@ import EmailCircleIcon from "../Icons/EmailCircleIcon";
 import PhoneCircleIcon from "../Icons/PhoneCircleIcon";
 import LocationCircleIcon from "../Icons/LocationCircleIcon";
 import Image from "next/image";
-export default function ContactInfo({ contactInfo }) {
+export default function ContactInfo({ contactInfo, className }) {
   if (contactInfo.info.length === 0) return null;
   const infoComponent = contactInfo.info.map((info, index) => {
     return (
@@ -24,13 +25,19 @@ export default function ContactInfo({ contactInfo }) {
       </Link>
     );
   });
-  return <Container>{infoComponent}</Container>;
+  return (
+    <Container className={className}>
+      <Typography variant="h6" component="div" sx={{ marginBottom: "8px" }}>
+        Contact
+      </Typography>
+      {infoComponent}
+    </Container>
+  );
 }
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
+  gap: 10px;
   .info-wrapper {
     display: grid;
     grid-template-columns: 32px 1fr;

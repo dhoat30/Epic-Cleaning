@@ -23,14 +23,14 @@ export async function generateMetadata({ params, searchParams }, parent) {
   if (data.length > 0) {
     const seoData = data[0].yoast_head_json
     return {
-      title: seoData.title,
-      description: seoData.description,
-      metadataBase: new URL('https://webduel.co.nz'),
+      title: seoData?.title,
+      description: seoData?.description,
+      metadataBase: new URL('https://epiccleaning.co.nz'),
       openGraph: {
-        title: seoData.title,
-        description: seoData.description,
-        url: 'https://webduel.co.nz',
-        siteName: 'webduel',
+        title: seoData?.title,
+        description: seoData?.description,
+        url: 'https://epiccleaning.co.nz',
+        siteName: 'Epic Cleaning Tauranga',
         images: [
           {
             url: seoData?.og_image && seoData?.og_image[0]?.url,
@@ -64,7 +64,7 @@ export default async function Page() {
   const residentialServicesIDs = postData[0]?.acf?.services_selector.residential_services
   // Fetching the residential cleaning services data based on IDs
   const residentialServices = await Promise.all(
-    residentialServicesIDs.map(async (id) => {
+    residentialServicesIDs?.map(async (id) => {
       return await getSinglePostDataWithID(id, "wp-json/wp/v2/residential-cleaning");
     })
   );
@@ -74,7 +74,7 @@ export default async function Page() {
   const commercialServicesIDs = postData[0]?.acf?.services_selector.commercial_services
   // Fetching the commercial cleaning services data based on IDs
   const commercialServices = await Promise.all(
-    commercialServicesIDs.map(async (id) => {
+    commercialServicesIDs?.map(async (id) => {
       return await getSinglePostDataWithID(id, "wp-json/wp/v2/commercial-cleaning");
     })
   );

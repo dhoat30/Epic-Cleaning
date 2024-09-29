@@ -11,7 +11,7 @@ export default function ServicesCardsTemplate({
   cards,
   archivePageSlug,
 }) {
-  console.log(cards);
+  if (!cards.length > 0) return null;
 
   const serviceCards = cards.map((item, key) => {
     console.log(item);

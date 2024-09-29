@@ -33,6 +33,9 @@ export default function Video({
               src={imageURL} // Replace with your placeholder image path
               fill
               alt={placeholderImage.alt}
+              style={{
+                objectFit: "cover", // cover, contain, none
+              }}
             />
             <ButtonStyled onClick={handleImageClick}>
               <PlayIcon />
@@ -82,14 +85,14 @@ const ButtonStyled = styled.div`
   z-index: 10;
 
   svg {
-    width: 56px;
-    height: 56px;
+    width: 72px;
+    height: 72px;
     cursor: pointer;
     circle {
-      stroke: white !important;
+      stroke: var(--light-primary) !important;
     }
     path {
-      fill: white;
+      fill: var(--light-primary);
     }
   }
 `;

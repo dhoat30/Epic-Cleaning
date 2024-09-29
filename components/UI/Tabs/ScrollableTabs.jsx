@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../../utils/themeSettings";
-import BeforeAfter from "@/components/Pages/OurWorkPage/SingleWorkPage/BeforeAfter";
+import BeforeAfter from "../BeforeAfterSlider/BeforeAfter";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 import Image from "next/image";

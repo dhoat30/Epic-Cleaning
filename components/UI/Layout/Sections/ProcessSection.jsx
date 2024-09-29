@@ -6,8 +6,9 @@ import StickyProcess from "./Process/StickyProcess";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function ProcessSection({ title, description, cards }) {
-  if (!cards) return null;
   const matches = useMediaQuery("(min-width:1000px)");
+
+  if (!cards) return null;
 
   return (
     <>

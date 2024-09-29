@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://webduel.co.nz
+Host: https://epiccleaning.co.nz/
 
 # Sitemaps
-Sitemap: https://webduel.co.nz/sitemap.xml
+Sitemap: https://epiccleaning.co.nz/sitemap.xml

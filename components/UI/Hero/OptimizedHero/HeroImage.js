@@ -9,11 +9,14 @@ export default async function HeroImage({ image }) {
                 }%`,
         }}>
             <Image
-                src={image.sizes.large}
+                src={image?.sizes?.large}
                 alt={image.alt}
                 fill
-                priority={true}
+                priority
                 sizes="(max-width: 1200px) 100vw, 50vw"
+                style={{
+                    objectFit: 'cover', // cover, contain, none
+                }}
             />
         </div>
     )

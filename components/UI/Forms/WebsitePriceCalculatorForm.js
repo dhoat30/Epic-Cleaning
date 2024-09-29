@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Input from './InputFields/Input'
-import { websitePriceCalculatorFieldsData } from "@/utils/websitePriceCalculatorFieldsData";
+import { getQuoteFormData } from "@/utils/getQuoteFormData";
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -18,7 +18,7 @@ import { calculateWebsitePrice } from "@/utils/calcultation/calculateWebsitePric
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-export default function WebsitePriceCalculatorForm({ className, formName = "Website Enquiry Form" }) {
+export default function WebsitePriceCalculatorForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
     const router = useRouter()
 
     const [formData, setFormData] = useState({ typeOfService: [] });
@@ -34,7 +34,7 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Webs
 
     // Update total price whenever formData changes
     useEffect(() => {
-        setTotalPrice(calculateWebsitePrice(formData, websitePriceCalculatorFieldsData));
+        setTotalPrice(calculateWebsitePrice(formData, getQuoteFormData));
     }, [formData]);
 
 
@@ -67,7 +67,7 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Webs
         const newErrors = {};
 
         // Loop through each field to check if it's required and valid
-        websitePriceCalculatorFieldsData.forEach(field => {
+        getQuoteFormData.forEach(field => {
             if (field.required && !formData[field.id]) {
                 // Set field as invalid if it's required but empty or invalid
                 newErrors[field.id] = true;
@@ -170,7 +170,7 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Webs
     }
 
 
-    const formInputs = websitePriceCalculatorFieldsData.map((field, index) => {
+    const formInputs = getQuoteFormData.map((field, index) => {
         const isSelectMultiple = field.type === "select" && field.multiple; // Example condition
 
         return <Input
@@ -203,8 +203,7 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Webs
                     <React.Fragment>
                         <div className="input-wrapper p-6">
                             <Typography variant="h4" component="h1" className="title">
-                                Instant Website Design Price Calculator
-                            </Typography>
+                                {title}                            </Typography>
                             {formInputs}
                             <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess} >Submit now</LoadingBtn>
 
@@ -214,24 +213,7 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Webs
 
                 </Box>
             </ContainerStyled>
-            {totalPrice > 0 &&
-                <TopPriceBar>
-                    <Container maxWidth="xl">
 
-                        <div className="wrapper">
-                            <div className="content">
-                                <Typography variant="h6" component="div" className="title">Total Price </Typography>
-                                <Typography variant="h4" component="div" className="price">${totalPrice} </Typography>
-                                <Typography variant="body1" component="div" className="gst" color="white">excl. GST </Typography>
-
-                            </div>
-                            <Link href="/book-consultation" className="button-wrapper">
-                                <Button variant="contained" color="secondary" size="large">Book free consultation</Button>
-                            </Link>
-                        </div>
-                    </Container>
-                </TopPriceBar>
-            }
 
         </>
 

@@ -80,8 +80,9 @@ function DesktopNavbar() {
         </Link>
 
         {item.subLinks && (
-          <Box
+          <Paper
             component="ul"
+            variant="outlined"
             className={`${
               showMenu === index ? "block" : "hidden"
             } sublinks-container`}
@@ -93,32 +94,20 @@ function DesktopNavbar() {
               display: `${showMenu === index ? "block" : "none"} `,
             }}
           >
-            <Paper sx={{ background: "white" }}>
-              {item.subLinks.map((subLink, subIndex) => (
-                <Box component="li" key={subIndex} className="text-left">
-                  <Link href={subLink.url}>
-                    <Typography
-                      className="subLink"
-                      component="span"
-                      variant="body1"
-                      sx={{
-                        display: "block",
-                        color: "black",
-                        py: 2,
-                        pr: 4,
-                        pl: 4,
-                        "&:hover": {
-                          color: "var(--light-on-surface)",
-                        },
-                      }}
-                    >
-                      {subLink.label}
-                    </Typography>
-                  </Link>
-                </Box>
-              ))}
-            </Paper>
-          </Box>
+            {item.subLinks.map((subLink, subIndex) => (
+              <li key={subIndex}>
+                <Link href={subLink.url}>
+                  <Typography
+                    className="subLink"
+                    component="span"
+                    variant="body1"
+                  >
+                    {subLink.label}
+                  </Typography>
+                </Link>
+              </li>
+            ))}
+          </Paper>
         )}
       </Box>
     );
@@ -188,6 +177,22 @@ const AppBarContainer = styled(AppBar)`
     justify-content: space-between;
   }
   .link {
+    a {
+      &:hover {
+        color: var(--light-primary);
+        svg {
+          color: var(--light-primary);
+        }
+      }
+      span {
+        &:hover {
+          color: var(--light-primary);
+          svg {
+            color: var(--light-primary);
+          }
+        }
+      }
+    }
     > a {
       display: flex;
       align-items: center;
@@ -196,34 +201,27 @@ const AppBarContainer = styled(AppBar)`
       @media (max-width: 1300px) {
         padding: 16px 16px;
       }
-      &:hover {
-        color: var(--light-on-surface);
-        svg {
-          color: var(--light-on-surface);
-        }
-      }
+
       &.active {
         &::before {
           content: "";
           position: absolute;
           width: 100%;
           height: 2px;
-          background: var(--light-secondary-fixed);
+          background: var(--light-primary);
           bottom: 0;
           left: 0;
         }
       }
-      span {
-      }
     }
   }
   .sublinks-container {
-    li {
-      &:hover {
-        span {
-          color: var(--light-primary);
-        }
-      }
+    border-radius: 12px;
+    padding: 8px 0;
+    .subLink {
+      display: inline-block;
+      padding: 8px 16px;
+      font-weight: 350;
     }
   }
 `;

@@ -39,9 +39,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function CustomAccordion({ qaData }) {
-  if (!qaData) return null;
   const [expanded, setExpanded] = React.useState("panel1");
-
+  if (!qaData) return null;
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };

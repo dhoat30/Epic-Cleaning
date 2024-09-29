@@ -7,23 +7,23 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    fastRefresh: true,
     compiler: {
         // Enables the styled-components SWC transform
         styledComponents: true
     },
     images: {
         remotePatterns: [{
-            protocol: 'http',
-            hostname: 'epic-cleaning.local',
+            protocol: 'https',
+            hostname: 'cms.epiccleaning.co.nz',
             port: '',
             pathname: '/**'
         }],
     },
     env: {
-        url: "http://epic-cleaning.local",
-        siteUrl: "https://webduel.co.nz",
+        url: "https://cms.epiccleaning.co.nz",
+        siteUrl: "https://epiccleaning.co.nz",
         name: "Epic Cleaning Tauranga",
-        darkLogo: "/dark-logo.png",
         gurpreet: "/gurpreet.jpg"
     },
     async redirects() {

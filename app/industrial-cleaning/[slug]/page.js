@@ -21,12 +21,12 @@ export async function generateMetadata({ params, searchParams }, parent) {
         return {
             title: seoData.title,
             description: seoData.description,
-            metadataBase: new URL('https://webduel.co.nz'),
+            metadataBase: new URL('https://epiccleaning.co.nz'),
             openGraph: {
                 title: seoData.title,
                 description: seoData.description,
-                url: 'https://webduel.co.nz',
-                siteName: 'webduel',
+                url: 'https://epiccleaning.co.nz',
+                siteName: 'Epic Cleaning Tauranga',
                 images: [
                     {
                         url: seoData?.og_image && seoData?.og_image[0]?.url,

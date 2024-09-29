@@ -6,7 +6,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import Slider from "react-slick";
 import Image from "next/image";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 var settings = {
   dots: false,
@@ -45,14 +44,13 @@ var settings = {
 };
 export default function TechLogos({ data }) {
   if (!data) return null;
-  const matches = useMediaQuery("(max-width:800px)");
   const logos = data.logos.map((item, index) => {
     return (
       <Image
         style={{ objectFit: "cover" }}
         key={index}
         src={item.logo.url}
-        alt={item.alt}
+        alt={item.logo.alt}
         width={83}
         height={83}
       />

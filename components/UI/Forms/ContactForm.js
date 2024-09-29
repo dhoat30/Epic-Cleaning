@@ -199,15 +199,13 @@ const Container = styled.form`
 }
 
 .input-wrapper{ 
-    background: var(--material-theme--sys--dark--surface-container);
 border-radius: 12px; 
-    max-width: 500px; 
-    margin: 40px auto 0 auto; 
+   
+    margin: 0 auto 0 auto; 
     @media(max-width: 500px){ 
         margin: 0 auto 0 auto;   
     }
     .Mui-error{ 
-        color: var(--dark-error); 
         font-size: 1rem;
     }
 }

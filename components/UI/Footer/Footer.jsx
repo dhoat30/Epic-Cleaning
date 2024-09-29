@@ -69,7 +69,7 @@ export default function Footer({
                   formName="Newsletter Form"
                   formType="newsletter-form"
                   emailRoute={"/api/newsletter-hubspot"}
-                  emailTo="designer@webduel.co.nz"
+                  emailTo="designer@epiccleaning.co.nz"
                   btnLabel="Subscribe"
                 />
               </div>
@@ -136,13 +136,6 @@ export default function Footer({
             </div>
             <div className="contact-wrapper">
               <div className="contact-section">
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{ marginBottom: "8px" }}
-                >
-                  Contact
-                </Typography>
                 <ContactInfo contactInfo={contactInfo} />
               </div>
 

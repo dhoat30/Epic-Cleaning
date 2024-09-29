@@ -14,7 +14,7 @@ import Link from "next/link";
 import ArrowIcon from "../../Icons/ArrowIcon";
 import { headerLinks } from "@/utils/headerLinks";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 
 import dynamic from "next/dynamic";
@@ -27,7 +27,6 @@ const DrawerHeader = style("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -35,30 +34,9 @@ const DrawerHeader = style("div")(({ theme }) => ({
 export default function MobileNavbar() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [showMenu, setShowMenu] = useState(-1);
-  const menuRef = useRef(null);
+  const [showMenu, setShowMenu] = useState(-1); // To track which submenu is open
   const pathname = usePathname();
-  // Function to check if the path matches the current page
-  const isActive = (path) => {
-    return pathname === path;
-  };
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(-1);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const toggleDropdown = (event, index) => {
-    event.preventDefault();
-    setShowMenu(index === showMenu ? -1 : index);
-  };
+  const router = useRouter(); // To programmatically navigate
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -68,30 +46,46 @@ export default function MobileNavbar() {
     setOpen(false);
   };
 
+  const handleClick = (event, item, index) => {
+    event.preventDefault();
+
+    // Check if the link has sublinks
+    if (item.subLinks && item.subLinks.length > 0) {
+      // If the same submenu is open, navigate to the link
+      if (showMenu === index) {
+        router.push(item.url); // Navigate to the link
+        handleDrawerClose(); // Close the drawer after navigation
+      } else {
+        // Open the submenu
+        setShowMenu(index);
+      }
+    } else {
+      // If no sublinks, just navigate and close the drawer
+      router.push(item.url);
+      handleDrawerClose();
+    }
+  };
+
   const menuItems = headerLinks.map((item, index) => {
     return (
       <li
         className="flex-auto text-center relative parent-list-item"
         key={index}
-        onClick={handleDrawerClose}
-        // onMouseLeave={() => setShowMenu({ [index]: false })}
       >
-        <Link
+        <a
           href={item.url}
-          className="parent-link"
-          onClick={
-            item.subLinks ? (event) => toggleDropdown(event, index) : null
-          }
+          className={`parent-link ${pathname === item.url ? "active" : ""}`}
+          onClick={(event) => handleClick(event, item, index)}
         >
           {item.label}
-          {item.subLinks && <ArrowIcon className="arrow " />}
-        </Link>
+          {item.subLinks && <ArrowIcon className="arrow" />}
+        </a>
 
         {item.subLinks && (
           <ul
             className={`${
               showMenu === index ? "block" : "hidden"
-            }  bg-primary-light text-surface-light top-8  dropdown`}
+            } bg-primary-light text-surface-light top-8 dropdown`}
           >
             {item.subLinks.map((subLink, subIndex) => (
               <li key={subIndex} className="text-left child-list-item">
@@ -99,11 +93,7 @@ export default function MobileNavbar() {
                   key={subIndex + 100}
                   style={{ borderColor: "rgba(255,255,255,0.1)" }}
                 />
-                <Link
-                  href={subLink.url}
-                  className="child-link"
-                  onClick={handleDrawerClose}
-                >
+                <Link href={subLink.url} className="child-link">
                   {subLink.label}
                 </Link>
               </li>
@@ -139,7 +129,7 @@ export default function MobileNavbar() {
               <div className="menu-logo-wrapper">
                 <IconButton
                   size="small"
-                  aria-label="Hamburger Icon to Open the menu"
+                  aria-label="Open navigation menu"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleDrawerOpen}
@@ -152,8 +142,8 @@ export default function MobileNavbar() {
                 <Link href="/" className="logo-wrapper">
                   <Image
                     src="/logo.png"
-                    width={48 * 1.5}
-                    height={22 * 1.5}
+                    width={72}
+                    height={33}
                     alt="Epic Cleaning Logo"
                     quality={100}
                   />
@@ -186,7 +176,7 @@ export default function MobileNavbar() {
           open={open}
           onClose={handleDrawerClose}
         >
-          <DrawerHeader onClose={handleDrawerClose}>
+          <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIconStyle />
@@ -205,14 +195,13 @@ export default function MobileNavbar() {
               sx={{
                 border: "1px solid white",
                 color: "white",
-
                 width: "100%",
                 "&:hover": {
                   border: "1px solid #eaeaea",
                 },
               }}
             >
-              Get instant quote
+              GET A QUOTE
             </Button>
           </Link>
         </Drawer>
@@ -220,8 +209,9 @@ export default function MobileNavbar() {
     </>
   );
 }
+
 const AppBarStyled = styled(AppBar)`
-  backdrop-filter: blur(7.599999904632568px);
+  backdrop-filter: blur(7.6px);
 
   .menu-logo-wrapper {
     display: flex;
@@ -237,6 +227,7 @@ const AppBarStyled = styled(AppBar)`
     }
   }
 `;
+
 const ListContainer = styled.ul`
   margin: 0;
   padding: 0;
@@ -264,6 +255,9 @@ const ListContainer = styled.ul`
       &:hover {
         color: #ebebeb;
       }
+      &.active {
+        color: #f0f0f0;
+      }
     }
     svg {
       position: absolute;
@@ -277,7 +271,6 @@ const ListContainer = styled.ul`
   }
   .child-list-item {
     .child-link {
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       display: block;
       text-align: left;
       padding: 16px 40px;
@@ -290,6 +283,7 @@ const ListContainer = styled.ul`
     }
   }
 `;
+
 const ChevronLeftIconStyle = styled(ChevronLeftIcon)`
   path {
     fill: white !important;

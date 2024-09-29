@@ -5,7 +5,7 @@ import styles from './Hero.module.css'
 import HeroImage from "./HeroImage";
 import Video from "../../Video/Video";
 export default async function OptimizedHero({ data, heroUSP }) {
-    if (!data) return null
+    if (!data || !data.image) return null
     const heroData = {
         subtitle: data.subtitle,
         title: data.title,
