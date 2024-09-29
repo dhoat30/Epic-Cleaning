@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
 import Image from "next/image";
 import styled from "@emotion/styled";

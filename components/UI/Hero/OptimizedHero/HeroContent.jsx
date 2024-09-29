@@ -2,8 +2,7 @@
 import React from "react";
 
 import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";

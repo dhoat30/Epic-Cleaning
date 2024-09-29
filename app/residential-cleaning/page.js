@@ -64,7 +64,7 @@ export default async function Contact({ params }) {
             <main>
                 <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
                 <TechLogos data={options.clients_logos} />
-                <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="services" />
+                <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="residential-cleaning" />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
 

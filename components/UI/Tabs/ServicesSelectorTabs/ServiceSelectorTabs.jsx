@@ -16,7 +16,7 @@ export default function ServiceSelectorTabs({
     {
       title: "Residential Cleaning",
       data: residentialServicesData,
-      slug: "services",
+      slug: "residential-cleaning",
     },
     {
       title: "Commercial Cleaning",

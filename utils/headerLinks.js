@@ -17,8 +17,8 @@ export const headerLinks = [
     },
     {
         id: 2,
-        label: "Services",
-        url: "/services",
+        label: "Residential Cleaning",
+        url: "/residential-cleaning",
         subLinks: [
             { label: "Move Out Cleaning", url: "/services/end-of-tenancy-cleaning-tauranga" },
             { label: "Window Cleaning", url: "/services/window-cleaning-tauranga" },

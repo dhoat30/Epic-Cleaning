@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
 export default function USP({
   title,
   description,
@@ -151,25 +152,10 @@ const Section = styled.section`
     .stats-wrapper {
       display: flex;
       flex-wrap: wrap;
-
+      gap: 8px;
       .stat {
-        position: relative;
-        padding: 0 32px 0 0;
-        &:not(:first-child) {
-          padding-left: 32px;
-        }
-        &:not(:last-child) {
-          &::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 50%;
-            background: var(--dark-on-surface-variant);
-          }
-        }
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 16px;
       }
     }
   }
