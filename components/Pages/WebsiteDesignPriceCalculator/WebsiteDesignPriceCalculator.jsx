@@ -19,7 +19,6 @@ export default function WebsiteDesignPriceCalculator({
   data,
   websitePackageOffer,
 }) {
-  console.log(data.acf.hero_section.youtube_id);
   let graphicComponent = null;
   if (data.acf.hero_section.show_video) {
     if (data.acf.hero_section.video_options === "enter_youtube_id") {

@@ -49,7 +49,7 @@ export default function Footer({
                     <Image
                       key={index}
                       src={item.certification_image.url}
-                      alt={item.alt}
+                      alt={item.alt ? item.alt : "certification"}
                       width={item.certification_image.width}
                       height={item.certification_image.height}
                     />

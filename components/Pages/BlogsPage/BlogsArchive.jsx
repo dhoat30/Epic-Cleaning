@@ -16,7 +16,6 @@ export default function BlogsArchive({
   sectionUI = false,
   blogsData,
 }) {
-  console.log("blogsData", blogsData);
   if (!blogsData) {
     console.log("no page data");
     return null;
@@ -42,7 +41,6 @@ export default function BlogsArchive({
   });
 
   const cards = blogsDataArr.map((item, index) => {
-    console.log("item", item);
     return (
       <BlogCard
         key={index}

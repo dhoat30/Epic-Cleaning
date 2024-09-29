@@ -133,10 +133,8 @@ export default function CheckoutForm({ className, formName = "Checkout Form" }) 
             headers: { 'Content-Type': 'application/json' },
             data: data
         };
-        console.log(data)
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (responses) {
-                console.log(responses)
                 // responses[0] is the response from create-hubspot-contact
                 // responses[1] is the response from sendmail
                 if (responses[0].status === 200) {

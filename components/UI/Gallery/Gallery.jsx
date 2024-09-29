@@ -6,7 +6,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
 export default function Gallery({ galleryData }) {
-  console.log(galleryData);
   const [value, setValue] = React.useState(0);
   // Extract unique tags for the tabs, and add a "Show All" option
   const uniqueTags = [
@@ -18,7 +17,6 @@ export default function Gallery({ galleryData }) {
       return tag;
     }),
   ];
-  console.log(uniqueTags);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -78,14 +76,17 @@ const Section = styled.section`
     }
   }
   .grid-wrapper {
-    column-count: 3;
-    column-gap: 16px;
+    column-count: 4;
+    column-gap: 24px;
 
     padding-left: 16px;
     padding-right: 16px;
     margin-top: 24px;
     margin-bottom: 24px;
-    @media (max-width: 1000px) {
+    @media (max-width: 1300px) {
+      column-count: 3;
+    }
+    @media (max-width: 900px) {
       column-count: 2;
     }
     @media (max-width: 600px) {
@@ -96,7 +97,7 @@ const Section = styled.section`
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--light-outline);
-    margin-bottom: 16px; /* Adds the row gap */
+    margin-bottom: 24px; /* Adds the row gap */
     break-inside: avoid; /* Ensures no images break in the column layout */
   }
 `;

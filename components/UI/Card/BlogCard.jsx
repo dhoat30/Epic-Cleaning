@@ -20,7 +20,6 @@ export default function BlogCard({
   publishDate,
   categoryDetails,
 }) {
-  console.log("categoryDetails", categoryDetails);
   let publishedDate = new Date(publishDate);
   // Create an array of abbreviated month names
   const months = [

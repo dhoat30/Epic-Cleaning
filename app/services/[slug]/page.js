@@ -56,7 +56,6 @@ export default async function Contact({ params }) {
             notFound: true,
         }
     }
-    console.log(options.footer_cta)
     return (
         <>
             <Header />

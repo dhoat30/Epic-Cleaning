@@ -5,9 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
 })
 
-/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfigp} */
 const nextConfig = {
-    fastRefresh: true,
+
     compiler: {
         // Enables the styled-components SWC transform
         styledComponents: true

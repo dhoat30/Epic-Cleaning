@@ -9,7 +9,6 @@ export default function BreadCrumb() {
   const pathSegments = pathname.split("/").filter((segment) => segment);
 
   // Split the path into an array to generate breadcrumbs
-  console.log(pathname);
   return (
     <Nav aria-label="breadcrumb" className="flex mb-8">
       {/* Home Link */}

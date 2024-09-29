@@ -14,20 +14,17 @@ export default function ServicesCardsTemplate({
   if (!cards.length > 0) return null;
 
   const serviceCards = cards.map((item, key) => {
-    console.log(item);
     return (
-      <>
-        <ServiceCard
-          key={key}
-          cta={{
-            label: "LEARN MORE",
-            link: `/${archivePageSlug}/${item.slug}`,
-          }}
-          image={item.acf.hero_section.image}
-          title={item.title.rendered}
-          description={item.excerpt?.rendered}
-        />
-      </>
+      <ServiceCard
+        key={key}
+        cta={{
+          label: "LEARN MORE",
+          link: `/${archivePageSlug}/${item.slug}`,
+        }}
+        image={item.acf.hero_section.image}
+        title={item.title.rendered}
+        description={item.excerpt?.rendered}
+      />
     );
   });
   return (

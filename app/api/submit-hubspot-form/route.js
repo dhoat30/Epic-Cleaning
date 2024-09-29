@@ -5,7 +5,6 @@ const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 export async function POST(req, res) {
     const { hubspotFormObject, hubspotFormID, portalID } = await req.json();
 
-    console.log(hubspotFormObject)
 
     var payload = JSON.stringify({
         "submittedAt": new Date().getTime(),

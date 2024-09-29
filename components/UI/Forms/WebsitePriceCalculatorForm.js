@@ -38,7 +38,6 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Get 
     }, [formData]);
 
 
-    console.log(totalPrice)
     const handleChange = (id, value, isSelectMultiple) => {
         // Check if 'value' is an event object and handle accordingly
         let newValue = value.target ? value.target.value : value;
@@ -82,7 +81,6 @@ export default function WebsitePriceCalculatorForm({ className, formName = "Get 
             return; // Stop the function if any field is invalid or empty
         }
 
-        console.log(formData)
         const dataPayload = {
             email: formData.email,
             formName: formName,

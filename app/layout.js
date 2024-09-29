@@ -9,8 +9,7 @@ import { Work_Sans } from 'next/font/google'
 import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme } from '../utils/themeSettings'
 
-import Header from '@/components/UI/Header/Header';
-import Footer from '@/components/UI/Footer/Footer';
+
 
 import { GoogleTagManager } from '@next/third-parties/google'
 

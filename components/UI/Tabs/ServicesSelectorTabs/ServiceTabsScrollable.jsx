@@ -20,19 +20,19 @@ function CustomTabPanel(props) {
     ...other
   } = props;
   const serviceCards = childCardsData.map((item, key) => {
+    console.log("key", key);
+    console.log("item", item);
     return (
-      <>
-        <ServiceCard
-          key={key}
-          cta={{
-            label: "LEARN MORE",
-            link: `/${archivePageSlug}/${item.slug}`,
-          }}
-          image={item.acf.hero_section.image}
-          title={item.title.rendered}
-          description={item.excerpt?.rendered}
-        />
-      </>
+      <ServiceCard
+        key={item.id}
+        cta={{
+          label: "LEARN MORE",
+          link: `/${archivePageSlug}/${item.slug}`,
+        }}
+        image={item.acf.hero_section.image}
+        title={item.title.rendered}
+        description={item.excerpt?.rendered}
+      />
     );
   });
 
@@ -93,7 +93,7 @@ export default function ServiceTabsScrollable({ tabsData }) {
       {tabsData.map((item, index) => {
         return (
           <CustomTabPanel
-            key={100 + index}
+            key={325 + index}
             value={value}
             index={index}
             className="cards-container"

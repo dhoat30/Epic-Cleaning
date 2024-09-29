@@ -7,7 +7,6 @@ import { lightTheme } from "@/utils/themeSettings";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 
 export default function BlogTableOfContent({ data }) {
-  console.log(data);
   if (!data) return null;
   return (
     <ThemeProvider theme={lightTheme}>

@@ -4,7 +4,6 @@ import ReactPlayer from "react-player/youtube";
 import Image from "next/image";
 import styled from "@emotion/styled";
 import PlayIcon from "../Icons/PlayIcon";
-import Container from "@mui/material/Container";
 export default function Video({
   videoID,
   placeholderImage,
@@ -89,10 +88,10 @@ const ButtonStyled = styled.div`
     height: 72px;
     cursor: pointer;
     circle {
-      stroke: var(--light-primary) !important;
+      stroke: white !important;
     }
     path {
-      fill: var(--light-primary);
+      fill: white;
     }
   }
 `;

@@ -17,8 +17,6 @@ const useScrollAndOpacity = (ref) => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 0.7]);
 
   // Logging scroll progress for debugging
-  console.log("Scroll progress:", scrollYProgress);
-
   return { opacity };
 };
 

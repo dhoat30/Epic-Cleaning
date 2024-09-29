@@ -15,15 +15,8 @@ import FormLabel from "@mui/material/FormLabel";
 import styled from "@emotion/styled";
 import Slider from "@mui/material/Slider";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import dynamic from "next/dynamic";
-// Dynamically import Slider with SSR disabled
-const Select = dynamic(() => import("@mui/material/Select"), {
-  ssr: false,
-});
-const TextField = dynamic(() => import("@mui/material/TextField"), {
-  ssr: false,
-});
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
 
 // styling for select
 const ITEM_HEIGHT = 48;
@@ -229,7 +222,7 @@ export default function Input({
         error={required ? isInvalid : null}
         style={{ marginTop: "16px" }}
       >
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           {label}
         </Typography>
         <div
