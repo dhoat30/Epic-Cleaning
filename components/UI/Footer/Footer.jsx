@@ -7,7 +7,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import NewsletterForm from "../Forms/NewsletterForm";
-import { footerLinks } from "./FooterLinks";
+import { services, commercialLinks, informationLinks } from "./FooterLinks";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHub from "@mui/icons-material/GitHub";
 import YouTube from "@mui/icons-material/YouTube";
@@ -83,7 +83,7 @@ export default function Footer({
                 Services
               </Typography>
               <ul component="ul" sx={{ margin: 0, padding: 0 }}>
-                {footerLinks.map((link, index) => {
+                {services.map((link, index) => {
                   return (
                     <li key={index}>
                       <Link href={link.url} className="body2">
@@ -103,7 +103,7 @@ export default function Footer({
                 Commercial
               </Typography>
               <ul component="ul" sx={{ margin: 0, padding: 0 }}>
-                {footerLinks.map((link, index) => {
+                {commercialLinks.map((link, index) => {
                   return (
                     <li key={index}>
                       <Link href={link.url} className="body2">
@@ -123,7 +123,7 @@ export default function Footer({
                 Information
               </Typography>
               <ul component="ul" sx={{ margin: 0, padding: 0 }}>
-                {footerLinks.map((link, index) => {
+                {informationLinks.map((link, index) => {
                   return (
                     <li key={index}>
                       <Link href={link.url} className="body2">

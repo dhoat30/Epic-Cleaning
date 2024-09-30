@@ -42,9 +42,10 @@ const Section = styled.section`
     grid-template-columns: 500px 1fr;
     gap: 56px;
     display: grid;
-
     align-items: start;
     @media (max-width: 1100px) {
+      gap: 24px;
+
       grid-template-columns: 1fr;
     }
     .title-wrapper {

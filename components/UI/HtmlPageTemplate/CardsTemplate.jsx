@@ -34,12 +34,12 @@ export default function CardsTemplate({
       <Section>
         <Container maxWidth="xl">
           <div className="title-wrapper">
-            <Typography variant="h1" align="center">
+            <Typography variant="h2" component="h1" align="center">
               {heroData.title}
             </Typography>
             <Typography
               align="center"
-              variant="h6"
+              variant="body1"
               component="div"
               className="subtitle mt-24"
               dangerouslySetInnerHTML={{ __html: heroData.description }}

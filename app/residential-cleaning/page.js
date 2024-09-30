@@ -6,6 +6,7 @@ import USP from '@/components/UI/USP/USP'
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
+import { all } from 'axios'
 
 
 export async function generateMetadata({ params, searchParams }, parent) {

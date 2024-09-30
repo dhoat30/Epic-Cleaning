@@ -89,7 +89,6 @@ function DesktopNavbar() {
             sx={{
               position: "absolute",
               left: "-16px",
-              width: "250px",
               paddingLeft: 0,
               display: `${showMenu === index ? "block" : "none"} `,
             }}
@@ -218,8 +217,9 @@ const AppBarContainer = styled(AppBar)`
   .sublinks-container {
     border-radius: 12px;
     padding: 8px 0;
+    width: 300px;
     .subLink {
-      display: inline-block;
+      display: block;
       padding: 8px 16px;
       font-weight: 350;
     }

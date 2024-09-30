@@ -57,7 +57,8 @@ export default async function Contact({ params }) {
             notFound: true,
         }
     }
-
+    const allSlugs = allPosts.map(post => post.slug)
+    console.log(allSlugs)
     return (
         <>
             <Header />

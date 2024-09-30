@@ -98,6 +98,14 @@ const Section = styled.section`
         padding: 16px;
         border-radius: 12px;
         border: 1px solid var(--light-outline-variant);
+        ul {
+          list-style: disc !important;
+          margin-left: 32px;
+        }
+        ol {
+          list-style: decimal !important;
+          margin-left: 32px;
+        }
       }
     }
   }

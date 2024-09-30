@@ -8,20 +8,29 @@ import React from "react";
 export default function Copyright() {
   return (
     <PaperStyle>
-      <Container maxWidth="lg" className="content-wrapper">
-        <Typography variant="body1" component="span">
-          © {new Date().getFullYear()} Epic Cleaning. All rights reserved
-        </Typography>
-        <Link href="/privacy-policy">
+      <Container maxWidth="xl" className="content-wrapper">
+        <div className="copyright-wrapper">
           <Typography variant="body1" component="span">
-            Privacy Policy
+            © {new Date().getFullYear()} Epic Cleaning. All rights reserved
           </Typography>
-        </Link>
-        <Link href="/terms-and-conditions">
-          <Typography variant="body1" component="span">
-            Terms and Conditions
-          </Typography>
-        </Link>
+          <a href="https://webduel.co.nz" rel="nofollow" target="_blank">
+            <Typography variant="body1" component="span">
+              Designed & Developed by web<strong>duel</strong>
+            </Typography>
+          </a>
+        </div>
+        <div className="policy-links">
+          <Link href="/privacy-policy">
+            <Typography variant="body1" component="span">
+              Privacy Policy
+            </Typography>
+          </Link>
+          <Link href="/terms-and-conditions">
+            <Typography variant="body1" component="span">
+              Terms and Conditions
+            </Typography>
+          </Link>
+        </div>
       </Container>
     </PaperStyle>
   );
@@ -31,7 +40,7 @@ const PaperStyle = styled.div`
   background: var(--dark-primary-container);
   .content-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 40px;
@@ -42,6 +51,40 @@ const PaperStyle = styled.div`
       color: var(--dark-on-surface);
       font-weight: 300;
       text-align: center;
+    }
+    .copyright-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      a {
+        &:hover {
+          text-decoration: underline;
+          color: white;
+        }
+        @media (min-width: 620px) {
+          &::before {
+            content: "|";
+            margin: 0 8px;
+            color: var(--dark-on-surface);
+          }
+        }
+      }
+    }
+    .policy-links {
+      display: flex;
+      flex-wrap: wrap;
+      a {
+        &::after {
+          content: "|";
+          margin: 0 8px;
+          color: var(--dark-on-surface);
+        }
+        /* not the last element  */
+        &:last-child {
+          &::after {
+            content: "";
+          }
+        }
+      }
     }
   }
 `;

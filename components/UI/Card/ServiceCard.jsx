@@ -13,7 +13,7 @@ export default function ServiceCard({ title, description, image, cta }) {
           paddingBottom: `56.25%`,
         }}
       >
-        <Image src={image?.sizes.medium_large} alt={image?.alt} fill />
+        <Image src={image?.sizes?.medium_large} alt={image?.alt} fill />
       </div>
 
       <div className="content-wrapper">
