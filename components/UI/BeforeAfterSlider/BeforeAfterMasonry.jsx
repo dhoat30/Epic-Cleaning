@@ -21,6 +21,7 @@ export default function BeforeAfterMasonry({ data, showTitle }) {
           paddingBottom: `${
             (data.beforeImage.height / data.beforeImage.width) * 100
           }%`,
+          touchAction: "pan-y",
         }}
         itemTwo={
           <Image

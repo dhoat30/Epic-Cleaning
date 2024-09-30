@@ -24,6 +24,7 @@ export default function BeforeAfter({ data, showTitle }) {
           paddingBottom: `${
             (data.beforeImage.height / data.beforeImage.width) * 100
           }%`,
+          touchAction: "pan-y",
         }}
         itemTwo={
           <Image
