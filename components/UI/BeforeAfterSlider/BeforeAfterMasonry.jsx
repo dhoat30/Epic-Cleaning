@@ -2,10 +2,7 @@ import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import React from "react";
-import {
-  ReactCompareSlider,
-  ReactCompareSliderImage,
-} from "react-compare-slider";
+import { ReactCompareSlider } from "react-compare-slider";
 
 export default function BeforeAfterMasonry({ data, showTitle }) {
   if (!data.afterImage || !data.beforeImage) return null;
@@ -19,6 +16,7 @@ export default function BeforeAfterMasonry({ data, showTitle }) {
 
       <ReactCompareSlider
         className="image-wrapper"
+        onlyHandleDraggable={true}
         style={{
           paddingBottom: `${
             (data.beforeImage.height / data.beforeImage.width) * 100
