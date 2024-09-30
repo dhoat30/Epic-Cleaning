@@ -118,8 +118,8 @@ function DesktopNavbar() {
         sx={{
           display: { xs: "none", lg: "block" },
           background: pathname.includes("blogs")
-            ? "var(--light-surface-container-lowest)"
-            : "var(--light-surface-container-lowest)",
+            ? "var(--light-surface-container-low)"
+            : "var(--light-surface-container-low)",
         }}
       >
         <Container maxWidth="xl">
@@ -162,8 +162,9 @@ export default DesktopNavbar;
 const AppBarContainer = styled(AppBar)`
   z-index: 100;
   top: 0;
-  backdrop-filter: blur(7.599999904632568px);
   position: fixed;
+  box-shadow: none;
+  border-bottom: 1px solid var(--light-outline-variant);
   .grid-links-wrapper {
     display: flex;
     /* grid-template-columns: 60px 1fr; */

@@ -31,8 +31,8 @@ export const informationLinks = [
     { label: "Gallery", url: "/gallery" },
     { label: "About Us", url: "/about-us" },
     { label: "FAQs", url: "/faq" },
-    { label: "Contact Us", url: "/contact-us" },
+    { label: "Contact Us", url: "/contact" },
     { label: "Get Free Quote", url: "/get-a-quote" },
     { label: "Blogs", url: "/blogs" },
-    { label: "Sitemap", url: "/sitemap" },
+
 ] 

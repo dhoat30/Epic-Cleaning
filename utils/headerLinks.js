@@ -61,7 +61,7 @@ export const headerLinks = [
         subLinks: [
             { label: "Skate Park Cleaning", url: "/industrial-cleaning/skate-park-cleaning-tauranga" },
             { label: "Car Park Cleaning", url: "/industrial-cleaning/car-park-cleaning-tauranga" },
-            { label: "Scrubbing and Sweeping", url: "/commercial-cleaning/scrubbing-and-sweeping-tauranga" },
+            { label: "Scrubbing and Sweeping", url: "/industrial-cleaning/scrubbing-and-sweeping-tauranga" },
         ]
     },
 

@@ -53,6 +53,10 @@ export const getQuoteFormData = [
         multiple: true,
         priceType: "fixed",
         options: [
+            { value: "commercial-cleaning", label: "Commercials Cleaning", price: 0 },
+            { value: "house-cleaning", label: "House Cleaning", price: 0 },
+            { value: "builder-clean", label: "Builder Clean", price: 0 },
+            { value: "office-cleaning", label: "Office Cleaning", price: 0 },
             { value: "carpet-cleaning", label: "Carpet Cleaning", price: 0 },
             { value: "end-of-tenancy-cleaning", label: "End-of-Tenancy", price: 0 },
             { value: "exterior-washing-cleaning", label: "Exterior Washing", price: 0 },
