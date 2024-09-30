@@ -4,52 +4,42 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
-export default function OrderSummary({ selectedPackages }) {
-  // Calculate total price
-  const totalPrice = selectedPackages.reduce(
-    (acc, item) => acc + Number(item.acf.cta_section.service_price),
-    0
-  );
+export default function OrderSummary({
+  serviceName,
+  packageName,
+  price,
+  description,
+}) {
   return (
     <Container>
       <Typography variant="h5" component="h2">
         Order Summary
       </Typography>
       <div className="summary-wrapper">
-        {selectedPackages.map((item, index) => {
-          return (
-            <Paper key={index} className="card" elevation={2}>
-              <Link href={`/service-packages/${item.slug}`} className="link">
-                <div className="image-wrapper">
-                  <Image
-                    src={item.acf.hero_section.image.url}
-                    alt={item.acf.hero_section.image.alt}
-                    fill
-                    priority={true}
-                  />
-                </div>
-                <div className="content-wrapper">
-                  <Typography
-                    className="title"
-                    component="h3"
-                    variant="subtitle1"
-                  >
-                    {item.acf.hero_section.title}
-                  </Typography>
-                  <Typography className="price" component="div" variant="h5">
-                    ${item.acf.cta_section.service_price}
-                  </Typography>
-                </div>
-              </Link>
-            </Paper>
-          );
-        })}
-        {/* Display total price */}
-        <div className="total-wrapper">
-          <Typography className="total" component="div" variant="h6">
-            Total: ${totalPrice}
-          </Typography>
-        </div>
+        <Paper className="card" variant="outlined">
+          <div className="content-wrapper">
+            <Typography className="title" component="h3" variant="h5">
+              {packageName}
+            </Typography>
+            <Typography
+              className="service-title"
+              component="div"
+              variant="subtitle1"
+            >
+              {serviceName}
+            </Typography>
+            <Typography
+              className="description mt-8"
+              component="p"
+              variant="body1"
+            >
+              {description}
+            </Typography>
+            <Typography className="price mt-16" component="div" variant="h5">
+              ${price}+GST
+            </Typography>
+          </div>
+        </Paper>
       </div>
     </Container>
   );
@@ -58,7 +48,7 @@ export default function OrderSummary({ selectedPackages }) {
 const Container = styled.div`
   .summary-wrapper {
     .card {
-      padding: 8px;
+      padding: 16px;
       margin-top: 16px;
       .link {
         display: grid;
@@ -76,7 +66,7 @@ const Container = styled.div`
     .total-wrapper {
       margin-top: 16px;
       padding-top: 8px;
-      border-top: 1px solid var(--dark-outline-variant);
+      border-top: 1px solid var(--light-outline-variant);
     }
   }
 `;

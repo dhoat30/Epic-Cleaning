@@ -24,11 +24,9 @@ export const checkoutFormData = [
     },
 
     {
-        id: 'phone', label: 'Phone number', type: 'text', required: false, autoComplete: "phone"
+        id: 'phone', label: 'Phone number', type: 'tel', required: true, autoComplete: "phone"
     },
-    {
-        id: 'website', label: 'Website', type: 'text', required: false, autoComplete: "website",
-    },
+
     {
         id: 'payBy',
         label: 'Pay by',

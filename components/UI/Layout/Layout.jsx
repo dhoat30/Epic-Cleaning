@@ -87,8 +87,10 @@ export default function Layout({ sections, projectsData }) {
       return (
         <Packages
           key={index}
+          serviceName={section.service_name}
           title={section.title}
           packagesArray={section.package}
+          termsAndConditions={section.terms_conditions}
         />
       );
     }

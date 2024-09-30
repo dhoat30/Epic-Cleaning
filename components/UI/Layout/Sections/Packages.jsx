@@ -6,7 +6,13 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-export default function Packages({ title, packagesArray }) {
+export default function Packages({
+  title,
+  packagesArray,
+  serviceName,
+  termsAndConditions,
+}) {
+  console.log(termsAndConditions);
   const packageComponent = packagesArray.map((item, index) => {
     let packageHighlightClass;
     if (item.do_you_want_to_highlight_this_package) {
@@ -41,7 +47,7 @@ export default function Packages({ title, packagesArray }) {
             className="price"
             color="white"
           >
-            {item.price}
+            ${item.price}
           </Typography>
           <Typography
             color="white"
@@ -51,7 +57,18 @@ export default function Packages({ title, packagesArray }) {
           >
             +GST
           </Typography>
-          <Link href="/book-now" className="cta-wrapper mt-16">
+          <Link
+            href={{
+              pathname: "/book-now",
+              query: {
+                serviceName: serviceName,
+                packageName: item.package_name,
+                price: item.price,
+                description: item.package_description,
+              },
+            }}
+            className="cta-wrapper mt-16"
+          >
             <Button variant="contained" disableElevation>
               BOOK NOW
             </Button>
@@ -91,6 +108,23 @@ export default function Packages({ title, packagesArray }) {
           {title}
         </Typography>
         <div className="packages-wrapper">{packageComponent}</div>
+        <div className="terms-wrapper mt-24">
+          {termsAndConditions &&
+            termsAndConditions.length > 0 &&
+            termsAndConditions.map((term, index) => {
+              return (
+                <Typography
+                  key={index}
+                  variant="body2"
+                  component="p"
+                  className="mb-8"
+                  color="var(--dark-on-surface-variant)"
+                >
+                  *{term.term}
+                </Typography>
+              );
+            })}
+        </div>
       </Container>
     </Section>
   );

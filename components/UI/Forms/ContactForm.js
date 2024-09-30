@@ -10,15 +10,17 @@ import styled from "@emotion/styled";
 
 
 import dynamic from "next/dynamic";
-import { FormatColorResetTwoTone } from "@mui/icons-material";
+import { useRouter } from 'next/navigation'
+
 
 // const axios = dynamic(() => import("axios"));
 const Alert = dynamic(() => import("@mui/material/Alert"));
 
 export default function ContactForm({ className, formName = "Contact Form" }) {
+    const router = useRouter()
+
     const [formData, setFormData] = useState({ typeOfService: [], formName: "Contact Form" });
     const [errors, setErrors] = useState({});
-    const [activeStep, setActiveStep] = React.useState(0);
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [error, setError] = useState(false)
@@ -65,9 +67,9 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
         const data = {
             email: formData.email,
             formName: formName,
-            message: `First Name: ${formData.firstname} \n Email: ${formData.email} \n Type of Service: ${formData['services_needed']} \n Budget: ${formData.budget} \n Message: ${formData.message}`,
-            portalID: "22260883",
-            hubspotFormID: "9cbffee8-9708-40f8-b4fd-e4b2271f0f77",
+            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone: ${formData.phone} \nMessage: ${formData.message}`,
+            portalID: "145323047",
+            hubspotFormID: "55e20349-3d71-45ed-a6be-62524384a7dd",
             hubspotFormObject: [
                 {
                     name: "firstname",
@@ -76,13 +78,11 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
                 {
                     name: "email",
                     value: formData.email
-                }, {
-                    name: "services_needed",
-                    value: formData['services_needed'].join(",")
                 },
+
                 {
-                    name: "budget",
-                    value: formData.budget
+                    name: "phone",
+                    value: formData.phone
                 },
                 {
                     name: "message",
@@ -93,14 +93,14 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
 
         setIsLoading(true)
         // Send an event to GA4 manually
-        if (typeof window !== 'undefined') {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'contact_form', // The custom event name you configured in GTM
-                'event_category': 'form_submit',
-                'event_label': 'Speed Checker Form Submitted'
-            });
-        }
+        // if (typeof window !== 'undefined') {
+        //     window.dataLayer = window.dataLayer || [];
+        //     window.dataLayer.push({
+        //         'event': 'contact_form', // The custom event name you configured in GTM
+        //         'event_category': 'form_submit',
+        //         'event_label': 'Speed Checker Form Submitted'
+        //     });
+        // }
 
         // hubspot config
         var configHubspot = {
@@ -120,15 +120,14 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (responses) {
                 console.log(responses)
-                // responses[0] is the response from create-hubspot-contact
                 // responses[1] is the response from sendmail
                 if (responses[0].status === 200) {
                     setIsLoading(false)
                     setIsSuccess(true)
                     setNewSubmission(false)
                     // set initial state to empty string 
-                    setActiveStep((prevActiveStep) => prevActiveStep + 1);
                     setError(false)
+                    router.push('/form-submitted/thank-you')
 
                 }
                 else {

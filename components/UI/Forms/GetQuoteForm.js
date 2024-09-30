@@ -1,82 +1,118 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from './InputFields/Input'
-import { quoteFormData } from "@/utils/quoteFormFieldsData";
+import { getQuoteFormData } from "@/utils/getQuoteFormData";
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 import styled from "@emotion/styled";
 import axios from "axios";
 import Alert from '@mui/material/Alert';
-import Link from 'next/link'
-import MobileStepper from '@mui/material/MobileStepper';
-import { useTheme } from '@mui/material/styles';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import Container from '@mui/material/Container';
 
-export default function GetQuoteForm({ className }) {
-    const [formData, setFormData] = useState({});
-    const [formErrors, setFormErrors] = useState({});
-    const [activeStep, setActiveStep] = React.useState(0);
+
+import Container from '@mui/material/Container';
+import { useRouter } from 'next/navigation'
+import { calculateWebsitePrice } from "@/utils/calcultation/calculateWebsitePrice";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
+
+export default function GetQuoteForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
+    const router = useRouter()
+
+    const [formData, setFormData] = useState({ typeOfService: [] });
+    const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [newSubmission, setNewSubmission] = useState(false)
-    const [quote, setQuote] = useState({})
 
-    // theme 
-    const theme = useTheme();
 
-    const handleNext = () => {
 
-        // validate field on next click 
-        const currentField = quoteFormData[activeStep];
-        if (currentField.validation && !currentField.validation(formData[currentField.id])) {
-            setFormErrors({ [currentField.id]: true });
-        } else {
-            setFormErrors({});
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
+
+
+    const handleChange = (id, value, isSelectMultiple) => {
+        // Check if 'value' is an event object and handle accordingly
+        let newValue = value.target ? value.target.value : value;
+
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [id]: newValue,
+        }));
+
+        // Reset errors on change
+        if (errors[id]) {
+            setErrors({ ...errors, [id]: false });
         }
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    const handleBlur = (id, validationFunction) => {
+        if (!validationFunction(formData[id])) {
+            setErrors({ ...errors, [id]: true });
+        }
     };
-
-    // handle input change 
-    const handleInputChange = (event, id) => {
-        const newFormData = { ...formData, [id]: event.target.value };
-        setFormData(newFormData);
-    };
-
     // submit handler 
     const submitHandler = (e) => {
+        e.preventDefault(); // Prevent default form submission if using form tag
 
-        // validate field on next click 
-        const currentField = quoteFormData[activeStep];
-        if (currentField.validation && !currentField.validation(formData[currentField.id])) {
-            setFormErrors({ [currentField.id]: true });
-        } else {
-            setFormErrors({});
+        let allFieldsValid = true;
+        const newErrors = {};
+
+        // Loop through each field to check if it's required and valid
+        getQuoteFormData.forEach(field => {
+            if (field.required && !formData[field.id]) {
+                // Set field as invalid if it's required but empty or invalid
+                newErrors[field.id] = true;
+                allFieldsValid = false;
+                return
+            }
+        });
+
+        setErrors(newErrors);
+        // If any required field is invalid, stop and don't make API calls
+        if (!allFieldsValid) {
+            return; // Stop the function if any field is invalid or empty
         }
 
+        const dataPayload = {
+            email: formData.email,
+            formName: formName,
+            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone Number: ${formData.phone} \nProperty Type: ${formData.propertyType} \nServices Required: ${formData['service'].join(", ")}  \n Message: ${formData.message} `,
+            portalID: "145323047",
+            hubspotFormID: "56669fff-b1f7-4aff-a297-42e71574dadc",
+            hubspotFormObject: [
+                {
+                    name: "firstname",
+                    value: formData.firstname
+                },
+                {
+                    name: "email",
+                    value: formData.email
+                },
+                {
+                    name: "phone",
+                    value: formData.phone
+                },
+
+                {
+                    name: "propertyType",
+                    value: formData.propertyType
+                },
+                {
+                    name: "services_required",
+                    value: formData['service'].join(", ")
+                },
+                {
+                    name: "message",
+                    value: formData.message
+                },
+
+            ]
+        }
         setIsLoading(true)
-        // send email 
-        var config = {
-            method: 'post',
-            url: '/api/get-quote',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: formData
-        };
+
         // Send an event to GA4 manually
         if (typeof window !== 'undefined') {
             window.dataLayer = window.dataLayer || [];
@@ -86,23 +122,37 @@ export default function GetQuoteForm({ className }) {
                 'event_label': 'Instant Quote From Submission'
             });
         }
-        axios(config)
+        // hubspot config
+        var configHubspot = {
+            method: 'post',
+            url: '/api/submit-hubspot-form',
+            headers: { 'Content-Type': 'application/json' },
+            data: dataPayload
+        };
+        // mailgun config
+        var configSendMail = {
+            method: 'post',
+            url: '/api/sendmail',
+            headers: { 'Content-Type': 'application/json' },
+            data: dataPayload
+        };
+        console.log(formData)
+        Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (response) {
-                if (response.status === 200) {
+                console.log(response)
+                if (response[1].status === 200) {
                     setIsLoading(false)
                     setIsSuccess(true)
-                    setNewSubmission(true)
-                    // set initial state to empty string 
-                    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                    setNewSubmission(false)
                     setError(false)
-                    setQuote(response.data.price)
+                    router.push('/form-submitted/thank-you')
                 }
                 else {
                     console.log(response)
                     setIsLoading(false)
                     setIsSuccess(false)
                     setError(true)
-                    setNewSubmission(false)
+                    setNewSubmission(true)
 
                 }
             })
@@ -111,93 +161,64 @@ export default function GetQuoteForm({ className }) {
                 setIsLoading(false)
                 setIsSuccess(false)
                 setError(true)
-                setNewSubmission(false)
+                setNewSubmission(true)
 
             });
     }
-    const currentField = quoteFormData[activeStep];
-    let dollarUSLocale = Intl.NumberFormat('en-US')
+
+
+    const formInputs = getQuoteFormData.map((field, index) => {
+        const isSelectMultiple = field.type === "select" && field.multiple; // Example condition
+
+        return <Input
+            lightTheme={true}
+            key={index}
+            label={field.label}
+            type={field.type}
+            value={isSelectMultiple ? formData[field.id] || [] : formData[field.id] || ''}
+            onChange={field.type === 'chip' ?
+                (newValue) => handleChange(field.id, newValue, isSelectMultiple) :
+                (e) => handleChange(field.id, e, isSelectMultiple)}
+
+            onBlur={field.required ? () => handleBlur(field.id, field.validation) : null} //check if the field is required then call the function 
+            required={field.required}
+            autoComplete={field.autoComplete}
+            isInvalid={errors[field.id]}
+            errorMessage={field.errorMessage}
+            options={field.options}
+            multipleValue={field.multiple}
+            min={field.range && field.range.min}
+            max={field.range && field.range.max}
+            note={field.note && field.note}
+
+        />
+    })
     return (
-        <ContainerStyled variant="div" className={`${className} py-8 `} maxWidth="sm">
-
-            <Box sx={{ width: '100%' }}>
-
-                <MobileStepper
-                    className="mobile-stepper"
-                    variant="progress"
-                    steps={quoteFormData.length + 1}
-                    position="static"
-                    activeStep={activeStep}
-                />
-                {activeStep === quoteFormData.length ? (
-                    <React.Fragment>
-                        <div className="quote-wrapper p-6">
-                            <Typography variant="h5" sx={{ mb: 1, textAlign: "center" }}>
-                                Your Quote
-                            </Typography>
-                            <div className="quote">
-                                <Typography variant="h3" sx={{ mb: 1, textAlign: "center" }}>
-                                    ${dollarUSLocale.format(quote)}
-                                </Typography>
-                            </div>
-
-                            <Link href="/book-consultation"> <Button color="primary" variant="contained" sx={{ borderRadius: "50px", margin: "24px auto", display: 'block' }} size="large">Book Free Consultation </Button></Link>
-                        </div>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                        </Box>
-                    </React.Fragment>
-                ) : (
+        <>
+            <ContainerStyled variant="div" className={`${className} py-8 `} maxWidth="xl">
+                <Box sx={{ width: '100%' }}>
                     <React.Fragment>
                         <div className="input-wrapper p-6">
-                            <Input
-                                lightTheme={true}
-                                label={quoteFormData[activeStep].label}
-                                type={quoteFormData[activeStep].type}
-                                value={formData[currentField.id] || ''}
-                                onChange={(e) => handleInputChange(e, quoteFormData[activeStep].id)}
-                                onBlur={quoteFormData[activeStep].onBlur}
-                                required={quoteFormData[activeStep].required}
-                                autoComplete={quoteFormData[activeStep].autoComplete}
-                                isInvalid={formErrors[currentField.id]}
-                                errorMessage={quoteFormData[activeStep].errorMessage}
-                                options={quoteFormData[activeStep].options}
-                            />
+                            <Typography variant="h4" component="h1" className="title">
+                                {title}
+                            </Typography>
+                            {formInputs}
+                            <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess} >Submit now</LoadingBtn>
 
-                            <Box className="button-wrapper" sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                <Button
-                                    color="primary"
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                    variant="outlined"
-                                    startIcon={<KeyboardArrowLeft />}
-                                    size="large"
-                                >
-                                    Back
-                                </Button>
-                                {activeStep === quoteFormData.length - 1 ?
-                                    <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess}>Submit</LoadingBtn>
-                                    :
-                                    <Button onClick={handleNext} color="primary" variant="outlined"
-                                        endIcon={<KeyboardArrowRight />}
-                                        size="large"
-                                    >
-                                        Next
-                                    </Button>
-                                }
-                            </Box>
                             {error && <Alert sx={{ margin: "8px 0" }} severity='error'>Something went wrong. Please Try again</Alert>}
                         </div>
                     </React.Fragment>
-                )}
-            </Box>
 
-        </ContainerStyled>
+                </Box>
+            </ContainerStyled>
+
+
+        </>
+
     )
 }
 
 const ContainerStyled = styled(Container)`
-background: var(--light-surface-container) ;
 padding: 0 !important; 
 
 .mobile-stepper{ 
@@ -234,13 +255,15 @@ svg.Mui-active{
 }
 
 .input-wrapper{ 
-        padding: 0 24px 24px 24px; 
+        padding: 24px 24px 24px 24px; 
     background: var(--light--surface-container);
 border-radius: 12px; 
-@media(max-width: 600px){ 
-        padding: 0 16px 24px 16px; 
-
-    }
+@media (max-width: 600px) {
+        padding: 24px 16px;
+      }
+.title { 
+    margin: 8px 0; 
+}
     .Mui-error{ 
         font-size: 1rem;
     }

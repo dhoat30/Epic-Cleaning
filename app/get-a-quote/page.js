@@ -5,8 +5,7 @@ import TechLogos from '@/components/UI/TechLogos/TechLogos'
 import USP from '@/components/UI/USP/USP'
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
-import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
-import WebsiteDesignPriceCalculator from '@/components/Pages/WebsiteDesignPriceCalculator/WebsiteDesignPriceCalculator'
+import GetQuotePage from '@/components/Pages/GetQuotePage/GetQuotePage'
 
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -62,7 +61,7 @@ export default async function Contact() {
         <>
             <Header />
             <main>
-                <WebsiteDesignPriceCalculator data={postData[0]} />
+                <GetQuotePage data={postData[0]} />
                 <TechLogos data={options.clients_logos} />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />

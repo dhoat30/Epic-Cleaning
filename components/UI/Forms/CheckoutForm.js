@@ -16,12 +16,12 @@ import Typography from "@mui/material/Typography";
 // const axios = dynamic(() => import("axios"));
 const Alert = dynamic(() => import("@mui/material/Alert"));
 
-export default function CheckoutForm({ className, formName = "Checkout Form" }) {
+export default function CheckoutForm({ className, formName = "Checkout Form", packageName, serviceName }) {
+    console.log(packageName, serviceName)
     const router = useRouter()
 
     const [formData, setFormData] = useState({ typeOfService: [], formName: "Checkout Form" });
     const [errors, setErrors] = useState({});
-    const [activeStep, setActiveStep] = React.useState(0);
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [error, setError] = useState(false)
@@ -64,14 +64,13 @@ export default function CheckoutForm({ className, formName = "Checkout Form" }) 
         if (!allFieldsValid) {
             return; // Stop the function if any field is invalid or empty
         }
-        const servicePackages = Cookies.get("services"); // Ensure this matches the cookie key used when setting
 
         const data = {
             email: formData.email,
             formName: formName,
-            message: `First Name: ${formData.firstname} \n Last Name: ${formData.lastname} \n Phone: ${formData.phone} \n Email: ${formData.email} \n Website: ${formData.website} \n Type of Service: ${servicePackages} \n Pay by: ${formData.payBy} \n Message: ${formData.message}`,
-            portalID: "22260883",
-            hubspotFormID: "485989cb-e43d-47c4-80c1-abb6f593a6fb",
+            message: `First Name: ${formData.firstname} \n Last Name: ${formData.lastname} \n Phone: ${formData.phone} \n Email: ${formData.email} \n Service Required: ${serviceName} \n Package Name: ${packageName} \n Pay by: ${formData.payBy} \n Message: ${formData.message}`,
+            portalID: "145323047",
+            hubspotFormID: "d039c2eb-90f5-4114-982b-74d0a792422a",
             hubspotFormObject: [
                 {
                     name: "firstname",
@@ -89,13 +88,15 @@ export default function CheckoutForm({ className, formName = "Checkout Form" }) 
                     name: "phone",
                     value: formData.phone
                 },
+
                 {
-                    name: "website",
-                    value: formData.website
+                    name: "service_required",
+                    value: serviceName
                 },
+
                 {
-                    name: "services_needed",
-                    value: servicePackages
+                    name: "package_name",
+                    value: packageName
                 },
                 {
                     name: "payBy",
@@ -135,16 +136,15 @@ export default function CheckoutForm({ className, formName = "Checkout Form" }) 
         };
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (responses) {
-                // responses[0] is the response from create-hubspot-contact
+
                 // responses[1] is the response from sendmail
                 if (responses[0].status === 200) {
                     setIsLoading(false)
                     setIsSuccess(true)
                     setNewSubmission(false)
                     // set initial state to empty string 
-                    setActiveStep((prevActiveStep) => prevActiveStep + 1);
                     setError(false)
-                    router.push('/checkout/order-received')
+                    router.push('/book-now/order-received')
                 }
                 else {
 

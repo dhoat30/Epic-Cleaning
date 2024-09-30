@@ -16,11 +16,9 @@ export const contactFormData = [
     },
 
     {
-        id: 'phone', label: 'Phone', type: 'text', required: false,
+        id: 'phone', label: 'Phone', type: 'tel', required: false,
     },
-    {
-        id: 'address', label: 'Address', type: 'text', required: false,
-    },
+
     {
         id: 'message', label: 'Message', type: 'textarea', required: false,
     },

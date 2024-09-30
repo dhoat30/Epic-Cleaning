@@ -1,37 +1,32 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 
 import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import CheckoutForm from "@/components/UI/Forms/CheckoutForm";
-import Paper from "@mui/material/Paper";
 import OrderSummary from "@/components/UI/Checkout/OrderSummary";
 
-export default function Checkout({ servicePackages }) {
-  const [selectedPackages, setSelectedPackages] = useState(null);
-  useEffect(() => {
-    const slugs = Cookies.get("services"); // Ensure this matches the cookie key used when setting
-    const slugArray = slugs ? JSON.parse(slugs) : [];
-
-    if (slugArray.length > 0 && servicePackages.length > 0) {
-      const filteredPackages = servicePackages.filter((p) =>
-        slugArray.includes(p.slug)
-      );
-      setSelectedPackages(filteredPackages);
-    }
-  }, [servicePackages]);
-
+export default function Checkout({
+  serviceName,
+  packageName,
+  price,
+  description,
+  attributes,
+}) {
   return (
     <Section>
       <Container maxWidth="lg">
         <div className="wrapper">
           <div className="form-wrapper">
-            <CheckoutForm />
+            <CheckoutForm packageName={packageName} serviceName={serviceName} />
           </div>
-          {!selectedPackages ? null : (
+          {!packageName ? null : (
             <div className="order-summary-wrapper">
-              <OrderSummary selectedPackages={selectedPackages} />
+              <OrderSummary
+                serviceName={serviceName}
+                packageName={packageName}
+                price={price}
+                description={description}
+              />
             </div>
           )}
         </div>
@@ -59,13 +54,13 @@ const Section = styled.section`
     }
 
     .form-wrapper {
-      background: var(--dark-surface-container-lowest);
+      background: var(--light-surface-container-lowest);
       padding: 24px;
       min-height: 719px;
       border-radius: 12px;
     }
     .order-summary-wrapper {
-      background: var(--dark-surface-container-lowest);
+      background: var(--light-surface-container-lowest);
       padding: 24px;
       position: sticky;
       top: 80px;
