@@ -19,6 +19,7 @@ export default function BeforeAfter({ data, showTitle }) {
 
       <ReactCompareSlider
         className="image-wrapper"
+        onlyHandleDraggable={true}
         style={{
           paddingBottom: `${
             (data.beforeImage.height / data.beforeImage.width) * 100
