@@ -76,7 +76,7 @@ const Section = styled.section`
     }
   }
   .grid-wrapper {
-    column-count: 4;
+    column-count: 5;
     column-gap: 24px;
 
     padding-left: 16px;
@@ -84,7 +84,7 @@ const Section = styled.section`
     margin-top: 24px;
     margin-bottom: 24px;
     @media (max-width: 1300px) {
-      column-count: 3;
+      column-count: 4;
     }
     @media (max-width: 900px) {
       column-count: 2;

@@ -156,12 +156,17 @@ const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 450px;
     gap: 40px;
-    align-items: center;
+    align-items: start;
     @media (max-width: 1100px) {
       grid-template-columns: 1fr;
       gap: 24px;
     }
     .content-wrapper {
+      @media (min-width: 1100px) {
+        position: sticky;
+        top: 100px;
+      }
+
       .title {
       }
       .description {
@@ -174,5 +179,9 @@ const Container = styled.div`
       color: var(--dark-secondary, #f8f770);
       letter-spacing: 0.1rem;
     }
+  }
+  .image-container {
+    overflow: hidden;
+    border-radius: 8px;
   }
 `;

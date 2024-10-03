@@ -49,14 +49,26 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
         }
         setIsLoading(true)
 
+
+        const data = {
+            formName: formName,
+            portalID: "145323047",
+            hubspotFormID: "20dafc89-4d01-43d3-9b6d-48c22e334ef4",
+            hubspotFormObject: [
+                {
+                    name: "email",
+                    value: emailAddress
+                },
+            ]
+        }
         // send email 
         var config = {
             method: 'post',
-            url: `${emailRoute}`,
+            url: '/api/submit-hubspot-form',
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: formData
+            data: data
         };
         axios(config)
             .then(function (response) {
@@ -66,6 +78,7 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
                     // set initial state to empty string 
 
                     setEmailAddress('')
+                    setError(false)
 
 
                     setEmailAddressTouched(false)

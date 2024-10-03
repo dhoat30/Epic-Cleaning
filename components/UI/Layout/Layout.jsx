@@ -23,6 +23,7 @@ export default function Layout({ sections, projectsData }) {
       );
     }
     if (section.acf_fc_layout === "row") {
+      console.log(section);
       return (
         <RowSection
           key={index}
@@ -33,6 +34,15 @@ export default function Layout({ sections, projectsData }) {
           image={section.image}
           ctaGroup={section.cta_group}
           bulletPoints={section.bullet_points}
+          showBeforeAfterImages={section.show_before_after_images}
+          beforeImage={
+            section.show_before_after_images &&
+            section.before_after_images.before_image
+          }
+          afterImage={
+            section.show_before_after_images &&
+            section.before_after_images.after_image
+          }
         />
       );
     }

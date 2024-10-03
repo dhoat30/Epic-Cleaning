@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import Container from "@mui/material/Container";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import BeforeAfter from "../../BeforeAfterSlider/BeforeAfter";
 
 export default function RowSection({
   title,
@@ -15,6 +16,9 @@ export default function RowSection({
   image,
   ctaGroup,
   bulletPoints,
+  showBeforeAfterImages,
+  beforeImage,
+  afterImage,
 }) {
   const imgPadding = (image.height / image.width) * 100;
   const contentAlignment = imageAlignment === "left" ? "2 / 3" : "1 / 2";
@@ -68,17 +72,26 @@ export default function RowSection({
           </div>
 
           {/* image wrapper */}
-          <div
-            className="image-wrapper border-radius-12"
-            style={{ paddingBottom: `${imgPadding}%` }}
-          >
-            <Image
-              src={image.url}
-              alt={image.alt}
-              fill
-              sizes="(max-width: 1100px) 100vw, 50vw"
-            />
-          </div>
+          {showBeforeAfterImages ? (
+            <div className="image-container">
+              <BeforeAfter
+                showTitle={false}
+                data={{ beforeImage, afterImage }}
+              />
+            </div>
+          ) : (
+            <div
+              className="image-wrapper border-radius-12"
+              style={{ paddingBottom: `${imgPadding}%` }}
+            >
+              <Image
+                src={image.url}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 1100px) 100vw, 50vw"
+              />
+            </div>
+          )}
         </div>
       </Container>
     </Section>
@@ -118,7 +131,10 @@ const Section = styled.section`
         display: inline-block;
       }
     }
-    .image-wrapper {
+    .image-wrapper,
+    .image-container {
+      border-radius: 12px;
+      overflow: hidden;
       @media (min-width: 1100px) {
         grid-row: 1 / 2;
       }

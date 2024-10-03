@@ -45,9 +45,7 @@ export default function BeforeAfter({ data, showTitle }) {
   );
 }
 const Container = styled.section`
-  padding: 40px 0;
   .image-wrapper {
-    margin-top: 16px;
     width: 100%;
     position: relative;
     img {
