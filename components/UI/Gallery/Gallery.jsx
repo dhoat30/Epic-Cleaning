@@ -7,6 +7,7 @@ import Tabs from "@mui/material/Tabs";
 
 export default function Gallery({ galleryData }) {
   const [value, setValue] = React.useState(0);
+  if (!galleryData) return null;
   // Extract unique tags for the tabs, and add a "Show All" option
   const uniqueTags = [
     { value: "all", label: "All" },

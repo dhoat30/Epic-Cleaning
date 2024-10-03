@@ -61,12 +61,20 @@ export const headerLinks = [
         label: "Industrial Cleaning",
         url: "/industrial-cleaning",
         subLinks: [
-            { label: "Skate Park Cleaning", url: "/industrial-cleaning/skate-park-cleaning-tauranga" },
+            { label: "Sweeping", url: "/industrial-cleaning/sweeping-tauranga" },
+            { label: "Scrubbing", url: "/industrial-cleaning/floor-scrubbing-tauranga" },
             { label: "Car Park Cleaning", url: "/industrial-cleaning/car-park-cleaning-tauranga" },
-            { label: "Scrubbing and Sweeping", url: "/industrial-cleaning/scrubbing-and-sweeping-tauranga" },
         ]
     },
-
+    {
+        id: 6,
+        label: "Our Work",
+        url: "/our-work/gallery",
+        subLinks: [
+            { label: "Gallery", url: "/our-work/gallery" },
+            { label: "Video Gallery", url: "/our-work/video-gallery" },
+        ]
+    },
     {
         id: 2,
         label: "Blogs",
@@ -74,10 +82,6 @@ export const headerLinks = [
     },
 
 
-    {
-        id: 6,
-        label: "Gallery",
-        url: "/gallery"
-    },
+
 ]
 

@@ -10,7 +10,6 @@ export const services = [
     { label: "Tile and Grout Cleaning", url: "/residential-cleaning/tile-and-grout-cleaning-tauranga" },
     { label: "Flood Restoration", url: "/residential-cleaning/flood-restoration-tauranga" },
     { label: "Builders Cleaning", url: "/residential-cleaning/builders-cleaning-tauranga" },
-
 ]
 export const commercialLinks = [
     { label: "Building Washing", url: "/commercial-cleaning/building-washing-tauranga" },
@@ -24,14 +23,12 @@ export const commercialLinks = [
     { label: "Hospital Cleaning", url: "/commercial-cleaning/hospital-cleaning-tauranga" },
     { label: "Medical Center Cleaning", url: "/commercial-cleaning/medical-center-cleaning-tauranga" },
     { label: "Rest Home Cleaning", url: "/commercial-cleaning/rest-home-cleaning-tauranga" },
-    { label: "Skate Park Cleaning", url: "/industrial-cleaning/skate-park-cleaning-tauranga" },
-    { label: "Car Park Cleaning", url: "/industrial-cleaning/car-park-cleaning-tauranga" },
-    { label: "Scrubbing and Sweeping", url: "/industrial-cleaning/scrubbing-and-sweeping-tauranga" },
 
 ]
 
 export const informationLinks = [
-    { label: "Gallery", url: "/gallery" },
+    { label: "Our Work", url: "/our-work/gallery" },
+    { label: "Video Gallery", url: "/our-work/video-gallery" },
     { label: "About Us", url: "/about-us" },
     { label: "FAQs", url: "/faq" },
     { label: "Contact Us", url: "/contact" },

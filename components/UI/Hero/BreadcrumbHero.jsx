@@ -3,14 +3,22 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import styled from "@emotion/styled";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
-export default function BreadcrumbHero({ title }) {
+export default function BreadcrumbHero({
+  title,
+  description,
+  showBreadcrumb = true,
+}) {
   return (
     <TitleWrapper className="title-wrapper ">
-      <Container maxWidth="xl  container">
-        <BreadCrumb />
+      <Container maxWidth="lg" className="Container">
+        {showBreadcrumb && <BreadCrumb className="justify-center" />}
+
         <div className="title">
           <Typography variant="h2" component="h1">
             {title}
+          </Typography>
+          <Typography variant="body1" component="p" className="mt-16">
+            {description}
           </Typography>
         </div>
       </Container>

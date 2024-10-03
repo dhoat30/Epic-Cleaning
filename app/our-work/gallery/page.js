@@ -63,7 +63,7 @@ export default async function Contact() {
         <>
             <Header />
             <main>
-                <BreadcrumbHero title={postData[0]?.title.rendered} />
+                <BreadcrumbHero title={postData[0]?.acf.hero_section.title} description={postData[0]?.acf.hero_section.description} showBreadcrumb={false} />
                 <Gallery galleryData={postData[0]?.acf.gallery} />
                 <TechLogos data={options.clients_logos} />
                 <Layout sections={postData[0]?.acf?.sections} />

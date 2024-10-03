@@ -4,13 +4,13 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styled from "@emotion/styled";
-export default function BreadCrumb() {
+export default function BreadCrumb({ className }) {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter((segment) => segment);
 
   // Split the path into an array to generate breadcrumbs
   return (
-    <Nav aria-label="breadcrumb" className="flex mb-8">
+    <Nav aria-label="breadcrumb" className={`flex mb-8 ${className}`}>
       {/* Home Link */}
       <Link href="/">
         <span className="link-text">Home</span>
