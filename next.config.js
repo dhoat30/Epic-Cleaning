@@ -146,7 +146,7 @@ const nextConfig = {
                 destination: '/commercial-cleaning',
                 permanent: true,
             }, {
-                source: '/blog/page/3/?et_blog',
+                source: '/blog/page/3',
                 destination: '/blogs',
                 permanent: true,
             }, {
@@ -162,7 +162,7 @@ const nextConfig = {
                 destination: '/commercial-cleaning',
                 permanent: true,
             }, {
-                source: '/blog/page/4/?et_blog',
+                source: '/blog/page/4',
                 destination: '/blogs',
                 permanent: true,
             }, {

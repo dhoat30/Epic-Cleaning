@@ -7,7 +7,7 @@ import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } f
 
 export const metadata = {
     metadataBase: new URL('https://epiccleaning.co.nz'),
-    title: 'Checkout | webduel',
+    title: 'Checkout | Epic Cleaning',
     robots: {
         index: false,
         follow: true,
