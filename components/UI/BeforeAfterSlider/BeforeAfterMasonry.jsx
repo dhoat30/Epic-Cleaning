@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { ReactCompareSlider } from "react-compare-slider";
 
-export default function BeforeAfterMasonry({ data, showTitle }) {
+export default function BeforeAfterMasonry({ data, showTitle, priority }) {
   if (!data.afterImage || !data.beforeImage) return null;
   return (
     <Container>
@@ -27,6 +27,7 @@ export default function BeforeAfterMasonry({ data, showTitle }) {
           <Image
             src={data.beforeImage.url}
             alt={data.beforeImage.alt ? data.beforeImage.alt : "Before"}
+            priority={priority}
             fill
           />
         }
@@ -35,6 +36,7 @@ export default function BeforeAfterMasonry({ data, showTitle }) {
             src={data.afterImage.url}
             alt={data.afterImage.alt ? data.afterImage.alt : "Before"}
             fill
+            priority={priority}
           />
         }
       />
