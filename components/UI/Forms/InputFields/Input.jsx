@@ -206,7 +206,7 @@ export default function Input({
         </FormHelperText>
       </SliderContainer>
     );
-  } else if (type === "chip") {
+  } else if (type === "chip" && options.length > 0) {
     const handleChipClick = (optionValue) => {
       let currentValues = Array.isArray(value) ? [...value] : [];
       if (currentValues.includes(optionValue)) {
@@ -248,7 +248,12 @@ export default function Input({
         </FormHelperText>
       </FormControlStyled>
     );
-  } else {
+  } else if (
+    type === "text" ||
+    type === "email" ||
+    type === "tel" ||
+    type === "textarea"
+  ) {
     return (
       <TextFieldStyle
         sx={{
