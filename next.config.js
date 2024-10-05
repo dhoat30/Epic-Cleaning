@@ -261,6 +261,11 @@ const nextConfig = {
                 destination: '/blogs',
                 permanent: true,
             },
+            {
+                source: '/spring-cleaning-in-tauranga-tips-for-a-fresh-and-organized-home',
+                destination: '/residential-cleaning/spring-cleaning-tauranga',
+                permanent: true,
+            },
         ];
     },
 }
