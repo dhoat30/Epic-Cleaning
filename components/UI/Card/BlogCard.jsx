@@ -59,7 +59,7 @@ export default function BlogCard({
 
       <Box className="content-wrapper">
         <Typography
-          variant="h5"
+          variant="h6"
           component="h2"
           className="title"
           color="var(--white)"

@@ -1,3 +1,4 @@
+"use client";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";

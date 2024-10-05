@@ -109,13 +109,7 @@ export default async function singleProject({ params }) {
         "author": {
             "@type": "Person",
             "name": data[0].yoast_head_json.author,
-            "image": {
-                "@type": "ImageObject",
-                "@id": process.env.gurpreet,
-                "url": process.env.gurpreet,
-                "height": "96",
-                "width": "96"
-            }
+
         },
         "publisher": {
             "@type": "Organization",
@@ -137,7 +131,7 @@ export default async function singleProject({ params }) {
     return (
         <>
             <Header />
-            <main className={styles.blogMain} style={{ background: "var( --light-surface-container-low)" }}>
+            <main className={styles.blogMain} style={{ background: "var( --light-surface-container-lowest)" }}>
 
                 <script
                     type="application/ld+json"

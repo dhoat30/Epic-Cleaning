@@ -141,6 +141,11 @@ const Section = styled.section`
         font-size: 1.4rem !important;
         color: var(--dark-on-surface-variant);
       }
+      strong {
+        font-size: 1.4rem !important;
+
+        color: var(--dark-on-surface-variant);
+      }
       @media (max-width: 900px) {
         font-size: 1.2rem !important;
         p {
@@ -230,6 +235,10 @@ const Section = styled.section`
             font-size: 1rem;
             font-weight: 400 !important;
             line-height: 1.5rem;
+            margin-top: 16px;
+          }
+          li {
+            margin-top: 4px;
           }
         }
       }

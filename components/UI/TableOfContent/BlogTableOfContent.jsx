@@ -36,6 +36,7 @@ export default function BlogTableOfContent({ data }) {
   );
 }
 const Section = styled(Paper)`
+  background: var(--light-surface-container-low);
   @media (max-width: 1100px) {
     padding: 16px;
     width: 100%;

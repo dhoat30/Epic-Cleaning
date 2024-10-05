@@ -203,7 +203,9 @@ ul {
 .border-radius-12 {
   border-radius: 12px;
 }
-
+.overflow-hidden {
+  overflow: hidden;
+}
 /* body 1 */
 .body1,
 .body1 p,

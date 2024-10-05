@@ -68,7 +68,8 @@ const Section = styled.section`
     }
     .description {
       font-size: 1.4rem !important;
-      p {
+      p,
+      strong {
         font-size: 1.4rem !important;
         color: var(--dark-on-surface-variant);
       }
@@ -133,6 +134,11 @@ const Section = styled.section`
           font-size: 1rem;
           font-weight: 400 !important;
           line-height: 1.5rem;
+          margin-top: 8px;
+          margin-bottom: 8px;
+        }
+        li {
+          margin-top: 4px;
         }
       }
     }

@@ -24,7 +24,6 @@ const nextConfig = {
         url: "https://cms.epiccleaning.co.nz",
         siteUrl: "https://epiccleaning.co.nz",
         name: "Epic Cleaning Tauranga",
-        gurpreet: "/gurpreet.jpg"
     },
     async redirects() {
         return [
