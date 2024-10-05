@@ -33,7 +33,7 @@ export const informationLinks = [
     { label: "Video Gallery", url: "/our-work/video-gallery" },
     { label: "About Us", url: "/about-us" },
     { label: "FAQs", url: "/faq" },
-    { label: "Contact Us", url: "/contact" },
+    { label: "Contact Us", url: "/contact-us" },
     { label: "Get Free Quote", url: "/get-a-quote" },
     { label: "Blogs", url: "/blogs" },
 
