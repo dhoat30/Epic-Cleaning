@@ -100,7 +100,7 @@ export default async function Page() {
         <Layout sections={postData[0]?.acf?.sections} />
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
         <FaqAccordionSection title={options.faq.section_title} description={options.faq.section_description} qaData={options.faq.items} />
-        <BlogsArchive blogsData={allBlogsData} sectionUI={true} />
+        <BlogsArchive blogsData={allBlogsData} sectionUI={true} show={3} />
       </main>
       <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
     </>

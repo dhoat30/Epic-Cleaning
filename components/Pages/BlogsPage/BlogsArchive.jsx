@@ -15,6 +15,7 @@ export default function BlogsArchive({
   description = staticDescription,
   sectionUI = false,
   blogsData,
+  show = 1000,
 }) {
   if (!blogsData) {
     console.log("no page data");
@@ -41,6 +42,7 @@ export default function BlogsArchive({
   });
 
   const cards = blogsDataArr.map((item, index) => {
+    if (index >= show) return null;
     return (
       <BlogCard
         key={index}
