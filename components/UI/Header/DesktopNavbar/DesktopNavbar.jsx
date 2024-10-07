@@ -131,6 +131,7 @@ function DesktopNavbar() {
                 width={48 * 2}
                 height={22 * 2}
                 alt="Epic Cleaning Logo"
+                style={{ cursor: "pointer" }}
               />
             </Link>
             {/* menu */}

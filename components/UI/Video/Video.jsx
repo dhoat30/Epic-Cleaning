@@ -27,6 +27,7 @@ export default function Video({
       <div className="video-wrapper">
         {!videoLoaded && (
           <>
+            <div className="video-overlay"></div>
             <Image
               onClick={handleImageClick}
               src={imageURL} // Replace with your placeholder image path
@@ -69,6 +70,13 @@ const ContainerStyled = styled.div`
     overflow: hidden;
     border: 1px solid var(--light-outline-variant);
   }
+  .video-overlay {
+    background: rgba(31, 101, 135, 0.3);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+  }
   .img-wrapper {
     img {
       object-fit: cover;
@@ -85,6 +93,9 @@ const ButtonStyled = styled.div`
   z-index: 10;
 
   svg {
+    &:hover {
+      cursor: pointer;
+    }
     width: 72px;
     height: 72px;
     cursor: pointer;
