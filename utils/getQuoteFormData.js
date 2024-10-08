@@ -94,6 +94,19 @@ export const getQuoteFormData = [
         errorMessage: 'Please enter a valid New Zealand phone number'
     },
     {
+        id: 'address',
+        label: 'Property Address',
+        type: 'text',
+        required: false,
+        autoComplete: "address-line1",
+        validation: value => {
+            if (typeof value === 'string') {
+                return value.trim().length > 2;
+            }
+            return false;
+        },
+    },
+    {
         id: 'propertyType',
         label: 'Property type',
         type: 'select', // or 'radio' for single selection

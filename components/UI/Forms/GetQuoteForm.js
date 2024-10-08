@@ -84,7 +84,7 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         const dataPayload = {
             email: formData.email,
             formName: formName,
-            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone Number: ${formData.phone} \nProperty Type: ${formData.propertyType} \nServices Required: ${formData['service'].join(", ")}  \n Message: ${formData.message} `,
+            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone Number: ${formData.phone} \nProperty Address: ${formData.address} \nProperty Type: ${formData.propertyType} \nServices Required: ${formData['service'].join(", ")}  \n Message: ${formData.message} `,
             portalID: "145323047",
             hubspotFormID: "56669fff-b1f7-4aff-a297-42e71574dadc",
             hubspotFormObject: [
