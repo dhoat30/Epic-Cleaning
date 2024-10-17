@@ -199,10 +199,12 @@ const AppBarContainer = styled(AppBar)`
       align-items: center;
       color: var(--light-on-surface);
       padding: 16px 24px;
-      @media (max-width: 1300px) {
+      @media (max-width: 1366px) {
         padding: 16px 16px;
       }
-
+      @media (max-width: 1366px) {
+        padding: 16px 8px;
+      }
       &.active {
         &::before {
           content: "";
