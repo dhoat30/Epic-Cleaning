@@ -94,7 +94,7 @@ const nextConfig = {
                 permanent: true,
             }, {
                 source: '/professional-house-cleaning',
-                destination: '/residential-cleaning/end-of-tenancy-cleaning-tauranga',
+                destination: '/residential-cleaning/move-out-cleaning',
                 permanent: true,
             }, {
                 source: '/zero-waste-cleaning',
@@ -102,7 +102,7 @@ const nextConfig = {
                 permanent: true,
             }, {
                 source: '/end-of-tenancy',
-                destination: '/residential-cleaning/end-of-tenancy-cleaning-tauranga',
+                destination: '/residential-cleaning/move-out-cleaning',
                 permanent: true,
             }, {
                 source: '/category/carpet-cleaning',
@@ -170,7 +170,7 @@ const nextConfig = {
                 permanent: true,
             }, {
                 source: '/move-out-cleaning-tauranga-2024',
-                destination: '/residential-cleaning/end-of-tenancy-cleaning-tauranga',
+                destination: '/residential-cleaning/move-out-cleaning',
                 permanent: true,
             }, {
                 source: '/spotless-solutions-premier-commercial-cleaners-in-tauranga',
@@ -182,7 +182,7 @@ const nextConfig = {
                 permanent: true,
             }, {
                 source: '/end-of-tenancy-cleaning-services-in-tauranga',
-                destination: '/residential-cleaning/end-of-tenancy-cleaning-tauranga',
+                destination: '/residential-cleaning/move-out-cleaning',
                 permanent: true,
             }, {
                 source: '/commercial-cleaning-companies-in-tauranga',
