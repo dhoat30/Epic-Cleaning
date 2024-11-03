@@ -266,6 +266,11 @@ const nextConfig = {
                 destination: '/residential-cleaning/spring-cleaning-tauranga',
                 permanent: true,
             },
+            {
+                source: '/residential-cleaning/end-of-tenancy-cleaning-tauranga',
+                destination: '/residential-cleaning/move-out-cleaning',
+                permanent: true,
+            }
         ];
     },
 }
