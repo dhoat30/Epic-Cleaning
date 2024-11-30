@@ -8,6 +8,7 @@ import Footer from '@/components/UI/Footer/Footer'
 import ServiceSelectorTabs from '@/components/UI/Tabs/ServicesSelectorTabs/ServiceSelectorTabs'
 import FaqAccordionSection from '@/components/UI/Layout/Sections/FaqAccordionSection'
 import BlogsArchive from '@/components/Pages/BlogsPage/BlogsArchive'
+import GoogleReviews from '@/components/UI/GoogleReviews/GoogleReviews'
 
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -95,6 +96,7 @@ export default async function Page() {
       <Header />
       <main>
         <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
+        <GoogleReviews/>
         <TechLogos data={options.clients_logos} />
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
         <Layout sections={postData[0]?.acf?.sections} />

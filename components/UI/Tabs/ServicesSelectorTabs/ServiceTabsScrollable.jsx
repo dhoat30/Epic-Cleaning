@@ -20,8 +20,7 @@ function CustomTabPanel(props) {
     ...other
   } = props;
   const serviceCards = childCardsData.map((item, key) => {
-    console.log("key", key);
-    console.log("item", item);
+  
     return (
       <ServiceCard
         key={item.id}
