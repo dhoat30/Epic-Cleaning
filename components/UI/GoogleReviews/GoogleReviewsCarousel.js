@@ -38,7 +38,7 @@ var settings = {
   ],
 };
 
-export default function GoogleReviews({data}) {
+export default function GoogleReviewsCarousel({data}) {
   console.log(data);
 
   // slider arrow functionality
@@ -98,7 +98,7 @@ export default function GoogleReviews({data}) {
             className="description mt-16"
             align="center"
           >
-Read feedback from our clients and learn how our services have made a positive impact.          </Typography>
+Explore authentic customer feedback and see why people trust us. Each review reflects the quality and dedication we bring to every service we provide.        </Typography>
         </div>
         <div className="arrows-wrapper">
           <CarouselArrows next={next} previous={previous} />
