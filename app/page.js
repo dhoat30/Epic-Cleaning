@@ -64,7 +64,7 @@ export default async function Page() {
   }
 // google reviews data fetch 
   const googleReviewsData = await getGoogleReviews()  
-  console.log(googleReviewsData)
+  console.log("Google reviews", googleReviewsData)
 
   // Fetching the residential cleaning services IDs
   const residentialServicesIDs = postData[0]?.acf?.services_selector.residential_services
@@ -102,7 +102,7 @@ export default async function Page() {
       <main>
         <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
         <TechLogos data={options.clients_logos} />
-        <GoogleReviews data={googleReviewsData.reviews}/>
+        <GoogleReviews data={googleReviewsData}/>
 
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
         <Layout sections={postData[0]?.acf?.sections} />

@@ -1,7 +1,6 @@
 
 const { google } = require('googleapis');
 
-// new way of doing it 
 //get single post with slug 
 export const getSinglePostData = async (slug, apiRoute) => {
     let response = await fetch(`${process.env.url}/${apiRoute}?slug=${slug}&acf_format=standard`, {
@@ -43,27 +42,33 @@ export const getOptions = async () => {
 
 
 // get reivews 
-export const getGoogleReviews = async() => {
+
+export const getGoogleReviews = async () => {
+    // Add revalidation logic
+    const nextRevalidateOptions = { next: { revalidate: 30 * 86400 } }; // Revalidate every 30 days 
+
+    // Fetch reviews directly from Google API
     const oauth2Client = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET
+        process.env.GOOGLE_CLIENT_ID,
+        process.env.GOOGLE_CLIENT_SECRET
     );
-  
+
     oauth2Client.setCredentials({
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+        refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
-  
+
     const accountId = process.env.GOOGLE_ACCOUNT_ID;
     const locationId = process.env.GOOGLE_LOCATION_ID;
-  
+
+    // Fetch reviews
     const response = await oauth2Client.request({
-      url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
-      method: 'GET',
+        url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
+        method: "GET",
+        ...nextRevalidateOptions, // Pass the revalidate option here
     });
-  
+
     return response.data.reviews || [];
-  }
-  
+};
 
 //get projects 
 // export const getProjects = async () => {
