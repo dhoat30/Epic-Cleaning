@@ -1,4 +1,5 @@
 
+const { google } = require('googleapis');
 
 // new way of doing it 
 //get single post with slug 
@@ -37,15 +38,32 @@ export const getOptions = async () => {
     return data
 }
 
+
+
+
+
 // get reivews 
-export const getGoogleReviews = async () => {
-    const revalidationTime = 30 * 86400; 
-    let fetchData = await fetch(`${process.env.GOOGLE_REDIRECT_URI}/wp-json/options/all`, {
-        next: { revalidate: revalidationTime },
+export const getGoogleReviews = async() => {
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET
+    );
+  
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
-    let data = await fetchData.json();
-    return data
-}
+  
+    const accountId = process.env.GOOGLE_ACCOUNT_ID;
+    const locationId = process.env.GOOGLE_LOCATION_ID;
+  
+    const response = await oauth2Client.request({
+      url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
+      method: 'GET',
+    });
+  
+    return response.data.reviews || [];
+  }
+  
 
 //get projects 
 // export const getProjects = async () => {
