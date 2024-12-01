@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import LongArrowIcon from "../Icons/LongArrowIcon";
 export default function CarouselArrows({ next, previous, className }) {
   return (
@@ -18,12 +18,24 @@ export default function CarouselArrows({ next, previous, className }) {
 
 const Container = styled.div`
   width: 100%;
+  display: flex; 
+  justify-content: flex-end;
+  .wrapper{ 
+    display: flex; 
+    gap: 8px; 
+  }
   .arrow-wrapper {
     cursor: pointer;
+   svg{ 
+    path{ 
+      fill: var(--light-primary) !important;
+
+    }
+   }
     &:hover {
       svg {
         path {
-          fill: var(--light-on-surface, #1d1b16);
+          fill: var(--light-on-primary-container) !important;
         }
       }
     }

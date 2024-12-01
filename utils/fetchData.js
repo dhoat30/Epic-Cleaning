@@ -37,6 +37,16 @@ export const getOptions = async () => {
     return data
 }
 
+// get reivews 
+export const getGoogleReviews = async () => {
+    const revalidationTime = 30 * 86400; 
+    let fetchData = await fetch('http://localhost:3000/api/google-reviews', {
+        next: { revalidate: revalidationTime },
+    });
+    let data = await fetchData.json();
+    return data
+}
+
 //get projects 
 // export const getProjects = async () => {
 //     let fetchData = await fetch(`${process.env.url}/wp-json/wp/v2/work?acf_format=standard&per_page=100`, {

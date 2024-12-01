@@ -18,12 +18,21 @@ const nextConfig = {
             hostname: 'cms.epiccleaning.co.nz',
             port: '',
             pathname: '/**'
-        }],
+        },
+        {
+            protocol: 'https',
+            hostname: 'lh3.googleusercontent.com',
+            port: '',
+            pathname: '/**'
+        }
+        
+    ],
     },
     env: {
         url: "https://cms.epiccleaning.co.nz",
         siteUrl: "https://epiccleaning.co.nz",
         name: "Epic Cleaning Tauranga",
+        GOOGLE_REDIRECT_URI: process.env.NODE_ENV === 'production' ? 'https://epiccleaning.co.nz' : 'http://localhost:3000'
     },
     async redirects() {
         return [

@@ -66,12 +66,12 @@ export default function BlogCard({
         >
           {title}
         </Typography>
-        <div className="meta-info-wrapper">
-          <Typography variant="body2" component="span">
+        <div className="meta-info-wrapper mt-8">
+          <Typography variant="label1" component="div" style={{fontWeight: 600}}>
             {categoryDetails[0]?.name}
           </Typography>
 
-          <div className="text-wrapper">
+          <div className="name-wrapper text-wrapper mt-4">
             <Typography
               variant="body2"
               component="span"
@@ -79,9 +79,7 @@ export default function BlogCard({
             >
               {authorFirstName} {authorLastName}
             </Typography>
-            <Typography variant="body1" component="span" className="divider">
-              |
-            </Typography>
+          <div className="divider">|</div>
             <Typography variant="body2" component="span" className="meta-info">
               {formattedDate}
             </Typography>
@@ -130,13 +128,9 @@ const ContainerStyled = styled(Paper)`
     }
   }
   .meta-info-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    @media (max-width: 370px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  
+
+ 
     .profile-pic-wrapper {
       position: relative;
       width: 32px;
@@ -155,11 +149,7 @@ const ContainerStyled = styled(Paper)`
 
       .meta-author-name {
       }
-      .divider {
-        @media (max-width: 370px) {
-          display: none;
-        }
-      }
+    
     }
   }
   .content-wrapper {

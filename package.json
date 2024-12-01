@@ -19,6 +19,8 @@
     "@next/bundle-analyzer": "^14.2.3",
     "@next/third-parties": "^14.2.5",
     "axios": "^1.5.0",
+    "dotenv": "^16.4.5",
+    "epicCleaning2024": "file:",
     "eslint": "8.48.0",
     "eslint-config-next": "^14.2.4",
     "framer-motion": "^10.16.4",

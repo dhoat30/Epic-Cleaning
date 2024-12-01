@@ -1,4 +1,4 @@
-import { getAllPosts, getOptions, getSinglePostData, getSinglePostDataWithID, getSingleServicePackage } from '@/utils/fetchData'
+import { getAllPosts, getOptions, getSinglePostData, getSinglePostDataWithID, getSingleServicePackage, getGoogleReviews } from '@/utils/fetchData'
 import Layout from '@/components/UI/Layout/Layout'
 import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
 import TechLogos from '@/components/UI/TechLogos/TechLogos'
@@ -8,7 +8,7 @@ import Footer from '@/components/UI/Footer/Footer'
 import ServiceSelectorTabs from '@/components/UI/Tabs/ServicesSelectorTabs/ServiceSelectorTabs'
 import FaqAccordionSection from '@/components/UI/Layout/Sections/FaqAccordionSection'
 import BlogsArchive from '@/components/Pages/BlogsPage/BlogsArchive'
-import GoogleReviews from '@/components/UI/GoogleReviews/GoogleReviews'
+import GoogleReviews from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
 
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -55,11 +55,16 @@ export default async function Page() {
 
   const postData = await getSinglePostData("home", "/wp-json/wp/v2/pages")
   const options = await getOptions()
+
+
   if (!postData) {
     return {
       notFound: true,
     }
   }
+// google reviews data fetch 
+  const googleReviewsData = await getGoogleReviews()  
+  console.log(googleReviewsData)
 
   // Fetching the residential cleaning services IDs
   const residentialServicesIDs = postData[0]?.acf?.services_selector.residential_services
@@ -96,8 +101,9 @@ export default async function Page() {
       <Header />
       <main>
         <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
-        <GoogleReviews/>
         <TechLogos data={options.clients_logos} />
+        <GoogleReviews data={googleReviewsData.reviews}/>
+
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
         <Layout sections={postData[0]?.acf?.sections} />
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
@@ -106,6 +112,5 @@ export default async function Page() {
       </main>
       <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
     </>
-
   )
 }
