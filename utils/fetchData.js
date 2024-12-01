@@ -40,7 +40,7 @@ export const getOptions = async () => {
 // get reivews 
 export const getGoogleReviews = async () => {
     const revalidationTime = 30 * 86400; 
-    let fetchData = await fetch('http://localhost:3000/api/google-reviews', {
+    let fetchData = await fetch(`${process.env.GOOGLE_REDIRECT_URI}/wp-json/options/all`, {
         next: { revalidate: revalidationTime },
     });
     let data = await fetchData.json();
