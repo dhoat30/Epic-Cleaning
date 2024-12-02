@@ -17,7 +17,7 @@ export default function GoogleReviewCard({ name, description, customerPic, class
   };
 
   // Limit description to 200 characters if not expanded
-  const charLimit = 200;
+  const charLimit = 180;
   const shortDescription =
     description.length > charLimit
       ? description.slice(0, charLimit) + "..."

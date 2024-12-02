@@ -1,4 +1,4 @@
-import { getAllPosts, getOptions, getSinglePostData, getSinglePostDataWithID, getSingleServicePackage, getGoogleReviews } from '@/utils/fetchData'
+import { getAllPosts, getOptions, getSinglePostData, getSinglePostDataWithID, getGoogleReviews } from '@/utils/fetchData'
 import Layout from '@/components/UI/Layout/Layout'
 import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
 import TechLogos from '@/components/UI/TechLogos/TechLogos'

@@ -1,4 +1,4 @@
-import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } from '@/utils/fetchData'
+import { getOptions, getSinglePostData, getAllPosts, getGoogleReviews } from '@/utils/fetchData'
 import Layout from '@/components/UI/Layout/Layout'
 import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
 import TechLogos from '@/components/UI/TechLogos/TechLogos'
@@ -7,6 +7,7 @@ import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
 import { all } from 'axios'
+import GoogleReviewsCarousel from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
 
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -58,7 +59,8 @@ export default async function Contact({ params }) {
             notFound: true,
         }
     }
-
+// google reviews data fetch 
+const googleReviewsData = await getGoogleReviews()  
     return (
         <>
             <Header />
@@ -68,7 +70,7 @@ export default async function Contact({ params }) {
                 <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="residential-cleaning" />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
-
+                <GoogleReviewsCarousel data={googleReviewsData} />
             </main>
             <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
         </>
