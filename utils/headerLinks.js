@@ -12,11 +12,6 @@ export const headerLinks = [
 
     {
         id: 2,
-        label: "Home",
-        url: "/"
-    },
-    {
-        id: 2,
         label: "Residential Cleaning",
         url: "/residential-cleaning",
         subLinks: [
@@ -73,8 +68,15 @@ export const headerLinks = [
         subLinks: [
             { label: "Gallery", url: "/our-work/gallery" },
             { label: "Video Gallery", url: "/our-work/video-gallery" },
+            {
+               
+                label: "Testimonials",
+                url: "/testimonials"
+            },
         ]
     },
+    
+  
     {
         id: 2,
         label: "Blogs",
