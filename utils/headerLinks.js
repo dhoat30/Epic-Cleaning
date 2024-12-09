@@ -79,10 +79,9 @@ export const headerLinks = [
   
     {
         id: 2,
-        label: "Blogs",
-        url: "/blogs"
+        label: "Shop",
+        url: "https://epicdistributors.co.nz/"
     },
-
 
 
 ]
