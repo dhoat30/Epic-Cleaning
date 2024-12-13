@@ -1,4 +1,3 @@
-'use client'
 //import css file 
 import './globals.css'
 import './tokens.css'
@@ -6,12 +5,8 @@ import './tokens.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Work_Sans } from 'next/font/google'
-import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme } from '../utils/themeSettings'
-import Loading from '../components/UI/Loader/Loading'
-import {useEffect, useState} from "react"
 
-
+import ClientProvider from '@/components/Providers/ClientProvider';
 
 import { GoogleTagManager } from '@next/third-parties/google'
 
@@ -26,30 +21,16 @@ const work_sans = Work_Sans({
 
 
 export default function RootLayout({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000); // Adjust timing as needed
-    return () => clearTimeout(timer);
-  }, []);
 
 
   return (
     <html lang="en" className={`${work_sans.variable}`}>
       <GoogleTagManager gtmId="GTM-NDXM6D" />
       <body >
-      {isLoading ?
-<Loading/>
-        :
-        <ThemeProvider theme={lightTheme}>
-        {/* Wrap main content with Suspense */}
+      <ClientProvider>
           {children}
- 
-         </ThemeProvider>
-        
-        }
+        </ClientProvider>
 
       </body>
     </html>
