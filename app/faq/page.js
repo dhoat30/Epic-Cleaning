@@ -65,7 +65,6 @@ export default async function Contact({ params }) {
             <main >
                 <div className='mt-40'></div>
                 <FaqAccordionSection title={options.faq.section_title} description={options.faq.section_description} qaData={options.faq.items} />
-                <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
 
