@@ -26,10 +26,15 @@ ul {
   height: 100vh;
   background: var(--light-surface-container-highest);
   z-index: 10000;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+@media(max-width: 1200px){ 
+  .loading-wrapper {
+   display: flex; 
+  }
 }
 .loading-wrapper img {
   position: relative;
