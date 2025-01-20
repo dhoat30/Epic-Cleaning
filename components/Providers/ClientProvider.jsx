@@ -7,7 +7,7 @@ export default function ClientProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000); // Adjust timing
+    const timer = setTimeout(() => setIsLoading(false), 4000); // Adjust timing
     return () => clearTimeout(timer);
   }, []);
 
