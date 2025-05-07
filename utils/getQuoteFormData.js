@@ -3,6 +3,7 @@ export const servicePropertyMap = {
         { value: "Builder Cleaning", label: "Builder Cleaning", price: 0 },
         { value: "Carpet Cleaning", label: "Carpet Cleaning", price: 0 },
         { value: "End-of-Tenancy", label: "End-of-Tenancy", price: 0 },
+        { value: "Regular Cleaning", label: "Regular Cleaning", price: 400 },
         { value: "Exterior Washing", label: "Exterior Washing", price: 0 },
         { value: "Flood Restoration", label: "Flood Restoration", price: 0 },
         { value: "Grout & Tiles Cleaning", label: "Grout & Tiles Cleaning", price: 90 },
