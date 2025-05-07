@@ -3,6 +3,7 @@ export const services = [
     { label: "Carpet Cleaning", url: "/residential-cleaning/carpet-cleaning-tauranga" },
     { label: "Exterior House Washing", url: "/residential-cleaning/exterior-house-washing-tauranga" },
     { label: "Flood Restoration", url: "/residential-cleaning/flood-restoration-tauranga" },
+    { label: "Regular Cleaning", url: "/residential-cleaning/regular-cleaning-tauranga" },
     { label: "Glass Treatment Protection", url: "/residential-cleaning/shower-glass-protection" },
     { label: "Move Out Cleaning", url: "/residential-cleaning/move-out-cleaning" },
     { label: "Oven Cleaning", url: "/residential-cleaning/oven-cleaning-tauranga" },
