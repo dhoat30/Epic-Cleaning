@@ -4,11 +4,10 @@
 
 import React, { useState } from "react";
 import Input from './InputFields/Input';
-import { getQuoteFormData } from "@/utils/getQuoteFormData";
-import { servicePropertyMap } from "@/utils/getQuoteFormData"; // Import the service mapping
+import { getRegularCleaningFormData } from "@/utils/getRegularCleaningFormData";
+import { servicePropertyMap } from "@/utils/getRegularCleaningFormData"; // Import the service mapping
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import styled from "@emotion/styled";
 import axios from "axios";
 import Alert from '@mui/material/Alert';
@@ -18,15 +17,16 @@ import Typography from "@mui/material/Typography";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
 
-export default function GetQuoteForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
+export default function GetRegularCleaningForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
     const router = useRouter();
 
     const [formData, setFormData] = useState({
         firstname: '',   // Default empty string to make it controlled
         email: '',
         phone: '',
-        propertyType: '',
-        service: [],
+        address: '', 
+        frequency: '',
+        areasToFocus: [],
         message: ''
     });
     const [errors, setErrors] = useState({});
@@ -76,7 +76,7 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         const newErrors = {};
 
         // Loop through each field to check if it's required and valid
-        getQuoteFormData.forEach(field => {
+        getRegularCleaningFormData.forEach(field => {
             if (field.required) {
                 if (field.type === 'chip') {
                     if (!formData[field.id] || formData[field.id].length === 0) {
@@ -99,15 +99,16 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         const dataPayload = {
             email: formData.email,
             formName: formName,
-            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone Number: ${formData.phone} \nProperty Address: ${formData.address} \nProperty Type: ${formData.propertyType} \nServices Required: ${formData['service'].join(", ")}  \n Message: ${formData.message} `,
+            message: `First Name: ${formData.firstname} \nEmail: ${formData.email} \nPhone Number: ${formData.phone} \n Cleaning Frequency: ${formData.frequency} \nFocus areas: ${formData.areasToFocus} \n Address: ${formData.address} \n Message: ${formData.message} `,
             portalID: "145323047",
-            hubspotFormID: "56669fff-b1f7-4aff-a297-42e71574dadc",
+            hubspotFormID: "48e50aba-1d18-4b05-87c6-bb8660166a8c",
             hubspotFormObject: [
                 { name: "firstname", value: formData.firstname },
                 { name: "email", value: formData.email },
                 { name: "phone", value: formData.phone },
-                { name: "propertyType", value: formData.propertyType },
-                { name: "services_required", value: formData['service'].join(", ") },
+                { name: "cleaning_frequency", value: formData.frequency },
+                { name: "focus_areas", value: formData['areasToFocus'].join(", ") },
+                { name: "address", value: formData.address },
                 { name: "message", value: formData.message },
             ]
         };
@@ -175,7 +176,7 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         return [];
     };
 
-    const formInputs = getQuoteFormData.map((field, index) => {
+    const formInputs = getRegularCleaningFormData.map((field, index) => {
         if (field.id === 'service') {
             const filteredOptions = getFilteredServiceOptions();
             return (

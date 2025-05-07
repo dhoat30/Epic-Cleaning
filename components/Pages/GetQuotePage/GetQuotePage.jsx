@@ -9,11 +9,12 @@ import HeroImage from "@/components/UI/Hero/OptimizedHero/HeroImage";
 import Video from "@/components/UI/Video/Video";
 import USP from "@/components/UI/USP/USP";
 import GetQuoteForm from "@/components/UI/Forms/GetQuoteForm";
+import GetRegularCleaningForm from "@/components/UI/Forms/GetRegualrCleaningForm";
 // const WebsitePriceCalculatorForm = dynamic(() =>
 //   import("@/components/UI/Forms/WebsitePriceCalculatorForm")
 // );
 
-export default function GetQuotePage({ data, websitePackageOffer }) {
+export default function GetQuotePage({ data, websitePackageOffer, regularCleaningForm=false }) {
   let graphicComponent = null;
   if (data.acf.hero_section.show_video) {
     if (data.acf.hero_section.video_options === "enter_youtube_id") {
@@ -53,10 +54,17 @@ export default function GetQuotePage({ data, websitePackageOffer }) {
             )}
           </div>
           <div className="form-container">
-            <GetQuoteForm
+           
+            {
+              regularCleaningForm ?  <GetRegularCleaningForm
+              className="row-max form-component"
+              title={data.acf.hero_section.title}
+            />:  <GetQuoteForm
               className="row-max form-component"
               title={data.acf.hero_section.title}
             />
+            }
+          
           </div>
         </Container>
       </Section>
