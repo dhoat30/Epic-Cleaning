@@ -115,7 +115,7 @@ export const getQuoteFormData = [
         multiple: true,
         priceType: "fixed",
         options: [], // Will be populated dynamically
-        required: true, // Make it required if necessary
+        required: false, // Make it required if necessary
     },
     {
         id: 'message',

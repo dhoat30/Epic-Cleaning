@@ -70,34 +70,6 @@ export const getGoogleReviews = async () => {
     return response.data.reviews || [];
 };
 
-//get projects 
-// export const getProjects = async () => {
-//     let fetchData = await fetch(`${process.env.url}/wp-json/wp/v2/work?acf_format=standard&per_page=100`, {
-//         next: { revalidate: 259200 },
-//     });
-//     let data = await fetchData.json();
-//     return data
-// }
-
-//fetch work categories 
-// export const getProjectCategories = async () => {
-//     let fetchData = await fetch(`${process.env.url}/wp-json/wp/v2/work-category`, {
-//         next: { revalidate: 259200 },
-//     });
-//     let data = await fetchData.json();
-//     return data
-// }
-
-// fetch single project 
-// export const getSingleProject = async (slug) => {
-//     let fetchData = await fetch(`${process.env.url}/wp-json/wp/v2/work?slug=${slug}&acf_format=standard`, {
-//         next: { revalidate: 259200 },
-//     });
-//     let data = await fetchData.json();
-//     return data
-// }
-
-
 
 //get service packages  
 export const getCommercialServices = async () => {
