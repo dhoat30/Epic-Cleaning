@@ -320,3 +320,11 @@ strong {
 .gap-8 {
   gap: 8px;
 }
+
+
+
+/* date and time picker  */
+.MuiDialog-root .MuiMenuItem-root.Mui-selected, .MuiPopper-root .MuiMenuItem-root.Mui-selected{
+  background-color: var(--light-secondary) !important; 
+  color: var(--light-on-secondary) !important;
+}

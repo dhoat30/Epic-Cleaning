@@ -18,6 +18,15 @@ import Chip from "@mui/material/Chip";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
+import dayjs from "dayjs";
+
+
 // styling for select
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -248,7 +257,37 @@ export default function Input({
         </FormHelperText>
       </FormControlStyled>
     );
-  } else if (
+  } 
+  else if(type==="datePicker"){
+    return       <FormControl
+    fullWidth
+    required={required}
+    error={required ? isInvalid : null}
+    sx={{ marginTop: "24px" }}
+  >
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+  <DateTimePicker
+    label={label}
+    value={value ?? null}
+    onChange={onChange}
+    color="secondary"
+    format="DD/MM/YYYY HH:mm" // include time in the format
+    minDate={dayjs()} 
+    slotProps={{
+      textField: {
+        variant: "outlined",
+        fullWidth: true,
+        helperText: isInvalid ? errorMessage : "",
+        error: isInvalid,
+        color: "secondary", // ✅ explicitly set color here
+
+      },
+    }}
+  />
+</LocalizationProvider>
+  </FormControl>
+  } 
+  else if (
     type === "text" ||
     type === "email" ||
     type === "tel" ||

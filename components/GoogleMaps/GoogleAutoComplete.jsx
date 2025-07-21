@@ -45,6 +45,7 @@ export default function GoogleAutocomplete({
       onChange={(e) => onChange(e.target.value)}
       inputRef={inputRef}
       fullWidth
+      color="secondary"
       required={required}
       autoComplete={autoComplete}
       error={error}

@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import Typography from "@mui/material/Typography";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
+import dayjs from "dayjs";
 
 export default function GetQuoteForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
     const router = useRouter();
@@ -27,8 +28,11 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         phone: '',
         propertyType: '',
         service: [],
+        date: null,
+
         message: ''
     });
+    console.log(formData)
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -95,7 +99,8 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
         if (!allFieldsValid) {
             return; // Stop the function if any field is invalid or empty
         }
-
+        let formattedDate = dayjs(formData.datePicker).format('DD/MM/YYYY HH:mm')
+   
         const dataPayload = {
             email: formData.email,
             formName: formName,
@@ -108,6 +113,7 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
                 { name: "phone", value: formData.phone },
                 { name: "propertyType", value: formData.propertyType },
                 { name: "services_required", value: formData['service'].join(", ") },
+                {name: "preffered_time_to_call", value: formattedDate},
                 { name: "message", value: formData.message },
             ]
         };

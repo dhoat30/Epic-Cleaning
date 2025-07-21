@@ -87,7 +87,8 @@ export const theme = createTheme({
 
                 }
             }
-        }
+        }, 
+        
     }
 });
 
@@ -187,6 +188,46 @@ export const lightTheme = createTheme({
 
                 },
             }
-        }
+        },
+        MuiPickersDay: {
+            styleOverrides: {
+              root: {
+                '&.Mui-selected': {
+                    color: "white", 
+                  backgroundColor: '#007239', // your secondary.main color
+                  '&:hover': {
+                    backgroundColor: 'rgb(49, 106, 66)', // darker secondary
+                  },
+                },
+              },
+            },
+          },
+          MuiClockNumber: {
+            styleOverrides: {
+              root: {
+                '&.Mui-selected': {
+                  backgroundColor: '#007239',
+                  color: '#fff',
+                },
+              },
+            },
+          },
+          MuiClockPointer: {
+            styleOverrides: {
+              root: {
+                backgroundColor: '#007239', // clock hand
+              },
+              thumb: {
+                border: '14px solid #007239', // clock knob in the middle
+              },
+            },
+          },
+          MuiClock: {
+            styleOverrides: {
+              pin: {
+                backgroundColor: '#007239', // clock pin in the center
+              },
+            },
+          },
     }
 });
