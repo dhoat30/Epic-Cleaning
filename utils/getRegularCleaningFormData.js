@@ -117,12 +117,12 @@ export const getRegularCleaningFormData = [
        
         required: false, // Make it required if necessary
     },
-    {
-        id: 'date',
-        label: 'Schedule a call',
-        type: 'datePicker',
-        required: false,
-    },
+    // {
+    //     id: 'date',
+    //     label: 'Schedule a call',
+    //     type: 'datePicker',
+    //     required: false,
+    // },
     {
         id: 'message',
         label: 'Message',

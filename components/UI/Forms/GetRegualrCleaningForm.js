@@ -16,7 +16,6 @@ import { useRouter } from 'next/navigation';
 import Typography from "@mui/material/Typography";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
-import dayjs from "dayjs";
 
 export default function GetRegularCleaningForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
     const router = useRouter();
@@ -96,7 +95,7 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
         if (!allFieldsValid) {
             return; // Stop the function if any field is invalid or empty
         }
-        let formattedDate = dayjs(formData.datePicker).format('DD/MM/YYYY HH:mm')
+        // let formattedDate = dayjs(formData.datePicker).format('DD/MM/YYYY HH:mm')
 
         const dataPayload = {
             email: formData.email,
@@ -111,7 +110,6 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
                 { name: "cleaning_frequency", value: formData.frequency },
                 { name: "focus_areas", value: formData['areasToFocus'].join(", ") },
                 { name: "address", value: formData.address },
-                {name: "preffered_time_to_call", value: formattedDate},
                 { name: "message", value: formData.message },
             ]
         };
