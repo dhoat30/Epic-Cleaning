@@ -281,7 +281,7 @@ const nextConfig = {
                 permanent: true,
             },
                      {
-                source: '/home/',
+                source: '/home',
                 destination: '/',
                 permanent: true,
             }, 
@@ -290,15 +290,15 @@ const nextConfig = {
                 destination: '/',
                 permanent: true,
             },  {
-                source: '/office-cleaning/5-reasons-why-every-company-needs-winter-office-cleaning/',
+                source: '/office-cleaning/5-reasons-why-every-company-needs-winter-office-cleaning',
                 destination: '/blogs/5-reasons-why-every-company-needs-winter-office-cleaning',
                 permanent: true,
             },  {
-                source: '/category/home-cleaning/',
+                source: '/category/home-cleaning',
                 destination: '/residential-cleaning/regular-cleaning-tauranga',
                 permanent: true,
             },  {
-                source: '/commercial-cleaners-in-tauranga-your-trusted-choice/',
+                source: '/commercial-cleaners-in-tauranga-your-trusted-choice',
                 destination: '/commercial-cleaning/building-washing-tauranga',
                 permanent: true,
             },  {
