@@ -23,6 +23,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
             title: seoData.title,
             description: seoData.description,
             metadataBase: new URL('https://epiccleaning.co.nz'),
+                alternates: { 
+        canonical: `/residential-cleaning/${slug}`,
+      }, 
             openGraph: {
                 title: seoData.title,
                 description: seoData.description,

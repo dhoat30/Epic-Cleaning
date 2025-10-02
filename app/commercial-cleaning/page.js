@@ -29,6 +29,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
                 description: seoData.description,
                 url: 'https://epiccleaning.co.nz',
                 siteName: 'Epic Cleaning Tauranga',
+                  alternates: {
+                canonical: `/commercial-cleaning`,
+            },
                 images: [
                     {
                         url: seoData?.og_image && seoData?.og_image[0]?.url,

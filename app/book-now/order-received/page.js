@@ -4,6 +4,9 @@ import ThankYou from '@/components/UI/ThankYou/ThankYou';
 export const metadata = {
     metadataBase: new URL('https://epiccleaning.co.nz'),
     title: 'Thank You',
+       alternates: {
+        canonical: `/order-received`,
+    },
     robots: {
         index: false,
         follow: true,

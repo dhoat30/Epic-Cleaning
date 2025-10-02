@@ -10,7 +10,6 @@ import FaqAccordionSection from '@/components/UI/Layout/Sections/FaqAccordionSec
 import BlogsArchive from '@/components/Pages/BlogsPage/BlogsArchive'
 import GoogleReviewsCarousel from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
 
-
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
   const slug = params.slug
@@ -27,6 +26,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
       title: seoData?.title,
       description: seoData?.description,
       metadataBase: new URL('https://epiccleaning.co.nz'),
+      alternates: { 
+        canonical: `/`,
+      }, 
       openGraph: {
         title: seoData?.title,
         description: seoData?.description,

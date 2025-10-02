@@ -43,32 +43,5 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
 }
 
 const Section = styled.section`
-  background: var(--dark-secondary-container);
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
 
-  .title-row {
-    max-width: 1000px;
-    margin: 0 auto;
-    .title {
-    }
-    .subtitle {
-    }
-    .description {
-      margin-top: 16px;
-    }
-  }
-  .cards {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    @media (max-width: 900px) {
-      display: flex;
-      gap: 32px;
-      flex-direction: column;
-    }
-  }
 `;

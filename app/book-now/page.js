@@ -8,6 +8,9 @@ import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } f
 export const metadata = {
     metadataBase: new URL('https://epiccleaning.co.nz'),
     title: 'Checkout | Epic Cleaning',
+    alternates: {
+        canonical: `/book-now`,
+    },
     robots: {
         index: false,
         follow: true,
