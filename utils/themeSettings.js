@@ -23,14 +23,14 @@ export const theme = createTheme({
         ].join(','),
         h1: {
             fontSize: '5rem',
-            fontWeight: 600,
+            fontWeight: 700,
             color: "var(--dark-on-surface)",
             '@media (max-width:900px)': {
                 fontSize: '3rem',
             },
         },
         h2: {
-            fontWeight: 600,
+            fontWeight: 700,
             color: "var(--dark-on-surface)",
             '@media (max-width:600px)': {
                 fontSize: '2.5rem',
@@ -113,16 +113,17 @@ export const lightTheme = createTheme({
             'sans-serif',
         ].join(','),
         h1: {
-            fontSize: '5rem',
-            fontWeight: 600,
+            fontSize: '4rem',
+            fontWeight: 800,
             color: "var(--light-on-surface)",
-
+            lineHeight: "100%",
+            textTransform: "uppercase",
             '@media (max-width:900px)': {
                 fontSize: '3rem',
             },
         },
         h2: {
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: '3rem',
             lineHeight: "3.4rem",
             color: "var(--light-on-surface)",

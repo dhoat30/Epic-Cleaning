@@ -43,5 +43,9 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
 }
 
 const Section = styled.section`
-
+background-color: var(--dark-secondary-container);
+padding: 80px 0;
+@media(max-width: 768px){ 
+  padding: 40px 0;
+} 
 `;

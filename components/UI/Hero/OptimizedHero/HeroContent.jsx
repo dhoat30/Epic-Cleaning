@@ -80,7 +80,7 @@ export default function HeroContent({
       </Typography>
       <Typography
         component="h1"
-        variant="h2"
+        variant="h1"
         className="title"
         color="var(--light-on-primary-fixed-variant)"
       >
