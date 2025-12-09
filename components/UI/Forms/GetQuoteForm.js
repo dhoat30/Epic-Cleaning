@@ -112,7 +112,8 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
                 { name: "phone", value: formData.phone },
                 { name: "propertyType", value: formData.propertyType },
                 { name: "services_required", value: formData['service'].join(", ") },
-             
+                             { name: "address", value: formData.address },
+
                 { name: "message", value: formData.message },
             ]
         };
