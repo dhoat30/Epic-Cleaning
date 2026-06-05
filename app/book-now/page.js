@@ -2,15 +2,16 @@ import Checkout from '@/components/Pages/Checkout/Checkout'
 import Footer from '@/components/UI/Footer/Footer';
 import Header from '@/components/UI/Header/Header';
 import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } from '@/utils/fetchData'
+import { getSeoMetadata } from '@/utils/metadata';
 
 
 
 export const metadata = {
-    metadataBase: new URL('https://epiccleaning.co.nz'),
-    title: 'Checkout | Epic Cleaning',
-    alternates: {
-        canonical: `/book-now`,
-    },
+    ...getSeoMetadata({
+        path: '/book-now',
+        title: 'Checkout | Epic Cleaning',
+        description: 'Book your Epic Cleaning service online.',
+    }),
     robots: {
         index: false,
         follow: true,

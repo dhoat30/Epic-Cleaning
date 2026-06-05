@@ -1,12 +1,13 @@
 import Header from '@/components/UI/Header/Header';
 import ThankYou from '@/components/UI/ThankYou/ThankYou';
+import { getSeoMetadata } from '@/utils/metadata';
 
 export const metadata = {
-    metadataBase: new URL('https://epiccleaning.co.nz'),
-    title: 'Thank You',
-    alternates: { 
-        canonical: `/form-submitted/thank-you`,
-      },
+    ...getSeoMetadata({
+        path: '/form-submitted/thank-you',
+        title: 'Thank You',
+        description: 'Thank you for contacting Epic Cleaning.',
+    }),
     robots: {
         index: false,
         follow: true,

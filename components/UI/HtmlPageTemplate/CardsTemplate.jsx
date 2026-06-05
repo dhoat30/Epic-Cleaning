@@ -10,9 +10,29 @@ export default function CardsTemplate({
   cardsDataArr,
   heroData,
   oneByOneAspectRatio,
+  searchQuery,
 }) {
   if (!cardsDataArr || !heroData) return null;
-  const cards = cardsDataArr.map((item, index) => {
+  const normalizedSearchQuery = searchQuery?.trim().toLowerCase();
+  const visibleCards = normalizedSearchQuery
+    ? cardsDataArr.filter((item) => {
+        const searchableText = [
+          item.title,
+          item.description,
+          item.authorFirstName,
+          item.authorLastName,
+          ...(item.categoryDetails || []).map((category) => category.name),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .replace(/<[^>]*>/g, " ")
+          .toLowerCase();
+
+        return searchableText.includes(normalizedSearchQuery);
+      })
+    : cardsDataArr;
+
+  const cards = visibleCards.map((item, index) => {
     return (
       <BlogCard
         key={index}
@@ -49,7 +69,13 @@ export default function CardsTemplate({
       </Section>
       <CardsSection>
         <Container maxWidth="xl" className="cards-wrapper">
-          {cards}
+          {cards.length ? (
+            cards
+          ) : (
+            <Typography variant="body1" component="p" className="empty-state">
+              No posts found.
+            </Typography>
+          )}
         </Container>
       </CardsSection>
     </>
@@ -80,6 +106,10 @@ const CardsSection = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 32px;
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
     @media (max-width: 1100px) {
       gap: 16px;
 

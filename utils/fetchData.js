@@ -44,30 +44,35 @@ export const getOptions = async () => {
 // get reivews 
 
 export const getGoogleReviews = async () => {
-    // Add revalidation logic
-    const nextRevalidateOptions = { next: { revalidate: 30 * 86400 } }; // Revalidate every 30 days 
+    try {
+        // Add revalidation logic
+        const nextRevalidateOptions = { next: { revalidate: 30 * 86400 } }; // Revalidate every 30 days 
 
-    // Fetch reviews directly from Google API
-    const oauth2Client = new google.auth.OAuth2(
-        process.env.GOOGLE_CLIENT_ID,
-        process.env.GOOGLE_CLIENT_SECRET
-    );
+        // Fetch reviews directly from Google API
+        const oauth2Client = new google.auth.OAuth2(
+            process.env.GOOGLE_CLIENT_ID,
+            process.env.GOOGLE_CLIENT_SECRET
+        );
 
-    oauth2Client.setCredentials({
-        refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-    });
+        oauth2Client.setCredentials({
+            refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+        });
 
-    const accountId = process.env.GOOGLE_ACCOUNT_ID;
-    const locationId = process.env.GOOGLE_LOCATION_ID;
+        const accountId = process.env.GOOGLE_ACCOUNT_ID;
+        const locationId = process.env.GOOGLE_LOCATION_ID;
 
-    // Fetch reviews
-    const response = await oauth2Client.request({
-        url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
-        method: "GET",
-        ...nextRevalidateOptions, // Pass the revalidate option here
-    });
+        // Fetch reviews
+        const response = await oauth2Client.request({
+            url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
+            method: "GET",
+            ...nextRevalidateOptions, // Pass the revalidate option here
+        });
 
-    return response.data.reviews || [];
+        return response.data.reviews || [];
+    } catch (error) {
+        console.error('Failed to fetch Google reviews:', error?.message || error);
+        return [];
+    }
 };
 
 
@@ -105,4 +110,3 @@ export const getSingleBlog = async (slug) => {
     let data = await fetchData.json();
     return data
 }
-

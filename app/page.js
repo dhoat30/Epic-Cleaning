@@ -9,6 +9,9 @@ import ServiceSelectorTabs from '@/components/UI/Tabs/ServicesSelectorTabs/Servi
 import FaqAccordionSection from '@/components/UI/Layout/Sections/FaqAccordionSection'
 import BlogsArchive from '@/components/Pages/BlogsPage/BlogsArchive'
 import GoogleReviewsCarousel from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { getFAQPageSchema, getWebPageSchema } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
@@ -17,47 +20,16 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // fetch data
   const data = await getSinglePostData("home", "/wp-json/wp/v2/pages")
 
-
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
-  if (data.length > 0) {
-    const seoData = data[0].yoast_head_json
-    return {
-      title: seoData?.title,
-      description: seoData?.description,
-      metadataBase: new URL('https://epiccleaning.co.nz'),
-      alternates: { 
-        canonical: `/`,
-      }, 
-      openGraph: {
-        title: seoData?.title,
-        description: seoData?.description,
-        url: 'https://epiccleaning.co.nz',
-        siteName: 'Epic Cleaning Tauranga',
-        images: [
-          {
-            url: seoData?.og_image && seoData?.og_image[0]?.url,
-            width: 800,
-            height: 600,
-          }, {
-            url: seoData?.og_image && seoData?.og_image[0].url,
-            width: 1800,
-            height: 1600,
-          },
-
-        ],
-        type: 'website',
-      },
-    }
-  }
-
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: '/',
+  })
 }
 
 export default async function Page() {
 
   const postData = await getSinglePostData("home", "/wp-json/wp/v2/pages")
   const options = await getOptions()
-
 
   if (!postData) {
     return {
@@ -97,8 +69,26 @@ export default async function Page() {
 
   // get all blogs 
   const allBlogsData = await getAllPosts("wp-json/wp/v2/posts")
+  const seoData = postData[0]?.yoast_head_json
+  const jsonLd = [
+    getWebPageSchema({
+      path: '/',
+      name: seoData?.title,
+      description: seoData?.description,
+      image: seoData?.og_image,
+    }),
+    getFAQPageSchema({
+      path: '/',
+      name: `${seoData?.title || 'Epic Cleaning Tauranga'} FAQs`,
+      description: options?.faq?.section_description || seoData?.description,
+      image: seoData?.og_image,
+      idSuffix: 'faq',
+      questions: options?.faq?.items || [],
+    }),
+  ]
   return (
     <>
+      <JsonLd data={jsonLd} idPrefix="home-schema" />
       <Header />
       <main>
         <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
@@ -106,7 +96,7 @@ export default async function Page() {
         <GoogleReviewsCarousel data={googleReviewsData}/>
 
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
-        <Layout sections={postData[0]?.acf?.sections} />
+        <Layout sections={postData[0]?.acf?.sections} data={postData}/>
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
         <FaqAccordionSection title={options.faq.section_title} description={options.faq.section_description} qaData={options.faq.items} />
         <BlogsArchive blogsData={allBlogsData} sectionUI={true} show={3} />

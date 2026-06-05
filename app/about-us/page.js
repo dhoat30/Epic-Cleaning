@@ -6,54 +6,23 @@ import USP from '@/components/UI/USP/USP'
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { getWebPageSchema } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
 
-export async function generateMetadata({ params, searchParams }, parent) {
-    // read route params
-    const slug = params.slug
+export async function generateMetadata() {
+  const data = await getSinglePostData("about-us", "/wp-json/wp/v2/pages")
 
-    // fetch data
-    const data = await getSinglePostData("about-us", "/wp-json/wp/v2/pages")
-
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || []
-    if (data.length > 0) {
-        const seoData = data[0].yoast_head_json
-        return {
-            title: seoData.title,
-            description: seoData.description,
-            metadataBase: new URL('https://epiccleaning.co.nz'),
-               alternates: {
-        canonical: `/about-us`,
-    },
-            openGraph: {
-                title: seoData.title,
-                description: seoData.description,
-                url: 'https://epiccleaning.co.nz',
-                siteName: 'Epic Cleaning Tauranga',
-                images: [
-                    {
-                        url: seoData?.og_image && seoData?.og_image[0]?.url,
-                        width: 800,
-                        height: 600,
-                    }, {
-                        url: seoData?.og_image && seoData?.og_image[0].url,
-                        width: 1800,
-                        height: 1600,
-                    },
-
-                ],
-                type: 'website',
-            },
-        }
-    }
-
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: '/about-us',
+  })
 }
 
 export default async function Contact({ params }) {
     const slug = params.slug
     const postData = await getSinglePostData("about-us", "/wp-json/wp/v2/pages")
-    const allPosts = await getAllPosts("wp-json/wp/v2/industrial-cleaning")
     const options = await getOptions()
     if (!postData) {
         return {
@@ -61,8 +30,18 @@ export default async function Contact({ params }) {
         }
     }
 
+    const seoData = postData[0]?.yoast_head_json
+    const jsonLd = getWebPageSchema({
+        path: '/about-us',
+        name: seoData?.title,
+        description: seoData?.description,
+        image: seoData?.og_image,
+        type: 'AboutPage',
+    })
+
     return (
         <>
+            <JsonLd data={jsonLd} idPrefix="about-schema" />
             <Header />
             <main className="mt-16">
                 <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />

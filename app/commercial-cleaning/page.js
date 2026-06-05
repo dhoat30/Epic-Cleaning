@@ -7,48 +7,18 @@ import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
 import GoogleReviewsCarousel from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { getCollectionPageSchema } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
 
-export async function generateMetadata({ params, searchParams }, parent) {
-    // read route params
-    const slug = params.slug
+export async function generateMetadata() {
+  const data = await getSinglePostData("commercial-cleaning", "/wp-json/wp/v2/pages")
 
-    // fetch data
-    const data = await getSinglePostData("commercial-cleaning", "/wp-json/wp/v2/pages")
-
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || []
-    if (data.length > 0) {
-        const seoData = data[0].yoast_head_json
-        return {
-            title: seoData.title,
-            description: seoData.description,
-            metadataBase: new URL('https://epiccleaning.co.nz'),
-            openGraph: {
-                title: seoData.title,
-                description: seoData.description,
-                url: 'https://epiccleaning.co.nz',
-                siteName: 'Epic Cleaning Tauranga',
-                  alternates: {
-                canonical: `/commercial-cleaning`,
-            },
-                images: [
-                    {
-                        url: seoData?.og_image && seoData?.og_image[0]?.url,
-                        width: 800,
-                        height: 600,
-                    }, {
-                        url: seoData?.og_image && seoData?.og_image[0].url,
-                        width: 1800,
-                        height: 1600,
-                    },
-
-                ],
-                type: 'website',
-            },
-        }
-    }
-
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: '/commercial-cleaning',
+  })
 }
 
 export default async function Contact({ params }) {
@@ -62,10 +32,20 @@ export default async function Contact({ params }) {
         }
     }
     const googleReviewsData = await getGoogleReviews() 
-    const allSlugs = allPosts.map(post => post.slug)
-    console.log(allSlugs)
+    const seoData = postData[0]?.yoast_head_json
+    const jsonLd = getCollectionPageSchema({
+        path: '/commercial-cleaning',
+        name: seoData?.title,
+        description: seoData?.description,
+        image: seoData?.og_image,
+        items: allPosts.map((post) => ({
+            name: post.title.rendered,
+            path: `/commercial-cleaning/${post.slug}`,
+        })),
+    })
     return (
         <>
+            <JsonLd data={jsonLd} idPrefix="commercial-archive-schema" />
             <Header />
             <main>
                 <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />

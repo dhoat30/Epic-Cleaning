@@ -16,6 +16,7 @@ export default function BlogsArchive({
   sectionUI = false,
   blogsData,
   show = 1000,
+  searchQuery,
 }) {
   if (!blogsData) {
     console.log("no page data");
@@ -92,7 +93,11 @@ export default function BlogsArchive({
           </Container>
         </Section>
       ) : (
-        <CardsTemplate cardsDataArr={blogsDataArr} heroData={heroData} />
+        <CardsTemplate
+          cardsDataArr={blogsDataArr}
+          heroData={heroData}
+          searchQuery={searchQuery}
+        />
       )}
     </>
   );

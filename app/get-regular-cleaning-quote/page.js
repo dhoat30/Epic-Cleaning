@@ -6,48 +6,18 @@ import USP from '@/components/UI/USP/USP'
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import GetQuotePage from '@/components/Pages/GetQuotePage/GetQuotePage'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { getWebPageSchema } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
 
-export async function generateMetadata({ params, searchParams }, parent) {
-    // read route params
-    const slug = params.slug
+export async function generateMetadata() {
+  const data = await getSinglePostData("get-regular-cleaning-quote", "/wp-json/wp/v2/pages")
 
-    // fetch data
-    const data = await getSinglePostData("get-a-quote", "/wp-json/wp/v2/pages")
-
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || []
-    if (data.length > 0) {
-        const seoData = data[0].yoast_head_json
-        return {
-            title: seoData.title,
-            description: seoData.description,
-            metadataBase: new URL('https://epiccleaning.co.nz'),
-                 alternates: {
-                    canonical: `/get-regular-cleaning-quote`,
-                },
-            openGraph: {
-                title: seoData.title,
-                description: seoData.description,
-                url: 'https://epiccleaning.co.nz',
-                siteName: 'Epic Cleaning Tauranga',
-                images: [
-                    {
-                        url: seoData?.og_image && seoData?.og_image[0]?.url,
-                        width: 800,
-                        height: 600,
-                    }, {
-                        url: seoData?.og_image && seoData?.og_image[0].url,
-                        width: 1800,
-                        height: 1600,
-                    },
-
-                ],
-                type: 'website',
-            },
-        }
-    }
-
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: '/get-regular-cleaning-quote',
+  })
 }
 
 export default async function Contact() {
@@ -59,9 +29,18 @@ export default async function Contact() {
             notFound: true,
         }
     }
+    const seoData = postData[0]?.yoast_head_json
+    const jsonLd = getWebPageSchema({
+        path: '/get-regular-cleaning-quote',
+        name: seoData?.title,
+        description: seoData?.description,
+        image: seoData?.og_image,
+        type: 'ContactPage',
+    })
 
     return (
         <>
+            <JsonLd data={jsonLd} idPrefix="regular-quote-schema" />
             <Header />
             <main>
                 <GetQuotePage data={postData[0]} regularCleaningForm={true}/>

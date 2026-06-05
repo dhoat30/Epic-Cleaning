@@ -7,8 +7,52 @@ import "slick-carousel/slick/slick-theme.css";
 import { Work_Sans } from 'next/font/google'
 
 import ClientProvider from '@/components/Providers/ClientProvider';
+import JsonLd from '@/components/UI/Meta/JsonLd';
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_SOCIAL_IMAGE,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SITE_URL,
+} from '@/utils/metadata';
+import {
+  getLocalBusinessSchema,
+  getOrganizationSchema,
+  getWebsiteSchema,
+} from '@/utils/schema';
 
 import Script from 'next/script'
+
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  openGraph: {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: DEFAULT_SOCIAL_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
+      },
+    ],
+    locale: 'en_NZ',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_SOCIAL_IMAGE],
+  },
+};
 
 // fonts settings
 
@@ -19,9 +63,13 @@ const work_sans = Work_Sans({
   preload: true
 })
 
-
 export default function RootLayout({ children }) {
   const GTM_ID = 'GTM-NDXM6D'
+  const schemaGraph = [
+    getOrganizationSchema(),
+    getLocalBusinessSchema(),
+    getWebsiteSchema(),
+  ];
 
 
 
@@ -42,6 +90,7 @@ export default function RootLayout({ children }) {
           }}
         />
       <body >
+        <JsonLd data={schemaGraph} idPrefix="site-schema" />
                {/* 3) GTM noscript fallback */}
                <noscript>
           <iframe 

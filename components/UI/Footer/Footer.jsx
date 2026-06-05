@@ -139,6 +139,18 @@ export default function Footer({
                 <ContactInfo contactInfo={contactInfo} />
               </div>
 
+              <div className="business-hours">
+                <Typography variant="h6" component="div">
+                  Business Hours
+                </Typography>
+                <Typography variant="body1" component="p" className="hours-text">
+                  Monday to Sunday
+                </Typography>
+                <Typography variant="body1" component="p" className="hours-text">
+                  7:00 AM - 6:00 PM
+                </Typography>
+              </div>
+
               <div className="social-wrapper">
                 <Typography variant="h6" component="div">
                   Follow Us
@@ -237,6 +249,17 @@ const ContainerStyled = styled(Container)`
             }
           }
         }
+      }
+    }
+  }
+  .contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .business-hours {
+      .hours-text {
+        margin: 4px 0 0 0;
+        color: var(--light-on-surface-variant);
       }
     }
   }

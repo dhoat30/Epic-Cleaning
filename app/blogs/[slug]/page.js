@@ -10,66 +10,21 @@ import BlogTableOfContent from '@/components/UI/TableOfContent/BlogTableOfConten
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
 import BreadCrumb from '@/components/UI/BreadCrumb/BreadCrumb'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { SITE_URL, getBlogPostingSchema, getWebPageSchema, stripHtml } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
-export async function generateMetadata({ params, searchParams }, parent) {
-    // read route params
-    const slug = params.slug
+export async function generateMetadata({ params }) {
+  const slug = params.slug
+  const data = await getSinglePostData(slug, "/wp-json/wp/v2/posts")
 
-    // fetch data
-    const data = await getSingleBlog(slug)
-
-    // optionally access and extend (rather than replace) parent metadata
-    // const previousImages = (await parent).openGraph?.images || []
-    if (data.length > 0) {
-        const seoData = data[0].yoast_head_json
-        return {
-            title: seoData.title,
-            description: seoData.description,
-            metadataBase: new URL('https://epiccleaning.co.nz'),
-               alternates: {
-        canonical: `/blogs/${slug}`,
-    },
-            openGraph: {
-                title: seoData.title,
-                description: seoData.description,
-                url: `https://epiccleaning.co.nz/blogs/${slug}`,
-                siteName: "epiccleaning.co.nz",
-                images: [
-                    {
-                        url: seoData.og_image && seoData.og_image[0].url,
-                        width: 800,
-                        height: 600,
-                    },
-                    {
-                        url: seoData?.og_image && seoData.og_image[0].url,
-                        width: 1800,
-                        height: 1600,
-                    },
-                ],
-                type: 'article',
-            },
-        }
-    }
-
-}
-function countWords(text) {
-    // Remove any extra spaces and split the text into words
-    const words = text.trim().split(/\s+/);
-    return words.length;
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: `/blogs/${slug}`,
+    type: 'article',
+  })
 }
 
-export async function HeroSection({ slug }) {
-
-    const data = await getSingleBlog(slug)
-    if (!data.length) return null
-    return (
-        <BlogHero
-            className="hero-section mt-16"
-            videoID={data[0].acf.youtube_video_id ? data[0].acf.youtube_video_id : null}
-            featuredImage={data[0].acf.blog_featured_image}
-        />
-    )
-}
 export default async function singleProject({ params }) {
 
     const slug = params.slug
@@ -77,6 +32,7 @@ export default async function singleProject({ params }) {
     const options = await getOptions()
 
     if (!data.length) return null
+    const seoData = data[0].yoast_head_json
 
     //meta info 
     const metaData = {
@@ -92,55 +48,33 @@ export default async function singleProject({ params }) {
     publishedDate = `${publishedDate.getDate()} ${months[publishedDate.getMonth()]}, ${publishedDate.getFullYear()}`;
 
     // share buttons 
-    const postUrl = `${process.env.siteUrl}/blogs/ ${data[0].slug}`;
+    const postUrl = `${SITE_URL}/blogs/${data[0].slug}`;
     const postTitle = data[0].title.rendered;
     const postDescription = data[0].excerpt.rendered;
-    //schema data
-    const jsonLd = {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": data[0].yoast_head_json.title,
-        "name": data[0].yoast_head_json.title,
-        "datePublished": data[0].yoast_head_json.article_published_time,
-        "dateModified": data[0].yoast_head_json.article_modified_time,
-        "description": data[0].yoast_head_json.description,
-        "url": `${process.env.siteUrl} /blogs/${slug} `,
-        "wordCount": `${countWords(data[0].content.rendered)} `,
-        "image": [
-            data[0].yoast_head_json?.og_image ? data[0].yoast_head_json.og_image[0].url : null,
-        ],
-        "author": {
-            "@type": "Person",
-            "name": data[0].yoast_head_json.author,
-
-        },
-        "publisher": {
-            "@type": "Organization",
-            "@id": process.env.siteUrl,
-            "name": process.env.name,
-            "logo": {
-                "@type": "ImageObject",
-                "@id": process.env.darkLogo,
-                "url": process.env.darkLogo
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `${process.env.siteUrl} /blogs/${slug} `
-        },
-
-    }
+    const jsonLd = [
+        getWebPageSchema({
+            path: `/blogs/${slug}`,
+            name: seoData?.title,
+            description: seoData?.description,
+            image: seoData?.og_image,
+        }),
+        getBlogPostingSchema({
+            path: `/blogs/${slug}`,
+            headline: seoData?.title,
+            description: seoData?.description,
+            image: seoData?.og_image,
+            datePublished: seoData?.article_published_time,
+            dateModified: seoData?.article_modified_time,
+            authorName: seoData?.author || `${metaData.authorFirstName} ${metaData.authorLastName}`,
+            wordCount: countWords(data[0].content.rendered),
+        }),
+    ]
 
     return (
         <>
+            <JsonLd data={jsonLd} idPrefix="blog-schema" />
             <Header />
             <main className={styles.blogMain} style={{ background: "var( --light-surface-container-lowest)" }}>
-
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-                />
-
                 <section className={`container max-width-xl ${styles.wrapper}`}>
                     <BlogTableOfContent data={data[0].toc ? data[0].toc : null} />
                     <div className='main-content-wrapper'>
@@ -182,5 +116,3 @@ export default async function singleProject({ params }) {
 
     )
 }
-
-

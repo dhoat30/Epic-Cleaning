@@ -9,48 +9,18 @@ import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplat
 import ContactHero from '@/components/UI/Hero/OptimizedHero/ContactHero'
 import Gallery from '@/components/UI/Gallery/Gallery'
 import BreadcrumbHero from '@/components/UI/Hero/BreadcrumbHero'
+import JsonLd from '@/components/UI/Meta/JsonLd'
+import { getCollectionPageSchema } from '@/utils/schema'
+import { getSeoMetadata } from '@/utils/metadata'
 
 
-export async function generateMetadata({ params, searchParams }, parent) {
-    // read route params
-    const slug = params.slug
+export async function generateMetadata() {
+  const data = await getSinglePostData("gallery", "/wp-json/wp/v2/pages")
 
-    // fetch data
-    const data = await getSinglePostData("gallery", "/wp-json/wp/v2/pages")
-
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || []
-    if (data.length > 0) {
-        const seoData = data[0].yoast_head_json
-        return {
-            title: seoData.title,
-            description: seoData.description,
-            metadataBase: new URL('https://epiccleaning.co.nz'),
-                alternates: {
-                    canonical: `/our-work/gallery`,
-                },
-            openGraph: {
-                title: seoData.title,
-                description: seoData.description,
-                url: 'https://epiccleaning.co.nz',
-                siteName: 'Epic Cleaning Tauranga',
-                images: [
-                    {
-                        url: seoData?.og_image && seoData?.og_image[0]?.url,
-                        width: 800,
-                        height: 600,
-                    }, {
-                        url: seoData?.og_image && seoData?.og_image[0].url,
-                        width: 1800,
-                        height: 1600,
-                    },
-
-                ],
-                type: 'website',
-            },
-        }
-    }
-
+  return getSeoMetadata({
+    seoData: data?.[0]?.yoast_head_json,
+    path: '/our-work/gallery',
+  })
 }
 
 export default async function Contact() {
@@ -62,8 +32,16 @@ export default async function Contact() {
             notFound: true,
         }
     }
+    const seoData = postData[0]?.yoast_head_json
+    const jsonLd = getCollectionPageSchema({
+        path: '/our-work/gallery',
+        name: seoData?.title,
+        description: seoData?.description,
+        image: seoData?.og_image,
+    })
     return (
         <>
+            <JsonLd data={jsonLd} idPrefix="gallery-schema" />
             <Header />
             <main>
                 <BreadcrumbHero title={postData[0]?.acf.hero_section.title} description={postData[0]?.acf.hero_section.description} showBreadcrumb={false} />
