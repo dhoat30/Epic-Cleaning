@@ -81,6 +81,7 @@ function DesktopNavbar() {
           aria-haspopup={item.subLinks ? "menu" : undefined}
           aria-expanded={item.subLinks ? showMenu === index : undefined}
           onClick={item.subLinks ? (event) => toggleDropdown(event, index) : undefined}
+          data-dropdown-toggle={item.subLinks ? "true" : undefined}
         >
           <Typography component="span" variant="body1" align="center">
             {item.label}
@@ -118,7 +119,7 @@ function DesktopNavbar() {
   });
   return (
     <>
-      <AppBarContainer position="static">
+      <AppBarContainer position="fixed">
         <Container maxWidth="xl">
           <Toolbar disableGutters className="grid-links-wrapper" ref={menuRef}>
             {/* logo  */}
@@ -158,5 +159,8 @@ export default DesktopNavbar;
 const AppBarContainer = ({ className = "", ...props }) =>
   React.createElement(AppBar, {
     ...props,
+    color: "inherit",
+    elevation: 0,
+    sx: { backgroundColor: "var(--light-surface-container-low)", boxShadow: "none", borderBottom: "1px solid var(--light-outline-variant)" },
     className: `${styles.appBarContainer} ${className}`.trim(),
   });

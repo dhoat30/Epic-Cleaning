@@ -1,10 +1,5 @@
 .appBarStyled {
-  display: block;
   background: #ffffff;
-
-  @media (min-width: 1200px) {
-    display: none;
-  }
 
   :global(.menu-logo-wrapper) {
     display: flex;

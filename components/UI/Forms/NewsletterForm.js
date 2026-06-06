@@ -118,6 +118,7 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
                     autoComplete="email"
                     helperText={emailAddressIsInvalid && "Please enter your email address"}
                     error={emailAddressIsInvalid}
+                    className="mb-8"
                 />
 
                 {error && <Alert className="my-8" severity='error'>Try again</Alert>}

@@ -41,6 +41,8 @@ export default function NavigationProgress() {
 
       if (!isInternal || isSamePage) return;
 
+      if (anchor.dataset.dropdownToggle) return;
+
       window.clearInterval(intervalRef.current);
       window.clearTimeout(completionRef.current);
       setVisible(true);

@@ -15,7 +15,7 @@ export const LOCAL_BUSINESS_ID = `${SITE_URL}#localbusiness`;
 export const DEFAULT_RATING = {
   ratingValue: '4.9',
   bestRating: '5',
-  reviewCount:'100',
+  reviewCount: '90',
   worstRating: '1',
 };
 

@@ -54,7 +54,8 @@ export default function Footer({
       )}
 
       <footer className={styles.footer}>
-        <Container maxWidth="xl" className={styles.grid}>
+        <Container maxWidth="xl">
+          <div className={styles.grid}>
           {/* Column 1 — branding, certifications, newsletter (never accordion) */}
           <div className={styles.brandCol}>
             <div className={styles.certSection}>
@@ -169,6 +170,7 @@ export default function Footer({
               </div>
             </div>
           </AccordionCol>
+          </div>
         </Container>
       </footer>
 

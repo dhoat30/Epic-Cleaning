@@ -1,15 +1,10 @@
 .appBarContainer {
-  display: none;
   background: var(--light-surface-container-low);
   z-index: 100;
   top: 0;
   position: fixed;
   box-shadow: none;
   border-bottom: 1px solid var(--light-outline-variant);
-
-  @media (min-width: 1200px) {
-    display: block;
-  }
 
   :global(.desktop-links) {
     display: none;
