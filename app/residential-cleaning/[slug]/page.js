@@ -1,4 +1,4 @@
-import { getOptions, getSinglePostData, getGoogleReviews, getSingleServicePackage } from '@/utils/fetchData'
+import { getOptions, getSinglePostData, getGoogleReviews, getAllPosts } from '@/utils/fetchData'
 import Layout from '@/components/UI/Layout/Layout'
 import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
 import TechLogos from '@/components/UI/TechLogos/TechLogos'
@@ -10,6 +10,11 @@ import JsonLd from '@/components/UI/Meta/JsonLd'
 import { getServiceSchema, getWebPageSchema } from '@/utils/schema'
 import { getSeoMetadata } from '@/utils/metadata'
 
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts("wp-json/wp/v2/residential-cleaning")
+  return posts.map((post) => ({ slug: post.slug }))
+}
 
 export async function generateMetadata({ params }) {
   const slug = params.slug

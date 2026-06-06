@@ -119,7 +119,7 @@ export const getOrganizationSchema = () => ({
 
 export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'CleaningService', 'HouseCleaning'],
+  '@type': ['LocalBusiness', 'CleaningService'],
   '@id': LOCAL_BUSINESS_ID,
   name: SITE_NAME,
   url: SITE_URL,

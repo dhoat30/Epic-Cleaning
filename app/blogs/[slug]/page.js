@@ -1,4 +1,4 @@
-import { getSingleBlog, getOptions, getSinglePostData } from '@/utils/fetchData'
+import { getSingleBlog, getOptions, getSinglePostData, getAllPosts } from '@/utils/fetchData'
 import SingleBlog from '@/components/Pages/BlogsPage/SingleBlog'
 import { Suspense } from 'react'
 import styles from './Blogs.module.css'
@@ -13,6 +13,11 @@ import BreadCrumb from '@/components/UI/BreadCrumb/BreadCrumb'
 import JsonLd from '@/components/UI/Meta/JsonLd'
 import { SITE_URL, getBlogPostingSchema, getWebPageSchema, stripHtml } from '@/utils/schema'
 import { getSeoMetadata } from '@/utils/metadata'
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts("wp-json/wp/v2/posts")
+  return posts.map((post) => ({ slug: post.slug }))
+}
 
 export async function generateMetadata({ params }) {
   const slug = params.slug

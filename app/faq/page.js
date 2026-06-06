@@ -1,4 +1,4 @@
-import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } from '@/utils/fetchData'
+import { getOptions, getSinglePostData } from '@/utils/fetchData'
 import Layout from '@/components/UI/Layout/Layout'
 import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
 import TechLogos from '@/components/UI/TechLogos/TechLogos'
@@ -24,7 +24,6 @@ export async function generateMetadata() {
 export default async function Contact({ params }) {
     const slug = params.slug
     const postData = await getSinglePostData("faq", "/wp-json/wp/v2/pages")
-    const allPosts = await getAllPosts("wp-json/wp/v2/industrial-cleaning")
     const options = await getOptions()
     if (!postData) {
         return {

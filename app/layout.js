@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <html lang="en" className={`${work_sans.variable}`}>
+    <html lang="en-NZ" className={`${work_sans.variable}`}>
       <Script
           id="gtm-script"
           strategy="lazyOnload" // or "lazyOnload" if you prefer
