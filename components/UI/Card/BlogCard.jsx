@@ -1,50 +1,30 @@
+import styles from "./BlogCard.module.scss";
 import React from "react";
-import Paper from "@mui/material/Paper";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import TextLink from "../CTA/TextLink";
 export default function BlogCard({
   title,
   description,
   image,
   ctaLabel,
   ctaLink,
-  oneByOneAspectRatio,
   authorFirstName,
   authorLastName,
-  profilePic,
   publishDate,
   categoryDetails,
 }) {
-  let publishedDate = new Date(publishDate);
-  // Create an array of abbreviated month names
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  // Format the date in "9 Jul, 2024" format
-  const formattedDate = `${publishedDate.getDate()} ${
-    months[publishedDate.getMonth()]
-  }, ${publishedDate.getFullYear()}`;
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const d = new Date(publishDate);
+  const formattedDate = `${d.getDate()} ${months[d.getMonth()]}, ${d.getFullYear()}`;
+  const category = categoryDetails?.[0]?.name;
 
   return (
-    <ContainerStyled className="card-wrapper" variant="outlined">
-      <Link href={ctaLink}>
-        <Box className="image-wrapper">
+    <article className={styles.card}>
+      <Link href={ctaLink} className={styles.imageLink} aria-label={title}>
+        <div className={styles.imageWrapper}>
           {image && (
             <Image
               src={image.url}
@@ -52,118 +32,47 @@ export default function BlogCard({
               fill
               sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
               quality={80}
+              className={styles.image}
             />
           )}
-        </Box>
+        </div>
       </Link>
 
-      <Box className="content-wrapper">
-        <Typography
-          variant="h6"
-          component="h2"
-          className="title"
-          color="var(--white)"
-        >
-          {title}
-        </Typography>
-        <div className="meta-info-wrapper mt-8">
-          <Typography variant="label1" component="div" style={{fontWeight: 600}}>
-            {categoryDetails[0]?.name}
-          </Typography>
+      <div className={styles.content}>
+        {category && (
+          <span className={styles.category}>{category}</span>
+        )}
 
-          <div className="name-wrapper text-wrapper mt-4">
-            <Typography
-              variant="body2"
-              component="span"
-              className="meta-author-name"
-            >
-              {authorFirstName} {authorLastName}
-            </Typography>
-          <div className="divider">|</div>
-            <Typography variant="body2" component="span" className="meta-info">
-              {formattedDate}
-            </Typography>
-          </div>
+        <Typography variant="h6" component="h2" className={styles.title}>
+          <Link href={ctaLink}>{title}</Link>
+        </Typography>
+
+        <div className={styles.meta}>
+          <Typography variant="body2" component="span" className={styles.author}>
+            {authorFirstName} {authorLastName}
+          </Typography>
+          <span className={styles.dot} />
+          <Typography variant="body2" component="span" className={styles.date}>
+            {formattedDate}
+          </Typography>
         </div>
+
         {description && (
           <Typography
-            variant="body1"
+            variant="body2"
             component="div"
-            className="description"
+            className={styles.description}
             dangerouslySetInnerHTML={{ __html: description }}
-            color="var(--gray-light)"
           />
         )}
+
         {ctaLink && (
-          <Box className="button-wrapper">
-            <TextLink
-              url={ctaLink}
-              className="cta"
-              label={ctaLabel}
-              color="var(--light-secondary)"
-            ></TextLink>
-          </Box>
+          <Link href={ctaLink} className={styles.readMore}>
+            {ctaLabel || "Read More"}
+            <ArrowForwardIcon className={styles.arrow} />
+          </Link>
         )}
-      </Box>
-    </ContainerStyled>
+      </div>
+    </article>
   );
 }
-const ContainerStyled = styled(Paper)`
-  border-radius: 12px;
-  background: var(--light-surface-container);
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    @media (max-width: 450px) {
-      padding-bottom: 300px;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-  .meta-info-wrapper {
-  
-
- 
-    .profile-pic-wrapper {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      img {
-        border-radius: 50%;
-        object-fit: cover;
-      }
-    }
-    .text-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      position: relative;
-      flex-wrap: wrap;
-
-      .meta-author-name {
-      }
-    
-    }
-  }
-  .content-wrapper {
-    padding: 16px 24px 24px 24px;
-    @media (max-width: 450px) {
-      padding: 16px 16px 24px 16px;
-    }
-    .title {
-    }
-    .description {
-      margin-top: 8px;
-    }
-    .button-wrapper {
-      margin-top: 16px;
-    }
-  }
-`;

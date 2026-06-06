@@ -1,12 +1,13 @@
 "use client";
+import styles from "./HeroContent.module.scss";
 import React from "react";
 
-import styled from "@emotion/styled";
 
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Image from "next/image";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import PhoneIcon from '@mui/icons-material/Phone';import Image from "next/image";
 import Link from "next/link";
 
 export default function HeroContent({
@@ -16,16 +17,27 @@ export default function HeroContent({
   ctaArray,
   className,
   heroUSP,
+  compact = false,
+  showAccreditations = true,
 }) {
   let ctaComponent = null;
-  if (ctaArray.length === 1) {
+  if (ctaArray?.length > 0) {
     ctaComponent = (
-      <div className="single-button-wrapper">
+      <div className={compact ? "hero-button-wrapper" : "single-button-wrapper"}>
         <Link href={ctaArray[0].cta_link.url}>
           <Button variant="contained" size="large">
             {ctaArray[0].cta_link.title}
+            <ArrowForwardRoundedIcon aria-hidden="true" />
           </Button>
         </Link>
+        {compact && (
+          <Link href="tel:+64800080056" >
+            <Button variant="outlined" size="large">
+              <PhoneIcon aria-hidden="true" />
+              {process.env.NEXT_PUBLIC_PHONE}
+            </Button>
+          </Link>
+        )}
       </div>
     );
   }
@@ -37,20 +49,16 @@ export default function HeroContent({
         <div className="text-usp-wrapper">
           {heroUSP.text_usp.map((item, index) => {
             return (
-              <Typography
-                variant="subtitle2"
-                component="div"
-                className="text-usp"
-                key={index}
-                color="var(--light-on-primary-fixed-variant)"
-              >
-                <CheckCircleIcon />
-                <span> {item.value}</span>
-              </Typography>
+              <div key={index} className={styles.uspItem}>
+                <CheckCircleIcon sx={{ color: "white", fontSize: 18 }} />
+                <Typography component="span" variant="body2" sx={{ fontWeight: 600, color: "white" }}>
+                  {item.value}
+                </Typography>
+              </div>
             );
           })}
         </div>
-        <div className="image-usp-wrapper">
+        {showAccreditations && <div className="image-usp-wrapper">
           {heroUSP.image_usp &&
             heroUSP.image_usp.map((item, index) => {
               return (
@@ -63,33 +71,30 @@ export default function HeroContent({
                 />
               );
             })}
-        </div>
+        </div>}
       </div>
     );
   }
 
   return (
-    <Div className={className}>
-      <Typography
+    <Div className={`${className || ""} ${compact ? styles.compact : ""}`}>
+      {/* <Typography
         className="subtitle"
         component="div"
         variant="h5"
-        color="var(--light-on-primary-fixed-variant)"
       >
         {subtitle}
-      </Typography>
+      </Typography> */}
       <Typography
         component="h1"
         variant="h1"
         className="title"
-        color="var(--light-on-primary-fixed-variant)"
       >
         {title}
       </Typography>
       <Typography
         component="p"
         variant="body1"
-        color="var(--light-on-primary-fixed-variant)"
         className="description"
       >
         {description}
@@ -100,42 +105,8 @@ export default function HeroContent({
   );
 }
 
-const Div = styled.div`
-  .subtitle {
-    @media (max-width: 600px) {
-      font-size: 1.5rem;
-    }
-  }
-  .title {
-    margin: 8px 0 16px 0;
-  }
-
-  .single-button-wrapper {
-    margin-top: 24px;
-    button {
-      width: 100%;
-      max-width: 500px;
-    }
-  }
-  .hero-usp-wrapper {
-    .text-usp-wrapper {
-      margin-top: 32px;
-    }
-    .image-usp-wrapper {
-      margin-top: 16px;
-    }
-    .text-usp-wrapper,
-    .image-usp-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-
-      flex-wrap: wrap;
-      .text-usp {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-    }
-  }
-`;
+const Div = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.div} ${className}`.trim(),
+  });

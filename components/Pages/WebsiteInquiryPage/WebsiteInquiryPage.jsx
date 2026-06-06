@@ -1,5 +1,6 @@
 "use client";
-import styled from "@emotion/styled";
+import React from "react";
+import styles from "./WebsiteInquiryPage.module.scss";
 
 import Container from "@mui/material/Container";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
@@ -70,46 +71,8 @@ export default function WebsiteInquiryPage({ data }) {
     </ThemeProvider>
   );
 }
-const Section = styled.section`
-  background: var(--light-surface-container-low);
-  padding: 120px 0 160px 0;
-  @media (max-width: 600px) {
-    padding: 80px 0 24px 0;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--light-surface-container-low);
-    gap: 16px;
-    align-items: start;
-    @media (max-width: 1000px) {
-      grid-template-columns: 1fr;
-    }
-    @media (max-width: 600px) {
-      padding: 0;
-    }
-    .form-container {
-      background: var(--light-surface-container);
-
-      //remove the top border radius
-      border-radius: 0 0 12px 12px;
-    }
-    .content-container {
-      position: sticky;
-      top: 80px;
-      padding: 24px;
-      background: var(--dark-surface-container);
-      border-radius: 12px;
-      @media (max-width: 600px) {
-        padding: 24px 16px;
-      }
-      .title {
-        margin: 8px 0;
-      }
-      .image-wrapper {
-        position: relative;
-        width: 100%;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

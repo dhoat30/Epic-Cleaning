@@ -1,7 +1,7 @@
 "use client";
+import styles from "./BlogHero.module.scss";
 
 import React from "react";
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
@@ -30,9 +30,8 @@ export default function BlogHero({ className, videoID, featuredImage }) {
     </Wrapper>
   );
 }
-const Wrapper = styled.section`
-  .featured-image-wrapper {
-    position: relative;
-    width: 100%;
-  }
-`;
+const Wrapper = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.wrapper} ${className}`.trim(),
+  });

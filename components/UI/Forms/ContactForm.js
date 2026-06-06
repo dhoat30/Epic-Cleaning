@@ -1,4 +1,5 @@
 "use client";
+import styles from "./ContactForm.module.scss";
 
 import React, { useState } from "react";
 import Input from './InputFields/Input'
@@ -6,7 +7,6 @@ import { contactFormData } from "@/utils/contactFormData";
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
 import axios from "axios";
-import styled from "@emotion/styled";
 
 
 import dynamic from "next/dynamic";
@@ -172,7 +172,7 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
     })
     return (
         <Container className={`${className} py-8 `}>
-            <Box sx={{ width: '100%' }}>
+            <Box className={styles.fullWidth}>
                 <div className="input-wrapper p-6">
 
                     {
@@ -181,7 +181,7 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
 
                     <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess} >Contact now</LoadingBtn>
 
-                    {error && <Alert sx={{ margin: "8px 0" }} severity='error'>Something went wrong. Please Try again</Alert>}
+                    {error && <Alert className="my-8" severity='error'>Something went wrong. Please Try again</Alert>}
                 </div>
 
             </Box>
@@ -190,24 +190,8 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
     )
 }
 
-const Container = styled.form`
-@media(max-width: 500px){ 
-    .stepper-wrapper{ 
-    display: none ;
-}
-}
-
-.input-wrapper{ 
-border-radius: 12px; 
-   
-    margin: 0 auto 0 auto; 
-    @media(max-width: 500px){ 
-        margin: 0 auto 0 auto;   
-    }
-    .Mui-error{ 
-        font-size: 1rem;
-    }
-}
-
-`
-
+const Container = ({ className = "", ...props }) =>
+  React.createElement("form", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

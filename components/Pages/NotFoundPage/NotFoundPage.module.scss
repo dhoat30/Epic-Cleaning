@@ -1,0 +1,17 @@
+.section {
+display: flex;
+  align-items: center;
+
+  min-height: 90vh;
+}
+
+.content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 0;
+}

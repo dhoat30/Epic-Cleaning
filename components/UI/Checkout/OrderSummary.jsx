@@ -1,8 +1,8 @@
+import styles from "./OrderSummary.module.scss";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
 export default function OrderSummary({
   serviceName,
@@ -45,28 +45,8 @@ export default function OrderSummary({
   );
 }
 
-const Container = styled.div`
-  .summary-wrapper {
-    .card {
-      padding: 16px;
-      margin-top: 16px;
-      .link {
-        display: grid;
-        grid-template-columns: 5fr 7fr;
-        gap: 16px;
-        align-items: center;
-
-        .image-wrapper {
-          position: relative;
-          width: 100%;
-          padding-bottom: 56.25%;
-        }
-      }
-    }
-    .total-wrapper {
-      margin-top: 16px;
-      padding-top: 8px;
-      border-top: 1px solid var(--light-outline-variant);
-    }
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

@@ -1,6 +1,6 @@
 "use client";
+import styles from "./HtmlPageTemplate.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -25,28 +25,13 @@ export default function HtmlPageTemplate({ pageData }) {
     </>
   );
 }
-const TitleWrapper = styled.div`
-  text-align: center;
-  flex-direction: column;
-  background: var(--light-surface-container);
-  border-bottom: 1px solid var(--light-outline);
-  padding-top: 120px;
-  padding-bottom: 24px;
-`;
-const ContainerStyled = styled(Container)`
-  padding-bottom: 40px;
-  .content {
-    strong {
-    }
-    h2 {
-      font-size: 2rem;
-      margin-top: 24px;
-    }
-    h3 {
-      font-size: 1.5rem;
-      margin-top: 24px;
-    }
-    p {
-    }
-  }
-`;
+const TitleWrapper = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.titleWrapper} ${className}`.trim(),
+  });
+const ContainerStyled = ({ className = "", ...props }) =>
+  React.createElement(Container, {
+    ...props,
+    className: `${styles.containerStyled} ${className}`.trim(),
+  });

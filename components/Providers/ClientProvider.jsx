@@ -1,19 +1,14 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
 import {lightTheme } from "../../utils/themeSettings"
-import { useState, useEffect } from 'react';
-import Loading from '../UI/Loader/Loading'
+import { Suspense } from 'react';
+import NavigationProgress from '../UI/NavigationProgress/NavigationProgress';
+
 export default function ClientProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 4000); // Adjust timing
-    return () => clearTimeout(timer);
-  }, []);
-
-
-
   return <ThemeProvider theme={lightTheme}>
-    {isLoading && <Loading />}
-    {children}</ThemeProvider>;
+    <Suspense fallback={null}>
+      <NavigationProgress />
+    </Suspense>
+    {children}
+  </ThemeProvider>;
 }

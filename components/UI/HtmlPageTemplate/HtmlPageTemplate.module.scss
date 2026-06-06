@@ -1,0 +1,26 @@
+.titleWrapper {
+text-align: center;
+  flex-direction: column;
+  background: var(--light-surface-container);
+  border-bottom: 1px solid var(--light-outline);
+  padding-top: 120px;
+  padding-bottom: 24px;
+}
+
+.containerStyled {
+padding-bottom: 40px;
+  :global(.content) {
+    strong {
+    }
+    h2 {
+      font-size: 2rem;
+      margin-top: 24px;
+    }
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 24px;
+    }
+    p {
+    }
+  }
+}

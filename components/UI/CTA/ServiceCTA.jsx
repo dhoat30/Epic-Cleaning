@@ -1,9 +1,9 @@
+import styles from "./ServiceCTA.module.scss";
 import * as React from "react";
 import Cookies from "js-cookie";
 
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
@@ -84,42 +84,8 @@ export default function ServiceCTA({ data, className }) {
     </PaperStyle>
   );
 }
-const PaperStyle = styled(Paper)`
-  padding: 24px;
-  .price-wrapper {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    .frequency {
-      position: relative;
-      bottom: 2px;
-    }
-  }
-  .button {
-    width: 100%;
-    margin: 16px auto;
-  }
-  > .accordion-wrapper {
-    margin-top: 8px;
-    .MuiAccordionSummary-content {
-      margin: 8px 0;
-    }
-    .MuiAccordionDetails-root {
-      padding-top: 0;
-      ul {
-        list-style: disc !important;
-        padding-left: 24px;
-      }
-      ol {
-        margin: 0;
-        padding-left: 24px;
-        li {
-          padding: 8px 0;
-        }
-      }
-      a {
-        color: var(--dark-secondary);
-      }
-    }
-  }
-`;
+const PaperStyle = ({ className = "", ...props }) =>
+  React.createElement(Paper, {
+    ...props,
+    className: `${styles.paperStyle} ${className}`.trim(),
+  });

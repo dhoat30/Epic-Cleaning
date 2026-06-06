@@ -1,6 +1,6 @@
+import styles from "./Packages.module.scss";
 import Container from "@mui/material/Container";
 import React from "react";
-import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "next/link";
@@ -78,7 +78,7 @@ export default function Packages({
             {item.what_is_included.map((service, index) => {
               return (
                 <li key={index} className="flex align-center gap-4 mt-8">
-                  <CheckCircleIcon sx={{ color: "white" }} />
+                  <CheckCircleIcon className={styles.checkIcon} />
                   <Typography
                     variant="subtitle1"
                     component="span"
@@ -130,66 +130,8 @@ export default function Packages({
   );
 }
 
-const Section = styled.section`
-  background: var(--dark-primary-container);
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-  .packages-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
-    margin-top: 56px;
-    @media (max-width: 900px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 600px) {
-      grid-template-columns: 1fr;
-    }
-    .package {
-      border: 1px solid #057aa8;
-      border-radius: 12px;
-      padding: 24px 16px;
-      .price {
-        font-weight: 400;
-      }
-      .cta-wrapper {
-        width: 100%;
-        display: block;
-        button {
-          width: 100%;
-          background: white;
-          color: var(--dark-on-primary);
-        }
-      }
-    }
-
-    .highlighted-package {
-      border: 1px solid #73ffd6;
-      position: relative;
-      background: linear-gradient(
-        180deg,
-        rgba(9, 156, 112, 0.4) 0%,
-        rgba(5, 108, 133, 0.3) 100%
-      );
-      .highlighted-tag {
-        position: absolute;
-        top: -19px;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 1px solid #18e2be;
-
-        background: linear-gradient(98deg, #099b71 6.38%, #066e85 93.34%);
-        color: white;
-        padding: 4px 16px;
-        border-radius: 4px;
-      }
-      .cta-wrapper {
-        button {
-          background: linear-gradient(91deg, #3affc9 2.5%, #0ac7ef 99.71%);
-        }
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

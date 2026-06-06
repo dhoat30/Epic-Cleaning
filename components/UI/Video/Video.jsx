@@ -1,8 +1,8 @@
 "use client";
+import styles from "./Video.module.scss";
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
 import Image from "next/image";
-import styled from "@emotion/styled";
 import PlayIcon from "../Icons/PlayIcon";
 export default function Video({
   videoID,
@@ -60,50 +60,13 @@ export default function Video({
     </ContainerStyled>
   );
 }
-const ContainerStyled = styled.div`
-  position: relative;
-  .video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--light-outline-variant);
-  }
-  .video-overlay {
-    background: rgba(31, 101, 135, 0.3);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 8;
-  }
-  .img-wrapper {
-    img {
-      object-fit: cover;
-    }
-  }
-`;
-const ButtonStyled = styled.div`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-
-  svg {
-    &:hover {
-      cursor: pointer;
-    }
-    width: 72px;
-    height: 72px;
-    cursor: pointer;
-    circle {
-      stroke: white !important;
-    }
-    path {
-      fill: white;
-    }
-  }
-`;
+const ContainerStyled = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.containerStyled} ${className}`.trim(),
+  });
+const ButtonStyled = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.buttonStyled} ${className}`.trim(),
+  });

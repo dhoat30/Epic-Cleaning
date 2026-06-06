@@ -1,6 +1,6 @@
 "use client";
+import styles from "./BlogMetaInfo.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 export default function BlogMetaInfo({
@@ -36,35 +36,8 @@ export default function BlogMetaInfo({
     </Wrapper>
   );
 }
-const Wrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding-bottom: 16px;
-
-  border-bottom: 1px solid var(--light-outline-variant);
-  .profile-pic-wrapper {
-    position: relative;
-    width: 32px;
-    height: 32px;
-    img {
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  }
-  .text-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    position: relative;
-    flex-wrap: wrap;
-
-    .meta-author-name {
-    }
-    .divider {
-      @media (max-width: 370px) {
-        display: none;
-      }
-    }
-  }
-`;
+const Wrapper = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.wrapper} ${className}`.trim(),
+  });

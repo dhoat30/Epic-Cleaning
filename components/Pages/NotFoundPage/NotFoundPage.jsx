@@ -1,4 +1,5 @@
 "use client";
+import styles from "./NotFoundPage.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,22 +7,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import styled from "@emotion/styled";
 export default function NotFoundPage() {
   return (
     <Section maxWidth="lg">
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: "900px",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "16px",
-          padding: "80px 0",
-        }}
-      >
+      <Box className={styles.content}>
         <Typography
           variant="h1"
           component="h1"
@@ -48,9 +37,8 @@ export default function NotFoundPage() {
   );
 }
 
-const Section = styled(Container)`
-  display: flex;
-  align-items: center;
-
-  min-height: 90vh;
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement(Container, {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

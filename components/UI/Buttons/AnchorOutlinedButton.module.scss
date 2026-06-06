@@ -1,0 +1,11 @@
+.linkStyle {
+border: 1px solid var(--light-outline-variant, #cec6b4);
+  border-radius: 100px;
+  padding: 10px 24px;
+  color: var(--light-outline-variant, #cec6b4);
+
+  &:hover {
+    background: var(--dark-primary, #e7c446);
+    color: var(--dark-on-primary, #3c2f00);
+  }
+}

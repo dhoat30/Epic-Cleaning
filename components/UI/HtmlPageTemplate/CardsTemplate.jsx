@@ -1,7 +1,7 @@
 "use client";
+import styles from "./CardsTemplate.module.scss";
 
 import React from "react";
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import BlogCard from "../Card/BlogCard";
@@ -82,41 +82,13 @@ export default function CardsTemplate({
   );
 }
 
-const Section = styled.section`
-  border-top: 1px solid var(--light-outline-variant);
-  border-bottom: 1px solid var(--light-outline-variant);
-  padding: 120px 0 40px 0;
-  background: var(--light-surface-container);
-  @media (max-width: 1020px) {
-    padding: 80px 0 40px 0;
-  }
-  .title-wrapper {
-    max-width: 900px;
-    margin: 0 auto 0 auto;
-    .subtitle {
-      margin-top: 16px;
-    }
-  }
-`;
-const CardsSection = styled.section`
-  padding: 40px 0;
-  background: var(--light-surface-container-lowest);
-
-  .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-    }
-    @media (max-width: 1100px) {
-      gap: 16px;
-
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 700px) {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });
+const CardsSection = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.cardsSection} ${className}`.trim(),
+  });

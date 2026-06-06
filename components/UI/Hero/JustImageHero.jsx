@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styles from "./JustImageHero.module.scss";
 import React from "react";
 import Image from "next/image";
 export default function JustImageHero({ desktopImage }) {
@@ -14,7 +14,8 @@ export default function JustImageHero({ desktopImage }) {
     </Section>
   );
 }
-const Section = styled.section`
-  position: relative;
-  width: 100%;
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

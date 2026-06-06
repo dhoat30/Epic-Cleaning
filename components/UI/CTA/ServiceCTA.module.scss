@@ -1,0 +1,39 @@
+.paperStyle {
+padding: 24px;
+  :global(.price-wrapper) {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    :global(.frequency) {
+      position: relative;
+      bottom: 2px;
+    }
+  }
+  :global(.button) {
+    width: 100%;
+    margin: 16px auto;
+  }
+  > :global(.accordion-wrapper) {
+    margin-top: 8px;
+    :global(.MuiAccordionSummary-content) {
+      margin: 8px 0;
+    }
+    :global(.MuiAccordionDetails-root) {
+      padding-top: 0;
+      ul {
+        list-style: disc !important;
+        padding-left: 24px;
+      }
+      ol {
+        margin: 0;
+        padding-left: 24px;
+        li {
+          padding: 8px 0;
+        }
+      }
+      a {
+        color: var(--dark-secondary);
+      }
+    }
+  }
+}

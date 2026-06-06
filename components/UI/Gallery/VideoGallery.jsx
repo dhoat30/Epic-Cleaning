@@ -1,6 +1,6 @@
 "use client";
+import styles from "./VideoGallery.module.scss";
 import React, { useState, useEffect } from "react";
-import styled from "@emotion/styled";
 import BeforeAfterMasonry from "../BeforeAfterSlider/BeforeAfterMasonry";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -36,31 +36,8 @@ export default function VideoGallery({ galleryData }) {
   );
 }
 
-const Section = styled.section`
-  margin-top: 16px;
-  .tabs-wrapper {
-    .MuiTabs-flexContainer {
-    }
-
-    button {
-      border-bottom: 1px solid var(--light-outline-variant);
-    }
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 0 0 24px 0;
-    margin: 0 16px;
-    gap: 16px;
-    @media (max-width: 1366px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 800px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  .image-container {
-    position: relative;
-    padding-bottom: 56.25%;
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

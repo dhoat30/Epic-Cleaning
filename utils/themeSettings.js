@@ -24,7 +24,7 @@ export const theme = createTheme({
         h1: {
             fontSize: '5rem',
             fontWeight: 700,
-            color: "var(--dark-on-surface)",
+            color: "var(--dark-primary)",
             '@media (max-width:900px)': {
                 fontSize: '3rem',
             },
@@ -84,6 +84,7 @@ export const theme = createTheme({
                 root: {
                     borderRadius: "50px",
                     textTransform: "none",
+                    gap: "4px",
 
                 }
             }
@@ -113,13 +114,13 @@ export const lightTheme = createTheme({
             'sans-serif',
         ].join(','),
         h1: {
-            fontSize: '4rem',
+            fontSize: '3.3rem',
             fontWeight: 800,
-            color: "var(--light-on-surface)",
+            color: "var(--light-primary)",
             lineHeight: "100%",
-            textTransform: "uppercase",
+            // textTransform: "uppercase",
             '@media (max-width:900px)': {
-                fontSize: '3rem',
+                fontSize: '2rem',
             },
         },
         h2: {
@@ -182,6 +183,10 @@ export const lightTheme = createTheme({
                     color: "var(--light-on-primary)",
                     paddingRight: "32px",
                     paddingLeft: "32px",
+                    paddingTop: "12px",
+                    paddingBottom: "12px",
+                    fontSize: "1rem",
+                    gap: "4px",
                 },
                 outlined: {
                     border: "1px solid var(--light-primary)",

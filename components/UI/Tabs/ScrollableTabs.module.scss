@@ -1,0 +1,49 @@
+.container {
+:global(.tabs-wrapper) {
+    max-width: 1000px;
+    margin: 0 auto;
+    :global(.MuiTabs-flexContainer) {
+    }
+    svg {
+      path {
+        fill: var(--dark-on-surface);
+      }
+    }
+    button {
+      border-bottom: 1px solid var(--dark-on-surface);
+    }
+  }
+  :global(.tab-content-wrapper) {
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 40px;
+    align-items: start;
+    @media (max-width: 1100px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    :global(.content-wrapper) {
+      @media (min-width: 1100px) {
+        position: sticky;
+        top: 100px;
+      }
+
+      :global(.title) {
+      }
+      :global(.description) {
+        color: var(--dark-on-surface-variant);
+      }
+    }
+  }
+  :global(.description) {
+    strong {
+      color: var(--dark-secondary, #f8f770);
+      letter-spacing: 0.1rem;
+    }
+  }
+  :global(.image-container) {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+}

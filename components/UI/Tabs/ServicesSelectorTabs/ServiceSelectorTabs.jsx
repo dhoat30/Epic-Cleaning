@@ -1,8 +1,8 @@
 "use client";
+import styles from "./ServiceSelectorTabs.module.scss";
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 import ServiceTabsScrollable from "./ServiceTabsScrollable";
 export default function ServiceSelectorTabs({
   subtitle = null,
@@ -64,34 +64,8 @@ export default function ServiceSelectorTabs({
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-lowest);
-
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-
-  .title-row {
-    max-width: 1000px;
-    margin: 0 auto;
-    .title {
-    }
-    .subtitle {
-    }
-    .description {
-      margin-top: 16px;
-    }
-  }
-  .cards {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    @media (max-width: 900px) {
-      display: flex;
-      gap: 32px;
-      flex-direction: column;
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

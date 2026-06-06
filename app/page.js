@@ -92,13 +92,16 @@ export default async function Page() {
       <Header />
       <main>
         <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
-        <TechLogos data={options.clients_logos} />
-        <GoogleReviewsCarousel data={googleReviewsData}/>
-
+      
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
+                 <TechLogos data={options.clients_logos} />
+
         <Layout sections={postData[0]?.acf?.sections} data={postData}/>
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
+        <GoogleReviewsCarousel data={googleReviewsData}/>
+
         <FaqAccordionSection title={options.faq.section_title} description={options.faq.section_description} qaData={options.faq.items} />
+        
         <BlogsArchive blogsData={allBlogsData} sectionUI={true} show={3} />
       </main>
       <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />

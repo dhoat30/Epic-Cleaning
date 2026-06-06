@@ -1,9 +1,9 @@
+import styles from "./ServiceCard.module.scss";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import styled from "@emotion/styled";
 export default function ServiceCard({ title, description, image, cta }) {
   return (
     <Card className="tab-content-wrapper card">
@@ -44,14 +44,8 @@ export default function ServiceCard({ title, description, image, cta }) {
   );
 }
 
-const Card = styled.div`
-  .card {
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--light-surface-container);
-    border: 1px solid var(--light-outline-variant);
-    .content-wrapper {
-      padding: 16px;
-    }
-  }
-`;
+const Card = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.card} ${className}`.trim(),
+  });

@@ -1,7 +1,7 @@
 "use client";
+import styles from "./Contact.module.scss";
 import Paper from "@mui/material/Paper";
 import React from "react";
-import styled from "@emotion/styled";
 
 import dynamic from "next/dynamic";
 
@@ -15,9 +15,8 @@ export default function Contact() {
     </>
   );
 }
-const ContainerStyled = styled(Paper)`
-  padding: 0 16px 0 16px;
-  border-radius: 16px;
-  background: var(--light-surface-container-lowest);
-  min-height: 440px;
-`;
+const ContainerStyled = ({ className = "", ...props }) =>
+  React.createElement(Paper, {
+    ...props,
+    className: `${styles.containerStyled} ${className}`.trim(),
+  });

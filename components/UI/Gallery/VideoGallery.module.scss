@@ -1,0 +1,28 @@
+.section {
+margin-top: 16px;
+  :global(.tabs-wrapper) {
+    :global(.MuiTabs-flexContainer) {
+    }
+
+    button {
+      border-bottom: 1px solid var(--light-outline-variant);
+    }
+  }
+  :global(.grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 0 24px 0;
+    margin: 0 16px;
+    gap: 16px;
+    @media (max-width: 1366px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  :global(.image-container) {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+}

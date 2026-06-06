@@ -1,0 +1,23 @@
+.container {
+@media(max-width: 500px){ 
+    :global(.stepper-wrapper){ 
+    display: none ;
+}
+
+.fullWidth {
+  width: 100%;
+}
+}
+
+:global(.input-wrapper){ 
+border-radius: 12px; 
+   
+    margin: 0 auto 0 auto; 
+    @media(max-width: 500px){ 
+        margin: 0 auto 0 auto;   
+    }
+    :global(.Mui-error){ 
+        font-size: 1rem;
+    }
+}
+}

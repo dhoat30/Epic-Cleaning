@@ -1,0 +1,25 @@
+.container {
+:global(.summary-wrapper) {
+    :global(.card) {
+      padding: 16px;
+      margin-top: 16px;
+      :global(.link) {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        gap: 16px;
+        align-items: center;
+
+        :global(.image-wrapper) {
+          position: relative;
+          width: 100%;
+          padding-bottom: 56.25%;
+        }
+      }
+    }
+    :global(.total-wrapper) {
+      margin-top: 16px;
+      padding-top: 8px;
+      border-top: 1px solid var(--light-outline-variant);
+    }
+  }
+}

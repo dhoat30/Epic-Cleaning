@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styles from "./BeforeAfterMasonry.module.scss";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import React from "react";
@@ -43,14 +43,8 @@ export default function BeforeAfterMasonry({ data, showTitle, priority }) {
     </Container>
   );
 }
-const Container = styled.section`
-  .image-wrapper {
-    display: inline-block;
-
-    width: 100%;
-    position: relative;
-    img {
-      object-fit: cover;
-    }
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

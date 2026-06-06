@@ -1,63 +1,28 @@
 "use client";
+import styles from "./ContactInfo.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import EmailCircleIcon from "../Icons/EmailCircleIcon";
-import PhoneCircleIcon from "../Icons/PhoneCircleIcon";
-import LocationCircleIcon from "../Icons/LocationCircleIcon";
 import Image from "next/image";
+
 export default function ContactInfo({ contactInfo, className }) {
   if (contactInfo.info.length === 0) return null;
-  const infoComponent = contactInfo.info.map((info, index) => {
-    return (
-      <Link href={info.url} key={index} className="info-wrapper">
-        <span
-          className="image-wrapper"
-          style={{ width: "32px", height: "32px" }}
-        >
-          <Image src={info.icon.url} alt={info.icon.alt} fill />
-        </span>
 
-        <Typography variant="body1" component="span" className="label">
-          {info.label}
-        </Typography>
-      </Link>
-    );
-  });
   return (
-    <Container className={className}>
-      <Typography variant="h6" component="div" sx={{ marginBottom: "8px" }}>
+    <div className={`${styles.container} ${className || ""}`}>
+      <Typography variant="overline" component="p" className={styles.heading}>
         Contact
       </Typography>
-      {infoComponent}
-    </Container>
+      {contactInfo.info.map((info, index) => (
+        <Link href={info.url} key={index} className={styles.infoRow}>
+          <span className={styles.iconWrapper}>
+            <Image src={info.icon.url} alt={info.icon.alt} fill />
+          </span>
+          <Typography variant="body2" component="span" className={styles.label}>
+            {info.label}
+          </Typography>
+        </Link>
+      ))}
+    </div>
   );
 }
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  .info-wrapper {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-
-    gap: 12px;
-    cursor: pointer;
-    .label {
-      position: relative;
-      top: 3px;
-    }
-    &:hover {
-      svg {
-        circle {
-          fill: var(--light-primary);
-        }
-      }
-      span,
-      div {
-        color: var(--light-primary);
-      }
-    }
-  }
-`;

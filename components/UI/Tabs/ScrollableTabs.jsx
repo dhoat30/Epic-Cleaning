@@ -1,9 +1,10 @@
+"use client";
+import styles from "./ScrollableTabs.module.scss";
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../../utils/themeSettings";
 import BeforeAfter from "../BeforeAfterSlider/BeforeAfter";
@@ -136,52 +137,8 @@ export default function ScrollableTabs({ tabsData }) {
   );
 }
 
-const Container = styled.div`
-  .tabs-wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-    .MuiTabs-flexContainer {
-    }
-    svg {
-      path {
-        fill: var(--dark-on-surface);
-      }
-    }
-    button {
-      border-bottom: 1px solid var(--dark-on-surface);
-    }
-  }
-  .tab-content-wrapper {
-    padding-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 450px;
-    gap: 40px;
-    align-items: start;
-    @media (max-width: 1100px) {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    .content-wrapper {
-      @media (min-width: 1100px) {
-        position: sticky;
-        top: 100px;
-      }
-
-      .title {
-      }
-      .description {
-        color: var(--dark-on-surface-variant);
-      }
-    }
-  }
-  .description {
-    strong {
-      color: var(--dark-secondary, #f8f770);
-      letter-spacing: 0.1rem;
-    }
-  }
-  .image-container {
-    overflow: hidden;
-    border-radius: 8px;
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

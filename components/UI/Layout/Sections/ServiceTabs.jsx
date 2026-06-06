@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styles from "./ServiceTabs.module.scss";
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -42,10 +42,8 @@ export default function ServiceTabs({ title, subtitle, description, cards }) {
   );
 }
 
-const Section = styled.section`
-background-color: var(--dark-secondary-container);
-padding: 80px 0;
-@media(max-width: 768px){ 
-  padding: 40px 0;
-} 
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

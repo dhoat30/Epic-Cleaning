@@ -1,5 +1,6 @@
 "use client";
-import styled from "@emotion/styled";
+import React from "react";
+import styles from "./CenterAlignHero.module.scss";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -59,52 +60,8 @@ export default function CenterAlignHero({ data }) {
   );
 }
 
-const Section = styled(Box)`
-  background: var(--dark-surface-container-lowest);
-  .container {
-    position: relative;
-    .row {
-      position: absolute;
-      z-index: 10;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .content-wrapper {
-      .subtitle {
-        @media (max-width: 600px) {
-          font-size: 1.5rem;
-        }
-      }
-      .title {
-        margin: 16px 0;
-      }
-      .button-wrapper {
-        margin-top: 24px;
-        display: flex;
-        justify-content: center;
-      }
-    }
-    .image-wrapper {
-      /* background: radial-gradient(
-        50% 50% at 50% 50%,
-        #4f33ff 0%,
-        rgba(79, 51, 255, 0) 50%
-      ); */
-      width: 100%;
-      padding-bottom: 40%;
-      position: relative;
-      @media (max-width: 900px) {
-        width: 100%;
-        padding-bottom: 60%;
-      }
-      @media (max-width: 500px) {
-        width: 100%;
-        padding-bottom: 130%;
-      }
-      img {
-        object-fit: cover;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement(Box, {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

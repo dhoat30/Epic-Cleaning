@@ -1,6 +1,7 @@
 // components/GetQuoteForm.js
 
 "use client";
+import styles from "./GetRegualrCleaningForm.module.scss";
 
 import React, { useState } from "react";
 import Input from './InputFields/Input';
@@ -8,7 +9,6 @@ import { getRegularCleaningFormData } from "@/utils/getRegularCleaningFormData";
 import { servicePropertyMap } from "@/utils/getRegularCleaningFormData"; // Import the service mapping
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
-import styled from "@emotion/styled";
 import axios from "axios";
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
@@ -247,7 +247,7 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
     return (
         <>
             <ContainerStyled variant="div" className={`${className} py-8`} maxWidth="xl">
-                <Box sx={{ width: '100%' }}>
+                <Box className={styles.fullWidth}>
                     <React.Fragment>
                         <div className="input-wrapper p-6">
                             <Typography variant="h4" component="h1" className="title">
@@ -257,7 +257,7 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
                             <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess}>
                                 Submit now
                             </LoadingBtn>
-                            {error && <Alert sx={{ margin: "8px 0" }} severity='error'>Something went wrong. Please Try again</Alert>}
+                            {error && <Alert className="my-8" severity='error'>Something went wrong. Please Try again</Alert>}
                         </div>
                     </React.Fragment>
                 </Box>
@@ -266,67 +266,8 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
     );
 }
 
-const ContainerStyled = styled(Container)`
-  padding: 0 !important; 
-
-  .mobile-stepper{ 
-    background: none; 
-    padding:0;
-    .MuiLinearProgress-root{ 
-      width:100%;
-      background: var(--light-primary-container); 
-    }
-  }
-  .button-wrapper{ 
-    display: flex;  
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; 
-    gap: 8px; 
-  }
-  svg.Mui-active{ 
-    color: #F9F871; 
-  }
-  svg.Mui-completed{ 
-    color: #F9F871; 
-  }
-  svg.Mui-active{ 
-    text{ 
-      fill: black; 
-    }
-  }
-  @media(max-width: 500px){ 
-    .stepper-wrapper{ 
-      display: none ;
-    }
-  }
-
-  .input-wrapper{ 
-    padding: 24px 24px 24px 24px; 
-    background: var(--light--surface-container);
-    border-radius: 12px; 
-    @media (max-width: 600px) {
-      padding: 24px 16px;
-    }
-    .title { 
-      margin: 8px 0; 
-    }
-    .Mui-error{ 
-      font-size: 1rem;
-    }
-  }
-  .quote-wrapper{ 
-    background: var(--light--surface-container);
-    border-radius: 12px; 
-    max-width: 500px; 
-    margin: 40px auto 0 auto;   
-  
-    .quote{ 
-      max-width: 300px;
-      margin: 16px auto; 
-      padding: 16px 0; 
-      border: dashed 2px var(--light-primary, #f9f871);
-    }
-  }
-`;
-
+const ContainerStyled = ({ className = "", ...props }) =>
+  React.createElement(Container, {
+    ...props,
+    className: `${styles.containerStyled} ${className}`.trim(),
+  });

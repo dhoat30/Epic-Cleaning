@@ -1,6 +1,6 @@
 "use client";
+import styles from "./USP.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Container from "@mui/material/Container";
@@ -92,71 +92,8 @@ export default function USP({
     </Section>
   );
 }
-const Section = styled.section`
-  margin-top: 8px;
-  background: var(--dark-secondary-container);
-  padding: 80px 0;
-
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 500px 1fr;
-    gap: 80px;
-    align-items: start;
-    @media (max-width: 1300px) {
-      gap: 40px;
-    }
-    @media (max-width: 1250px) {
-      gap: 24px;
-      grid-template-columns: 1fr;
-    }
-    .title-wrapper {
-      @media (min-width: 1250px) {
-        position: sticky;
-        top: 100px;
-      }
-      .title {
-        color: var(--dark-on-surface);
-      }
-      .description {
-        color: var(--dark-on-surface-variant);
-      }
-    }
-    .cards-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      @media (max-width: 900px) {
-        gap: 16px;
-      }
-      @media (max-width: 650px) {
-        grid-template-columns: 1fr;
-      }
-      .card {
-        border-radius: 12px;
-        border: 1px solid #b3f1be;
-        background: var(
-          --material-theme-sys-dark-medium-contrast-on-secondary-fixed-variant,
-          #003f1d
-        );
-        padding: 16px;
-        .title {
-        }
-        .image {
-          border-radius: 50%;
-        }
-      }
-    }
-    .stats-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      .stat {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 8px 16px;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

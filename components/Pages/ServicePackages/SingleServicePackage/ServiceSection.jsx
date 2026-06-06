@@ -1,7 +1,7 @@
 "use client";
+import styles from "./ServiceSection.module.scss";
 
 import React from "react";
-import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 
@@ -65,41 +65,8 @@ export default function ServiceSection({ data }) {
   });
   return <>{section}</>;
 }
-const Section = styled.section`
-  border-top: 1px solid var(--dark-outline-variant);
-  padding: 24px 0;
-  .sub-heading-wrapper {
-    .sub-heading {
-      padding: 16px 0 0 0;
-      font-weight: 600;
-    }
-  }
-  strong {
-    font-weight: 550;
-    font-size: 1rem;
-    color: var(--dark-on-surface-variant);
-    letter-spacing: 0.05rem;
-    line-height: 1.5rem;
-    margin-top: 8px;
-  }
-  p,
-  li {
-    font-size: 1rem;
-    color: var(--dark-on-surface-variant);
-    font-weight: 350;
-    letter-spacing: 0.02rem;
-    line-height: 1.5rem;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-  ul {
-    margin: 0;
-    padding: 0 0 0 32px;
-    list-style: disc !important;
-  }
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    margin: 16px 0 40px 0;
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

@@ -1,5 +1,5 @@
+import styles from "./RowSection.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Button from "@mui/material/Button";
@@ -23,7 +23,7 @@ export default function RowSection({
   const imgPadding = (image.height / image.width) * 100;
   const contentAlignment = imageAlignment === "left" ? "2 / 3" : "1 / 2";
   return (
-    <Section className="mt-8">
+    <Section className="">
       <Container maxWidth="xl">
         <div className="wrapper">
           <div
@@ -50,7 +50,7 @@ export default function RowSection({
                     className="bullet-point flex align-center gap-8 mt-8"
                   >
                     <CheckCircleIcon
-                      sx={{ color: "var(--light-on-primary-fixed-variant)" }}
+                      className={styles.checkIcon}
                     />
                     <Typography
                       variant="subtitle1"
@@ -98,46 +98,8 @@ export default function RowSection({
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-lowest);
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-  .wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 40px;
-    align-items: start;
-    @media (max-width: 1100px) {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      display: flex;
-      flex-direction: column;
-    }
-    .content-wrapper {
-      @media (min-width: 1100px) {
-        position: sticky;
-        top: 100px;
-        grid-row: 1 / 2;
-      }
-
-      .subtitle {
-        margin: 0 0 8px 0;
-      }
-      .cta {
-        margin-top: 16px;
-        display: inline-block;
-      }
-    }
-    .image-wrapper,
-    .image-container {
-      border-radius: 12px;
-      overflow: hidden;
-      @media (min-width: 1100px) {
-        grid-row: 1 / 2;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

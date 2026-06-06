@@ -1,0 +1,298 @@
+.footer {
+  background: var(--light-surface-container-high);
+  border-top: 3px solid var(--light-primary);
+  padding: 56px 0 48px;
+
+  @media (max-width: 900px) {
+    padding: 40px 0 0;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 340px 1fr 1fr 1fr 240px;
+  align-items: start;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 300px 1fr 1fr 1fr;
+    gap: 28px;
+  }
+
+  /* Accordion layout — below 960px each col spans full width */
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* ── Column heading ── */
+.colHeading {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--light-on-surface) !important;
+  margin-bottom: 14px !important;
+  display: block;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--light-primary);
+    margin-top: 5px;
+  }
+
+  /* On mobile the heading lives inside the button — remove the underline accent */
+  @media (max-width: 960px) {
+    margin-bottom: 0 !important;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+/* ── Column 1 — Brand (never accordion) ── */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  @media (max-width: 960px) {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--light-outline-variant);
+  }
+
+  /* Certifications heading keeps its accent on all sizes */
+  .colHeading {
+    margin-bottom: 14px !important;
+
+    &::after {
+      display: block !important;
+    }
+  }
+}
+
+.logo {
+  object-fit: contain;
+  height: auto;
+  max-width: 150px;
+}
+
+.certSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.certLogos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.certLogo {
+  height: auto;
+  max-height: 52px;
+  width: auto;
+  max-width: 100px;
+  object-fit: contain;
+}
+
+.newsletterBox {
+  padding: 16px;
+  background: var(--light-surface-container);
+  border-radius: 12px;
+  border: 1px solid var(--light-outline-variant);
+}
+
+.newsletterTitle {
+  color: var(--light-on-surface);
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+  line-height: 1.4 !important;
+}
+
+/* ── Accordion columns (2-5) ── */
+.linksCol {
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 960px) {
+    border-bottom: 1px solid var(--light-outline-variant);
+  }
+}
+
+/* Trigger button — invisible on desktop, visible on mobile */
+.accordionTrigger {
+  display: none;
+
+  @media (max-width: 960px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+}
+
+.accordionIcon {
+  display: flex;
+  align-items: center;
+  color: var(--light-on-surface-variant);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  .isOpen & {
+    color: var(--light-primary);
+  }
+}
+
+/* Body — always visible on desktop, collapsible on mobile */
+.accordionBody {
+  @media (max-width: 960px) {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+
+    .isOpen & {
+      max-height: 1000px;
+    }
+  }
+}
+
+/* Inner wrapper needed for grid-template-rows trick */
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 960px) {
+    padding-bottom: 16px;
+  }
+}
+
+.contactInner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (max-width: 960px) {
+    padding-bottom: 20px;
+  }
+}
+
+.navLink {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 0.875rem;
+  color: var(--light-on-surface-variant);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--light-primary);
+    transition: width 0.25s ease;
+  }
+
+  &:hover {
+    color: var(--light-primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+/* ── Contact inner sections ── */
+.hoursSection {
+  display: flex;
+  flex-direction: column;
+
+  /* On mobile the .colHeading inside hoursSection needs its accent back */
+  @media (max-width: 960px) {
+    .colHeading {
+      margin-bottom: 10px !important;
+
+      &::after {
+        display: block !important;
+      }
+    }
+  }
+}
+
+.hoursRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--light-surface-container);
+  border-radius: 8px;
+  border: 1px solid var(--light-outline-variant);
+}
+
+.hoursTime {
+  color: var(--light-primary) !important;
+  font-weight: 600 !important;
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 960px) {
+    .colHeading {
+      margin-bottom: 10px !important;
+
+      &::after {
+        display: block !important;
+      }
+    }
+  }
+}
+
+.socialLinks {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--light-outline-variant);
+  background: white;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: var(--light-primary);
+    border-color: var(--light-primary);
+    transform: translateY(-2px);
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  img {
+    transition: filter 0.2s ease;
+  }
+}

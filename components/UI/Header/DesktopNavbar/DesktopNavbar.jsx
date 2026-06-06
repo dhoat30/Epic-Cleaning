@@ -1,4 +1,5 @@
 "use client";
+import styles from "./DesktopNavbar.module.scss";
 import React, { useState, useEffect, useRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,16 +12,16 @@ import Image from "next/image";
 import { headerLinks } from "@/utils/headerLinks";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import Paper from "@mui/material/Paper";
-import styled from "@emotion/styled";
 import { usePathname } from "next/navigation";
 
 function DesktopNavbar() {
   const [showMenu, setShowMenu] = useState(-1);
   const menuRef = useRef(null);
+  const hoverTimerRef = useRef(null);
   // router
   const pathname = usePathname();
   const isActive = (path) => {
-    return pathname === path;
+    return pathname === path || (path !== "/" && pathname.startsWith(`${path}/`));
   };
   // drop down logic
   useEffect(() => {
@@ -32,23 +33,31 @@ function DesktopNavbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.clearTimeout(hoverTimerRef.current);
     };
   }, []);
 
-  const showDropdown = (event, index) => {
-    setTimeout(() => {
+  useEffect(() => {
+    setShowMenu(-1);
+  }, [pathname]);
+
+  const showDropdown = (index) => {
+    window.clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = window.setTimeout(() => {
       setShowMenu(index);
-    }, 200); // Delay in milliseconds
+    }, 100);
   };
-  const hideDropdown = (event, index) => {
-    event.preventDefault();
-    setTimeout(() => {
+
+  const hideDropdown = () => {
+    window.clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = window.setTimeout(() => {
       setShowMenu(-1);
-    }, 200); // Del
+    }, 180);
   };
 
   const toggleDropdown = (event, index) => {
     event.preventDefault();
+    window.clearTimeout(hoverTimerRef.current);
     setShowMenu(index === showMenu ? -1 : index);
   };
 
@@ -56,25 +65,29 @@ function DesktopNavbar() {
   const menuItems = headerLinks.map((item, index) => {
     return (
       <Box
-        className="link"
+        className={styles.menuItem}
         component="li"
         key={index}
-        sx={{ color: "white", display: "block", position: "relative" }}
-        onMouseLeave={
-          item.subLinks ? (event) => hideDropdown(event, index) : null
-        }
-        onMouseEnter={
-          item.subLinks ? (event) => showDropdown(event, index) : null
-        }
-        onClick={item.subLinks ? (event) => toggleDropdown(event, index) : null}
+        onMouseLeave={item.subLinks ? hideDropdown : undefined}
+        onMouseEnter={item.subLinks ? () => showDropdown(index) : undefined}
+        onFocus={item.subLinks ? () => showDropdown(index) : undefined}
+        onBlur={item.subLinks ? (event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) hideDropdown();
+        } : undefined}
       >
-        <Link href={item.url} className={isActive(item.url) ? "active" : ""}>
+        <Link
+          href={item.url}
+          className={`${styles.menuLink} ${isActive(item.url) ? styles.active : ""}`}
+          aria-haspopup={item.subLinks ? "menu" : undefined}
+          aria-expanded={item.subLinks ? showMenu === index : undefined}
+          onClick={item.subLinks ? (event) => toggleDropdown(event, index) : undefined}
+        >
           <Typography component="span" variant="body1" align="center">
             {item.label}
           </Typography>
           {item.subLinks && (
             <KeyboardArrowDownRoundedIcon
-              className={`${showMenu === index && "arrow-up"} arrow `}
+              className={`${styles.arrow} ${showMenu === index ? styles.arrowOpen : ""}`}
             />
           )}
         </Link>
@@ -83,26 +96,18 @@ function DesktopNavbar() {
           <Paper
             component="ul"
             variant="outlined"
-            className={`${
-              showMenu === index ? "block" : "hidden"
-            } sublinks-container`}
-            sx={{
-              position: "absolute",
-              left: "-16px",
-              paddingLeft: 0,
-              display: `${showMenu === index ? "block" : "none"} `,
-            }}
+            role="menu"
+            className={`${styles.dropdown} ${showMenu === index ? styles.dropdownOpen : ""}`}
           >
+            <li role="none" className={styles.viewAllItem}>
+              <Link href={item.url} role="menuitem" className={styles.viewAllLink}>
+                View all {item.label}
+              </Link>
+            </li>
             {item.subLinks.map((subLink, subIndex) => (
-              <li key={subIndex}>
-                <Link href={subLink.url}>
-                  <Typography
-                    className="subLink"
-                    component="span"
-                    variant="body1"
-                  >
-                    {subLink.label}
-                  </Typography>
+              <li key={subIndex} role="none">
+                <Link href={subLink.url} role="menuitem" className={styles.subLink}>
+                  {subLink.label}
                 </Link>
               </li>
             ))}
@@ -113,17 +118,9 @@ function DesktopNavbar() {
   });
   return (
     <>
-      <AppBarContainer
-        position="static"
-        sx={{
-          display: { xs: "none", lg: "block" },
-          background: pathname.includes("blogs")
-            ? "var(--light-surface-container-low)"
-            : "var(--light-surface-container-low)",
-        }}
-      >
+      <AppBarContainer position="static">
         <Container maxWidth="xl">
-          <Toolbar disableGutters className="grid-links-wrapper">
+          <Toolbar disableGutters className="grid-links-wrapper" ref={menuRef}>
             {/* logo  */}
             <Link href="/">
               <Image
@@ -140,11 +137,7 @@ function DesktopNavbar() {
             <div className="links-wrapper">
               <Box
                 component="ul"
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  alignItems: "center",
-                  margin: 0,
-                }}
+                className="desktop-links"
               >
                 {menuItems}
               </Box>
@@ -162,72 +155,8 @@ function DesktopNavbar() {
 }
 export default DesktopNavbar;
 
-const AppBarContainer = styled(AppBar)`
-  z-index: 100;
-  top: 0;
-  position: fixed;
-  box-shadow: none;
-  border-bottom: 1px solid var(--light-outline-variant);
-  .grid-links-wrapper {
-    display: flex;
-    /* grid-template-columns: 60px 1fr; */
-    justify-content: space-between;
-  }
-  .links-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    justify-content: space-between;
-  }
-  .link {
-    a {
-      &:hover {
-        color: var(--light-primary);
-        svg {
-          color: var(--light-primary);
-        }
-      }
-      span {
-        &:hover {
-          color: var(--light-primary);
-          svg {
-            color: var(--light-primary);
-          }
-        }
-      }
-    }
-    > a {
-      display: flex;
-      align-items: center;
-      color: var(--light-on-surface);
-      padding: 16px 24px;
-      @media (max-width: 1366px) {
-        padding: 16px 16px;
-      }
-      @media (max-width: 1366px) {
-        padding: 16px 8px;
-      }
-      &.active {
-        &::before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          background: var(--light-primary);
-          bottom: 0;
-          left: 0;
-        }
-      }
-    }
-  }
-  .sublinks-container {
-    border-radius: 12px;
-    padding: 8px 0;
-    width: 300px;
-    .subLink {
-      display: block;
-      padding: 8px 16px;
-      font-weight: 350;
-    }
-  }
-`;
+const AppBarContainer = ({ className = "", ...props }) =>
+  React.createElement(AppBar, {
+    ...props,
+    className: `${styles.appBarContainer} ${className}`.trim(),
+  });

@@ -1,8 +1,9 @@
+"use client";
+import styles from "./ServiceTabsScrollable.module.scss";
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 import Image from "next/image";
@@ -106,41 +107,8 @@ export default function ServiceTabsScrollable({ tabsData }) {
   );
 }
 
-const Container = styled.div`
-  .tabs-wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-    .MuiTabs-flexContainer {
-    }
-    svg {
-      path {
-        fill: var(--dark-on-surface);
-      }
-    }
-    button {
-      border-bottom: 1px solid var(--dark-on-surface);
-    }
-  }
-  .cards-wrapper {
-    display: grid;
-    gap: 32px;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1100px) {
-      gap: 16px;
-
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 650px) {
-      grid-template-columns: 1fr;
-    }
-    .card {
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--light-surface-container);
-      border: 1px solid var(--light-outline-variant);
-      .content-wrapper {
-        padding: 16px;
-      }
-    }
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

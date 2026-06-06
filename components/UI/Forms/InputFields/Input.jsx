@@ -1,3 +1,4 @@
+import styles from "./Input.module.scss";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
@@ -12,7 +13,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
-import styled from "@emotion/styled";
 import Slider from "@mui/material/Slider";
 import Chip from "@mui/material/Chip";
 import Select from "@mui/material/Select";
@@ -60,9 +60,9 @@ export default function Input({
   if (type === "radio") {
     return (
       <FormControlStyled
+        className="mt-16"
         error={required ? isInvalid : null}
         variant="standard"
-        sx={{ marginTop: "16px" }}
         fullWidth
       >
         <FormLabel className="radio-label">
@@ -71,17 +71,17 @@ export default function Input({
           </Typography>
         </FormLabel>
         <RadioGroup
+          className="mt-8"
           aria-labelledby="error-radios"
           name="quiz"
           color={lightTheme ? "primary" : "secondary"}
           value={value}
           onChange={onChange}
-          sx={{ marginTop: "8px" }}
         >
           {options.map((option, index) => (
             <FormControlLabel
+              className={styles.lightLabel}
               color="white"
-              sx={{ color: "rgba(255, 255, 255, 0.7)" }}
               key={index}
               value={option.value}
               control={<Radio color={lightTheme ? "primary" : "secondary"} />}
@@ -97,16 +97,16 @@ export default function Input({
   } else if (type === "select") {
     return (
       <FormControlStyled
+        className="mb-16"
         error={required ? isInvalid : null}
-        sx={{ marginTop: "16px " }}
         color="secondary"
         fullWidth={true}
       >
-        <InputLabel id="multiple-checkbox-label" sx={{ width: "100%" }}>
+        <InputLabel id="multiple-checkbox-label" className={styles.fullWidth}>
           {label}
         </InputLabel>
         <Select
-          sx={{ width: "100%" }}
+          className={styles.fullWidth}
           labelId="multiple-checkbox-label"
           id="multiple-checkbox"
           multiple={multipleValue}
@@ -138,9 +138,9 @@ export default function Input({
   } else if (type == "checkbox") {
     return (
       <FormControlStyled
+        className="mt-16"
         error={required ? isInvalid : null}
         variant="standard"
-        sx={{ marginTop: "16px " }}
       >
         <FormLabel className="radio-label">
           <Typography variant="h6" component="div">
@@ -149,12 +149,12 @@ export default function Input({
         </FormLabel>
 
         <FormGroup
+          className="mt-8"
           aria-labelledby="checkbox"
           name="checkbox group"
           color={lightTheme ? "primary" : "secondary"}
           value={value}
           onChange={onChange}
-          sx={{ marginTop: "8px" }}
         >
           {options.map((option, index) => (
             <FormControlLabel
@@ -260,10 +260,10 @@ export default function Input({
   } 
   else if(type==="datePicker"){
     return       <FormControl
+    className="mb-16"
     fullWidth
     required={required}
     error={required ? isInvalid : null}
-    sx={{ marginTop: "24px" }}
   >
   <LocalizationProvider dateAdapter={AdapterDayjs}>
   <DateTimePicker
@@ -295,9 +295,7 @@ export default function Input({
   ) {
     return (
       <TextFieldStyle
-        sx={{
-          marginTop: "24px",
-        }}
+        className="mb-16"
         label={label}
         type={type}
         value={value}
@@ -316,41 +314,20 @@ export default function Input({
     );
   }
 }
-const FormControlStyled = styled(FormControl)`
-  .MuiTypography-body1 {
-    font-weight: 350;
-  }
-  .radio-label.Mui-focused {
-    /* color: rgba(255, 255, 255, 0.7); */
-  }
-  label {
-    @media (max-width: 600px) {
-      padding: 8px 0;
-    }
-  }
-`;
+const FormControlStyled = ({ className = "", ...props }) =>
+  React.createElement(FormControl, {
+    ...props,
+    className: `${styles.formControlStyled} ${className}`.trim(),
+  });
 
-const TextFieldStyle = styled(TextField)`
-  label,
-  input {
-    font-weight: 350;
-  }
-`;
+const TextFieldStyle = ({ className = "", ...props }) =>
+  React.createElement(TextField, {
+    ...props,
+    className: `${styles.textFieldStyle} ${className}`.trim(),
+  });
 
-const SliderContainer = styled.div`
-  margin-top: 16px;
-  .slider-wrapper {
-    @media (max-width: 600px) {
-      margin-left: 24px;
-    }
-
-    margin: 0 8px;
-    display: grid;
-    grid-template-columns: auto 60px;
-    gap: 24px;
-    align-items: center;
-    .MuiFormControl-root {
-      margin-top: 0;
-    }
-  }
-`;
+const SliderContainer = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.sliderContainer} ${className}`.trim(),
+  });

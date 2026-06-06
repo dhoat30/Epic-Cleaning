@@ -1,4 +1,5 @@
 "use client";
+import styles from "./AboutUsPage.module.scss";
 import CenterAlignHero from "@/components/UI/Hero/CenterAlignHero";
 import React from "react";
 import TechLogos from "@/components/UI/TechLogos/TechLogos";
@@ -6,7 +7,6 @@ import FooterCta from "@/components/UI/CTA/FooterCta";
 import SecondAboutUsSection from "./SecondAboutUsSection";
 import TeamSection from "./TeamSection";
 import Video from "@/components/UI/Video/Video";
-import styled from "@emotion/styled";
 export default function AboutUsPage({ pageData, techLogos }) {
   const heroData = {
     subtitle: pageData.acf.hero_section.subtitle,
@@ -50,9 +50,8 @@ export default function AboutUsPage({ pageData, techLogos }) {
     </>
   );
 }
-const Section = styled.section`
-  padding: 80px 0 0 0;
-  @media (max-width: 600px) {
-    padding: 40px 0 0 0;
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

@@ -1,6 +1,6 @@
+import styles from "./LoadingBtn.module.scss";
 import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
-import styled from "@emotion/styled";
 import DoneIcon from "@mui/icons-material/Done";
 function LoadingBtn({
   align,
@@ -16,9 +16,6 @@ function LoadingBtn({
   let labelText = children ? children : "Submit";
   return (
     <LoadingButtonStyle
-      sx={{
-        borderRadius: "50px",
-      }}
       className={className}
       id={id}
       onClick={onClick}
@@ -30,7 +27,7 @@ function LoadingBtn({
       loading={isLoading}
     >
       {isSuccess && !newSubmission ? (
-        <DoneIcon sx={{ color: "var(--dark-on-surface) !important" }} />
+        <DoneIcon className={styles.doneIcon} />
       ) : (
         labelText
       )}
@@ -39,17 +36,8 @@ function LoadingBtn({
 }
 
 export default LoadingBtn;
-const LoadingButtonStyle = styled(LoadingButton)`
-  margin: ${(props) => (props.align === "right" ? "16px 0 0 auto" : "16px 0")};
-
-  .MuiLoadingButton-loadingIndicator {
-    top: 15px;
-  }
-  span {
-    color: #c5c0ff;
-  }
-  svg {
-    path {
-    }
-  }
-`;
+const LoadingButtonStyle = ({ className = "", ...props }) =>
+  React.createElement(LoadingButton, {
+    ...props,
+    className: `${styles.loadingButtonStyle} ${className}`.trim(),
+  });

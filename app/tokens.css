@@ -2,7 +2,7 @@
   /* Color styles */
   --material-theme--white: rgba(255, 255, 255, 1);
   --material-theme--black: rgba(0, 0, 0, 1);
-  --light-primary: rgb(31 101 135);
+  --light-primary: #043b51;
   --light-surface-tint: rgb(31 101 135);
   --light-on-primary: rgb(255 255 255);
   --light-primary-container: rgb(197 231 255);

@@ -1,6 +1,8 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import { styled as style, useTheme } from "@mui/material/styles";
+import React from "react";
+import styles from "./MobileNavbar.module.scss";
+import { useState } from "react";
+import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,7 +10,6 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import styled from "@emotion/styled";
 import MenuIcon from "../../Icons/MenuIcon";
 import Link from "next/link";
 import ArrowIcon from "../../Icons/ArrowIcon";
@@ -20,16 +21,6 @@ import Button from "@mui/material/Button";
 import dynamic from "next/dynamic";
 
 const Drawer = dynamic(() => import("@mui/material/Drawer"));
-
-const drawerWidth = 300;
-
-const DrawerHeader = style("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
 
 export default function MobileNavbar() {
   const theme = useTheme();
@@ -44,6 +35,7 @@ export default function MobileNavbar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+    setShowMenu(-1);
   };
 
   const handleClick = (event, item, index) => {
@@ -74,26 +66,35 @@ export default function MobileNavbar() {
       >
         <a
           href={item.url}
-          className={`parent-link ${pathname === item.url ? "active" : ""}`}
+          className={`${styles.parentLink} ${pathname === item.url ? styles.active : ""}`}
           onClick={(event) => handleClick(event, item, index)}
+          aria-haspopup={item.subLinks ? "true" : undefined}
+          aria-expanded={item.subLinks ? showMenu === index : undefined}
         >
           {item.label}
-          {item.subLinks && <ArrowIcon className="arrow" />}
+          {item.subLinks && (
+            <ArrowIcon
+              className={`${styles.mobileArrow} ${showMenu === index ? styles.mobileArrowOpen : ""}`}
+            />
+          )}
         </a>
 
         {item.subLinks && (
           <ul
-            className={`${
-              showMenu === index ? "block" : "hidden"
-            } bg-primary-light text-surface-light top-8 dropdown`}
+            className={`${styles.mobileDropdown} ${showMenu === index ? styles.mobileDropdownOpen : ""}`}
           >
+            <li className={styles.mobileViewAllItem}>
+              <Link href={item.url} className={styles.mobileViewAllLink} onClick={handleDrawerClose}>
+                View all {item.label}
+              </Link>
+            </li>
             {item.subLinks.map((subLink, subIndex) => (
-              <li key={subIndex} className="text-left child-list-item">
-                <Divider
-                  key={subIndex + 100}
-                  style={{ borderColor: "rgba(255,255,255,0.1)" }}
-                />
-                <Link href={subLink.url} className="child-link">
+              <li key={subIndex}>
+                <Link
+                  href={subLink.url}
+                  className={`${styles.mobileSubLink} ${pathname === subLink.url ? styles.mobileSubLinkActive : ""}`}
+                  onClick={handleDrawerClose}
+                >
                   {subLink.label}
                 </Link>
               </li>
@@ -113,19 +114,11 @@ export default function MobileNavbar() {
     <>
       <AppBarStyled
         position="fixed"
-        sx={{
-          display: {
-            xs: "block",
-            lg: "none",
-          },
-          background: pathname.includes("blogs")
-            ? "var(--light-surface-container-lowest)"
-            : "var(--light-surface-container-lowest)",
-        }}
+        style={{ backgroundColor: "var(--light-surface-container-low)", boxShadow: "none" }}
       >
-        <Container maxWidth="xl" sx={{ padding: "0 6px !important" }}>
+        <Container maxWidth="xl" className={styles.navContainer}>
           <Toolbar disableGutters>
-            <Box sx={{ width: "100%" }} id="menu-container">
+            <Box className={styles.fullWidth} id="menu-container">
               <div className="menu-logo-wrapper">
                 <IconButton
                   size="small"
@@ -154,29 +147,17 @@ export default function MobileNavbar() {
         </Container>
       </AppBarStyled>
       <Box
-        sx={{
-          display: "flex",
-          position: "fixed",
-          zIndex: "100",
-        }}
+        className={styles.drawerWrapper}
         role="presentation"
         id="menu-appbar"
       >
         <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              backgroundColor: "var(--light-on-primary-fixed-variant, #295000)",
-            },
-          }}
+          className={styles.drawer}
           anchor="left"
           open={open}
           onClose={handleDrawerClose}
         >
-          <DrawerHeader>
+          <div className={styles.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIconStyle />
@@ -184,7 +165,7 @@ export default function MobileNavbar() {
                 <ChevronRightIconStyle />
               )}
             </IconButton>
-          </DrawerHeader>
+          </div>
           <ListContainer>{menuItems}</ListContainer>
           <Link href="/get-a-quote" style={{ margin: "16px" }}>
             <Button
@@ -192,14 +173,7 @@ export default function MobileNavbar() {
               variant="outlined"
               className="button"
               onClick={handleDrawerClose}
-              sx={{
-                border: "1px solid white",
-                color: "white",
-                width: "100%",
-                "&:hover": {
-                  border: "1px solid #eaeaea",
-                },
-              }}
+              classes={{ root: styles.quoteButton }}
             >
               GET A QUOTE
             </Button>
@@ -210,87 +184,28 @@ export default function MobileNavbar() {
   );
 }
 
-const AppBarStyled = styled(AppBar)`
-  backdrop-filter: blur(7.6px);
+const AppBarStyled = ({ className = "", ...props }) =>
+  React.createElement(AppBar, {
+    ...props,
+    color: "inherit",
+    elevation: 0,
+    sx: { backgroundColor: "#ffffff", boxShadow: "none" },
+    className: `${styles.appBarStyled} ${className}`.trim(),
+  });
 
-  .menu-logo-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo-wrapper {
-  }
-  .hamburger-icon {
-    svg {
-      path {
-      }
-    }
-  }
-`;
+const ListContainer = ({ className = "", ...props }) =>
+  React.createElement("ul", {
+    ...props,
+    className: `${styles.listContainer} ${className}`.trim(),
+  });
 
-const ListContainer = styled.ul`
-  margin: 0;
-  padding: 0;
-  .block {
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-  .hidden {
-    margin: 0;
-    padding: 0;
-    display: none;
-  }
-
-  .parent-list-item {
-    .parent-link {
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-      display: block;
-      text-align: left;
-      padding: 16px 16px;
-      color: white;
-      font-weight: 500;
-      letter-spacing: 0.005rem;
-      position: relative;
-      &:hover {
-        color: #ebebeb;
-      }
-      &.active {
-        color: #f0f0f0;
-      }
-    }
-    svg {
-      position: absolute;
-      right: 24px;
-      top: 24px;
-      transform: rotate(180deg);
-      path {
-        fill: white !important;
-      }
-    }
-  }
-  .child-list-item {
-    .child-link {
-      display: block;
-      text-align: left;
-      padding: 16px 40px;
-      color: #dedede;
-      font-weight: 400;
-      position: relative;
-      &:hover {
-        color: #ebebeb;
-      }
-    }
-  }
-`;
-
-const ChevronLeftIconStyle = styled(ChevronLeftIcon)`
-  path {
-    fill: white !important;
-  }
-`;
-const ChevronRightIconStyle = styled(ChevronLeftIcon)`
-  path {
-    fill: white !important;
-  }
-`;
+const ChevronLeftIconStyle = ({ className = "", ...props }) =>
+  React.createElement(ChevronLeftIcon, {
+    ...props,
+    className: `${styles.chevronLeftIconStyle} ${className}`.trim(),
+  });
+const ChevronRightIconStyle = ({ className = "", ...props }) =>
+  React.createElement(ChevronLeftIcon, {
+    ...props,
+    className: `${styles.chevronRightIconStyle} ${className}`.trim(),
+  });

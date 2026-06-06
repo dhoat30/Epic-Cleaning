@@ -1,6 +1,7 @@
 "use client";
+import React from "react";
+import styles from "./ThankYou.module.scss";
 import Container from "@mui/material/Container";
-import styled from "@emotion/styled";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -52,36 +53,8 @@ export default function ThankYou({
     </Section>
   );
 }
-const Section = styled.section`
-  background: var(--light-surface-container-low);
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .container {
-    background: var(--light-surface-container);
-    padding: 24px;
-    border-radius: 12px;
-    .image-container {
-      max-width: 400px;
-      margin: 0 auto;
-      .image-wrapper {
-        width: 100%;
-        padding-bottom: calc(86%);
-        position: relative;
-      }
-    }
-  }
-  .content-wrapper {
-    margin-top: 16px;
-  }
-  .button-wrapper {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

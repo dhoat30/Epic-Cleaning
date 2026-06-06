@@ -1,0 +1,22 @@
+.loadingButtonStyle {
+  margin: 16px 0;
+  border-radius: 50px;
+  &[align="right"] {
+    margin: 16px 0 0 auto;
+  }
+
+  :global(.MuiLoadingButton-loadingIndicator) {
+    top: 15px;
+  }
+  span {
+    color: #c5c0ff;
+  }
+  svg {
+    path {
+    }
+  }
+}
+
+.doneIcon {
+  color: var(--dark-on-surface) !important;
+}

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styles from "./FooterCta.module.scss";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -15,7 +15,6 @@ export default function FooterCta({ title, description, cta }) {
             <Typography
               component="h2"
               variant="h2"
-              sx={{ fontWeight: 700 }}
               align="center"
               color="white"
               className="title"
@@ -36,13 +35,7 @@ export default function FooterCta({ title, description, cta }) {
                 <Button
                   size="large"
                   variant="contained"
-                  sx={{
-                    background: "white",
-                    color: "var(--dark-on-primary)",
-                    "&:hover": {
-                      background: "#eaeaea",
-                    },
-                  }}
+                  className={styles.button}
                 >
                   {cta.title}
                 </Button>
@@ -52,13 +45,6 @@ export default function FooterCta({ title, description, cta }) {
               <Button
                 size="large"
                 variant="outlined"
-                sx={{
-                  border: "1px solid white",
-                  color: "white",
-                  "&:hover": {
-                    border: "1px solid #eaeaea",
-                  },
-                }}
               >
                 {cta.label}
               </Button>
@@ -70,31 +56,8 @@ export default function FooterCta({ title, description, cta }) {
     </Section>
   );
 }
-const Section = styled(Box)`
-  padding: 56px 0;
-  @media (max-width: 900px) {
-    padding: 24px 0;
-  }
-  .wrapper {
-    padding: 120px 0;
-    background: linear-gradient(97deg, #147ae7 2.05%, #000872 98.81%);
-    border-radius: 32px;
-    @media (max-width: 900px) {
-      padding: 56px 16px;
-    }
-    .content-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .title {
-      font-weight: 600;
-    }
-    .button-wrapper {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement(Box, {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

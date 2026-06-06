@@ -1,0 +1,85 @@
+.section {
+  background: var(--light-surface-container-low);
+  border-top: 1px solid var(--light-outline-variant);
+  border-bottom: 1px solid var(--light-outline-variant);
+  padding: 36px 24px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto 28px;
+  padding: 0 24px;
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--light-outline-variant);
+}
+
+.title {
+  white-space: nowrap;
+  color: var(--light-on-surface-variant);
+  font-size: 0.7rem !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1 !important;
+}
+
+.logoViewport {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.logoTrack {
+  display: flex;
+  align-items: center;
+  margin-left: -20px;
+  touch-action: pan-y pinch-zoom;
+}
+
+.logoSlide {
+  display: flex;
+  flex: 0 0 12%;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding-left: 20px;
+
+  @media (max-width: 1200px) {
+    flex-basis: 16%;
+  }
+
+  @media (max-width: 900px) {
+    flex-basis: 22%;
+  }
+
+  @media (max-width: 600px) {
+    flex-basis: 40%;
+  }
+}
+
+.logoWrapper {
+  position: relative;
+  width: 210px;
+  height: 84px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+
+  img {
+    object-fit: contain !important;
+  }
+
+  &:hover {
+    filter: grayscale(0%);
+    transform: translateY(-2px);
+  }
+}

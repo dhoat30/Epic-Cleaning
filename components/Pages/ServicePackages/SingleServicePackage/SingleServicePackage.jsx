@@ -1,6 +1,6 @@
 "use client";
+import styles from "./SingleServicePackage.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Image from "next/image";
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
@@ -63,50 +63,8 @@ export default function SingleServicePackage({ data }) {
     </>
   );
 }
-const Section = styled.section`
-  margin-top: 80px;
-  margin-bottom: 40px;
-  .wrapper {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 32px;
-    align-items: start;
-    @media (max-width: 1200px) {
-      display: block;
-    }
-    .main-content-wrapper {
-      grid-column: 1 / span 8;
-
-      .hero-image-wrapper {
-        position: relative;
-        width: 100%;
-        border-radius: 12px;
-        img {
-          border-radius: 12px;
-        }
-      }
-      .intro-wrapper {
-        padding: 24px 0;
-        .description {
-          margin-top: 8px;
-        }
-        .cta-wrapper-mobile {
-          display: none;
-          @media (max-width: 1200px) {
-            display: block;
-            margin-top: 16px;
-          }
-        }
-      }
-    }
-    .cta-wrapper {
-      grid-column: 9 / span 4;
-      position: sticky;
-      top: 80px;
-      border-radius: 12px;
-      @media (max-width: 1200px) {
-        display: none;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

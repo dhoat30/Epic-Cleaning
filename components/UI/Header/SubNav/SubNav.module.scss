@@ -1,0 +1,47 @@
+.section {
+position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--dark-surface, #131316);
+  z-index: 1101;
+
+  @media (max-width: 720px) {
+    :global(.cta-link) {
+      display: none;
+    }
+  }
+
+  :global(.wrapper) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 1150px) {
+      :global(.tabs-wrapper) {
+        width: 60%;
+      }
+    }
+    @media (max-width: 720px) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      :global(.tabs-wrapper) {
+        width: 100%;
+      }
+    }
+
+    :global(.cta-link) {
+      width: 222px;
+    }
+  }
+  :global(.MuiButtonBase-root) {
+    /* color: var(--material-theme-ref-neutral-neutral-99, #fdfcf5); */
+  }
+  :global(.Mui-selected) {
+    /* color: var(--dark-secondary, #f8f770); */
+  }
+  button {
+    /* color: white; */
+  }
+}

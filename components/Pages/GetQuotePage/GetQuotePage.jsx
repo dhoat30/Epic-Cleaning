@@ -1,5 +1,6 @@
 "use client";
-import styled from "@emotion/styled";
+import React from "react";
+import styles from "./GetQuotePage.module.scss";
 
 import Container from "@mui/material/Container";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
@@ -71,54 +72,8 @@ export default function GetQuotePage({ data, websitePackageOffer, regularCleanin
     </ThemeProvider>
   );
 }
-const Section = styled.section`
-  background: var(--light-surface-container-low);
-  padding: 120px 0 40px 0;
-  @media (max-width: 600px) {
-    padding: 80px 0 24px 0;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--light-surface-container-low);
-    gap: 16px;
-    align-items: start;
-    @media (max-width: 1000px) {
-      grid-template-columns: 1fr;
-    }
-    @media (max-width: 600px) {
-      padding: 0;
-    }
-    .form-container {
-      border: 1px solid var(--light-outline-variant);
-      background: var(--light-surface-container-lowest);
-      //remove the top border radius
-      border-radius: 12px;
-    }
-    .content-container {
-      @media (min-width: 1000px) {
-        position: sticky;
-        top: 80px;
-      }
-
-      padding: 24px;
-      background: var(--light-surface-container-lowest);
-      border-radius: 12px;
-      border: 1px solid var(--light-outline-variant);
-      @media (max-width: 600px) {
-        padding: 24px 16px;
-      }
-      .title {
-        margin: 8px 0;
-      }
-      .image-wrapper {
-        position: relative;
-        width: 100%;
-      }
-      .MuiContainer-root {
-        padding: 0 !important;
-        margin-top: 16px;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

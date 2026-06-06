@@ -1,11 +1,11 @@
 "use client";
+import styles from "./CatgoryTopFilter.module.scss";
 import Container from "@mui/material/Container";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
 import React from "react";
-import styled from "@emotion/styled";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 export default function CategoryTopFilter({ data, className }) {
@@ -61,20 +61,8 @@ export default function CategoryTopFilter({ data, className }) {
     </BoxSection>
   );
 }
-const BoxSection = styled(Box)`
-  padding: 40px 0 0 0;
-  border-bottom: 1px solid rgba(53, 52, 56, 1);
-
-  .filters-container {
-    .filter-label-wrapper {
-      .filter-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-    }
-
-    .filter-tab-wrapper {
-    }
-  }
-`;
+const BoxSection = ({ className = "", ...props }) =>
+  React.createElement(Box, {
+    ...props,
+    className: `${styles.boxSection} ${className}`.trim(),
+  });

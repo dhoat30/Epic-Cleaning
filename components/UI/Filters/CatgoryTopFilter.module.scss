@@ -1,0 +1,17 @@
+.boxSection {
+padding: 40px 0 0 0;
+  border-bottom: 1px solid rgba(53, 52, 56, 1);
+
+  :global(.filters-container) {
+    :global(.filter-label-wrapper) {
+      :global(.filter-label) {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    :global(.filter-tab-wrapper) {
+    }
+  }
+}

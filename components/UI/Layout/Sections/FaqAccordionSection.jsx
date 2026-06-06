@@ -1,6 +1,5 @@
-"use client";
+import styles from "./FaqAccordionSection.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import CustomAccordion from "../../Accordion/CustomAccordion";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -11,14 +10,11 @@ function FaqAccordionSection({ title, description, qaData }) {
       <Container maxWidth="xl">
         <div className="grid-wrapper ">
           <div className="title-wrapper">
-            <Typography variant="h4" component="h3" className="description">
+            <span className={styles.badge}>FAQ</span>
+            <Typography variant="h2" component="h2" className={`${styles.title} mt-16`}>
               {title}
             </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              className="description mt-16"
-            >
+            <Typography variant="body1" component="p" color="text.secondary" className="mt-16">
               {description}
             </Typography>
           </div>
@@ -30,29 +26,8 @@ function FaqAccordionSection({ title, description, qaData }) {
 }
 
 export default FaqAccordionSection;
-const Section = styled.section`
-  padding: 80px 0;
-
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-  .section-title {
-  }
-  .grid-wrapper {
-    grid-template-columns: 500px 1fr;
-    gap: 56px;
-    display: grid;
-    align-items: start;
-    @media (max-width: 1100px) {
-      gap: 24px;
-
-      grid-template-columns: 1fr;
-    }
-    .title-wrapper {
-      @media (min-width: 1100px) {
-        position: sticky;
-        top: 100px;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

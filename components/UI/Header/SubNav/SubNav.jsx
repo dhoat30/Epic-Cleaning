@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styles from "./SubNav.module.scss";
 import React, { useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -86,50 +86,8 @@ function SubNav({ dataArr }) {
 }
 
 export default SubNav;
-const Section = styled(Paper)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--dark-surface, #131316);
-  z-index: 1101;
-
-  @media (max-width: 720px) {
-    .cta-link {
-      display: none;
-    }
-  }
-
-  .wrapper {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media (max-width: 1150px) {
-      .tabs-wrapper {
-        width: 60%;
-      }
-    }
-    @media (max-width: 720px) {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      .tabs-wrapper {
-        width: 100%;
-      }
-    }
-
-    .cta-link {
-      width: 222px;
-    }
-  }
-  .MuiButtonBase-root {
-    /* color: var(--material-theme-ref-neutral-neutral-99, #fdfcf5); */
-  }
-  .Mui-selected {
-    /* color: var(--dark-secondary, #f8f770); */
-  }
-  button {
-    /* color: white; */
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement(Paper, {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

@@ -1,0 +1,36 @@
+.section {
+margin-top: 16px;
+  :global(.tabs-wrapper) {
+    :global(.MuiTabs-flexContainer) {
+    }
+
+    button {
+      border-bottom: 1px solid var(--light-outline-variant);
+    }
+  }
+  :global(.grid-wrapper) {
+    column-count: 5;
+    column-gap: 24px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    @media (max-width: 1300px) {
+      column-count: 4;
+    }
+    @media (max-width: 900px) {
+      column-count: 2;
+    }
+    @media (max-width: 600px) {
+      column-count: 1;
+    }
+  }
+  :global(.image-container) {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--light-outline);
+    margin-bottom: 24px; /* Adds the row gap */
+    break-inside: avoid; /* Ensures no images break in the column layout */
+  }
+}

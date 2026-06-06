@@ -1,6 +1,6 @@
 "use client";
+import styles from "./HtmlPageTemplate.module.scss";
 import React from "react";
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -25,16 +25,8 @@ export default function HtmlPageTemplate({ pageData }) {
     </Paper>
   );
 }
-const ContainerStyled = styled(Container)`
-  padding: 80px 0;
-  .content {
-    strong {
-      color: white;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      margin-top: 32px;
-    }
-  }
-`;
+const ContainerStyled = ({ className = "", ...props }) =>
+  React.createElement(Container, {
+    ...props,
+    className: `${styles.containerStyled} ${className}`.trim(),
+  });

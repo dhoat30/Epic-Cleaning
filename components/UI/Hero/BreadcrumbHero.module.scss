@@ -1,0 +1,15 @@
+.titleWrapper {
+text-align: center;
+  background: var(--light-surface-container);
+  border-bottom: 1px solid var(--light-outline);
+  padding-top: 120px;
+  padding-bottom: 24px;
+  @media (max-width: 900px) {
+    padding-top: 72px;
+  }
+  :global(.container) {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
+}

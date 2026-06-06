@@ -1,5 +1,6 @@
+import React from "react";
+import styles from "./NewsletterForm.module.scss";
 import { useState } from 'react'
-import styled from '@emotion/styled';
 import LoadingBtn from '../Buttons/LoadingBtn';
 import axios from 'axios';
 import dynamic from "next/dynamic";
@@ -119,11 +120,11 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
                     error={emailAddressIsInvalid}
                 />
 
-                {error && <Alert sx={{ margin: "8px 0" }} severity='error'>Try again</Alert>}
+                {error && <Alert className="my-8" severity='error'>Try again</Alert>}
 
 
                 <LoadingBtn align="left" onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess} >{btnLabel}</LoadingBtn>
-                {isSuccess && <Alert sx={{ margin: "8px 0" }} severity='success'>Thanks</Alert>}
+                {isSuccess && <Alert className="my-8" severity='success'>Thanks</Alert>}
             </form>
 
         </Container>
@@ -131,16 +132,19 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
 }
 
 export default NewsletterForm
-const Container = styled.div`
-min-height: 114px !important; 
- 
-`
+const Container = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });
 
-const LoadingBtnStyle = styled(LoadingBtn)`
-    display: block; 
-    width: 100%; 
-
-`
-const TextFieldStyle = styled(TextField)`
-width: 100% !important; 
-`
+const LoadingBtnStyle = ({ className = "", ...props }) =>
+  React.createElement(LoadingBtn, {
+    ...props,
+    className: `${styles.loadingBtnStyle} ${className}`.trim(),
+  });
+const TextFieldStyle = ({ className = "", ...props }) =>
+  React.createElement(TextField, {
+    ...props,
+    className: `${styles.textFieldStyle} ${className}`.trim(),
+  });

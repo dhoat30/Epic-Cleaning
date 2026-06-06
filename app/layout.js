@@ -1,9 +1,6 @@
 //import css file 
 import './globals.css'
 import './tokens.css'
-// Import slick css files
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Work_Sans } from 'next/font/google'
 
 import ClientProvider from '@/components/Providers/ClientProvider';
@@ -27,7 +24,7 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: DEFAULT_TITLE,
-    template: `%s | ${SITE_NAME}`,
+    template: '%s',
   },
   description: DEFAULT_DESCRIPTION,
   openGraph: {

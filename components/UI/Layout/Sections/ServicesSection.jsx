@@ -1,4 +1,5 @@
-import styled from "@emotion/styled";
+import React from "react";
+import styles from "./ServicesSection.module.scss";
 import Container from "@mui/material/Container";
 import Image from "next/image";
 import Button from "@mui/material/Button";
@@ -76,72 +77,8 @@ export default function ServicesSection({
     </Section>
   );
 }
-const Section = styled.section`
-  padding: 80px 0 80px 0;
-  background: var(--dark-surface-container-lowest);
-  @media (max-width: 600px) {
-    padding: 40px 0 40px 0;
-  }
-  .title-wrapper {
-    padding-top: 40px;
-    padding-bottom: 80px;
-    @media (max-width: 900px) {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-  .cards-wrapper {
-    margin-top: 40px;
-    /* display: grid;
-    grid-template-columns: 300px 1fr 1fr 1fr; */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: start;
-
-    @media (max-width: 900px) {
-      margin-top: 24px;
-      flex-direction: column-reverse;
-    }
-    > div {
-      width: calc(25% - 40px);
-      @media (max-width: 1200px) {
-        width: calc(33% - 40px);
-      }
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-    }
-    .section-cta {
-      button {
-        width: 100%;
-        background: var(--dark-primary);
-        color: var(--dark-on-primary);
-        padding-top: 12px;
-        padding-bottom: 12px;
-        border-radius: 50px;
-        font-size: 1.1rem;
-      }
-    }
-    .card {
-      .container {
-      }
-
-      .image-wrapper {
-      }
-      .content-wrapper {
-        .subtitle {
-          margin: 0 0 8px 0;
-        }
-        .title {
-          font-weight: 600;
-          margin-bottom: 24px;
-        }
-        .cta {
-          margin-top: 16px;
-          display: inline-block;
-        }
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

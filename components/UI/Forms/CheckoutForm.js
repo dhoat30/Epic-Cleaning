@@ -1,4 +1,5 @@
 "use client";
+import styles from "./CheckoutForm.module.scss";
 
 import React, { useState } from "react";
 import Input from './InputFields/Input'
@@ -6,7 +7,6 @@ import { checkoutFormData } from "@/utils/checkoutFormData";
 import LoadingBtn from "../Buttons/LoadingBtn";
 import Box from '@mui/material/Box';
 import axios from "axios";
-import styled from "@emotion/styled";
 import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation'
 
@@ -188,7 +188,7 @@ export default function CheckoutForm({ className, formName = "Checkout Form", pa
     })
     return (
         <Container className={`${className} py-8 `}>
-            <Box sx={{ width: '100%' }}>
+            <Box className={styles.fullWidth}>
                 <Typography variant="h5" component="h2" className="text-center">Billing details</Typography>
                 <div className="input-wrapper p-6">
 
@@ -198,7 +198,7 @@ export default function CheckoutForm({ className, formName = "Checkout Form", pa
 
                     <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess} >Place order</LoadingBtn>
 
-                    {error && <Alert sx={{ margin: "8px 0" }} severity='error'>Something went wrong. Please Try again</Alert>}
+                    {error && <Alert className="my-8" severity='error'>Something went wrong. Please Try again</Alert>}
                 </div>
 
             </Box>
@@ -207,26 +207,8 @@ export default function CheckoutForm({ className, formName = "Checkout Form", pa
     )
 }
 
-const Container = styled.form`
-@media(max-width: 500px){ 
-    .stepper-wrapper{ 
-    display: none ;
-}
-}
-
-.input-wrapper{ 
-    background: var(--material-theme--sys--dark--surface-container);
-border-radius: 12px; 
-
-    margin: 0 auto 0 auto; 
-    @media(max-width: 500px){ 
-        margin: 0 auto 0 auto;   
-    }
-    .Mui-error{ 
-        color: var(--dark-error); 
-        font-size: 1rem;
-    }
-}
-
-`
-
+const Container = ({ className = "", ...props }) =>
+  React.createElement("form", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

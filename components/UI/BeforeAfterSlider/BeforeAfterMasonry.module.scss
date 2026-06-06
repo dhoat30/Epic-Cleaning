@@ -1,0 +1,11 @@
+.container {
+:global(.image-wrapper) {
+    display: inline-block;
+
+    width: 100%;
+    position: relative;
+    img {
+      object-fit: cover;
+    }
+  }
+}

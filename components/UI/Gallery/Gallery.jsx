@@ -1,6 +1,6 @@
 "use client";
+import styles from "./Gallery.module.scss";
 import * as React from "react";
-import styled from "@emotion/styled";
 import BeforeAfterMasonry from "../BeforeAfterSlider/BeforeAfterMasonry";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -67,39 +67,8 @@ export default function Gallery({ galleryData }) {
   );
 }
 
-const Section = styled.section`
-  margin-top: 16px;
-  .tabs-wrapper {
-    .MuiTabs-flexContainer {
-    }
-
-    button {
-      border-bottom: 1px solid var(--light-outline-variant);
-    }
-  }
-  .grid-wrapper {
-    column-count: 5;
-    column-gap: 24px;
-
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-    @media (max-width: 1300px) {
-      column-count: 4;
-    }
-    @media (max-width: 900px) {
-      column-count: 2;
-    }
-    @media (max-width: 600px) {
-      column-count: 1;
-    }
-  }
-  .image-container {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--light-outline);
-    margin-bottom: 24px; /* Adds the row gap */
-    break-inside: avoid; /* Ensures no images break in the column layout */
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

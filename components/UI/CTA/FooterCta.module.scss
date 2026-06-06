@@ -1,0 +1,37 @@
+.section {
+padding: 56px 0;
+  @media (max-width: 900px) {
+    padding: 24px 0;
+  }
+  :global(.wrapper) {
+    padding: 120px 0;
+    background: linear-gradient(97deg, #147ae7 2.05%, #000872 98.81%);
+    border-radius: 32px;
+    @media (max-width: 900px) {
+      padding: 56px 16px;
+    }
+    :global(.content-wrapper) {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    :global(.title) {
+      font-weight: 600;
+    }
+    :global(.button-wrapper) {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.button {
+  background: white !important;
+  color: var(--dark-on-primary) !important;
+
+  &:hover {
+    background: #eaeaea !important;
+  }
+}

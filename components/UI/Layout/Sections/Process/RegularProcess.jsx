@@ -1,4 +1,6 @@
-import styled from "@emotion/styled";
+"use client";
+import React from "react";
+import styles from "./RegularProcess.module.scss";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { theme } from "@/utils/themeSettings";
@@ -54,95 +56,8 @@ export default function RegularProcess({ title, description, cards }) {
     </ThemeProvider>
   );
 }
-const Section = styled.section`
-  padding: 40px 0;
-  overflow: hidden !important;
-  background: var(--dark-secondary-container);
-  .title-wrapper {
-    display: grid;
-    grid-template-columns: auto 600px;
-    gap: 40px;
-    @media (max-width: 1000px) {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-    .description {
-      font-size: 1.4rem !important;
-      p,
-      strong {
-        font-size: 1.4rem !important;
-        color: var(--dark-on-surface-variant);
-      }
-      @media (max-width: 900px) {
-        font-size: 1.2rem !important;
-        p {
-          font-size: 1.2rem !important;
-        }
-      }
-    }
-  }
-  .steps-wrapper {
-    .step-wrapper {
-      margin: 80px 0;
-      display: grid;
-      gap: 40px;
-      grid-template-columns: auto 600px;
-      @media (max-width: 1000px) {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin: 24px 0;
-      }
-      align-items: end;
-      .title {
-        .step-title-number-wrapper {
-          display: grid;
-          grid-template-columns: 40px auto;
-          align-items: center;
-          gap: 16px;
-
-          .step-number {
-            background: var(--dark-on-secondary-container);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid var(--dark-on-secondary-container);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: var(--dark-secondary-container) !important;
-          }
-        }
-      }
-      .border {
-        margin-top: 24px;
-        border-top: 2px solid var(--dark-on-secondary-container);
-        height: 1px;
-        @media (max-width: 600px) {
-          margin-top: 16px;
-        }
-      }
-    }
-    .content {
-      color: var(--white);
-      .description {
-        p {
-          color: var(--dark-on-surface-variant);
-          font-size: 1rem;
-          font-weight: 400 !important;
-          line-height: 1.5rem;
-          margin-top: 8px;
-          margin-bottom: 8px;
-        }
-        li {
-          margin-top: 4px;
-        }
-      }
-    }
-    h2 {
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

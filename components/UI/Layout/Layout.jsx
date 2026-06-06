@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 import ZigZagCardsSection from "./Sections/ZigZagCardsSection";
 import RowSection from "./Sections/RowSection";
@@ -10,7 +10,6 @@ import Packages from "./Sections/Packages";
 import FaqAccordionSection from "./Sections/FaqAccordionSection";
 import ServiceChecklist from "./Sections/ServiceChecklist";
 export default function Layout({ sections, projectsData, data }) {
-  console.log(data);
   if (!sections) return null;
   const sectionsJSX = sections.map((section, index) => {
     if (section.acf_fc_layout === "zigzag_cards") {

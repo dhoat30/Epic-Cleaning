@@ -1,0 +1,11 @@
+.card {
+:global(.card) {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--light-surface-container);
+    border: 1px solid var(--light-outline-variant);
+    :global(.content-wrapper) {
+      padding: 16px;
+    }
+  }
+}

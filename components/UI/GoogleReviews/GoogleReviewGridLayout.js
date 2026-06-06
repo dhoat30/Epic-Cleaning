@@ -1,8 +1,9 @@
 'use client';
+import React from "react";
+import styles from "./GoogleReviewGridLayout.module.scss";
 
 import { useRef, useCallback } from "react";
 import Container from "@mui/material/Container";
-import styled from "@emotion/styled";
 import CarouselArrows from "../CarouselArrows/CarouselArrows";
 import Link from "next/link";
 import Button from "@mui/material/Button";
@@ -46,29 +47,8 @@ export default function GoogleReviewGridLayout({data}) {
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-lowest);
-
-  padding: 4px  0 16px 0;
- 
-.grid-wrapper{ 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px; 
-  justify-content: center; 
-  @media(max-width: 400px){ 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-  }
-  /* override the googleReviewcard div's max width */
-  >div{ 
-    max-width: 100%; 
-  }
-}
-  .cta-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap; 
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

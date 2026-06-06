@@ -1,7 +1,7 @@
 "use client";
+import styles from "./BlogsArchive.module.scss";
 
 import React from "react";
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import BlogCard from "@/components/UI/Card/BlogCard";
@@ -103,33 +103,8 @@ export default function BlogsArchive({
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-lowest);
-
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-
-  .title-row {
-    max-width: 1000px;
-    margin: 0 auto;
-    iption {
-      margin-top: 16px;
-    }
-  }
-  .cards {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
-    @media (max-width: 1100px) {
-      gap: 16px;
-
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 700px) {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

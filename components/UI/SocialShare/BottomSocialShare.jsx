@@ -1,7 +1,7 @@
 "use client";
+import styles from "./BottomSocialShare.module.scss";
 import React from "react";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 import Twitter from "../Icons/Twitter";
 import FacebookCircleIcon from "../Icons/FacebookCircleIcon";
 import Linkedin from "../Icons/Linkedin";
@@ -63,27 +63,8 @@ export default function BottomSocialShare({
   );
 }
 
-const Container = styled.div`
-  margin-top: 32px;
-  .title {
-    font-weight: 600;
-  }
-  .share-wrapper {
-    margin-top: 16px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    a {
-      svg {
-        width: 40px;
-        height: 40px;
-      }
-      .email {
-        svg {
-          path {
-          }
-        }
-      }
-    }
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

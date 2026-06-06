@@ -5,6 +5,8 @@ import styles from './Hero.module.css'
 import HeroImage from "./HeroImage";
 import Video from "../../Video/Video";
 import BeforeAfter from "../../BeforeAfterSlider/BeforeAfter";
+import AccreditationStrip from "./AccreditationStrip";
+
 export default async function OptimizedHero({ data, heroUSP }) {
     if (!data || !data.image) return null
     console.log(data.before_after_images?.after_image)
@@ -38,9 +40,21 @@ export default async function OptimizedHero({ data, heroUSP }) {
         <>
             <section className={`${styles.heroSection}`}>
                 <div className={`${styles.container} max-width-xl`}>
-                    <HeroContent title={heroData.title} subtitle={heroData.subtitle} description={heroData.description} ctaArray={heroData.ctaArray} heroUSP={heroUSP} />
-                    {graphicComponent}
+                    <HeroContent
+                        className={styles.heroContent}
+                        title={heroData.title}
+                        subtitle={heroData.subtitle}
+                        description={heroData.description}
+                        ctaArray={heroData.ctaArray}
+                        heroUSP={heroUSP}
+                        compact
+                        showAccreditations={false}
+                    />
+                    <div className={styles.heroMedia}>
+                        {graphicComponent}
+                    </div>
                 </div>
+                <AccreditationStrip accreditations={heroUSP?.image_usp} />
             </section>
 
 

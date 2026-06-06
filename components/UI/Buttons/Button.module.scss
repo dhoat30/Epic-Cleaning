@@ -1,0 +1,28 @@
+.container {
+background: var(--dark-primary, #e7c446) !important;
+  border-radius: 100px;
+  color: var(--dark-on-primary, #3c2f00);
+  margin: 0;
+  &[align="right"] {
+    margin: 0 0 0 auto;
+  }
+  display: block;
+  padding: 10px 24px;
+  :global(.MuiLoadingButton-loadingIndicator) {
+    top: 15px;
+  }
+  span {
+    color: var(--dark-on-primary, #3c2f00);
+  }
+  svg {
+    path {
+      fill: var(--dark-on-primary, #3c2f00);
+    }
+  }
+  &:hover {
+    background: var(
+      --material-theme-ref-primary-primary-70,
+      #c9a82c
+    ) !important;
+  }
+}

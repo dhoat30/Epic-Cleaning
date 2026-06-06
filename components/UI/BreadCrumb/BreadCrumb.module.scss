@@ -1,0 +1,8 @@
+.nav {
+a {
+    color: var(--light-secondary);
+    :global(.link-text) {
+      text-decoration: underline;
+    }
+  }
+}

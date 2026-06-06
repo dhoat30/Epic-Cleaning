@@ -1,0 +1,32 @@
+.wrapper {
+display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid var(--light-outline-variant);
+  :global(.profile-pic-wrapper) {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  :global(.text-wrapper) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    flex-wrap: wrap;
+
+    :global(.meta-author-name) {
+    }
+    :global(.divider) {
+      @media (max-width: 370px) {
+        display: none;
+      }
+    }
+  }
+}

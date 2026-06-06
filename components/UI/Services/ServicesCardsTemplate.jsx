@@ -1,8 +1,8 @@
 "use client";
+import styles from "./ServicesCardsTemplate.module.scss";
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 import ServiceCard from "../Card/ServiceCard";
 export default function ServicesCardsTemplate({
   subtitle,
@@ -60,45 +60,8 @@ export default function ServicesCardsTemplate({
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-lowest);
-
-  padding: 80px 0;
-  @media (max-width: 900px) {
-    padding: 40px 0;
-  }
-
-  .title-row {
-    max-width: 1000px;
-    margin: 0 auto;
-    .title {
-    }
-    .subtitle {
-    }
-    .description {
-      margin-top: 16px;
-    }
-  }
-  .cards-wrapper {
-    display: grid;
-    gap: 32px;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1100px) {
-      gap: 16px;
-
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 650px) {
-      grid-template-columns: 1fr;
-    }
-    .card {
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--light-surface-container);
-      border: 1px solid var(--light-outline-variant);
-      .content-wrapper {
-        padding: 16px;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

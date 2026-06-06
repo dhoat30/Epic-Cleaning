@@ -1,4 +1,5 @@
-import styled from "@emotion/styled";
+"use client";
+import styles from "./ProjectsSection.module.scss";
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -45,7 +46,7 @@ export default function ProjectsSection({
             {card.title.rendered}
           </Typography>
           <Typography variant="subtitle1" component="p" className="description">
-            <LocationOnIcon sx={{ position: "relative", top: "6px" }} />
+            <LocationOnIcon className={styles.locationIcon} />
             {card.acf.location}
           </Typography>
         </div>
@@ -77,94 +78,8 @@ export default function ProjectsSection({
   );
 }
 
-const Section = styled.section`
-  background: var(--light-surface-container-low);
-  padding: 80px 0;
-  @media (max-width: 600px) {
-    padding: 40px 0;
-  }
-  .subtitle-row {
-    @media (min-width: 900px) {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-    }
-
-    .subtitle {
-      grid-column: 5 / span 8;
-    }
-  }
-  .title-row {
-    margin-top: 24px;
-
-    @media (min-width: 900px) {
-      margin-top: 120px;
-      display: grid;
-      grid-template-columns: 60% 40%;
-    }
-    .title {
-      grid-column: 1 / span 1;
-    }
-    .subtitle {
-      margin-top: 24px;
-      grid-column: 1 / span 1;
-    }
-  }
-  .cards {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    @media (max-width: 900px) {
-      display: flex;
-      gap: 32px;
-      flex-direction: column;
-    }
-    .card-1 {
-      grid-column: 5 / span 4;
-      .image-wrapper {
-        padding-bottom: 100%;
-        @media (max-width: 900px) {
-          padding-bottom: 56.25%;
-        }
-      }
-    }
-    .card-2 {
-      grid-column: 9 / span 4;
-      .image-wrapper {
-        padding-bottom: 150%;
-        @media (max-width: 900px) {
-          padding-bottom: 56.25%;
-        }
-      }
-    }
-    .card-3 {
-      grid-column: 1 / span 8;
-      .image-wrapper {
-        padding-bottom: 64%;
-        @media (max-width: 900px) {
-          padding-bottom: 56.25%;
-        }
-      }
-    }
-    .card {
-      cursor: pointer;
-      .image-wrapper {
-        border-radius: 12px;
-        overflow: hidden;
-        img {
-          transition: transform 1s;
-          &:hover {
-            transform: scale(1.05);
-          }
-        }
-      }
-      .content-wrapper {
-        margin-top: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-    }
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

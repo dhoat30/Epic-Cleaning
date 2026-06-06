@@ -1,8 +1,8 @@
+import styles from "./TextLink.module.scss";
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
-import styled from "@emotion/styled";
 
 export default function TextLink({ label, url, color, className, size }) {
   const controls = useAnimation();
@@ -145,29 +145,8 @@ export default function TextLink({ label, url, color, className, size }) {
   );
 }
 
-const Container = styled(Link)`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  div {
-    font-weight: 400;
-    display: inline-block;
-    position: relative;
-  }
-
-  .underline {
-    position: absolute; /* Position the pseudo-element relative to the parent span */
-    bottom: -8px;
-    left: 0;
-    width: 0%; /* Initial width is 0% to hide the underline */
-    height: 2px; /* Set the desired height for the underline */
-  }
-  @media (max-width: 600px) {
-    .label {
-      font-size: 1rem;
-    }
-    svg {
-      width: 20px;
-    }
-  }
-`;
+const Container = ({ className = "", ...props }) =>
+  React.createElement(Link, {
+    ...props,
+    className: `${styles.container} ${className}`.trim(),
+  });

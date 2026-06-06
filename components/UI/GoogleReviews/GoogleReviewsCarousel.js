@@ -1,80 +1,68 @@
 'use client';
+import React from "react";
+import styles from "./GoogleReviewsCarousel.module.scss";
 
-import { useRef, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Container from "@mui/material/Container";
-import styled from "@emotion/styled";
-import Slider from "react-slick";
+import useEmblaCarousel from "embla-carousel-react";
 import CarouselArrows from "../CarouselArrows/CarouselArrows";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 import CallMadeOutlinedIcon from "@mui/icons-material/CallMadeOutlined";
-import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import GoogleReviewCard from "./GoogleReviewCard/GoogleReviewCard";
 import Typography from "@mui/material/Typography";
-var settings = {
-  dots: false,
-  arrows: false,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoplay: false,
-  centerMode: true,
-  centerPadding: "40px",
-  draggable: true,
-  infinite: true,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-      },
-    },
-  ],
-};
 
-export default function GoogleReviewsCarousel({data}) {
+export default function GoogleReviewsCarousel({ data }) {
+  const filteredReviewData = data?.filter((item) => {
+    return (
+      item.starRating === "FIVE" &&
+      typeof item.comment === "string" &&
+      item.comment.length > 250
+    );
+  }) || [];
 
-  // slider arrow functionality
-  const sliderRef = useRef(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    loop: filteredReviewData.length > 3,
+    skipSnaps: false,
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState([]);
 
+  const next = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const previous = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollTo = useCallback((index) => emblaApi?.scrollTo(index), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
   if (!data) return null;
 
-  const next = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext();
-    }
-  };
-
-  const previous = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev();
-    }
-  };
-  // filter review comment 
-  const filteredReviewData = data.filter((item) => { 
-    return (    item.starRating === "FIVE" &&
-      typeof item.comment === "string" && // Ensure comment is a string
-      item.comment.length > 250 // Check length of the comment
-      )
-  });
-
-  
   const testimonialCardsJSX = filteredReviewData.map(
     (item, index) => {
       if (index > 10) return null;
       return (
-        <GoogleReviewCard
-          key={index}
-          name={item.reviewer.displayName}
-          description={item.comment}
-          customerPic={item.reviewer.profilePhotoUrl}
-        />
+        <div className={styles.slide} key={index}>
+          <GoogleReviewCard
+            className={styles.reviewCard}
+            name={item.reviewer.displayName}
+            description={item.comment}
+            customerPic={item.reviewer.profilePhotoUrl}
+          />
+        </div>
       );
     }
   );
@@ -82,36 +70,44 @@ export default function GoogleReviewsCarousel({data}) {
   return (
     <Section>
       <Container maxWidth="xl">
-      <div className="title-row">
-          <Typography
-            variant="h2"
-            component="h2"
-            className="title"
-            align="center"
-          >
-          Google Reviews
-          </Typography>
-          <Typography
-            variant="body1"
-            component="p"
-            className="description mt-16"
-            align="center"
-          >
-Explore authentic customer feedback and see why people trust us. Each review reflects the quality and dedication we bring to every service we provide.        </Typography>
-        </div>
-        <div className="arrows-wrapper">
-          <CarouselArrows next={next} previous={previous} />
+        <div className={styles.header}>
+          <div className={styles.headerContent}>
+            <div className={styles.ratingBadge}>
+              <span className={styles.ratingScore}>4.9</span>
+              <span className={styles.ratingStars}>★★★★★</span>
+              <span className={styles.ratingCount}>from 90+ Google reviews</span>
+            </div>
+            <Typography variant="h2" component="h2" className={styles.title}>
+              What Our Customers Say
+            </Typography>
+            <Typography variant="body1" component="p" className={styles.description}>
+              Real reviews from real Tauranga customers — pulled directly from Google.
+            </Typography>
+          </div>
+          <div className={styles.arrowsWrapper}>
+            <CarouselArrows next={next} previous={previous} />
+          </div>
         </div>
       </Container>
-      <div className="carousel-wrapper mt-16">
-        <Slider ref={sliderRef} {...settings}>
-          {testimonialCardsJSX}
-        </Slider>
+      <div className={styles.viewport} ref={emblaRef}>
+        <div className={styles.track}>{testimonialCardsJSX}</div>
+      </div>
+      <div className={styles.dots} aria-label="Review carousel pagination">
+        {scrollSnaps.map((_, index) => (
+          <button
+            type="button"
+            key={index}
+            className={`${styles.dot} ${index === selectedIndex ? styles.dotSelected : ""}`}
+            onClick={() => scrollTo(index)}
+            aria-label={`Go to review ${index + 1}`}
+            aria-current={index === selectedIndex ? "true" : undefined}
+          />
+        ))}
       </div>
       <Container maxWidth="xl" className="cta-wrapper mt-32">
         <Link href={"https://g.page/r/CSHFRoJPsK-TEAE/review"} target="_blank">
           <Button variant={`contained`} endIcon={<CallMadeOutlinedIcon />}>
-           Leave a Review 
+            Leave a Review
           </Button>
         </Link>
         <Link href="/testimonials">
@@ -124,23 +120,8 @@ Explore authentic customer feedback and see why people trust us. Each review ref
   );
 }
 
-const Section = styled.section`
-background:var(--light-surface-container-lowest);
-
-  padding: 80px 0;
-  @media (max-width: 600px) {
-    padding: 40px 0;
-  }
-  .arrows-wrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .carousel-wrapper {
-  }
-  .cta-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap; 
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

@@ -1,9 +1,9 @@
 "use client";
+import styles from "./BreadCrumb.module.scss";
 
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled from "@emotion/styled";
 export default function BreadCrumb({ className }) {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter((segment) => segment);
@@ -47,11 +47,8 @@ export default function BreadCrumb({ className }) {
     </Nav>
   );
 }
-const Nav = styled.nav`
-  a {
-    color: var(--light-secondary);
-    .link-text {
-      text-decoration: underline;
-    }
-  }
-`;
+const Nav = ({ className = "", ...props }) =>
+  React.createElement("nav", {
+    ...props,
+    className: `${styles.nav} ${className}`.trim(),
+  });

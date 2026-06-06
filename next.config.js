@@ -8,10 +8,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfigp} */
 const nextConfig = {
 
-    compiler: {
-        // Enables the styled-components SWC transform
-        styledComponents: true
-    },
     images: {
         remotePatterns: [{
             protocol: 'https',

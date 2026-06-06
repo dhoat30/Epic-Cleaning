@@ -1,8 +1,9 @@
 "use client";
+import React from "react";
+import styles from "./ServicePacakgePage.module.scss";
 import ServicePackageCard from "@/components/UI/Card/ServicePackageCard";
 import CenterAlignHeroTop from "@/components/UI/Hero/CenterAlignHeroTop";
 
-import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 
 export default function ServicePackagePage({ pageData, servicesPackagesData }) {
@@ -38,11 +39,8 @@ export default function ServicePackagePage({ pageData, servicesPackagesData }) {
     </>
   );
 }
-const Section = styled.section`
-  padding: 80px 0;
-  .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-`;
+const Section = ({ className = "", ...props }) =>
+  React.createElement("section", {
+    ...props,
+    className: `${styles.section} ${className}`.trim(),
+  });

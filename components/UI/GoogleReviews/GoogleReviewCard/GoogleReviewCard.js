@@ -1,5 +1,5 @@
+import styles from "./GoogleReviewCard.module.scss";
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
@@ -9,7 +9,7 @@ export default function GoogleReviewCard({ name, description, customerPic, class
   const [isExpanded, setIsExpanded] = useState(false);
   const numberOfStars = 5;
   const starsJSX = Array.from({ length: numberOfStars }, (_, index) => (
-    <StarIcon key={index} sx={{ color: "#FABB05", fontSize: "1rem" }} />
+    <StarIcon key={index} className={styles.star} />
   ));
 
   const toggleExpand = () => {
@@ -33,10 +33,10 @@ export default function GoogleReviewCard({ name, description, customerPic, class
           height="40"
         />
         <div className="name-wrapper">
-          <Typography variant="subtitle1" component="h3">
+          <Typography variant="subtitle2" component="h3" sx={{ fontWeight: 600 }}>
             {name}
           </Typography>
-          {starsJSX}
+          <div style={{ display: 'flex', gap: '2px' }}>{starsJSX}</div>
         </div>
       </div>
       <div className="description-wrapper mt-16 mb-16">
@@ -54,30 +54,8 @@ export default function GoogleReviewCard({ name, description, customerPic, class
   );
 }
 
-const Div = styled.div`
-  background: var(--light-surface-container);
-  padding: 16px;
-  border: 1px solid var(--light-outline-variant);
-  max-width: calc(100% - 16px);
-  .profile-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .description-wrapper {
-    position: relative;
-    p {
-      margin-bottom: 8px;
-    }
-    .read-more-button {
-      background: none;
-      border: none;
-      color: var(--light-primary);
-      cursor: pointer;
-      font-weight: 500;
-      text-decoration: underline;
-    }
-  }
-`;
+const Div = ({ className = "", ...props }) =>
+  React.createElement("div", {
+    ...props,
+    className: `${styles.div} ${className}`.trim(),
+  });

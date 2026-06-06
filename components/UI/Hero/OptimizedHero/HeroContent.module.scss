@@ -1,0 +1,118 @@
+.div {
+  :global(.title) {
+    margin: 8px 0 16px 0;
+
+    @media (max-width: 1200px) {
+      max-width: 760px;
+    }
+  }
+
+  :global(.single-button-wrapper) {
+    margin-top: 24px;
+    button {
+      width: 100%;
+      max-width: 500px;
+    }
+  }
+  :global(.hero-usp-wrapper) {
+    :global(.text-usp-wrapper) {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    :global(.image-usp-wrapper) {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+  }
+}
+
+.uspItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--light-primary);
+  border-radius: 100px;
+}
+
+.compact {
+  :global(.subtitle) {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 5px 10px;
+    border: 1px solid var(--light-primary);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--light-primary) 8%, transparent);
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: var(--light-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--light-primary) 15%, transparent);
+    }
+  }
+
+  :global(.title) {
+    margin: 14px 0 12px;
+  }
+
+  :global(.description) {
+    display: block;
+    max-width: 560px;
+  }
+
+  :global(.hero-button-wrapper) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+
+    a {
+      display: flex;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  :global(.phone-button) {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 8px 20px;
+    border: 1px solid var(--light-primary);
+    border-radius: 999px;
+    transition: background-color 150ms ease, color 150ms ease;
+
+    &:hover,
+    &:focus-visible {
+      background: color-mix(in srgb, var(--light-primary) 10%, transparent);
+      outline: none;
+    }
+  }
+
+  :global(.hero-usp-wrapper) {
+    :global(.text-usp-wrapper) {
+      margin-top: 16px;
+      gap: 8px 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    :global(.hero-button-wrapper) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
