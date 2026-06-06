@@ -1,4 +1,4 @@
-import { getSingleBlog, getOptions } from '@/utils/fetchData'
+import { getSingleBlog, getOptions, getSinglePostData } from '@/utils/fetchData'
 import SingleBlog from '@/components/Pages/BlogsPage/SingleBlog'
 import { Suspense } from 'react'
 import styles from './Blogs.module.css'
@@ -23,6 +23,25 @@ export async function generateMetadata({ params }) {
     path: `/blogs/${slug}`,
     type: 'article',
   })
+}
+
+function countWords(text) {
+    const plainText = stripHtml(text)
+    return plainText ? plainText.split(/\s+/).length : 0
+}
+
+async function HeroSection({ slug }) {
+    const data = await getSingleBlog(slug)
+
+    if (!data.length) return null
+
+    return (
+        <BlogHero
+            className="hero-section mt-16"
+            videoID={data[0].acf.youtube_video_id || null}
+            featuredImage={data[0].acf.blog_featured_image}
+        />
+    )
 }
 
 export default async function singleProject({ params }) {
