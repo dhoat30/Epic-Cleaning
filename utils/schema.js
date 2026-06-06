@@ -122,8 +122,6 @@ export const getLocalBusinessSchema = () => ({
   '@type': ['LocalBusiness', 'CleaningService'],
   '@id': LOCAL_BUSINESS_ID,
   name: SITE_NAME,
-  url: SITE_URL,
-  image: absoluteUrl('/logo.png'),
   telephone: '+64-800-080-056',
   email: 'admin@epiccleaning.co.nz',
   description:
@@ -181,7 +179,6 @@ export const getLocalBusinessSchema = () => ({
       },
     },
   })),
-  sameAs: SAME_AS,
   parentOrganization: {
     '@id': ORGANIZATION_ID,
   },

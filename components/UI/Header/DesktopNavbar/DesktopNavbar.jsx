@@ -102,7 +102,7 @@ function DesktopNavbar() {
           >
             <li role="none" className={styles.viewAllItem}>
               <Link href={item.url} role="menuitem" className={styles.viewAllLink}>
-                View all {item.label}
+                {item.label}
               </Link>
             </li>
             {item.subLinks.map((subLink, subIndex) => (

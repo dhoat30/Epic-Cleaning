@@ -85,7 +85,7 @@ export default function MobileNavbar() {
           >
             <li className={styles.mobileViewAllItem}>
               <Link href={item.url} className={styles.mobileViewAllLink} onClick={handleDrawerClose}>
-                View all {item.label}
+                 {item.label}
               </Link>
             </li>
             {item.subLinks.map((subLink, subIndex) => (
