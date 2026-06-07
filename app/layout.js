@@ -1,7 +1,7 @@
 //import css file 
 import './globals.css'
 import './tokens.css'
-import { Work_Sans } from 'next/font/google'
+import { Work_Sans, Inter } from 'next/font/google'
 
 import ClientProvider from '@/components/Providers/ClientProvider';
 import JsonLd from '@/components/UI/Meta/JsonLd';
@@ -60,6 +60,13 @@ const work_sans = Work_Sans({
   preload: true
 })
 
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+  preload: true,
+})
+
 export default function RootLayout({ children }) {
   const GTM_ID = 'GTM-NDXM6D'
   const schemaGraph = [
@@ -71,7 +78,7 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <html lang="en-NZ" className={`${work_sans.variable}`}>
+    <html lang="en-NZ" className={`${work_sans.variable} ${inter.variable}`}>
       <Script
           id="gtm-script"
           strategy="lazyOnload" // or "lazyOnload" if you prefer

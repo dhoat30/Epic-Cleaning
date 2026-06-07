@@ -1,4 +1,4 @@
-"use client";
+
 import styles from "./HeroContent.module.scss";
 import React from "react";
 

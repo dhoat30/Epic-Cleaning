@@ -14,6 +14,7 @@ export default function AccreditationStrip({ accreditations }) {
         component="h2"
         variant="subtitle1"
         className={styles.accreditationTitle}
+        style={{ lineHeight: "110%", fontWeight: 600 }}
       >
         Certified & accredited
       </Typography>

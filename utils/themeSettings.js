@@ -61,14 +61,17 @@ export const theme = createTheme({
             fontWeight: 400,
             letterSpacing: "0.02rem",
             color: "var(--dark-on-surface)",
+                        fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
+
 
         },
         body1: {
+            fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
             fontWeight: 350,
-            letterSpacing: "0.02rem",
             color: "var( --dark-on-surface-variant)"
         },
         body2: {
+            fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
             fontWeight: 300,
             letterSpacing: "0.05rem",
         },
@@ -162,11 +165,12 @@ export const lightTheme = createTheme({
             color: "var(--light-on-surface)",
         },
         body1: {
-
+            fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
+            letterSpacing: "-0.02rem",
             color: "var( --light-on-surface-variant)"
         },
         body2: {
-
+            fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
         },
         subtitle1: {
             color: "var(--light-on-surface)",

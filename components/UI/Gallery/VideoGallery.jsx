@@ -1,18 +1,7 @@
-"use client";
 import styles from "./VideoGallery.module.scss";
-import React, { useState, useEffect } from "react";
-import BeforeAfterMasonry from "../BeforeAfterSlider/BeforeAfterMasonry";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import ReactPlayer from "react-player/youtube";
+import React from "react";
 
 export default function VideoGallery({ galleryData }) {
-  const [hasWindow, setHasWindow] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
   if (!galleryData) return null;
 
   return (
@@ -20,15 +9,15 @@ export default function VideoGallery({ galleryData }) {
       <div className="grid">
         {galleryData.map((item, index) => (
           <div key={index} className="image-container">
-            {hasWindow && (
-              <ReactPlayer
-                url={`https://www.youtube.com/watch?v=${item.youtube_id}`}
-                width="100%"
-                height="100%"
-                controls={true}
-                style={{ position: "absolute", top: 0, left: 0 }}
-              />
-            )}
+            <iframe
+              src={`https://www.youtube.com/embed/${item.youtube_id}`}
+              width="100%"
+              height="100%"
+              style={{ position: "absolute", top: 0, left: 0, border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={`Video ${index + 1}`}
+            />
           </div>
         ))}
       </div>

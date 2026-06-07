@@ -119,7 +119,7 @@ export const getOrganizationSchema = () => ({
 
 export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'CleaningService'],
+  '@type': 'LocalBusiness',
   '@id': LOCAL_BUSINESS_ID,
   name: SITE_NAME,
   telephone: '+64-800-080-056',
@@ -229,7 +229,7 @@ export const getWebPageSchema = ({
     about: {
       '@id': LOCAL_BUSINESS_ID,
     },
-    breadcrumb: getBreadcrumbListSchema(path),
+    breadcrumb: { ...getBreadcrumbListSchema(path), '@id': `${url}#${idSuffix}-breadcrumb` },
     inLanguage: 'en-NZ',
     ...(primaryImage && {
       primaryImageOfPage: {

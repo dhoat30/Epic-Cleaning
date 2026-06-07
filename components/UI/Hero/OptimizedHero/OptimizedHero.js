@@ -1,5 +1,4 @@
-import { Suspense } from "react";
-import Skeleton from "../../Skeleton/Skeleton";
+
 import HeroContent from "./HeroContent";
 import styles from './Hero.module.css'
 import HeroImage from "./HeroImage";
