@@ -171,6 +171,7 @@ export const getLocalBusinessSchema = () => ({
       '@type': 'Service',
       name,
       provider: {
+        '@type': 'LocalBusiness',
         '@id': LOCAL_BUSINESS_ID,
       },
       areaServed: {
@@ -180,6 +181,7 @@ export const getLocalBusinessSchema = () => ({
     },
   })),
   parentOrganization: {
+    '@type': 'Organization',
     '@id': ORGANIZATION_ID,
   },
 });
@@ -191,6 +193,7 @@ export const getWebsiteSchema = () => ({
   url: SITE_URL,
   name: SITE_NAME,
   publisher: {
+    '@type': 'Organization',
     '@id': ORGANIZATION_ID,
   },
   inLanguage: 'en-NZ',
@@ -224,9 +227,11 @@ export const getWebPageSchema = ({
     name,
     description,
     isPartOf: {
+      '@type': 'WebSite',
       '@id': WEBSITE_ID,
     },
     about: {
+      '@type': 'LocalBusiness',
       '@id': LOCAL_BUSINESS_ID,
     },
     breadcrumb: { ...getBreadcrumbListSchema(path), '@id': `${url}#${idSuffix}-breadcrumb` },
@@ -286,6 +291,7 @@ export const getServiceSchema = ({
     description,
     serviceType: serviceType || name,
     provider: {
+      '@type': 'LocalBusiness',
       '@id': LOCAL_BUSINESS_ID,
     },
     aggregateRating: {
@@ -359,6 +365,7 @@ export const getBlogPostingSchema = ({
       name: authorName,
     },
     publisher: {
+      '@type': 'Organization',
       '@id': ORGANIZATION_ID,
     },
   };
