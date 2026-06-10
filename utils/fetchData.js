@@ -68,10 +68,14 @@ export const getGoogleReviews = async () => {
             ...nextRevalidateOptions, // Pass the revalidate option here
         });
 
-        return response.data.reviews || [];
+        return {
+            reviews: response.data.reviews || [],
+            averageRating: response.data.averageRating ?? null,
+            totalReviewCount: response.data.totalReviewCount ?? null,
+        };
     } catch (error) {
         console.error('Failed to fetch Google reviews:', error?.message || error);
-        return [];
+        return { reviews: [], averageRating: null, totalReviewCount: null };
     }
 };
 

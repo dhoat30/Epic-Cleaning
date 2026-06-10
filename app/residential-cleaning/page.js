@@ -55,7 +55,7 @@ const googleReviewsData = await getGoogleReviews()
                 <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="residential-cleaning" />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
-                <GoogleReviewsCarousel data={googleReviewsData} />
+                <GoogleReviewsCarousel data={googleReviewsData.reviews} />
             </main>
             <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
         </>

@@ -73,7 +73,7 @@ export default async function Contact({ params }) {
             title={options.usp.section_title}
             description={options.usp.section_description}
           />
-          <GoogleReviewsCarousel data={googleReviewsData} />
+          <GoogleReviewsCarousel data={googleReviewsData.reviews} />
         </main>
         <Footer
           footerCtaData={options.footer_cta}

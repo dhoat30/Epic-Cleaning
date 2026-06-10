@@ -117,7 +117,7 @@ export const getOrganizationSchema = () => ({
   award: 'IICRC certified cleaning company',
 });
 
-export const getLocalBusinessSchema = () => ({
+export const getLocalBusinessSchema = ({ ratingValue, reviewCount } = {}) => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': LOCAL_BUSINESS_ID,
@@ -163,7 +163,10 @@ export const getLocalBusinessSchema = () => ({
   priceRange: '$$',
   aggregateRating: {
     '@type': 'AggregateRating',
-    ...DEFAULT_RATING,
+    ratingValue: ratingValue ?? DEFAULT_RATING.ratingValue,
+    reviewCount: reviewCount ?? DEFAULT_RATING.reviewCount,
+    bestRating: DEFAULT_RATING.bestRating,
+    worstRating: DEFAULT_RATING.worstRating,
   },
   makesOffer: CLEANING_SERVICE_TYPES.map((name) => ({
     '@type': 'Offer',
@@ -293,10 +296,6 @@ export const getServiceSchema = ({
     provider: {
       '@type': 'LocalBusiness',
       '@id': LOCAL_BUSINESS_ID,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ...DEFAULT_RATING,
     },
     areaServed: {
       '@type': 'AdministrativeArea',

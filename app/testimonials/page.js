@@ -46,7 +46,7 @@ export default async function Contact() {
             <Header />
             <main>
                 <BreadcrumbHero title={postData[0]?.acf.hero_section.title} description={postData[0]?.acf.hero_section.description} showBreadcrumb={false} />
-                <GoogleReviewGridLayout data={googleReviewsData} />
+                <GoogleReviewGridLayout data={googleReviewsData.reviews} />
                 <TechLogos data={options.clients_logos} />
                 <Layout sections={postData[0]?.acf?.sections} />
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />

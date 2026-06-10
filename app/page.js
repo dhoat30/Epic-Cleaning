@@ -98,7 +98,7 @@ export default async function Page() {
 
         <Layout sections={postData[0]?.acf?.sections} data={postData}/>
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
-        <GoogleReviewsCarousel data={googleReviewsData}/>
+        <GoogleReviewsCarousel data={googleReviewsData.reviews}/>
 
         <FaqAccordionSection title={options.faq.section_title} description={options.faq.section_description} qaData={options.faq.items} />
         
