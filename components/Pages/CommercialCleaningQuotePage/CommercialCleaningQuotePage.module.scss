@@ -1,0 +1,253 @@
+.page {
+  min-height: 100vh;
+  padding: 96px 0 40px 0;
+
+
+  @media (max-width: 1100px) {
+    padding: 48px 0;
+    background: var(--light-surface-container-lowest);
+  }
+
+  .container {
+    .heroGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      @media (max-width: 1100px) {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .contentColumn {
+        display: grid;
+        max-width: 760px;
+        justify-content: start;
+      
+        @media (max-width: 1100px) {
+          max-width: 860px;
+          margin: 0 auto;
+        }
+
+        span{ 
+          max-width: fit-content;
+        }
+
+        .benefitList {
+          display: grid;
+          gap: 24px;
+          grid-template-columns: 1fr 1fr;
+          @media(max-width: 1370px){ 
+            grid-template-columns: 1fr;
+          }
+          .benefitItem {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 18px;
+            align-items: center;
+
+            .checkIcon {
+              display: grid;
+              place-items: center;
+              width: 44px;
+              height: 44px;
+              border-radius: 50%;
+              background: var(--light-secondary);
+              color: var(--light-on-secondary);
+
+              svg {
+                width: 24px;
+                height: 24px;
+              }
+            }
+
+            .benefitTitle {
+             font-weight: 700;
+            }
+
+            .benefitDescription {
+          
+            }
+          }
+        }
+
+        .accreditationCard {
+          padding: 24px;
+          border: 1px solid var(--light-outline-variant);
+          border-radius: 8px;
+          background: color-mix(in srgb, var(--light-surface-container-low) 74%, white);
+
+          .accreditationTitle {
+            color: var(--light-primary);
+            font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+          }
+
+          .accreditationLogos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+
+            .accreditationLogo {
+              display: grid;
+              place-items: center;
+              min-width: 92px;
+              min-height: 58px;
+              padding: 10px 12px;
+              border: 1px solid color-mix(in srgb, var(--light-outline-variant) 72%, transparent);
+              border-radius: 8px;
+              background: var(--light-surface-container-lowest);
+
+              img {
+                width: auto;
+                max-width: 116px;
+                height: auto;
+                max-height: 42px;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+
+        .statsStrip {
+          flex-wrap: wrap;
+          padding-top: 26px;
+          border-top: 1px solid var(--light-outline-variant);
+
+          @media (max-width: 760px) {
+            grid-template-columns: 1fr;
+          }
+
+          span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--light-primary);
+            font-weight: 600;
+        
+            svg {
+              flex: 0 0 auto;
+              width: 24px;
+              height: 24px;
+              color: var(--light-secondary);
+                  position: relative; 
+            top: -1px; 
+            }
+          }
+        }
+      }
+
+      .formCard {
+        position: sticky;
+        top: 32px;
+        padding: 24px 40px;
+        border: 1px solid var(--light-outline-variant);
+        border-radius: 8px;
+        background: var(--light-surface-container-lowest);
+        box-shadow: 0 24px 70px color-mix(in srgb, var(--light-primary) 10%, transparent);
+
+        @media (max-width: 1100px) {
+          position: static;
+    width: 100%; 
+          margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+          padding: 28px 20px;
+        }
+
+        .formHeader {
+          margin-bottom: 28px;
+
+          .formTitle {
+        
+          }
+
+          .formDescription {
+       
+          }
+        }
+      }
+    }
+  }
+
+  .form {
+
+    .formGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+
+      @media (max-width: 620px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .submitButton {
+      margin-top: 6px;
+   
+    
+    }
+
+    .privacyNote {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--light-on-surface-variant);
+      font-size: 0.95rem;
+      line-height: 1.4;
+      text-align: center;
+
+      svg {
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .orDivider {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: center;
+      color: var(--light-on-surface-variant);
+      font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+      font-weight: 800;
+
+      &::before,
+      &::after {
+        content: "";
+        height: 1px;
+        background: var(--light-outline-variant);
+      }
+    }
+
+
+    .formTrustList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 22px;
+      color: var(--light-on-surface-variant);
+      font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: var(--light-secondary);
+      }
+    }
+  }
+}

@@ -17,6 +17,7 @@ import { headerLinks } from "@/utils/headerLinks";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
 import dynamic from "next/dynamic";
 
@@ -176,6 +177,8 @@ export default function MobileNavbar() {
               classes={{ root: styles.quoteButton }}
             >
               GET A QUOTE
+                                 <ArrowForwardRoundedIcon aria-hidden="true" />
+
             </Button>
           </Link>
         </Drawer>

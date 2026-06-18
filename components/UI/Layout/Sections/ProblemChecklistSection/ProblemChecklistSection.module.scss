@@ -1,0 +1,148 @@
+.section {
+  padding: 80px 0;
+  background: var(--light-surface-container-low);
+
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
+  .sectionHeader {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    text-align: center;
+
+    @media (max-width: 700px) {
+      margin-bottom: 32px;
+    }
+
+    .sectionTitle {
+      max-width: 900px;
+      margin: 16px auto 0;
+
+      h2 {
+        margin: 0;
+        color: var(--light-primary);
+        font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.2;
+
+        strong {
+          color: var(--light-secondary);
+          font-weight: inherit;
+        }
+
+        @media (max-width: 700px) {
+          font-size: 2rem;
+          line-height: 1.15;
+        }
+      }
+    }
+
+    .sectionDescription {
+      max-width: 960px;
+      margin: 16px auto 0;
+      color: var(--light-on-surface-variant);
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.35;
+
+      @media (max-width: 700px) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .contentGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    max-width: 1120px;
+    margin: 0 auto;
+    align-items: stretch;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+
+    .surfaceCard {
+      background: var(--light-surface-container-lowest);
+      border: 1px solid var(--light-outline-variant);
+      border-radius: 8px;
+      padding: 24px 16px;
+
+    
+    }
+
+    .checklistCard {
+      display: flex;
+      flex-direction: column;
+
+    
+
+      .checklist {
+      
+
+        li {
+          display: grid;
+          grid-template-columns: 20px 1fr;
+          gap: 8px;
+        
+          padding: 12px 0;
+          border-bottom: 1px solid var(--light-surface-container-high);
+      
+          svg {
+            width: 20px;
+            height: 20px;
+            color: var(--light-primary);
+            position: relative;
+            top: 2px;
+          }
+        }
+      }
+
+     
+    }
+
+    .sideCards {
+      display: grid;
+      gap: 16px;
+
+     
+    }
+  }
+
+  .calloutCard {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 24px;
+    align-items: center;
+    max-width: 1120px;
+    margin: 16px auto 0;
+    background: #F0F5F7; 
+    border: 1px solid var(--light-outline-variant);
+    border-radius: 8px;
+    padding: 32px;
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 24px;
+    }
+
+
+    .calloutContent {
+      .calloutLabel {
+        color: var(--light-primary);
+        font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+  
+    }
+  }
+}

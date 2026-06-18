@@ -1,6 +1,6 @@
 
 import HeroContent from "./HeroContent";
-import styles from './Hero.module.css'
+import styles from './Hero.module.scss'
 
 import Contact from '@/components/Pages/Contact/Contact';
 import ContactInfo from "../../Footer/ContactInfo";

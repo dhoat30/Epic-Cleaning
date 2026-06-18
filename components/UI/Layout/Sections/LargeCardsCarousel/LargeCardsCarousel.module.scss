@@ -1,0 +1,280 @@
+.section {
+  padding: 96px 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      color-mix(in srgb, var(--light-secondary) 12%, transparent),
+      transparent 32%
+    ),
+    var(--dark-surface-container-lowest);
+
+  @media (max-width: 900px) {
+    padding: 64px 0;
+  }
+
+  .container {
+  
+  }
+
+  .sectionHeader {
+
+    text-align: center;
+
+    .title {
+      h2 {
+        color: var(--dark-on-surface);
+        font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+        font-size: clamp(2.4rem, 5vw, 4.6rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: 0;
+
+        strong {
+          color: var(--light-secondary);
+          font-weight: inherit;
+        }
+      }
+    }
+
+    .description {
+
+      color: var(--dark-on-surface-variant);
+   
+
+     
+    }
+  }
+
+  .carousel {
+    display: grid;
+    gap: 32px;
+    width: 100vw;
+    margin-left: 50%;
+    padding-right: max(24px, calc((100vw - 1536px) / 2 + 24px));
+    padding-left: max(24px, calc((100vw - 1536px) / 2 + 24px));
+    transform: translateX(-50%);
+    min-width: 0;
+
+    .viewport {
+      overflow: hidden;
+
+      .track {
+        display: flex;
+        gap: 24px;
+        touch-action: pan-y pinch-zoom;
+
+        @media (max-width: 700px) {
+          gap: 16px;
+        }
+
+        .slide {
+          flex: 0 0 clamp(460px, calc((100vw - 168px) / 2.55), 650px);
+          min-width: 0;
+
+          @media (max-width: 1100px) {
+            flex-basis: 68vw;
+          }
+
+          @media (max-width: 700px) {
+            flex-basis: 86vw;
+          }
+
+          .cardLink {
+            display: block;
+            color: inherit;
+          }
+
+          .card {
+            position: relative;
+            min-height: 560px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--dark-outline-variant) 80%, transparent);
+            border-radius: 16px;
+            background: var(--dark-surface-container-low);
+            box-shadow: 0 24px 70px color-mix(in srgb, black 46%, transparent);
+            isolation: isolate;
+
+            @media (max-width: 1200px) {
+              min-height: 520px;
+            }
+
+            @media (max-width: 700px) {
+              min-height: 500px;
+            }
+
+            img {
+              object-fit: cover;
+              transition: transform 420ms ease;
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              z-index: 1;
+              background:
+                linear-gradient(
+                  180deg,
+                  color-mix(in srgb, black 6%, transparent) 0%,
+                  color-mix(in srgb, black 28%, transparent) 46%,
+                  color-mix(in srgb, black 82%, transparent) 100%
+                );
+              pointer-events: none;
+            }
+
+            &:hover {
+              img {
+                transform: scale(1.035);
+              }
+            }
+
+            .cardOverlay {
+              position: absolute;
+              inset: auto 0 0;
+              z-index: 2;
+              display: grid;
+              gap: 14px;
+              justify-items: start;
+              padding: 36px;
+              text-align: left;
+
+              @media (max-width: 700px) {
+                padding: 24px;
+              }
+
+              .cardNumber {
+                width: max-content;
+                color: var(--dark-on-surface-variant);
+                font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+                font-size: 0.8rem;
+                font-weight: 800;
+                letter-spacing: 0.14em;
+              }
+
+              .cardTitle {
+                max-width: 520px;
+                color: var(--dark-on-surface);
+                font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+                font-size: clamp(1.75rem, 2.7vw, 2.55rem);
+                font-weight: 800;
+                line-height: 1.08;
+                letter-spacing: 0;
+              }
+
+              .cardDescription {
+                max-width: 430px;
+                color: var(--dark-on-surface-variant);
+                font-family: var(--font-inter), "Segoe UI", sans-serif;
+                font-size: 1rem;
+                line-height: 1.55;
+
+                p {
+                  margin: 0;
+                }
+
+                strong {
+                  color: var(--dark-on-surface);
+                  font-weight: 800;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+   
+  }
+
+
+  .footerContainer {
+    width: 100vw;
+    margin-left: 50%;
+    padding-right: max(24px, calc((100vw - 1536px) / 2 + 24px));
+    padding-left: max(24px, calc((100vw - 1536px) / 2 + 24px));
+    transform: translateX(-50%);
+    min-width: 0;
+  }
+
+  .carouselFooter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+
+      @media (max-width: 700px) {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      // .dots {
+      //   display: flex;
+      //   flex: 1 1 auto;
+      //   flex-wrap: wrap;
+      //   gap: 8px;
+      //   min-width: 0;
+      //   max-width: 100%;
+      //   overflow: visible;
+     
+      //   .dot {
+      //     flex: 0 0 auto;
+      //     width: 28px;
+      //     height: 3px;
+      //     border: 0;
+      //     border-radius: 999px;
+      //     background: color-mix(in srgb, var(--dark-on-surface) 22%, transparent);
+      //     cursor: pointer;
+      //     transition:
+      //       background 180ms ease,
+      //       width 180ms ease;
+
+      //     &:hover {
+      //       background: color-mix(in srgb, var(--dark-on-surface) 44%, transparent);
+      //     }
+
+      //     &.dotSelected {
+      //       width: 48px;
+      //       background: var(--dark-on-surface);
+      //     }
+      //   }
+      // }
+
+      .arrows {
+        display: flex;
+        gap: 12px;
+        flex: 0 0 auto;
+        margin-left: auto;
+
+        // @media (max-width: 700px) {
+        //   margin-left: 0;
+        // }
+    
+        .arrowButton {
+          width: 48px;
+          height: 48px;
+          border: 1px solid color-mix(in srgb, var(--dark-on-surface) 28%, transparent);
+          color: var(--dark-on-surface);
+          background: color-mix(in srgb, var(--dark-on-surface) 8%, transparent);
+          transition:
+            background 180ms ease,
+            border-color 180ms ease,
+            transform 180ms ease;
+
+          &:hover {
+            border-color: color-mix(in srgb, var(--dark-on-surface) 56%, transparent);
+            background: color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
+            transform: translateY(-2px);
+          }
+
+          &:disabled {
+            color: color-mix(in srgb, var(--dark-on-surface) 28%, transparent);
+            border-color: color-mix(in srgb, var(--dark-on-surface) 12%, transparent);
+            background: transparent;
+            transform: none;
+          }
+        }
+      }
+    }
+}

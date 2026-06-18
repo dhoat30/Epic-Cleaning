@@ -3,15 +3,39 @@ import React from "react";
 import ZigZagCardsSection from "./Sections/ZigZagCardsSection";
 import RowSection from "./Sections/RowSection";
 import ServicesSection from "./Sections/ServicesSection";
-import ProcessSection from "./Sections/ProcessSection";
+import RegularProcess from "./Sections/Process/RegularProcess";
 import ProjectsSection from "./Sections/ProjectsSection";
+
 import ServiceTabs from "./Sections/ServiceTabs";
 import Packages from "./Sections/Packages";
-import FaqAccordionSection from "./Sections/FaqAccordionSection";
+import FaqAccordionSection from "./Sections/FaqAccordionSection/FaqAccordionSection";
 import ServiceChecklist from "./Sections/ServiceChecklist";
-export default function Layout({ sections, projectsData, data }) {
+import ProblemChecklistSection from "./Sections/ProblemChecklistSection/ProblemChecklistSection";
+import EditorialServices from "./Sections/EditorialServices/EditorialServices";
+import LargeCardsCarousel from "./Sections/LargeCardsCarousel/LargeCardsCarousel";
+import OptimizedHero from "../Hero/OptimizedHero/OptimizedHero";
+import TextRow from "./Sections/TextRow/TextRow";
+import TechLogos from "../TechLogos/TechLogos";
+import GoogleReviewsCarousel from "../GoogleReviews/GoogleReviewsCarousel";
+export default function Layout({ sections, projectsData, data, options, reviewsData }) {
   if (!sections) return null;
   const sectionsJSX = sections.map((section, index) => {
+    if (section.acf_fc_layout === "hero_section") {
+      return (
+        <React.Fragment key={index}>
+          <OptimizedHero data={section} heroUSP={options?.hero_usp} />
+        </React.Fragment>
+      );
+    }
+    if (section.acf_fc_layout === "text_row") {
+      return <TextRow key={index} title={section.title} description={section.description} />;
+    }
+    if(section.acf_fc_layout === "show_client_logos") { 
+      return  <TechLogos data={options.clients_logos} />
+    }
+     if(section.acf_fc_layout === "show_google_reviews") { 
+      return  <GoogleReviewsCarousel data={reviewsData}/>
+    }
     if (section.acf_fc_layout === "zigzag_cards") {
       return (
         <ZigZagCardsSection
@@ -23,7 +47,6 @@ export default function Layout({ sections, projectsData, data }) {
       );
     }
     if (section.acf_fc_layout === "row") {
-      console.log(section);
       return (
         <RowSection
           key={index}
@@ -60,11 +83,14 @@ export default function Layout({ sections, projectsData, data }) {
     }
     if (section.acf_fc_layout === "process") {
       return (
-        <ProcessSection
+        <RegularProcess
           key={index}
+          subtitle={section.subtitle}
           title={section.title}
           description={section.description}
           cards={section.cards}
+          ctaLink={section.cta_link}
+          ctaNote={section.cta_note || section.note}
         />
       );
     }
@@ -121,6 +147,41 @@ export default function Layout({ sections, projectsData, data }) {
           title={section.title}
           description={section.description}
           cards={section.items}
+        />
+      );
+    }
+    if (section.acf_fc_layout === "problem_checklist_section") {
+      return (
+        <ProblemChecklistSection
+          key={index}
+          subtitle={section.subtitle}
+          title={section.title}
+          description={section.description}
+          checklistCard={section.checklist_card}
+          topCard={section.top_card}
+          bottomCard={section.bottom_card}
+          pivotCard={section.pivot_card}
+        />
+      );
+    }
+    if (section.acf_fc_layout === "editorial_services_section") {
+      return (
+        <EditorialServices
+          key={index}
+          eyebrowText={section.eyebrow_text}
+          title={section.title}
+          description={section.description}
+          cards={section.cards}
+        />
+      );
+    }
+    if (section.acf_fc_layout === "large_cards_section") {
+      return (
+        <LargeCardsCarousel
+          key={index}
+          title={section.title}
+          description={section.description}
+          cards={section.cards}
         />
       );
     }

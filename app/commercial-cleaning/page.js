@@ -48,14 +48,15 @@ export default async function Contact({ params }) {
             <JsonLd data={jsonLd} idPrefix="commercial-archive-schema" />
             <Header />
             <main>
-                <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
-                <TechLogos data={options.clients_logos} />
-                <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="commercial-cleaning" />
-                <Layout sections={postData[0]?.acf?.sections} />
+               <Layout sections={postData[0]?.acf?.sections} options={options} reviewsData={googleReviewsData.reviews} />
+
+                {/* <ServicesCardsTemplate title={postData[0]?.acf.service_cards_section.title} description={postData[0]?.acf.service_cards_section.description} cards={allPosts} archivePageSlug="commercial-cleaning" /> */}
                 <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
-                <GoogleReviewsCarousel data={googleReviewsData.reviews} />
             </main>
-            <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
+            <Footer footerCtaData={{title: options.footer_cta.title, description: options.footer_cta.description, cta_link: { 
+                url: "/commercial-cleaning-quote", 
+                title: "GET YOUR FREE QUOTE"
+            }}} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} />
         </>
 
     )

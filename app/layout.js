@@ -1,10 +1,12 @@
 //import css file 
-import './globals.css'
+import './globals.scss'
 import './tokens.css'
-import { Work_Sans, Inter } from 'next/font/google'
+import { Montserrat, Inter } from 'next/font/google'
+import { Suspense } from 'react';
 
 import ClientProvider from '@/components/Providers/ClientProvider';
 import JsonLd from '@/components/UI/Meta/JsonLd';
+import NavigationProgress from '@/components/UI/NavigationProgress/NavigationProgress';
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_SOCIAL_IMAGE,
@@ -54,10 +56,10 @@ export const metadata = {
 
 // fonts settings
 
-const work_sans = Work_Sans({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-work-sans',
+  variable: '--font-montserrat',
   preload: true
 })
 
@@ -83,7 +85,7 @@ export default async function RootLayout({ children }) {
 
 
   return (
-    <html lang="en-NZ" className={`${work_sans.variable} ${inter.variable}`}>
+    <html lang="en-NZ" className={`${montserrat.variable} ${inter.variable}`}>
       <Script
           id="gtm-script"
           strategy="lazyOnload" // or "lazyOnload" if you prefer
@@ -114,6 +116,9 @@ export default async function RootLayout({ children }) {
       <ClientProvider>
           {children}
         </ClientProvider>
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
 
       </body>
     </html>

@@ -1,0 +1,203 @@
+.section {
+  padding: 88px 0;
+  background: var(--light-surface-container-lowest);
+
+  @media (max-width: 900px) {
+    padding: 56px 0;
+  }
+
+  .container {
+    display: grid;
+    gap: 48px;
+  }
+
+  .sectionHeader {
+    max-width: 840px;
+
+    .title {
+
+    }
+
+    .description {
+      color: var(--light-on-surface-variant);
+   
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1fr);
+    gap: 40px;
+    align-items: start;
+
+    @media (max-width: 1000px) {
+      grid-template-columns: 1fr;
+    }
+
+    .imageColumn {
+      position: sticky;
+      top: 96px;
+
+      @media (max-width: 1000px) {
+        display: none;
+      }
+
+      .imageWrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--light-surface-container);
+        box-shadow: 0 24px 60px color-mix(in srgb, var(--light-primary) 12%, transparent);
+
+        img {
+          object-fit: cover;
+        }
+      }
+
+      .imagePlaceholder {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border: 1px solid var(--light-outline-variant);
+        border-radius: 6px;
+        background:
+          linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--light-primary) 8%, transparent),
+            color-mix(in srgb, var(--light-secondary) 8%, transparent)
+          ),
+          var(--light-surface-container-low);
+        color: var(--light-on-surface-variant);
+        font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+    }
+
+    .accordionColumn {
+      display: grid;
+      border-top: 1px solid var(--light-outline-variant);
+      
+      .accordionItem {
+        overflow: hidden;
+        border-bottom: 1px solid var(--light-outline-variant);
+        transition: border-color 180ms ease;
+        &:hover {
+                 border-bottom: 2px solid var(--light-secondary);
+        }
+        &.active {
+                 border-bottom: 2px solid var(--light-secondary);
+          .accordionButton {
+            color: var(--light-secondary);
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .accordionButton {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          width: 100%;
+          padding: 28px 0;
+          border: 0;
+          background: transparent;
+          color: var(--light-primary);
+          cursor: pointer;
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 1.35rem;
+          font-weight: 800;
+          line-height: 1.25;
+          text-align: left;
+          letter-spacing: 0;
+          transition: color 180ms ease;
+          svg {
+            flex: 0 0 auto;
+            color: var(--light-primary);
+            transition: transform 180ms ease;
+             &:hover{ 
+                      color: var(--light-secondary);
+          }
+          }
+          &:hover{ 
+                      color: var(--light-secondary);
+          }
+        }
+
+        .accordionPanel {
+          padding: 0 0 28px;
+
+          .cardDescription {
+            color: var(--light-on-surface-variant);
+            font-family: var(--font-inter), "Segoe UI", sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            p {
+              margin: 0 0 16px;
+            }
+
+            ul {
+              display: grid;
+              gap: 8px;
+              margin: 16px 0 0;
+              padding-left: 18px;
+              
+            }
+
+            li {
+              padding-left: 4px;
+              position: relative; 
+              &::before{ 
+                content: "";
+                border-radius: 50%;
+                position: absolute; 
+                width: 8px; 
+                height: 8px; 
+                background: var(--light-secondary); 
+                top: calc(50% - 1px); 
+                left: -12px; 
+                transform: translate(0, -50%);
+              }
+            }
+
+            strong {
+              color: var(--light-primary);
+              font-weight: 800;
+            }
+          }
+
+          .cardLink {
+            display: inline-flex;
+            margin-top: 18px;
+          }
+
+          .mobileImageWrapper {
+            display: none;
+
+            @media (max-width: 1000px) {
+              display: block;
+              position: relative;
+              width: 100%;
+              aspect-ratio: 1 / 1;
+              margin-top: 24px;
+              overflow: hidden;
+              border-radius: 6px;
+              background: var(--light-surface-container);
+            }
+
+            img {
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+}

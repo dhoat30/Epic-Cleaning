@@ -51,9 +51,10 @@ export default function CustomAccordion({ qaData }) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="body1" component="p" className={styles.answer}>
-            {item.answer}
-          </Typography>
+          <div
+            className={styles.answer}
+            dangerouslySetInnerHTML={{ __html: item.answer }}
+          />
         </AccordionDetails>
       </Accordion>
     );

@@ -1,37 +1,173 @@
 .section {
-padding: 56px 0;
+  padding: 64px 0;
+  background: var(--light-surface-container-low);
+
   @media (max-width: 900px) {
-    padding: 24px 0;
+    padding: 48px 0;
   }
-  :global(.wrapper) {
-    padding: 120px 0;
-    background: linear-gradient(97deg, #147ae7 2.05%, #000872 98.81%);
-    border-radius: 32px;
-    @media (max-width: 900px) {
-      padding: 56px 16px;
-    }
-    :global(.content-wrapper) {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    :global(.title) {
-      font-weight: 600;
-    }
-    :global(.button-wrapper) {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
+.description{ 
+  @media(max-width:600px){ 
+    font-size: 1.2rem;
   }
 }
+  .container {
+    .wrapper {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 92px 64px 72px;
+      border: 1px solid color-mix(in srgb, var(--dark-on-surface) 12%, transparent);
+      border-radius: 32px;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          color-mix(in srgb, var(--light-secondary) 14%, transparent),
+          transparent 38%
+        ),
+        linear-gradient(
+          145deg,
+          color-mix(in srgb, var(--dark-surface-container-lowest) 84%, var(--light-primary)),
+          color-mix(in srgb, var(--dark-surface-container-lowest) 92%, var(--light-secondary))
+        );
+      box-shadow: 0 28px 80px color-mix(in srgb, var(--light-primary) 8%, transparent);
 
-.button {
-  background: white !important;
-  color: var(--dark-on-primary) !important;
+      @media (max-width: 900px) {
+        padding: 56px 24px 48px;
+        border-radius: 20px;
+      }
 
-  &:hover {
-    background: #eaeaea !important;
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(
+            90deg,
+            color-mix(in srgb, var(--dark-on-surface) 8%, transparent) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            color-mix(in srgb, var(--dark-on-surface) 8%, transparent) 1px,
+            transparent 1px
+          );
+        background-size: 56px 56px;
+        mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+        opacity: 0.18;
+      }
+
+      .contentWrapper {
+        display: grid;
+        justify-items: center;
+        max-width: 980px;
+        margin: 0 auto;
+        text-align: center;
+
+        .title {
+          h2{ 
+  
+          color: var(--dark-on-surface);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: clamp(2.5rem, 5vw, 4.3rem);
+          font-weight: 800;
+          line-height: 1.02;
+          letter-spacing: 0;
+          }
+        
+
+          span {
+            color: var(--light-secondary);
+          }
+        }
+
+      
+        .buttonWrapper {
+          flex-wrap: wrap;
+       
+          @media (max-width: 560px) {
+            width: 100%;
+          }
+
+          a {
+            @media (max-width: 560px) {
+              width: 100%;
+            }
+          }
+
+          .button {
+            background: var(--dark-on-surface);
+            color: var(--dark-surface-container-lowest);
+            box-shadow: 0 12px 28px color-mix(in srgb, black 18%, transparent);
+
+            &:hover {
+              background: color-mix(in srgb, var(--dark-on-surface) 92%, var(--light-secondary));
+            }
+
+            @media (max-width: 560px) {
+              width: 100%;
+            }
+          }
+
+          .phoneLink {
+            display: inline-flex;
+          }
+
+          .phoneButton {
+            border-color: color-mix(in srgb, var(--dark-on-surface) 40%, transparent);
+            color: var(--dark-on-surface);
+            background: color-mix(in srgb, var(--dark-on-surface) 8%, transparent);
+            backdrop-filter: blur(10px);
+
+            &:hover {
+              border-color: var(--dark-on-surface);
+              background: color-mix(in srgb, var(--dark-on-surface) 10%, transparent);
+            }
+
+            @media (max-width: 560px) {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .trustStrip {
+        flex-wrap: wrap;
+  
+        gap: 28px 48px;
+        max-width: 1120px;
+        margin: 52px auto 0;
+        padding-top: 34px;
+        border-top: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
+
+        @media (max-width: 700px) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+          margin-top: 40px;
+          padding-top: 28px;
+        }
+
+        @media (max-width: 460px) {
+          grid-template-columns: 1fr;
+        }
+
+        .trustItem {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          color: color-mix(in srgb, var(--dark-on-surface) 70%, transparent);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 1.2;
+
+          svg {
+            width: 24px;
+            height: 24px;
+            color: var(--light-secondary);
+          }
+        }
+      }
+    }
   }
 }

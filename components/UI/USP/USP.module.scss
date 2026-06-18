@@ -1,67 +1,199 @@
 .section {
-
-  background: var(--dark-secondary-container);
-  padding: 80px 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 96px 0;
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      color-mix(in srgb, var(--light-secondary) 14%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--dark-secondary-container) 88%, black),
+      color-mix(in srgb, var(--dark-surface-container-lowest) 86%, var(--light-primary))
+    );
 
   @media (max-width: 900px) {
-    padding: 40px 0;
+    padding: 64px 0;
   }
-  :global(.container) {
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 24px;
+    z-index: -1;
+    border: 1px solid color-mix(in srgb, var(--dark-on-surface) 8%, transparent);
+    pointer-events: none;
+
+    @media (max-width: 700px) {
+      inset: 12px;
+    }
+  }
+
+  .container {
     display: grid;
-    grid-template-columns: 500px 1fr;
-    gap: 80px;
+    grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.35fr);
+    gap: 64px;
     align-items: start;
-    @media (max-width: 1300px) {
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
       gap: 40px;
     }
-    @media (max-width: 1250px) {
-      gap: 24px;
-      grid-template-columns: 1fr;
+  }
+
+  .titleWrapper {
+    max-width: 560px;
+
+    @media (min-width: 1201px) {
+      position: sticky;
+      top: 112px;
     }
-    :global(.title-wrapper) {
-      @media (min-width: 1250px) {
-        position: sticky;
-        top: 100px;
-      }
-      :global(.title) {
-        color: var(--dark-on-surface);
-      }
-      :global(.description) {
-        color: var(--dark-on-surface-variant);
-      }
+
+    .title {
+      color: var(--dark-on-surface);
+      font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+      font-size: clamp(2.7rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: 0;
     }
-    :global(.cards-wrapper) {
+
+    .description {
+      max-width: 500px;
+      margin-top: 24px;
+      color: color-mix(in srgb, var(--dark-on-surface) 78%, transparent);
+      font-family: var(--font-inter), "Segoe UI", sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .statsWrapper {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      @media (max-width: 900px) {
-        gap: 16px;
-      }
-      @media (max-width: 650px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 420px;
+      margin-top: 36px;
+
+      @media (max-width: 520px) {
         grid-template-columns: 1fr;
       }
-      :global(.card) {
-        border-radius: 12px;
-        border: 1px solid #b3f1be;
-        background: var(
-          --material-theme-sys-dark-medium-contrast-on-secondary-fixed-variant,
-          #003f1d
-        );
-        padding: 16px;
-        :global(.title) {
+
+      .stat {
+        padding: 20px;
+        border: 1px solid color-mix(in srgb, var(--dark-on-surface) 16%, transparent);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--dark-surface-container-low) 42%, transparent);
+        box-shadow: inset 0 1px 0 color-mix(in srgb, var(--dark-on-surface) 10%, transparent);
+
+        .statValue {
+          color: var(--dark-on-surface);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: clamp(2.4rem, 4vw, 3.4rem);
+          font-weight: 800;
+          line-height: 0.95;
+          letter-spacing: 0;
         }
-        :global(.image) {
-          border-radius: 50%;
+
+        .statLabel {
+          margin-top: 10px;
+          color: color-mix(in srgb, var(--dark-on-surface) 74%, transparent);
+          font-family: var(--font-inter), "Segoe UI", sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          line-height: 1.3;
         }
       }
     }
-    :global(.stats-wrapper) {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      :global(.stat) {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 8px 16px;
+  }
+
+  .cardsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      display: grid;
+      align-content: start;
+      min-height: 292px;
+      padding: 28px;
+      border: 1px solid color-mix(in srgb, var(--dark-on-surface) 18%, transparent);
+      border-radius: 8px;
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--dark-on-surface) 7%, transparent),
+          color-mix(in srgb, var(--dark-surface-container-lowest) 10%, transparent)
+        ),
+        color-mix(in srgb, var(--dark-surface-container-low) 52%, transparent);
+      box-shadow:
+        0 24px 64px color-mix(in srgb, black 18%, transparent),
+        inset 0 1px 0 color-mix(in srgb, var(--dark-on-surface) 12%, transparent);
+      transition:
+        border-color 180ms ease,
+        transform 180ms ease,
+        background 180ms ease;
+
+      @media (max-width: 700px) {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      &:hover {
+        border-color: color-mix(in srgb, var(--light-secondary) 70%, transparent);
+        background:
+          linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--light-secondary) 10%, transparent),
+            color-mix(in srgb, var(--dark-surface-container-lowest) 12%, transparent)
+          ),
+          color-mix(in srgb, var(--dark-surface-container-low) 58%, transparent);
+        transform: translateY(-3px);
+      }
+
+      .iconWrapper {
+        display: grid;
+        place-items: center;
+        width: 76px;
+        height: 76px;
+        border: 1px solid color-mix(in srgb, var(--dark-on-surface) 18%, transparent);
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--light-secondary) 72%, white);
+        box-shadow: 0 12px 28px color-mix(in srgb, black 18%, transparent);
+
+        .image {
+          width: 48px;
+          height: 48px;
+          object-fit: contain;
+        }
+      }
+
+      .content {
+        margin-top: 28px;
+
+        .cardTitle {
+          color: var(--dark-on-surface);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 1.35rem;
+          font-weight: 800;
+          line-height: 1.22;
+          letter-spacing: 0;
+        }
+
+        .cardDescription {
+          margin-top: 12px;
+          color: color-mix(in srgb, var(--dark-on-surface) 76%, transparent);
+          font-family: var(--font-inter), "Segoe UI", sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 1.58;
+        }
       }
     }
   }

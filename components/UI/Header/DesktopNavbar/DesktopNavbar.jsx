@@ -13,6 +13,7 @@ import { headerLinks } from "@/utils/headerLinks";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import Paper from "@mui/material/Paper";
 import { usePathname } from "next/navigation";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
 function DesktopNavbar() {
   const [showMenu, setShowMenu] = useState(-1);
@@ -143,8 +144,9 @@ function DesktopNavbar() {
                 {menuItems}
               </Box>
               <Link href="/get-a-quote">
-                <Button size="large" variant="contained">
+                <Button size="large" variant="contained" >
                   GET A QUOTE
+                   <ArrowForwardRoundedIcon aria-hidden="true" />
                 </Button>
               </Link>
             </div>

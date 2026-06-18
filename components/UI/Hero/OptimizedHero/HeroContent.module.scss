@@ -1,79 +1,88 @@
 .div {
-  :global(.title) {
-    margin: 8px 0 16px 0;
+  display: block;
+}
 
-    @media (max-width: 1200px) {
-      max-width: 760px;
-    }
-  }
+.title {
+  margin: 8px 0 16px 0;
 
-  :global(.single-button-wrapper) {
-    margin-top: 24px;
-    button {
-      width: 100%;
-      max-width: 500px;
-    }
+  @media (max-width: 1200px) {
+    max-width: 760px;
   }
-  :global(.hero-usp-wrapper) {
-    :global(.text-usp-wrapper) {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-    :global(.image-usp-wrapper) {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
+}
+
+.description {
+  display: block;
+}
+
+.singleButtonWrapper {
+  margin-top: 24px;
+
+  button {
+    width: 100%;
+    max-width: 500px;
   }
+}
+
+.heroUspWrapper {
+  display: block;
+  container-type: inline-size;
+}
+
+.textUspWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.imageUspWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
 
 .uspItem {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  background: var(--light-primary);
-  border-radius: 100px;
+  color: var(--light-primary);
+
+  &:not(:last-child)::after {
+    content: "";
+    width: 1px;
+    height: 18px;
+    margin-left: 12px;
+    background: var(--light-outline);
+  }
+}
+
+@container (max-width: 560px) {
+  .textUspWrapper {
+    row-gap: 8px;
+  }
+
+  .uspItem::after {
+    display: none;
+  }
 }
 
 .compact {
-  :global(.subtitle) {
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    padding: 5px 10px;
-    border: 1px solid var(--light-primary);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--light-primary) 8%, transparent);
-
-    &::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      margin-right: 6px;
-      border-radius: 50%;
-      background: var(--light-primary);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--light-primary) 15%, transparent);
-    }
-  }
-
-  :global(.title) {
+  .title {
     margin: 14px 0 12px;
   }
 
-  :global(.description) {
+  .description {
     display: block;
     max-width: 560px;
   }
 
-  :global(.hero-button-wrapper) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .heroButtonWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
 
@@ -82,37 +91,70 @@
     }
 
     button {
-      width: 100%;
+      white-space: nowrap;
+    }
+
+    .phoneButton {
+      width: auto;
     }
   }
 
-  :global(.phone-button) {
+  .phoneButton {
     align-items: center;
     justify-content: center;
     gap: 8px;
     min-height: 42px;
-    padding: 8px 20px;
-    border: 1px solid var(--light-primary);
-    border-radius: 999px;
-    transition: background-color 150ms ease, color 150ms ease;
-
-    &:hover,
-    &:focus-visible {
-      background: color-mix(in srgb, var(--light-primary) 10%, transparent);
-      outline: none;
-    }
+    padding: 8px 10px;
+    border: 0;
+    background: transparent;
+    color: var(--light-primary);
+    font-weight: 700;
   }
 
-  :global(.hero-usp-wrapper) {
-    :global(.text-usp-wrapper) {
-      margin-top: 16px;
-      gap: 8px 24px;
+  .textUspWrapper {
+    margin-top: 16px;
+    gap: 8px 12px;
+  }
+
+  @media (max-width: 1200px) {
+    text-align: center;
+
+    .title {
+      max-width: none;
+    }
+
+    .description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .heroButtonWrapper {
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+
+    .singleButtonWrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .textUspWrapper,
+    .imageUspWrapper {
+      justify-content: center;
     }
   }
 
   @media (max-width: 600px) {
-    :global(.hero-button-wrapper) {
-      grid-template-columns: 1fr;
+    .heroButtonWrapper {
+      flex-direction: column;
+      align-items: stretch;
+
+      button,
+      .phoneButton {
+        width: 100%;
+      }
     }
   }
 }

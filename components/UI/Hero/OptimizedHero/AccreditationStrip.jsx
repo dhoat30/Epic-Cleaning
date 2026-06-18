@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
-import styles from "./Hero.module.css";
+import styles from "./Hero.module.scss";
 import Container from "@mui/material/Container";
 export default function AccreditationStrip({ accreditations }) {
   if (!accreditations?.length) return null;

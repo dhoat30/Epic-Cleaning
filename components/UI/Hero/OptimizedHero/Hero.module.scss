@@ -1,0 +1,163 @@
+.heroSection {
+  background: var(--light-surface-container-low);
+  padding-top: 120px;
+  padding-bottom: 32px;
+
+  @media (max-width: 1200px) {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  @media (max-width: 600px) {
+    padding-top: 80px;
+    padding-bottom: 24px;
+  }
+
+  .container {
+    align-items: center;
+    gap: 40px;
+    display: grid;
+    grid-template-columns: minmax(380px, 0.8fr) minmax(0, 1.2fr);
+
+    @media (max-width: 1200px) {
+      height: auto;
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.heroContent {
+  padding-block: 24px;
+
+  @media (max-width: 1200px) {
+    padding-block: 0;
+  }
+}
+
+.heroMedia {
+  width: 100%;
+}
+
+.accreditationStrip {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  align-items: center;
+  gap: 32px;
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border: 1px solid var(--light-outline-variant);
+  border-radius: 14px;
+  background: var(--light-surface-container-lowest);
+  padding-left: 32px;
+  padding-right: 32px;
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 24px;
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    margin-top: 24px;
+  }
+   @media(max-width: 370px ){ 
+       padding-left: 8px;
+  padding-right: 8px;
+      }
+
+  .accreditationTitle {
+    line-height: 120%;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    max-width: 122px;
+
+    @media (max-width: 1200px) {
+      max-width: none;
+
+      br {
+        display: none;
+      }
+    }
+
+    @media (max-width: 862px) {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+
+  .accreditationLogos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    @media (max-width: 862px) {
+      justify-content: center;
+      
+    }
+ @media (max-width: 600px) {
+    gap: 16px;
+      
+    }
+    .accreditationItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 0;
+      text-align: center;
+    @media(max-width: 370px ){ 
+      gap: 4px;
+      }
+      img {
+        width: auto;
+        max-width: 130px;
+        height: 36px;
+        object-fit: contain;
+           @media(max-width: 370px ){ 
+         height: 32px;
+      }
+      }
+   
+
+    }
+  }
+}
+
+.contactHeroSection {
+  background: var(--light-surface-container-low);
+  padding-top: 120px;
+  padding-bottom: 80px;
+
+  @media (max-width: 1200px) {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .container {
+    align-items: start;
+    gap: 56px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 600px 1fr;
+
+    @media (max-width: 1200px) {
+      height: auto;
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+  }
+}

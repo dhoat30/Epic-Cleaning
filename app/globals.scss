@@ -7,7 +7,7 @@
 body {
   box-sizing: border-box;
   background: var(--light-surface-container-low);
-  font-family: var(--font-inter), var(--font-work-sans), "Segoe UI", sans-serif;
+  font-family: var(--font-inter), var(--font-montserrat), "Segoe UI", sans-serif;
 }
 
 a {
@@ -17,15 +17,93 @@ ul {
   list-style: none !important;
 }
 
-.h1 {
+.heading1 {
+h1{ 
+    margin: 0;
+  font-weight: 800 !important;
+  font-family: var(--font-montserrat), Segoe UI, sans-serif;
+  font-size: 2.7rem;
+  line-height: 120%;
+  color: var(--light-primary);
+
+  strong{
+    font-weight: inherit;
+    color:var(--light-secondary);
+  }
+  @media(max-width: 600px) {
+    font-size: 1.8rem;
+      line-height: 110%;
+
+  }
+}
+
+}
+
+.heading2 {
+  h2{ 
   margin: 0;
-  font-weight: 600;
-  letter-spacing: 0.05rem;
-  color: var(--dark-on-surface);
-  font-family: var(--font-work-sans), Segoe UI, sans-serif;
+  font-weight: 800 !important;
+  font-family: var(--font-montserrat), Segoe UI, sans-serif;
   font-size: 3rem;
-  line-height: 1.167;
-  color: var(--white);
+  line-height: 120%;
+  color: var(--light-primary);
+  strong{
+    font-weight: inherit;
+    color:var(--light-secondary);
+  }
+    @media(max-width: 600px) {
+    font-size: 2.3rem;
+      line-height: 110%;
+
+  }
+  }
+}
+
+.heading5{ 
+
+    margin: 0;
+  font-weight: 400 ;
+  color: var(--light-on-surface-variant);
+  font-family: var(--font-inter), Segoe UI, sans-serif;
+  font-size: 1.4rem;
+  line-height: 140%;
+
+  strong{
+    font-weight: inherit;
+    color:var(--light-primary);
+    font-weight: 700;
+  }
+  a{
+    font-weight: 600;
+    
+    color:var(--light-primary);
+    &:hover { 
+      text-decoration: underline;
+    }
+  }
+
+}
+.heading6 { 
+    margin: 0;
+  font-weight: 400 ;
+  color: var(--light-on-surface-variant);
+  font-family: var(--font-inter), Segoe UI, sans-serif;
+  font-size: 1.2rem;
+  line-height: 140%;
+  strong{
+    font-weight: inherit;
+    color:var(--light-on-surface);
+    font-weight: 700;
+  }
+  a{
+    font-weight: 600;
+    
+    color:var(--light-primary);
+    &:hover { 
+      text-decoration: underline;
+    }
+  }
+
 }
 
 .bold {
@@ -37,6 +115,65 @@ ul {
   }
 }
 
+
+.text-center{ 
+  text-align: center;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 14px 20px 36px;
+  border: 1px solid var(--light-secondary);
+  border-radius: 999px;
+  color: var(--light-secondary);
+  background: color-mix(in srgb, var(--light-secondary-container) 45%, transparent);
+  font-family: var(--font-montserrat), Segoe UI, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  margin-bottom: 16px;
+}
+.section-eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.3;
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}
+.section-eyebrow::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+}
+
+.section-eyebrow-dark {
+  border: 1px solid white;
+  color: white;
+  background: color-mix(in srgb, var(--dark-primary-container) 45%, transparent);
+  &::before {
+  background: currentColor;
+  opacity: 0.3;
+}
+  &::after{ 
+  background: currentColor;
+  
+  }
+}
 /* container  */
 .max-width-lg {
   max-width: 900px;
@@ -271,9 +408,8 @@ ul {
   margin: 8px 0 8px 0;
   font-weight: 400;
   color: var(--light-on-surface-variant);
-  font-family: var(--font-work-sans), Segoe UI, sans-serif;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .body1 strong {
   font-weight: 600 !important;
@@ -301,7 +437,7 @@ ul {
 .body2 {
   font-weight: 400;
   color: var(--light-on-surface-variant);
-  font-family: var(--font-work-sans), Segoe UI, sans-serif;
+  font-family: var(--font-montserrat), Segoe UI, sans-serif;
   font-size: 0.9rem;
 }
 strong {
@@ -312,8 +448,24 @@ strong {
 .flex {
   display: flex;
 }
+.inline-flex {
+  display: inline-flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.grid {
+  display: grid !important;
+}
+.align-start{ 
+  align-items: start;
+}
 .align-center {
   align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .justify-center {
   justify-content: center;
@@ -327,6 +479,36 @@ strong {
 .gap-8 {
   gap: 8px;
 }
+.gap-16 {
+  gap: 16px;
+}
+.gap-24 {
+  gap: 24px;
+}
+.gap-32 {
+  gap: 32px;
+}
+.gap-40 {
+  gap: 40px;
+}
+.gap-48 {
+  gap: 48px;
+}
+.gap-56 {
+  gap: 56px;
+}
+.gap-64 {
+  gap: 64px;
+}
+.gap-72 {
+  gap: 72px;
+}
+.gap-80 {
+  gap: 80px;
+}
+
+
+
 
 
 

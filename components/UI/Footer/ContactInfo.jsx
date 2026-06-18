@@ -9,10 +9,8 @@ export default function ContactInfo({ contactInfo, className }) {
   if (contactInfo.info.length === 0) return null;
 
   return (
-    <div className={`${styles.container} ${className || ""}`}>
-      <Typography variant="overline" component="p" className={styles.heading}>
-        Contact
-      </Typography>
+    <div className={`${styles.container} flex flex-column ${className || ""}`}>
+     
       {contactInfo.info.map((info, index) => (
         <Link href={info.url} key={index} className={styles.infoRow}>
           <span className={styles.iconWrapper}>

@@ -1,50 +1,91 @@
 .paperStyle {
-padding: 8px 0;
-  background: var(--dark-primary-container);
-  :global(.content-wrapper) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    @media (max-width: 750px) {
-      gap: 8px;
-    }
-    span {
-      color: var(--dark-on-surface);
-      font-weight: 300;
+    background: color-mix(in srgb, var(--dark-surface-container-lowest) 88%, var(--light-primary));
+  border-top: 1px solid var(--dark-outline-variant); 
+  .contentWrapper {
+   padding-top: 12px; 
+   padding-bottom: 12px;
+
+   
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      gap: 16px;
+      justify-content: center;
+      padding: 24px;
       text-align: center;
     }
-    :global(.copyright-wrapper) {
-      display: flex;
-      flex-wrap: wrap;
-      a {
-        &:hover {
-          text-decoration: underline;
-          color: white;
+
+    @media (max-width: 560px) {
+      border-radius: 12px;
+    }
+
+    span {
+      color: color-mix(in srgb, var(--dark-on-surface) 68%, transparent);
+   
+      line-height: 1.4;
+    }
+
+    .copyrightWrapper {
+      gap: 0;
+
+      @media (max-width: 900px) {
+        justify-content: center;
+        row-gap: 4px;
+      }
+
+      .creditLink {
+        display: inline-flex;
+        align-items: center;
+        color: inherit;
+
+        &::before {
+          content: "";
+          width: 3px;
+          height: 3px;
+          margin: 0 16px;
+          border-radius: 50%;
+          background: color-mix(in srgb, var(--dark-on-surface) 28%, transparent);
         }
-        @media (min-width: 620px) {
-          &::before {
-            content: "|";
-            margin: 0 8px;
+
+        strong {
+          color: var(--light-secondary);
+          font-weight: 800;
+        }
+
+        &:hover {
+          span {
             color: var(--dark-on-surface);
+          }
+        }
+
+        @media (max-width: 620px) {
+          &::before {
+            display: none;
           }
         }
       }
     }
-    :global(.policy-links) {
-      display: flex;
-      flex-wrap: wrap;
-      a {
-        &::after {
-          content: "|";
-          margin: 0 8px;
-          color: var(--dark-on-surface);
+
+    .policyLinks {
+      gap: 28px;
+      flex: 0 0 auto;
+
+      @media (max-width: 900px) {
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .policyLink {
+        display: inline-flex;
+        align-items: center;
+
+        span {
+          transition: color 180ms ease;
         }
-        /* not the last element  */
-        &:last-child {
-          &::after {
-            content: "";
+
+        &:hover {
+          span {
+            color: var(--dark-on-surface);
           }
         }
       }

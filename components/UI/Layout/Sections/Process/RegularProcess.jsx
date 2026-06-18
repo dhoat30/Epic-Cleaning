@@ -1,61 +1,73 @@
-"use client";
 import React from "react";
 import styles from "./RegularProcess.module.scss";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { theme } from "@/utils/themeSettings";
-import { ThemeProvider } from "@mui/material/styles";
-export default function RegularProcess({ title, description, cards }) {
+import Button from "@mui/material/Button";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Link from "next/link";
+
+export default function RegularProcess({
+  subtitle,
+  title,
+  description,
+  cards,
+  ctaLink,
+  ctaNote,
+}) {
   if (!cards) return null;
 
-  const stepCards = cards.map((item, index) => {
-    return (
-      <div className="step-wrapper" key={index}>
-        <div className="title">
-          <div className="step-title-number-wrapper">
-            <div className="step-number">{index + 1}</div>
-            <Typography
-              variant="h6"
-              component="h3"
-              color="var(--dark-on-secondary-container)"
-            >
-              {item.title}
-            </Typography>
-          </div>
-
-          <div className="border"></div>
-        </div>
-        <div className="content">
-          <Typography
-            variant="body1"
-            component="div"
-            className="description"
-            dangerouslySetInnerHTML={{ __html: item.description }}
-          ></Typography>
-        </div>
-      </div>
-    );
-  });
   return (
-    <ThemeProvider theme={theme}>
-      <Section>
-        <Container maxWidth="lg" className="container">
-          <div className="title-wrapper">
-            <Typography variant="h2" component="h2" className="title">
+    <Section>
+      <Container maxWidth="xl" className={styles.container}>
+        <div className={styles.titleWrapper}>
+        <div className={"section-eyebrow section-eyebrow-dark"}>How it works</div>
+          {title && (
+            <Typography variant="h2" component="h2" className={`${styles.title } mt-16`} color={"var(--dark-on-surface)"}>
               {title}
             </Typography>
+          )}
+          {description && (
             <div
-              className="description body1"
+              className={`${styles.description} heading5 mt-16`} 
               dangerouslySetInnerHTML={{ __html: description }}
             />
-          </div>
+          )}
+        </div>
 
-          <div className="steps-wrapper">{stepCards}</div>
-        </Container>
-      </Section>
-    </ThemeProvider>
+        <div className={styles.stepsWrapper}>
+          {cards.map((item, index) => (
+            <div className={styles.stepCard} key={`${item.title}-${index}`}>
+              <div className={styles.stepNumber}>{index + 1}</div>
+              <Typography variant="h4" component="h3" className={styles.stepTitle}>
+                {item.title}
+              </Typography>
+              <div
+                className={styles.stepDescription}
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
+            </div>
+          ))}
+        </div>
+
+        {ctaLink && (
+          <div className={styles.ctaWrapper}>
+            <Link href={ctaLink.url}>
+              <Button
+                variant="contained"
+                endIcon={<ArrowForwardIcon />}
+                className={styles.ctaButton}
+              >
+                {ctaLink.title}
+              </Button>
+            </Link>
+            <div className={styles.ctaNote}>No obligation. Usually booked within 24 hours.</div>
+          </div>
+        )}
+      </Container>
+    </Section>
   );
 }
+
 const Section = ({ className = "", ...props }) =>
   React.createElement("section", {
     ...props,

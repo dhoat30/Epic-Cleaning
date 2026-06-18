@@ -12,7 +12,7 @@ export const headerLinks = [
 
     {
         id: 2,
-        label: "Residential Cleaning",
+        label: "All Residential Cleaning",
         url: "/residential-cleaning",
         subLinks: [
             { label: "Builders Cleaning", url: "/residential-cleaning/builders-cleaning-tauranga" },
@@ -33,7 +33,7 @@ export const headerLinks = [
     },
     {
         id: 2,
-        label: "Commercial Cleaning",
+        label: "All Commercial Cleaning",
         url: "/commercial-cleaning",
         subLinks: [
             { label: "Building Washing", url: "/commercial-cleaning/building-washing-tauranga" },
@@ -54,7 +54,7 @@ export const headerLinks = [
     },
     {
         id: 2,
-        label: "Industrial Cleaning",
+        label: "All Industrial Cleaning",
         url: "/industrial-cleaning",
         subLinks: [
             { label: "Sweeping Services", url: "/industrial-cleaning/sweeping-services-tauranga" },

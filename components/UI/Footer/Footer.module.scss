@@ -1,7 +1,13 @@
 .footer {
-  background: var(--light-surface-container-high);
-  border-top: 3px solid var(--light-primary);
-  padding: 56px 0 48px;
+  background:
+    radial-gradient(
+      circle at 12% 10%,
+      color-mix(in srgb, var(--light-secondary) 10%, transparent),
+      transparent 28%
+    ),
+    var(--dark-surface-container-lowest);
+  border-top: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
+  padding: 64px 0 56px;
 
   @media (max-width: 900px) {
     padding: 40px 0 0;
@@ -9,20 +15,16 @@
 }
 
 .grid {
-  display: grid;
-  gap: 40px;
   grid-template-columns: 340px 1fr 1fr 1fr 240px;
-  align-items: start;
 
   @media (max-width: 1200px) {
     grid-template-columns: 300px 1fr 1fr 1fr;
-    gap: 28px;
   }
 
   /* Accordion layout — below 960px each col spans full width */
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 0 !important;
   }
 }
 
@@ -31,7 +33,7 @@
   font-size: 0.7rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.1em !important;
-  color: var(--light-on-surface) !important;
+  color: var(--dark-on-surface) !important;
   margin-bottom: 14px !important;
   display: block;
   position: relative;
@@ -41,7 +43,7 @@
     display: block;
     width: 20px;
     height: 2px;
-    background: var(--light-primary);
+    background: var(--light-secondary);
     margin-top: 5px;
   }
 
@@ -57,13 +59,9 @@
 
 /* ── Column 1 — Brand (never accordion) ── */
 .brandCol {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-
   @media (max-width: 960px) {
     padding: 24px 0;
-    border-bottom: 1px solid var(--light-outline-variant);
+    border-bottom: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
   }
 
   /* Certifications heading keeps its accent on all sizes */
@@ -83,15 +81,9 @@
 }
 
 .certSection {
-  display: flex;
-  flex-direction: column;
 }
 
 .certLogos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
 }
 
 .certLogo {
@@ -100,20 +92,9 @@
   width: auto;
   max-width: 100px;
   object-fit: contain;
-}
-
-.newsletterBox {
-  padding: 16px;
-  background: var(--light-surface-container);
-  border-radius: 12px;
-  border: 1px solid var(--light-outline-variant);
-}
-
-.newsletterTitle {
-  color: var(--light-on-surface);
-  font-weight: 600 !important;
-  margin-bottom: 12px !important;
-  line-height: 1.4 !important;
+  padding: 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--dark-on-surface) 92%, transparent);
 }
 
 /* ── Accordion columns (2-5) ── */
@@ -122,7 +103,7 @@
   flex-direction: column;
 
   @media (max-width: 960px) {
-    border-bottom: 1px solid var(--light-outline-variant);
+    border-bottom: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
   }
 }
 
@@ -152,12 +133,12 @@
   @media (max-width: 960px) {
     display: flex;
     align-items: center;
-    color: var(--light-on-surface-variant);
+    color: var(--dark-on-surface-variant);
     flex-shrink: 0;
     transition: color 0.2s ease;
 
     .isOpen & {
-      color: var(--light-primary);
+      color: var(--light-secondary);
     }
   }
 }
@@ -187,10 +168,6 @@
 }
 
 .contactInner {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
   @media (max-width: 960px) {
     padding-bottom: 20px;
   }
@@ -200,7 +177,7 @@
   display: inline-block;
   padding: 5px 0;
   font-size: 0.875rem;
-  color: var(--light-on-surface-variant);
+  color: var(--dark-on-surface-variant);
   text-decoration: none;
   position: relative;
   transition: color 0.2s ease;
@@ -212,12 +189,12 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--light-primary);
+    background: var(--light-secondary);
     transition: width 0.25s ease;
   }
 
   &:hover {
-    color: var(--light-primary);
+    color: var(--dark-on-surface);
 
     &::after {
       width: 100%;
@@ -227,9 +204,6 @@
 
 /* ── Contact inner sections ── */
 .hoursSection {
-  display: flex;
-  flex-direction: column;
-
   /* On mobile the .colHeading inside hoursSection needs its accent back */
   @media (max-width: 960px) {
     .colHeading {
@@ -243,24 +217,22 @@
 }
 
 .hoursRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
   padding: 8px 12px;
-  background: var(--light-surface-container);
+  background: color-mix(in srgb, var(--dark-on-surface) 7%, transparent);
   border-radius: 8px;
-  border: 1px solid var(--light-outline-variant);
+  border: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
+
+  span {
+    color: var(--dark-on-surface-variant);
+  }
 }
 
 .hoursTime {
-  color: var(--light-primary) !important;
+  color: var(--light-secondary) !important;
   font-weight: 600 !important;
 }
 
 .socialSection {
-  display: flex;
-  flex-direction: column;
-
   @media (max-width: 960px) {
     .colHeading {
       margin-bottom: 10px !important;
@@ -273,9 +245,6 @@
 }
 
 .socialLinks {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .socialLink {
@@ -285,13 +254,13 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--light-outline-variant);
-  background: white;
+  border: 1px solid color-mix(in srgb, var(--dark-on-surface) 14%, transparent);
+  background: color-mix(in srgb, var(--dark-on-surface) 92%, transparent);
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    background: var(--light-primary);
-    border-color: var(--light-primary);
+    background: var(--light-secondary);
+    border-color: var(--light-secondary);
     transform: translateY(-2px);
 
     img {

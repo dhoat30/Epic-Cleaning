@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
-import NewsletterForm from "../Forms/NewsletterForm";
 import { services, commercialLinks, informationLinks } from "./FooterLinks";
 import Copyright from "./Copyright";
 import ContactInfo from "./ContactInfo";
@@ -55,14 +54,14 @@ export default function Footer({
 
       <footer className={styles.footer}>
         <Container maxWidth="xl">
-          <div className={styles.grid}>
-          {/* Column 1 — branding, certifications, newsletter (never accordion) */}
-          <div className={styles.brandCol}>
-            <div className={styles.certSection}>
+          <div className={`${styles.grid} grid gap-40 align-start`}>
+          {/* Column 1 — branding and certifications */}
+          <div className={`${styles.brandCol} flex flex-column gap-24`}>
+            <div className={`${styles.certSection} flex flex-column`}>
               <Typography variant="overline" component="p" className={styles.colHeading}>
                 Certifications
               </Typography>
-              <div className={styles.certLogos}>
+              <div className={`${styles.certLogos} flex flex-wrap align-center gap-8`}>
                 {certifications.cards.map((item, index) => (
                   <Image
                     key={index}
@@ -74,19 +73,6 @@ export default function Footer({
                   />
                 ))}
               </div>
-            </div>
-
-            <div className={styles.newsletterBox}>
-              <Typography variant="body2" component="p" className={styles.newsletterTitle}>
-                Get cleaning tips &amp; tricks every month
-              </Typography>
-              <NewsletterForm
-                formName="Newsletter Form"
-                formType="newsletter-form"
-                emailRoute={"/api/newsletter-hubspot"}
-                emailTo="designer@epiccleaning.co.nz"
-                btnLabel="Subscribe"
-              />
             </div>
           </div>
 
@@ -131,24 +117,24 @@ export default function Footer({
 
           {/* Column 5 — Contact, hours, social */}
           <AccordionCol title="Contact & Info">
-            <div className={styles.contactInner}>
+            <div className={`${styles.contactInner} flex flex-column gap-24`}>
               <ContactInfo contactInfo={contactInfo} />
 
-              <div className={styles.hoursSection}>
+              <div className={`${styles.hoursSection} flex flex-column`}>
                 <Typography variant="overline" component="p" className={styles.colHeading}>
                   Business Hours
                 </Typography>
-                <div className={styles.hoursRow}>
+                <div className={`${styles.hoursRow} flex justify-between gap-8`}>
                   <Typography variant="body2" component="span">Mon – Sun</Typography>
                   <Typography variant="body2" component="span" className={styles.hoursTime}>7:00 AM – 6:00 PM</Typography>
                 </div>
               </div>
 
-              <div className={styles.socialSection}>
+              <div className={`${styles.socialSection} flex flex-column`}>
                 <Typography variant="overline" component="p" className={styles.colHeading}>
                   Follow Us
                 </Typography>
-                <div className={styles.socialLinks}>
+                <div className={`${styles.socialLinks} flex flex-wrap gap-8`}>
                   {socialData.length > 0 &&
                     socialData.map((social, index) => (
                       <Link

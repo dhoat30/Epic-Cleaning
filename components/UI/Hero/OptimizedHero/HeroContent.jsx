@@ -20,19 +20,25 @@ export default function HeroContent({
   compact = false,
   showAccreditations = true,
 }) {
+  const titleHasHtml = containsHtml(title);
+  const descriptionHasHtml = containsHtml(description);
   let ctaComponent = null;
   if (ctaArray?.length > 0) {
+    const primaryCta = ctaArray[0]?.cta_link || ctaArray[0]?.link;
+
     ctaComponent = (
-      <div className={compact ? "hero-button-wrapper" : "single-button-wrapper"}>
-        <Link href={ctaArray[0].cta_link.url}>
-          <Button variant="contained" size="large">
-            {ctaArray[0].cta_link.title}
-            <ArrowForwardRoundedIcon aria-hidden="true" />
-          </Button>
-        </Link>
+      <div className={compact ? styles.heroButtonWrapper : styles.singleButtonWrapper}>
+        {primaryCta?.url && (
+          <Link href={primaryCta.url}>
+            <Button variant="contained" size="large">
+              {primaryCta.title}
+              <ArrowForwardRoundedIcon aria-hidden="true" />
+            </Button>
+          </Link>
+        )}
         {compact && (
           <Link href="tel:+64800080056" >
-            <Button variant="outlined" size="large">
+            <Button className={styles.phoneButton} variant="text" size="large">
               <PhoneIcon aria-hidden="true" />
               {process.env.NEXT_PUBLIC_PHONE}
             </Button>
@@ -45,20 +51,20 @@ export default function HeroContent({
   let heroUSPComponent = null;
   if (heroUSP) {
     heroUSPComponent = (
-      <div className="hero-usp-wrapper">
-        <div className="text-usp-wrapper">
+      <div className={styles.heroUspWrapper}>
+        <div className={styles.textUspWrapper}>
           {heroUSP.text_usp.map((item, index) => {
             return (
               <div key={index} className={styles.uspItem}>
-                <CheckCircleIcon sx={{ color: "white", fontSize: 18 }} />
-                <Typography component="span" variant="body2" sx={{ fontWeight: 600, color: "white" }}>
+                <CheckCircleIcon sx={{ color: "currentColor", fontSize: 18 }} />
+                <Typography component="span" variant="body2" sx={{ fontWeight: 600, color: "currentColor" }}>
                   {item.value}
                 </Typography>
               </div>
             );
           })}
         </div>
-        {showAccreditations && <div className="image-usp-wrapper">
+        {showAccreditations && <div className={styles.imageUspWrapper}>
           {heroUSP.image_usp &&
             heroUSP.image_usp.map((item, index) => {
               return (
@@ -77,7 +83,7 @@ export default function HeroContent({
   }
 
   return (
-    <Div className={`${className || ""} ${compact ? styles.compact : ""}`}>
+    <div className={`${className || ""} ${compact ? styles.compact : ""}`}>
       {/* <Typography
         className="subtitle"
         component="div"
@@ -85,23 +91,37 @@ export default function HeroContent({
       >
         {subtitle}
       </Typography> */}
-      <Typography
-        component="h1"
-        variant="h1"
-        className="title"
-      >
-        {title}
-      </Typography>
-      <Typography
-        component="p"
-        variant="body1"
-        className="description"
-      >
-        {description}
-      </Typography>
+      {titleHasHtml ? (
+        <div
+          className={`${styles.title} heading1`}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+      ) : (
+        <Typography
+          component="h1"
+          variant="h1"
+          className={styles.title}
+        >
+          {title}
+        </Typography>
+      )}
+      {descriptionHasHtml ? (
+        <div
+          className={`${styles.description} heading6 mt-16`}
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
+      ) : (
+        <Typography
+          component="p"
+          variant="h6"
+          className={`${styles.description} mt-16`}
+        >
+          {description}
+        </Typography>
+      )}
       {ctaComponent}
       {heroUSPComponent}
-    </Div>
+    </div>
   );
 }
 
@@ -110,3 +130,6 @@ const Div = ({ className = "", ...props }) =>
     ...props,
     className: `${styles.div} ${className}`.trim(),
   });
+
+const containsHtml = (value) =>
+  typeof value === "string" && /<\/?[a-z][\s\S]*>/i.test(value);

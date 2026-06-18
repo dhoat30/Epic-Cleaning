@@ -7,9 +7,11 @@
   --light-on-primary: rgb(255 255 255);
   --light-primary-container: rgb(197 231 255);
   --light-on-primary-container: rgb(0 30 45);
-  --light-secondary: rgb(49 106 66);
+  --light-secondary: #0B9E6A;
+    --secondary: hsl(159, 87%, 33%);
+
   --light-on-secondary: rgb(255 255 255);
-  --light-secondary-container: rgb(179 241 190);
+  --light-secondary-container: rgb(177, 241, 219);
   --light-on-secondary-container: rgb(0 33 12);
   --light-tertiary: rgb(31 101 134);
   --light-on-tertiary: rgb(255 255 255);
@@ -26,7 +28,7 @@
   --light-surface-variant: rgb(221 227 234);
   --light-on-surface-variant: rgb(65 72 77);
   --light-outline: rgb(113 120 126);
-  --light-outline-variant: rgb(193 199 206);
+  --light-outline-variant: rgb(217, 224, 231);
   --light-shadow: rgb(0 0 0);
   --light-scrim: rgb(0 0 0);
   --light-inverse-surface: rgb(44 49 52);
@@ -96,9 +98,9 @@
   --dark-on-tertiary-fixed-variant: rgb(0 76 106);
   --dark-surface-dim: rgb(15 20 23);
   --dark-surface-bright: rgb(53 58 61);
-  --dark-surface-container-lowest: rgb(10 15 18);
-  --dark-surface-container-low: rgb(24 28 31);
-  --dark-surface-container: rgb(28 32 36);
-  --dark-surface-container-high: rgb(38 43 46);
-  --dark-surface-container-highest: rgb(49 53 57);
+  --dark-surface-container-lowest: #0B1220;
+  --dark-surface-container-low: hsl(220, 51%, 10%);
+  --dark-surface-container: hsl(220, 49%, 12%);
+  --dark-surface-container-high: hsl(220, 49%, 14%);
+  --dark-surface-container-highest: hsl(220, 49%, 16%);
 }

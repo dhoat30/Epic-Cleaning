@@ -1,24 +1,26 @@
 import styles from "./FaqAccordionSection.module.scss";
 import React from "react";
-import CustomAccordion from "../../Accordion/CustomAccordion";
+import CustomAccordion from "../../../Accordion/CustomAccordion";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 function FaqAccordionSection({ title, description, qaData }) {
   if (!qaData) return null;
   return (
     <Section>
-      <Container maxWidth="xl">
-        <div className="grid-wrapper ">
-          <div className="title-wrapper">
-            <span className={styles.badge}>FAQ</span>
-            <Typography variant="h2" component="h2" className={`${styles.title} mt-16`}>
+      <Container maxWidth="xl" className={styles.container}>
+        <div className={styles.gridWrapper}>
+          <div className={styles.titleWrapper}>
+            {/* <div className="section-eyebrow">FAQ</div> */}
+            <Typography variant="h2" component="h2" className={styles.title}>
               {title}
             </Typography>
-            <Typography variant="body1" component="p" color="text.secondary" className="mt-16">
+            {/* <Typography variant="body1" component="p" className={styles.description}>
               {description}
-            </Typography>
+            </Typography> */}
           </div>
-          <CustomAccordion qaData={qaData} />
+          <div className={styles.accordionWrapper}>
+            <CustomAccordion qaData={qaData} />
+          </div>
         </div>
       </Container>
     </Section>

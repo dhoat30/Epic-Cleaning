@@ -14,38 +14,35 @@ export default function USP({
 }) {
   return (
     <Section>
-      <Container maxWidth="xl" className="container">
+      <Container maxWidth="xl" className={styles.container}>
         {showTitle && (
-          <div className="title-wrapper">
-            <Typography variant="h2" component="h2" className="title">
+          <div className={styles.titleWrapper}>
+            <div className="section-eyebrow section-eyebrow-dark">Why Epic</div>
+            <Typography variant="h2" component="h2" className={styles.title}>
               {title}
             </Typography>
             <Typography
               variant="body1"
               component="p"
-              className="description mt-16"
+              className={styles.description}
             >
               {description}
             </Typography>
             {statsArray && statsArray.length > 0 && (
-              <div className="stats-wrapper mt-24">
+              <div className={styles.statsWrapper}>
                 {statsArray.map((stat, index) => (
-                  <div key={index} className="stat">
+                  <div key={index} className={styles.stat}>
                     <Typography
                       variant="h2"
                       component="div"
-                      className="title"
-                      color="var(--dark-on-surface)"
-                      align="center"
+                      className={styles.statValue}
                     >
                       {stat.value}
                     </Typography>
                     <Typography
                       variant="body1"
                       component="div"
-                      className="description"
-                      color="var(--dark-on-surface)"
-                      align="center"
+                      className={styles.statLabel}
                     >
                       {stat.label}
                     </Typography>
@@ -55,32 +52,34 @@ export default function USP({
             )}
           </div>
         )}
-        <div className="cards-wrapper">
+        <div className={styles.cardsWrapper}>
           {cards &&
             cards.length > 0 &&
             cards.map((card, index) => (
-              <div key={index} className="card">
-                <Image
-                  src={card.icon.url}
-                  alt={card.icon.alt}
-                  width="80"
-                  height="80"
-                  className="image"
-                />
-                <div className="content">
+              <div key={index} className={styles.card}>
+                {card.icon?.url && (
+                  <div className={styles.iconWrapper}>
+                    <Image
+                      src={card.icon.url}
+                      alt={card.icon.alt || ""}
+                      width="56"
+                      height="56"
+                      className={styles.image}
+                    />
+                  </div>
+                )}
+                <div className={styles.content}>
                   <Typography
                     variant="h6"
                     component="h3"
-                    className="title mt-16"
-                    color="var(--dark-on-surface)"
+                    className={styles.cardTitle}
                   >
                     {card.title}
                   </Typography>
                   <Typography
                     variant="body1"
                     component="p"
-                    className="description mt-8"
-                    color="var(--dark-on-surface-variant)"
+                    className={styles.cardDescription}
                   >
                     {card.description}
                   </Typography>
