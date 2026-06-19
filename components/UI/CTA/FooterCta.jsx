@@ -16,7 +16,7 @@ export default function FooterCta({ title, description, cta }) {
   const phoneNumber = process.env.NEXT_PUBLIC_PHONE;
   const phoneHref = phoneNumber?.replace(/[^\d+]/g, "");
   const trustItems = [
-    { icon: <GppGoodOutlinedIcon />, label: "$5M insured" },
+    { icon: <GppGoodOutlinedIcon />, label: "$10M insured" },
     { icon: <StarBorderRoundedIcon />, label: "4.9★ rating · 90+ reviews" },
     { icon: <AccessTimeRoundedIcon />, label: "Quote in 24hrs" },
     { icon: <PlaceOutlinedIcon />, label: "Locally owned" },

@@ -1,0 +1,620 @@
+.page {
+  background:
+    linear-gradient(180deg, var(--light-surface-container-lowest) 0%, var(--light-surface-container-low) 52%, var(--light-surface-container-lowest) 100%);
+  color: var(--light-on-surface);
+
+  .hero {
+    padding: 112px 0 72px;
+
+    @media (max-width: 900px) {
+      padding: 80px 0 56px;
+    }
+
+    .container {
+      .heroGrid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+        align-items: start;
+
+        @media (max-width: 1100px) {
+          grid-template-columns: 1fr;
+        }
+
+        .contentColumn {
+          max-width: 820px;
+
+          .title {
+            max-width: 780px;
+          }
+
+          .description {
+            max-width: 700px;
+            color: var(--light-on-surface-variant);
+            font-family: var(--font-inter), "Segoe UI", sans-serif;
+            line-height: 1.5;
+          }
+
+          .benefitList {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            @media (max-width: 760px) {
+              grid-template-columns: 1fr;
+            }
+
+            .benefitItem {
+              display: grid;
+              grid-template-columns: 42px 1fr;
+              gap: 14px;
+              align-items: start;
+              padding: 18px;
+              border: 1px solid var(--light-outline-variant);
+              border-radius: 8px;
+              background: color-mix(in srgb, var(--light-surface-container-lowest) 82%, transparent);
+
+              .checkIcon {
+                display: grid;
+                place-items: center;
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                background: var(--light-secondary);
+                color: var(--light-on-secondary);
+
+                svg {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+
+              .benefitCopy {
+                .benefitTitle {
+                  color: var(--light-primary);
+                  font-weight: 800;
+                  line-height: 1.25;
+                }
+
+                .benefitDescription {
+                  margin-top: 4px;
+                  color: var(--light-on-surface-variant);
+                  line-height: 1.5;
+                }
+              }
+            }
+          }
+
+          .proofGrid {
+            grid-template-columns: minmax(0, 0.84fr) minmax(280px, 0.66fr);
+
+            @media (max-width: 760px) {
+              grid-template-columns: 1fr;
+            }
+
+            .processCard {
+              padding: 24px;
+              border: 1px solid color-mix(in srgb, var(--light-primary) 14%, var(--light-outline-variant));
+              border-radius: 8px;
+              background: var(--light-primary);
+              color: var(--dark-on-surface);
+
+              .stepList {
+                counter-reset: none;
+
+                li {
+                  display: grid;
+                  grid-template-columns: 34px 1fr;
+                  gap: 12px;
+                  align-items: center;
+                  color: var(--dark-on-surface); 
+                  font-family: var(--font-inter), "Segoe UI", sans-serif;
+                  line-height: 1.45;
+
+                  span {
+                    display: grid;
+                    place-items: center;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    background: var(--light-secondary);
+                    color: var(--light-on-secondary);
+                    font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+                    font-weight: 800;
+                  }
+                }
+              }
+            }
+
+            .equipmentCard {
+              position: relative;
+              min-height: 222px;
+              overflow: hidden;
+              border: 1px solid var(--light-outline-variant);
+              border-radius: 8px;
+              background: var(--light-primary);
+
+              img {
+                object-fit: cover;
+                filter: saturate(0.9) contrast(1.04);
+              }
+
+              &::after {
+                position: absolute;
+                inset: 0;
+                content: "";
+                background:
+                  linear-gradient(180deg, rgba(4, 59, 81, 0.1), rgba(4, 59, 81, 0.84)),
+                  linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent);
+              }
+
+              .equipmentOverlay {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1;
+                padding: 20px;
+
+                p {
+                  color: white;
+                  
+                  line-height: 1.35;
+                }
+              }
+            }
+          }
+
+          .statsStrip {
+            padding-top: 24px;
+            border-top: 1px solid var(--light-outline-variant);
+            span {
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+              color: var(--light-primary);
+              font-weight: 600;
+
+              svg {
+                flex: 0 0 auto;
+                width: 22px;
+                height: 22px;
+                color: var(--light-secondary);
+                position: relative;
+                top: -1px; 
+              }
+            }
+          }
+        }
+
+        .formCard {
+          position: sticky;
+          top: 96px;
+          padding: 32px;
+          border: 1px solid var(--light-outline-variant);
+          border-radius: 8px;
+          background: color-mix(in srgb, var(--light-surface-container-lowest) 94%, var(--light-secondary-container));
+          box-shadow: 0 24px 70px color-mix(in srgb, var(--light-primary) 12%, transparent);
+
+          @media (max-width: 1100px) {
+            position: static;
+            max-width: 760px;
+            margin: 0 auto;
+          }
+
+          @media (max-width: 600px) {
+            padding: 24px 18px;
+          }
+
+          .formHeader {
+            margin-bottom: 24px;
+
+            .formTitle {
+              color: var(--light-primary);
+              font-weight: 800;
+              line-height: 1.18;
+            }
+
+            .formDescription {
+              color: var(--light-on-surface-variant);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .form {
+    .stepProgress {
+      padding: 16px;
+      border: 1px solid var(--light-outline-variant);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--light-surface-container-low) 72%, white);
+
+      .stepMeta {
+        display: grid;
+        gap: 4px;
+
+        span {
+          color: var(--light-secondary);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 0.76rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          line-height: 1.1;
+          text-transform: uppercase;
+        }
+
+        strong {
+          color: var(--light-primary);
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 1rem;
+          line-height: 1.25;
+        }
+
+        p {
+          margin: 0;
+          color: var(--light-on-surface-variant);
+          font-size: 0.92rem;
+          line-height: 1.4;
+        }
+      }
+
+      .progressTrack {
+        position: relative;
+        height: 6px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--light-outline-variant);
+
+        span {
+          position: absolute;
+          inset: 0 auto 0 0;
+          border-radius: inherit;
+          background: var(--light-secondary);
+          transition: width 220ms ease;
+        }
+      }
+    }
+
+    .stepPanel {
+      align-content: start;
+    }
+
+    .formGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      @media (max-width: 620px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .addressField {
+      width: 100%;
+    }
+
+    .stepActions {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      gap: 12px;
+      padding-top: 4px;
+      @media (max-width: 520px) {
+        display: flex; 
+        flex-direction: column-reverse;
+      }
+
+      .backButton,
+      .nextButton,
+      .submitButton {
+        width: 100%;
+      }
+
+      .backButton {
+        border-color: var(--light-outline-variant);
+        color: var(--light-primary);
+        background: var(--light-surface-container-lowest);
+        font-weight: 800;
+
+        &:hover {
+          border-color: var(--light-primary);
+          background: var(--light-surface-container-lowest);
+          color: var(--light-primary);
+        }
+      }
+
+      .nextButton {
+        background: var(--light-primary);
+        color: var(--light-on-primary);
+        font-weight: 800;
+
+        &:hover {
+          background: color-mix(in srgb, var(--light-primary) 90%, black);
+        }
+      }
+    }
+
+    .submitButton {
+      margin-top: 4px;
+      background: var(--light-primary);
+      color: var(--light-on-primary);
+      font-weight: 800;
+
+      &:hover {
+        background: color-mix(in srgb, var(--light-primary) 90%, black);
+      }
+    }
+
+    .privacyNote {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--light-on-surface-variant);
+      font-size: 0.94rem;
+      line-height: 1.45;
+      text-align: center;
+
+      svg {
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .phonePrompt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--light-on-surface-variant);
+      font-size: 0.95rem;
+      line-height: 1.4;
+
+      @media (max-width: 520px) {
+        flex-wrap: wrap;
+      }
+
+      span {
+        font-family: var(--font-inter), "Segoe UI", sans-serif;
+      }
+
+      .phoneButton {
+        min-width: 0;
+        padding: 0;
+        color: var(--light-primary);
+        font-weight: 800;
+        line-height: 1.4;
+
+        svg {
+          width: 18px;
+          height: 18px;
+          color: var(--light-secondary);
+        }
+
+        &:hover {
+          color: var(--light-secondary);
+        }
+      }
+    }
+
+    .formTrustList {
+      color: var(--light-on-surface-variant);
+      font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: var(--light-secondary);
+      }
+    }
+  }
+
+  .beforeAfterSection {
+    max-width: 1536px;
+    margin: 0 auto;
+    padding: 16px 24px 88px;
+
+    @media (max-width: 600px) {
+      padding: 0 16px 64px;
+    }
+
+    .beforeAfterHeader {
+      max-width: 760px;
+      margin: 0 auto 40px;
+
+      .beforeAfterTitle {
+        color: var(--light-primary);
+        font-weight: 800;
+        line-height: 1.15;
+      }
+
+      .beforeAfterDescription {
+        color: var(--light-on-surface-variant);
+      }
+    }
+
+    .beforeAfterGrid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      @media (max-width: 1100px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+      }
+
+      .resultCard {
+        overflow: hidden;
+        border: 1px solid var(--light-outline-variant);
+        border-radius: 8px;
+        background: var(--light-surface-container-lowest);
+        box-shadow: 0 18px 44px color-mix(in srgb, var(--light-primary) 8%, transparent);
+
+        .compareFrame {
+          position: relative;
+          overflow: hidden;
+          background: var(--light-primary);
+
+          .compareSlider {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            min-height: 280px;
+
+            @media (max-width: 480px) {
+              min-height: 240px;
+            }
+          }
+
+          .resultBadge {
+            position: absolute;
+            top: 14px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 5px 8px;
+            border: 1px solid color-mix(in srgb, white 24%, transparent);
+            border-radius: 6px;
+            background: rgba(8, 22, 31, 0.46);
+            color: white;
+            font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+          }
+
+          .beforeBadge {
+            left: 14px;
+          }
+
+          .afterBadge {
+            right: 14px;
+            background: rgba(8, 22, 31, 0.46);
+          }
+        }
+
+        .resultCaption {
+          padding: 18px 20px;
+
+          h3 {
+            color: var(--light-primary);
+            font-weight: 800;
+          }
+        }
+      }
+    }
+  }
+
+  .trustSection {
+    padding: 56px 0 88px;
+    background: var(--light-primary);
+    color: var(--dark-on-surface);
+
+    @media (max-width: 760px) {
+      padding: 48px 0 64px;
+    }
+
+    .container {
+      .trustGrid {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.56fr) minmax(300px, 0.72fr);
+        align-items: stretch;
+
+        @media (max-width: 1100px) {
+          grid-template-columns: 1fr;
+        }
+
+        .trustCopy {
+          .trustTitle {
+            max-width: 720px;
+            color: white;
+            font-weight: 800;
+            line-height: 1.15;
+          }
+
+          .trustDescription {
+            max-width: 720px;
+            color: color-mix(in srgb, var(--dark-on-surface) 82%, transparent);
+          }
+        }
+
+        .trustCards {
+          grid-template-columns: 1fr;
+
+          @media (max-width: 1100px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+
+          @media (max-width: 760px) {
+            grid-template-columns: 1fr;
+          }
+
+          .trustCard {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px;
+            border: 1px solid color-mix(in srgb, white 18%, transparent);
+            border-radius: 8px;
+            background: color-mix(in srgb, white 7%, transparent);
+            color: white;
+            font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+            font-weight: 800;
+
+            svg {
+              width: 26px;
+              height: 26px;
+              color: var(--dark-secondary);
+            }
+          }
+        }
+
+        .accreditationCard {
+          padding: 24px;
+          border: 1px solid color-mix(in srgb, white 18%, transparent);
+          border-radius: 8px;
+          background: color-mix(in srgb, white 7%, transparent);
+          @media(max-width: 1100px){ 
+            display: none;
+          }
+          .accreditationLogos {
+            .accreditationLogo {
+              display: grid;
+              place-items: center;
+              min-width: 94px;
+              min-height: 60px;
+              padding: 10px 12px;
+              border: 1px solid color-mix(in srgb, white 18%, transparent);
+              border-radius: 8px;
+              background: white;
+
+              img {
+                width: auto;
+                max-width: 116px;
+                height: auto;
+                max-height: 42px;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cardEyebrow {
+    color: var(--light-secondary-container);
+    font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+}

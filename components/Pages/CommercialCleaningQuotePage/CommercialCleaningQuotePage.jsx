@@ -14,7 +14,7 @@ const fallbackHero = {
     '<h1>Get a Fixed Quote for <strong>Commercial Cleaning</strong> in 24 Hours</h1>',
   description:
     "<p>Offices, retail, restaurants, schools and more — across Tauranga and the Bay of Plenty. <strong>No 12-month contracts. No subcontracting.</strong></p>",
-  subtitle: "Commercial cleaning · Tauranga",
+  subtitle: "Commercial cleaning",
 };
 
 const benefits = [
@@ -24,7 +24,7 @@ const benefits = [
   },
   {
     title: "IICRC-certified technicians",
-    description: "$5M public liability insured",
+    description: "$10M public liability insured",
   },
   {
     title: "No lock-in contracts",
@@ -63,7 +63,7 @@ export default function CommercialCleaningQuotePage({
         <section className={`${styles.heroGrid} gap-40`}>
           <div className={`${styles.contentColumn} `}>
             <span className={"section-eyebrow "}>
-              {subtitle}
+              No Fixed Contract
             </span>
 
             <div

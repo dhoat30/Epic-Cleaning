@@ -359,7 +359,7 @@ export default function CommercialCleaningQuoteForm({ phoneNumber }) {
       <div className={styles.formTrustList}>
         <span>
           <GppGoodOutlinedIcon aria-hidden="true" />
-          $5M insured
+          $10M insured
         </span>
         <span>
           <VerifiedOutlinedIcon aria-hidden="true" />

@@ -91,12 +91,12 @@ export default async function Page() {
       <JsonLd data={jsonLd} idPrefix="home-schema" />
       <Header />
       <main>
-        <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} />
-      
+        {/* <OptimizedHero data={postData[0]?.acf?.hero_section} heroUSP={options.hero_usp} /> */}
+        <Layout sections={postData[0]?.acf?.sections} data={postData} options={options}/>
+
         <ServiceSelectorTabs residentialServicesData={residentialServices} commercialServicesData={commercialServices} industrialServicesData={industrialServices} title={postData[0]?.acf?.services_selector.title} description={postData[0]?.acf?.services_selector.description} />
                  <TechLogos data={options.clients_logos} />
 
-        <Layout sections={postData[0]?.acf?.sections} data={postData}/>
         <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
         <GoogleReviewsCarousel data={googleReviewsData.reviews}/>
 

@@ -162,7 +162,7 @@ export default function Header() {
                     >
                       <li role="none" className={styles.desktopViewAllItem}>
                         <Link href={item.url} role="menuitem" className={styles.desktopViewAllLink}>
-                          View all {item.label}
+                          {item.label}
                         </Link>
                       </li>
                       {item.subLinks.map((subLink) => (

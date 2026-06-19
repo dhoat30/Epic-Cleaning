@@ -15,14 +15,17 @@ export const headerLinks = [
         label: "Residential Cleaning",
         url: "/residential-cleaning",
         subLinks: [
-            { label: "Builders Cleaning", url: "/residential-cleaning/builders-cleaning-tauranga" },
+                        { label: "Move Out Cleaning", url: "/residential-cleaning/move-out-cleaning" },
+            { label: "Oven Cleaning", url: "/residential-cleaning/oven-cleaning-tauranga" },
             { label: "Carpet Cleaning", url: "/residential-cleaning/carpet-cleaning-tauranga" },
+
+            { label: "Builders Cleaning", url: "/residential-cleaning/builders-cleaning-tauranga" },
             { label: "Exterior House Washing", url: "/residential-cleaning/exterior-house-washing-tauranga" },
             { label: "Flood Restoration", url: "/residential-cleaning/flood-restoration-tauranga" },
             { label: "Regular Cleaning", url: "/residential-cleaning/regular-cleaning-tauranga" },
+                        // { label: "Residential Cleaning", url: "/residential-cleaning" },
+
             { label: "Glass Treatment Protection", url: "/residential-cleaning/shower-glass-protection" },
-            { label: "Move Out Cleaning", url: "/residential-cleaning/move-out-cleaning" },
-            { label: "Oven Cleaning", url: "/residential-cleaning/oven-cleaning-tauranga" },
             { label: "Spring Cleaning", url: "/residential-cleaning/spring-cleaning-tauranga" },
             { label: "Tile and Grout Cleaning", url: "/residential-cleaning/tile-and-grout-cleaning-tauranga" },
             { label: "Upholstery Cleaning", url: "/residential-cleaning/upholstery-cleaning-tauranga" },
@@ -41,6 +44,8 @@ export const headerLinks = [
             { label: "Vinyl Floor Stripping and Polishing", url: "/commercial-cleaning/vinyl-floor-cleaning-and-polishing-tauranga" },
             { label: "Restaurant & Bar Cleaning", url: "/commercial-cleaning/restaurant-cleaning-tauranga" },
             { label: "Hospitality Cleaning", url: "/commercial-cleaning/hospitality-cleaning-tauranga" },
+                    //    { label: "Commercial Cleaning", url: "/commercial-cleaning" },
+
             { label: "Supermarket Cleaning", url: "/commercial-cleaning/supermarket-cleaning-tauranga" },
             { label: "School & College Cleaning", url: "/commercial-cleaning/school-college-cleaning-tauranga" },
             { label: "Church Cleaning", url: "/commercial-cleaning/church-cleaning-tauranga" },

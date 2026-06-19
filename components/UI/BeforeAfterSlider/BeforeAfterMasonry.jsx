@@ -14,32 +14,40 @@ export default function BeforeAfterMasonry({ data, showTitle, priority }) {
         </Typography>
       )}
 
-      <ReactCompareSlider
-        className="image-wrapper"
-        onlyHandleDraggable={true}
-        style={{
-          paddingBottom: `${
-            (data.beforeImage.height / data.beforeImage.width) * 100
-          }%`,
-          touchAction: "pan-y",
-        }}
-        itemTwo={
-          <Image
-            src={data.beforeImage.url}
-            alt={data.beforeImage.alt ? data.beforeImage.alt : "Before"}
-            priority={priority}
-            fill
-          />
-        }
-        itemOne={
-          <Image
-            src={data.afterImage.url}
-            alt={data.afterImage.alt ? data.afterImage.alt : "Before"}
-            fill
-            priority={priority}
-          />
-        }
-      />
+      <div className={styles.imageFrame}>
+        <ReactCompareSlider
+          className={styles.imageWrapper}
+          onlyHandleDraggable={true}
+          style={{
+            paddingBottom: `${
+              (data.beforeImage.height / data.beforeImage.width) * 100
+            }%`,
+            touchAction: "pan-y",
+          }}
+          itemTwo={
+            <Image
+              src={data.beforeImage.url}
+              alt={data.beforeImage.alt ? data.beforeImage.alt : "Before"}
+              priority={priority}
+              fill
+            />
+          }
+          itemOne={
+            <Image
+              src={data.afterImage.url}
+              alt={data.afterImage.alt ? data.afterImage.alt : "After"}
+              fill
+              priority={priority}
+            />
+          }
+        />
+        <span className={`${styles.imageBadge} ${styles.beforeBadge}`}>
+          Before
+        </span>
+        <span className={`${styles.imageBadge} ${styles.afterBadge}`}>
+          After
+        </span>
+      </div>
     </Container>
   );
 }

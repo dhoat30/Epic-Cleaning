@@ -70,13 +70,14 @@
 }
 
 .compact {
+      max-width: 800px;
+  margin: 0 auto; 
   .title {
     margin: 14px 0 12px;
   }
 
   .description {
     display: block;
-    max-width: 560px;
   }
 
   .heroButtonWrapper {
