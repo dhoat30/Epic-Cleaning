@@ -31,7 +31,6 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
 
         message: ''
     });
-    console.log(formData)
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -145,10 +144,8 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
             data: dataPayload
         };
 
-        console.log(formData);
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (response) {
-                console.log(response);
                 if (response[1].status === 200) {
                     setIsLoading(false);
                     setIsSuccess(true);
@@ -157,7 +154,6 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
                     router.push('/form-submitted/thank-you');
                 }
                 else {
-                    console.log(response);
                     setIsLoading(false);
                     setIsSuccess(false);
                     setError(true);
@@ -165,7 +161,6 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 setIsLoading(false);
                 setIsSuccess(false);
                 setError(true);

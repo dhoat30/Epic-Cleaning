@@ -145,6 +145,7 @@
 
             ul {
               display: grid;
+            
               gap: 8px;
               margin: 16px 0 0;
               padding-left: 18px;
@@ -161,9 +162,8 @@
                 width: 8px; 
                 height: 8px; 
                 background: var(--light-secondary); 
-                top: calc(50% - 1px); 
+                top: 9px;
                 left: -12px; 
-                transform: translate(0, -50%);
               }
             }
 

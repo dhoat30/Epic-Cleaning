@@ -19,7 +19,6 @@ import {
   getOrganizationSchema,
   getWebsiteSchema,
 } from '@/utils/schema';
-import { getGoogleReviews } from '@/utils/fetchData';
 
 import Script from 'next/script'
 
@@ -72,13 +71,9 @@ const inter = Inter({
 
 export default async function RootLayout({ children }) {
   const GTM_ID = 'GTM-NDXM6D'
-  const { averageRating, totalReviewCount } = await getGoogleReviews();
   const schemaGraph = [
     getOrganizationSchema(),
-    getLocalBusinessSchema({
-      ratingValue: averageRating,
-      reviewCount: totalReviewCount,
-    }),
+    getLocalBusinessSchema(),
     getWebsiteSchema(),
   ];
 

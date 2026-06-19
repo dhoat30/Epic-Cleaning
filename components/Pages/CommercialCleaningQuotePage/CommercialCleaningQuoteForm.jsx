@@ -10,11 +10,8 @@ import TextField from "@mui/material/TextField";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
-import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
@@ -85,6 +82,7 @@ export default function CommercialCleaningQuoteForm({ phoneNumber }) {
   const [touched, setTouched] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [shouldLoadMaps, setShouldLoadMaps] = useState(false);
   const [mapsLoaded, setMapsLoaded] = useState(false);
 
   const phoneHref = useMemo(
@@ -176,18 +174,8 @@ export default function CommercialCleaningQuoteForm({ phoneNumber }) {
 
     try {
       const [hubspotResponse, emailResponse] = await Promise.all([
-        axios({
-          method: "post",
-          url: "/api/submit-hubspot-form",
-          headers: { "Content-Type": "application/json" },
-          data: dataPayload,
-        }),
-        axios({
-          method: "post",
-          url: "/api/sendmail",
-          headers: { "Content-Type": "application/json" },
-          data: dataPayload,
-        }),
+        postJson("/api/submit-hubspot-form", dataPayload),
+        postJson("/api/sendmail", dataPayload),
       ]);
 
       if (hubspotResponse.data?.success && emailResponse.data?.success) {
@@ -294,13 +282,24 @@ export default function CommercialCleaningQuoteForm({ phoneNumber }) {
         ))}
       </TextField>
 
-      {!mapsLoaded && <GoogleMapsLoader onLoad={() => setMapsLoaded(true)} />}
-      {mapsLoaded && (
+      {shouldLoadMaps && !mapsLoaded && (
+        <GoogleMapsLoader onLoad={() => setMapsLoaded(true)} />
+      )}
+      {mapsLoaded ? (
         <GoogleAutocomplete
           label="Site address"
           value={formData.address}
           onChange={handleAddressChange}
           onSelect={handleSelectAddress}
+          autoComplete="street-address"
+        />
+      ) : (
+        <TextField
+          label="Site address"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          onFocus={() => setShouldLoadMaps(true)}
           autoComplete="street-address"
         />
       )}
@@ -344,16 +343,15 @@ export default function CommercialCleaningQuoteForm({ phoneNumber }) {
           <div className={styles.orDivider}>
             <span>OR</span>
           </div>
-           <Button
-        type="submit"
-        variant="text"
-        size="large"
-       
-        disabled={isSubmitting}
-      
-      >
-          <PhoneRoundedIcon aria-hidden="true" /> Call now: {phoneNumber}
-      </Button>
+          <Button
+            component="a"
+            href={`tel:${phoneHref}`}
+            type="button"
+            variant="text"
+            size="large"
+          >
+            <PhoneRoundedIcon aria-hidden="true" /> Call now: {phoneNumber}
+          </Button>
        
         </>
       )}
@@ -394,6 +392,22 @@ function validateForm(formData) {
   }
 
   return errors;
+}
+
+async function postJson(url, payload) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  return {
+    ok: response.ok,
+    status: response.status,
+    data,
+  };
 }
 
 function buildEmailMessage(formData) {

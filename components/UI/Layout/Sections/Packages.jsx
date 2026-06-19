@@ -12,7 +12,6 @@ export default function Packages({
   serviceName,
   termsAndConditions,
 }) {
-  console.log(termsAndConditions);
   const packageComponent = packagesArray.map((item, index) => {
     let packageHighlightClass;
     if (item.do_you_want_to_highlight_this_package) {

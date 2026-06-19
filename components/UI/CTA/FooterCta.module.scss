@@ -155,7 +155,7 @@
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          color: color-mix(in srgb, var(--dark-on-surface) 70%, transparent);
+          color: var(--dark-on-surface); 
           font-family: var(--font-montserrat), "Segoe UI", sans-serif;
           font-size: 1rem;
           font-weight: 500;

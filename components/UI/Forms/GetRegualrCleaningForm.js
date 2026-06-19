@@ -141,10 +141,8 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
             data: dataPayload
         };
 
-        console.log(formData);
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (response) {
-                console.log(response);
                 if (response[1].status === 200) {
                     setIsLoading(false);
                     setIsSuccess(true);
@@ -153,7 +151,6 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
                     router.push('/form-submitted/thank-you');
                 }
                 else {
-                    console.log(response);
                     setIsLoading(false);
                     setIsSuccess(false);
                     setError(true);
@@ -161,7 +158,6 @@ export default function GetRegularCleaningForm({ className, formName = "Get a Qu
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 setIsLoading(false);
                 setIsSuccess(false);
                 setError(true);

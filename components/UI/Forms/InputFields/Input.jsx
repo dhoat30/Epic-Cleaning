@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Input.module.scss";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
@@ -17,14 +19,11 @@ import Slider from "@mui/material/Slider";
 import Chip from "@mui/material/Chip";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import dynamic from "next/dynamic";
 
-
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
-import dayjs from "dayjs";
+const DateTimeInput = dynamic(() => import("./DateTimeInput"), {
+  ssr: false,
+});
 
 
 // styling for select
@@ -259,33 +258,17 @@ export default function Input({
     );
   } 
   else if(type==="datePicker"){
-    return       <FormControl
-    className="mb-16"
-    fullWidth
-    required={required}
-    error={required ? isInvalid : null}
-  >
-  <LocalizationProvider dateAdapter={AdapterDayjs}>
-  <DateTimePicker
-    label={label}
-    value={value ?? null}
-    onChange={onChange}
-    color="secondary"
-    format="DD/MM/YYYY HH:mm" // include time in the format
-    minDate={dayjs()} 
-    slotProps={{
-      textField: {
-        variant: "outlined",
-        fullWidth: true,
-        helperText: isInvalid ? errorMessage : "",
-        error: isInvalid,
-        color: "secondary", // ✅ explicitly set color here
-
-      },
-    }}
-  />
-</LocalizationProvider>
-  </FormControl>
+    return (
+      <DateTimeInput
+        className="mb-16"
+        label={label}
+        value={value}
+        onChange={onChange}
+        required={required}
+        isInvalid={isInvalid}
+        errorMessage={errorMessage}
+      />
+    );
   } 
   else if (
     type === "text" ||

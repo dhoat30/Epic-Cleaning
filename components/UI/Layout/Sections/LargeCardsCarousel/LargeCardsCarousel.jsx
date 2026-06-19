@@ -139,7 +139,6 @@ function ServiceCard({ card, index }) {
           alt={card.image.alt || card.title || ""}
           fill
           sizes="(max-width: 700px) 86vw, (max-width: 1200px) 54vw, 520px"
-          priority={index < 2}
         />
       )}
       <div className={styles.cardOverlay}>

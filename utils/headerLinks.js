@@ -12,7 +12,7 @@ export const headerLinks = [
 
     {
         id: 2,
-        label: "All Residential Cleaning",
+        label: "Residential Cleaning",
         url: "/residential-cleaning",
         subLinks: [
             { label: "Builders Cleaning", url: "/residential-cleaning/builders-cleaning-tauranga" },
@@ -33,7 +33,7 @@ export const headerLinks = [
     },
     {
         id: 2,
-        label: "All Commercial Cleaning",
+        label: "Commercial Cleaning",
         url: "/commercial-cleaning",
         subLinks: [
             { label: "Building Washing", url: "/commercial-cleaning/building-washing-tauranga" },

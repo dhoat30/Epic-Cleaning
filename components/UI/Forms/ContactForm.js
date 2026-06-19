@@ -119,7 +119,6 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
 
         Promise.all([axios(configHubspot), axios(configSendMail)])
             .then(function (responses) {
-                console.log(responses)
                 // responses[1] is the response from sendmail
                 if (responses[0].status === 200) {
                     setIsLoading(false)
@@ -142,7 +141,6 @@ export default function ContactForm({ className, formName = "Contact Form" }) {
                 // Other success logic
             })
             .catch(function (error) {
-                console.log(error);
                 setIsLoading(false)
                 setIsSuccess(false)
                 setError(true)

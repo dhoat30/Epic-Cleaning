@@ -22,6 +22,7 @@ export default function Video({ videoID, placeholderImage, className, showCompre
               fill
               alt={placeholderImage.alt}
               style={{ objectFit: "cover" }}
+              priority
             />
             <ButtonStyled onClick={() => setVideoLoaded(true)}>
               <PlayIcon />

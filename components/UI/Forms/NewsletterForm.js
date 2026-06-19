@@ -92,7 +92,6 @@ function NewsletterForm({ emailTo, formName, emailRoute, btnLabel, className }) 
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 setIsLoading(false)
                 setIsSuccess(false)
                 setError(true)

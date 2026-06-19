@@ -1,5 +1,4 @@
-
-const { google } = require('googleapis');
+import { unstable_cache } from 'next/cache';
 
 //get single post with slug 
 export const getSinglePostData = async (slug, apiRoute) => {
@@ -41,13 +40,12 @@ export const getOptions = async () => {
 
 
 
+const GOOGLE_REVIEWS_REVALIDATE = 30 * 86400;
+
 // get reivews 
-
-export const getGoogleReviews = async () => {
+const fetchGoogleReviews = async () => {
     try {
-        // Add revalidation logic
-        const nextRevalidateOptions = { next: { revalidate: 30 * 86400 } }; // Revalidate every 30 days 
-
+        const { google } = require('googleapis');
         // Fetch reviews directly from Google API
         const oauth2Client = new google.auth.OAuth2(
             process.env.GOOGLE_CLIENT_ID,
@@ -65,7 +63,6 @@ export const getGoogleReviews = async () => {
         const response = await oauth2Client.request({
             url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`,
             method: "GET",
-            ...nextRevalidateOptions, // Pass the revalidate option here
         });
 
         return {
@@ -78,6 +75,12 @@ export const getGoogleReviews = async () => {
         return { reviews: [], averageRating: null, totalReviewCount: null };
     }
 };
+
+export const getGoogleReviews = unstable_cache(
+    fetchGoogleReviews,
+    ['google-reviews'],
+    { revalidate: GOOGLE_REVIEWS_REVALIDATE }
+);
 
 
 //get service packages  
