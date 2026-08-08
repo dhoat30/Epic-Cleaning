@@ -24,7 +24,7 @@ export default function BeforeAfterMasonry({ data, showTitle, priority }) {
             }%`,
             touchAction: "pan-y",
           }}
-          itemTwo={
+          itemOne={
             <Image
               src={data.beforeImage.url}
               alt={data.beforeImage.alt ? data.beforeImage.alt : "Before"}
@@ -32,7 +32,7 @@ export default function BeforeAfterMasonry({ data, showTitle, priority }) {
               fill
             />
           }
-          itemOne={
+          itemTwo={
             <Image
               src={data.afterImage.url}
               alt={data.afterImage.alt ? data.afterImage.alt : "After"}
