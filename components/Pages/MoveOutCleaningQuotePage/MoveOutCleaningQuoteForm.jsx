@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -117,6 +117,7 @@ const fieldSx = {
 
 export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
   const router = useRouter();
+  const preferredDateInputRef = useRef(null);
   const [formData, setFormData] = useState(initialFormData);
   const [tracking, setTracking] = useState(initialTracking);
   const [fieldErrors, setFieldErrors] = useState({});
@@ -207,6 +208,20 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
       ...current,
       address: selectedAddress,
     }));
+  };
+
+  const openPreferredDatePicker = () => {
+    const input = preferredDateInputRef.current;
+
+    if (!input) {
+      return;
+    }
+
+    input.focus();
+
+    if (typeof input.showPicker === "function") {
+      input.showPicker();
+    }
   };
 
   const handleNextStep = () => {
@@ -424,6 +439,8 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
             type="date"
             value={formData.preferredDate}
             onChange={handleChange}
+            onClick={openPreferredDatePicker}
+            inputRef={preferredDateInputRef}
             InputLabelProps={{ shrink: true }}
             inputProps={{ min: today }}
             sx={fieldSx}
