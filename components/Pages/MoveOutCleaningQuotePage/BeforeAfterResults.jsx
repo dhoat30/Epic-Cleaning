@@ -9,7 +9,10 @@ import {
 } from "react-compare-slider";
 import styles from "./MoveOutCleaningQuotePage.module.scss";
 
-export default function BeforeAfterResults({ items = [] }) {
+export default function BeforeAfterResults({
+  items = [],
+  title = "See what a proper move clean can include",
+}) {
   if (!items.length) return null;
 
   return (
@@ -17,7 +20,7 @@ export default function BeforeAfterResults({ items = [] }) {
       <div className={`${styles.beforeAfterHeader} text-center`}>
         <span className="section-eyebrow">Real results</span>
         <Typography variant="h3" component="h2" className={styles.beforeAfterTitle}>
-          See what a proper move clean can include
+          {title}
         </Typography>
         {/* <Typography
           variant="body1"

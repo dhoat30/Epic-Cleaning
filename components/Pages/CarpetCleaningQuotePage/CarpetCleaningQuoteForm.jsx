@@ -15,7 +15,7 @@ import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { useRouter } from "next/navigation";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
-import styles from "./MoveOutCleaningQuotePage.module.scss";
+import styles from "@/components/Pages/MoveOutCleaningQuotePage/MoveOutCleaningQuotePage.module.scss";
 
 const initialFormData = {
   firstname: "",
@@ -23,8 +23,6 @@ const initialFormData = {
   email: "",
   phone: "",
   serviceType: "",
-  bedrooms: "",
-  bathrooms: "",
   carpetRooms: "",
   address: "",
   preferredDate: "",
@@ -42,46 +40,31 @@ const initialTracking = {
 };
 
 const serviceTypes = [
-  "Move-out clean + carpet shampoo",
-  "Move-out clean only",
-  "Move-in clean",
-  "Carpet shampoo only",
+  "Carpet cleaning only",
+  "Carpet cleaning + stain treatment",
+  "Carpet cleaning + odour treatment",
+  "Move-out carpet cleaning",
   "Not sure yet",
 ];
 
-const bedroomOptions = [
-  "Studio / 1 bedroom",
-  "2 bedrooms",
-  "3 bedrooms",
-  "4 bedrooms",
-  "5+ bedrooms",
-];
-
-const bathroomOptions = [
-  "1 bathroom",
-  "2 bathrooms",
-  "3 bathrooms",
-  "4+ bathrooms",
-];
-
 const carpetRoomOptions = [
-  "No carpet shampoo",
   "1 carpeted room",
   "2 carpeted rooms",
   "3 carpeted rooms",
   "4 carpeted rooms",
   "5+ carpeted rooms",
+  "Whole house",
   "Not sure yet",
 ];
 
 const formSteps = [
   {
     label: "Job details",
-    description: "Cleaning type and property size",
+    description: "Service type and carpeted areas",
   },
   {
     label: "Property",
-    description: "Address, date, and access notes",
+    description: "Address, date, and stain notes",
   },
   {
     label: "Contact details",
@@ -92,7 +75,6 @@ const formSteps = [
 const fieldSx = {
   "& .MuiInputLabel-root": {
     color: "var(--light-primary)",
-
   },
   "& .MuiOutlinedInput-root": {
     borderRadius: "8px",
@@ -115,7 +97,7 @@ const fieldSx = {
   },
 };
 
-export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
+export default function CarpetCleaningQuoteForm({ phoneNumber }) {
   const router = useRouter();
   const [formData, setFormData] = useState(initialFormData);
   const [tracking, setTracking] = useState(initialTracking);
@@ -245,7 +227,7 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
     const message = buildEmailMessage(formData, tracking);
     const dataPayload = {
       email: formData.email,
-      formName: "Move-Out Cleaning Quote Landing Page",
+      formName: "Carpet Cleaning Quote Landing Page",
       message,
       portalID: "145323047",
       hubspotFormID: "56669fff-b1f7-4aff-a297-42e71574dadc",
@@ -269,9 +251,9 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
     if (typeof window !== "undefined") {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: "move_out_cleaning_quote_submission",
+        event: "carpet_cleaning_quote_submission",
         event_category: "form_submit",
-        event_label: "Move-Out Cleaning Quote Landing Page",
+        event_label: "Carpet Cleaning Quote Landing Page",
       });
     }
 
@@ -297,7 +279,7 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
   return (
     <form className={`${styles.form} grid gap-16`} onSubmit={submitHandler} noValidate>
       <div className={`${styles.stepProgress} grid gap-12 mb-16`}>
-        <div className={`${styles.stepMeta} `}>
+        <div className={styles.stepMeta}>
           <span>{`Step ${currentStep + 1} of ${formSteps.length}`}</span>
           <strong>{formSteps[currentStep].label}</strong>
           <p>{formSteps[currentStep].description}</p>
@@ -334,54 +316,16 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
             ))}
           </TextField>
 
-          <div className={`${styles.formGrid} grid gap-16`}>
-            <TextField
-              select
-              label="Bedrooms"
-              name="bedrooms"
-              value={formData.bedrooms}
-              onChange={handleChange}
-              sx={fieldSx}
-            >
-              <MenuItem value="" disabled>
-                Select bedrooms
-              </MenuItem>
-              {bedroomOptions.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              select
-              label="Bathrooms"
-              name="bathrooms"
-              value={formData.bathrooms}
-              onChange={handleChange}
-              sx={fieldSx}
-            >
-              <MenuItem value="" disabled>
-                Select bathrooms
-              </MenuItem>
-              {bathroomOptions.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-
           <TextField
             select
-            label="Carpet shampoo"
+            label="Carpeted areas"
             name="carpetRooms"
             value={formData.carpetRooms}
             onChange={handleChange}
             sx={fieldSx}
           >
             <MenuItem value="" disabled>
-              Select carpet shampoo
+              Select carpeted areas
             </MenuItem>
             {carpetRoomOptions.map((option) => (
               <MenuItem key={option} value={option}>
@@ -436,6 +380,7 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
             onChange={handleChange}
             multiline
             minRows={3}
+            placeholder="Tell us about stains, odours, access, parking, or anything else helpful."
             sx={fieldSx}
           />
         </div>
@@ -513,7 +458,6 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
             variant="contained"
             size="large"
             onClick={handleNextStep}
-        
           >
             Continue <ArrowForwardRoundedIcon />
           </Button>
@@ -522,17 +466,14 @@ export default function MoveOutCleaningQuoteForm({ phoneNumber }) {
             type="submit"
             variant="contained"
             size="large"
-         
             disabled={isSubmitting}
-         
           >
-          Submit {
-              isSubmitting ? (
-                <CircularProgress size={18} color="inherit" />
-              ) : (
-                <ArrowForwardRoundedIcon />
-              )
-            } 
+            Submit{" "}
+            {isSubmitting ? (
+              <CircularProgress size={18} color="inherit" />
+            ) : (
+              <ArrowForwardRoundedIcon />
+            )}
           </Button>
         )}
       </div>
@@ -649,9 +590,7 @@ function buildEmailMessage(formData, tracking) {
     `Email: ${formData.email}`,
     `Phone Number: ${formData.phone || "Not provided"}`,
     `Service Required: ${formData.serviceType}`,
-    `Bedrooms: ${formData.bedrooms}`,
-    `Bathrooms: ${formData.bathrooms}`,
-    `Carpet Shampoo: ${formData.carpetRooms}`,
+    `Carpeted Areas: ${formData.carpetRooms}`,
     `Property Address/Suburb: ${formData.address || "Not provided"}`,
     `Preferred Cleaning Date: ${formData.preferredDate || "Not provided"}`,
     `Message: ${formData.message || "Not provided"}`,

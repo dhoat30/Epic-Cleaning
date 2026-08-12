@@ -379,8 +379,9 @@
         min-width: 0;
         padding: 0;
         color: var(--light-primary);
-        font-weight: 800;
+        font: inherit;
         line-height: 1.4;
+        text-transform: none;
 
         svg {
           width: 18px;
