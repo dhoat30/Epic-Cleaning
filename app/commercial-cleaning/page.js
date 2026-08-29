@@ -8,7 +8,7 @@ import Footer from '@/components/UI/Footer/Footer'
 import ServicesCardsTemplate from '@/components/UI/Services/ServicesCardsTemplate'
 import GoogleReviewsCarousel from '@/components/UI/GoogleReviews/GoogleReviewsCarousel'
 import JsonLd from '@/components/UI/Meta/JsonLd'
-import { getCollectionPageSchema } from '@/utils/schema'
+import { getServiceHubPageSchema } from '@/utils/schema'
 import { getSeoMetadata } from '@/utils/metadata'
 
 
@@ -33,11 +33,14 @@ export default async function Contact({ params }) {
     }
     const googleReviewsData = await getGoogleReviews() 
     const seoData = postData[0]?.yoast_head_json
-    const jsonLd = getCollectionPageSchema({
+    const pageTitle = postData[0]?.title?.rendered || 'Commercial Cleaning Tauranga'
+    const jsonLd = getServiceHubPageSchema({
         path: '/commercial-cleaning',
         name: seoData?.title,
         description: seoData?.description,
         image: seoData?.og_image,
+        serviceName: pageTitle,
+        serviceType: pageTitle,
         items: allPosts.map((post) => ({
             name: post.title.rendered,
             path: `/commercial-cleaning/${post.slug}`,

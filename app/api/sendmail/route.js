@@ -16,7 +16,10 @@ export async function POST(req, res) {
   const url = `https://api.mailgun.net/v3/${DOMAIN}/messages`;
   // Prepare the form data as URL encoded
   const formData = new URLSearchParams();
-  formData.append('from', email);
+  formData.append('from', `Epic Cleaning Website <website@${DOMAIN}>`);
+  if (email) {
+    formData.append('h:Reply-To', email);
+  }
   formData.append('to', 'admin@epiccleaning.co.nz');
   formData.append('subject', formName);
   formData.append('text', `${message}`);
@@ -40,10 +43,13 @@ export async function POST(req, res) {
     const data = await response.json();
     // Use NextApiResponse type for auto-completion and proper response typing
 
-    return NextResponse.json({ message: "This Worked", success: true, data: response });
+    return NextResponse.json({ message: "This Worked", success: true, data });
 
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: error, success: false });
+    return NextResponse.json(
+      { message: "Email delivery failed", success: false },
+      { status: 502 }
+    );
   }
 };

@@ -262,18 +262,46 @@ export const getCollectionPageSchema = ({
     description,
     image,
     type: 'CollectionPage',
-    mainEntity: items.length
-      ? {
-          '@type': 'ItemList',
-          itemListElement: items.map((item, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: item.name,
-            url: absoluteUrl(item.path),
-          })),
-        }
-      : undefined,
+    mainEntity: getItemListSchema(items),
   });
+
+export const getItemListSchema = (items = []) =>
+  items.length
+    ? {
+        '@type': 'ItemList',
+        itemListElement: items.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          url: absoluteUrl(item.path),
+        })),
+      }
+    : undefined;
+
+export const getServiceHubPageSchema = ({
+  path,
+  name,
+  description,
+  image,
+  items = [],
+  serviceName,
+  serviceType,
+}) => [
+  getWebPageSchema({
+    path,
+    name,
+    description,
+    image,
+    mainEntity: getItemListSchema(items),
+  }),
+  getServiceSchema({
+    path,
+    name: serviceName || name,
+    description,
+    image,
+    serviceType: serviceType || serviceName || name,
+  }),
+].filter(Boolean);
 
 export const getServiceSchema = ({
   path,

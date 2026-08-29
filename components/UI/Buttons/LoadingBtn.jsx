@@ -12,6 +12,7 @@ function LoadingBtn({
   children,
   newSubmission,
   id,
+  ...props
 }) {
   let labelText = children ? children : "Submit";
   return (
@@ -25,6 +26,7 @@ function LoadingBtn({
       disableElevation
       disabled={isSuccess}
       loading={isLoading}
+      {...props}
     >
       {isSuccess && !newSubmission ? (
         <DoneIcon className={styles.doneIcon} />
