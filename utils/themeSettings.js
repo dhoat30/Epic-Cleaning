@@ -75,7 +75,7 @@ export const lightTheme = createTheme({
         h6: {
  color: "var( --light-on-surface-variant)", 
              lineHeight: "140%",
-            fontWeight: 400,
+            fontWeight: 500,
                         fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
 
         },
@@ -263,8 +263,8 @@ export const theme = createTheme({
         },
 
         h6: {
-            fontWeight: 400,
-            letterSpacing: "0.02rem",
+            fontWeight: 500,
+         
             color: "var(--dark-on-surface)",
                         fontFamily: 'var(--font-inter), "Segoe UI", sans-serif',
 

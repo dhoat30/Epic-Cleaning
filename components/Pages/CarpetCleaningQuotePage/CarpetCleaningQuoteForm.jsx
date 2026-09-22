@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -22,10 +21,7 @@ const initialFormData = {
   lastname: "",
   email: "",
   phone: "",
-  serviceType: "",
-  carpetRooms: "",
   address: "",
-  preferredDate: "",
   message: "",
 };
 
@@ -39,42 +35,10 @@ const initialTracking = {
   utmContent: "",
 };
 
-const serviceTypes = [
-  "Carpet cleaning only",
-  "Carpet cleaning + stain treatment",
-  "Carpet cleaning + odour treatment",
-  "Move-out carpet cleaning",
-  "Not sure yet",
-];
-
-const carpetRoomOptions = [
-  "1 carpeted room",
-  "2 carpeted rooms",
-  "3 carpeted rooms",
-  "4 carpeted rooms",
-  "5+ carpeted rooms",
-  "Whole house",
-  "Not sure yet",
-];
-
-const formSteps = [
-  {
-    label: "Job details",
-    description: "Service type and carpeted areas",
-  },
-  {
-    label: "Property",
-    description: "Address, date, and stain notes",
-  },
-  {
-    label: "Contact details",
-    description: "Where we should send the quote",
-  },
-];
-
 const fieldSx = {
   "& .MuiInputLabel-root": {
     color: "var(--light-primary)",
+
   },
   "& .MuiOutlinedInput-root": {
     borderRadius: "8px",
@@ -99,20 +63,14 @@ const fieldSx = {
 
 export default function CarpetCleaningQuoteForm({ phoneNumber }) {
   const router = useRouter();
-  const preferredDateInputRef = useRef(null);
   const [formData, setFormData] = useState(initialFormData);
   const [tracking, setTracking] = useState(initialTracking);
   const [fieldErrors, setFieldErrors] = useState({});
-  const [contactStepSession, setContactStepSession] = useState(0);
-  const [validatedContactStepSession, setValidatedContactStepSession] =
-    useState(-1);
-  const [isContactValidationArmed, setIsContactValidationArmed] =
-    useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [shouldLoadMaps, setShouldLoadMaps] = useState(false);
   const [mapsLoaded, setMapsLoaded] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -128,38 +86,10 @@ export default function CarpetCleaningQuoteForm({ phoneNumber }) {
     });
   }, []);
 
-  const today = useMemo(() => new Date().toISOString().split("T")[0], []);
   const phoneHref = useMemo(
     () => phoneNumber?.replace(/[^\d+]/g, ""),
     [phoneNumber]
   );
-  const isLastStep = currentStep === formSteps.length - 1;
-  const progressValue = ((currentStep + 1) / formSteps.length) * 100;
-  const hasSubmittedCurrentContactStep =
-    isContactValidationArmed &&
-    validatedContactStepSession === contactStepSession;
-
-  const resetContactValidation = () => {
-    setFieldErrors({});
-    setValidatedContactStepSession(-1);
-    setIsContactValidationArmed(false);
-    setContactStepSession((session) => session + 1);
-  };
-
-  useEffect(() => {
-    if (currentStep === formSteps.length - 1) {
-      resetContactValidation();
-    }
-  }, [currentStep]);
-
-  const getVisibleFieldError = (field) => {
-    if (!hasSubmittedCurrentContactStep) {
-      return "";
-    }
-
-    return fieldErrors[field] || "";
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -168,7 +98,7 @@ export default function CarpetCleaningQuoteForm({ phoneNumber }) {
       [name]: value,
     }));
 
-    if (fieldErrors[name] || hasSubmittedCurrentContactStep) {
+    if (fieldErrors[name] || hasSubmitted) {
       const nextError = validateContactField(name, value);
 
       setFieldErrors((current) => ({
@@ -192,50 +122,18 @@ export default function CarpetCleaningQuoteForm({ phoneNumber }) {
     }));
   };
 
-  const openPreferredDatePicker = () => {
-    const input = preferredDateInputRef.current;
-
-    if (!input) {
-      return;
-    }
-
-    input.focus();
-
-    if (typeof input.showPicker === "function") {
-      input.showPicker();
-    }
-  };
-
-  const handleNextStep = () => {
-    const nextStep = Math.min(currentStep + 1, formSteps.length - 1);
-
-    if (nextStep === formSteps.length - 1 && currentStep !== nextStep) {
-      resetContactValidation();
-    }
-
-    setCurrentStep(nextStep);
-  };
-
-  const handleBackStep = () => {
-    setCurrentStep((step) => Math.max(step - 1, 0));
-  };
-
   const submitHandler = async (event) => {
     event.preventDefault();
     setSubmitError("");
 
-    if (!isLastStep) {
-      handleNextStep();
-      return;
-    }
+    if (isSubmitting) return;
 
     const validationErrors = validateContactFields(formData);
-    setIsContactValidationArmed(true);
-    setValidatedContactStepSession(contactStepSession);
+    setHasSubmitted(true);
+    setFieldErrors(validationErrors);
 
     if (Object.keys(validationErrors).length) {
       setFieldErrors(validationErrors);
-      setCurrentStep(formSteps.length - 1);
       return;
     }
 
@@ -254,7 +152,7 @@ export default function CarpetCleaningQuoteForm({ phoneNumber }) {
         { name: "propertyType", value: "Residential" },
         {
           name: "services_required",
-          value: `${formData.serviceType} | ${formData.carpetRooms}`,
+          value: "Carpet cleaning",
         },
         { name: "address", value: formData.address },
         { name: "message", value: message },
@@ -293,214 +191,108 @@ export default function CarpetCleaningQuoteForm({ phoneNumber }) {
 
   return (
     <form className={`${styles.form} grid gap-16`} onSubmit={submitHandler} noValidate>
-      <div className={`${styles.stepProgress} grid gap-12 mb-16`}>
-        <div className={styles.stepMeta}>
-          <span>{`Step ${currentStep + 1} of ${formSteps.length}`}</span>
-          <strong>{formSteps[currentStep].label}</strong>
-          <p>{formSteps[currentStep].description}</p>
-        </div>
-        <div
-          className={styles.progressTrack}
-          role="progressbar"
-          aria-valuenow={Math.round(progressValue)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label="Quote form progress"
-        >
-          <span style={{ width: `${progressValue}%` }} />
-        </div>
+      <div className={`${styles.formGrid} grid gap-16`}>
+        <TextField
+          label="First name"
+          name="firstname"
+          required
+          value={formData.firstname}
+          onChange={handleChange}
+          error={Boolean(fieldErrors.firstname)}
+          helperText={fieldErrors.firstname}
+          autoComplete="given-name"
+          sx={fieldSx}
+        />
+
+        <TextField
+          label="Last name"
+          name="lastname"
+          required
+          value={formData.lastname}
+          onChange={handleChange}
+          error={Boolean(fieldErrors.lastname)}
+          helperText={fieldErrors.lastname}
+          autoComplete="family-name"
+          sx={fieldSx}
+        />
       </div>
 
-      {currentStep === 0 && (
-        <div className={`${styles.stepPanel} grid gap-16`}>
-          <TextField
-            select
-            label="Cleaning service"
-            name="serviceType"
-            value={formData.serviceType}
-            onChange={handleChange}
-            sx={fieldSx}
-          >
-            <MenuItem value="" disabled>
-              Select cleaning service
-            </MenuItem>
-            {serviceTypes.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
+      <TextField
+        label="Email address"
+        name="email"
+        required
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+        error={Boolean(fieldErrors.email)}
+        helperText={fieldErrors.email}
+        autoComplete="email"
+        sx={fieldSx}
+      />
 
-          <TextField
-            select
-            label="Carpeted areas"
-            name="carpetRooms"
-            value={formData.carpetRooms}
-            onChange={handleChange}
-            sx={fieldSx}
-          >
-            <MenuItem value="" disabled>
-              Select carpeted areas
-            </MenuItem>
-            {carpetRoomOptions.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
+      <TextField
+        label="Phone number"
+        name="phone"
+        required
+        type="tel"
+        value={formData.phone}
+        onChange={handleChange}
+        error={Boolean(fieldErrors.phone)}
+        helperText={fieldErrors.phone}
+        autoComplete="tel"
+        sx={fieldSx}
+      />
+      {shouldLoadMaps && !mapsLoaded && (
+        <GoogleMapsLoader onLoad={() => setMapsLoaded(true)} />
+      )}
+      {mapsLoaded ? (
+        <GoogleAutocomplete
+          label="Address (optional)"
+          value={formData.address}
+          onChange={handleAddressChange}
+          onSelect={handleSelectAddress}
+          autoComplete="street-address"
+          className={styles.addressField}
+        />
+      ) : (
+        <TextField
+          label="Address (optional)"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          onFocus={() => setShouldLoadMaps(true)}
+          autoComplete="street-address"
+          sx={fieldSx}
+        />
       )}
 
-      {currentStep === 1 && (
-        <div className={`${styles.stepPanel} grid gap-16`}>
-          {shouldLoadMaps && !mapsLoaded && (
-            <GoogleMapsLoader onLoad={() => setMapsLoaded(true)} />
-          )}
-          {mapsLoaded ? (
-            <GoogleAutocomplete
-              label="Property address or suburb"
-              value={formData.address}
-              onChange={handleAddressChange}
-              onSelect={handleSelectAddress}
-              autoComplete="street-address"
-              className={styles.addressField}
-            />
-          ) : (
-            <TextField
-              label="Property address or suburb"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              onFocus={() => setShouldLoadMaps(true)}
-              autoComplete="street-address"
-              sx={fieldSx}
-            />
-          )}
-
-          <TextField
-            label="Preferred cleaning date"
-            name="preferredDate"
-            type="date"
-            value={formData.preferredDate}
-            onChange={handleChange}
-            onClick={openPreferredDatePicker}
-            inputRef={preferredDateInputRef}
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ min: today }}
-            sx={fieldSx}
-          />
-
-          <TextField
-            label="Message (optional)"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            multiline
-            minRows={3}
-            placeholder="Tell us about stains, odours, access, parking, or anything else helpful."
-            sx={fieldSx}
-          />
-        </div>
-      )}
-
-      {currentStep === 2 && (
-        <div
-          key={`contact-step-${contactStepSession}`}
-          className={`${styles.stepPanel} grid gap-16`}
-        >
-          <div className={`${styles.formGrid} grid gap-16`}>
-            <TextField
-              label="First name *"
-              name="firstname"
-              value={formData.firstname}
-              onChange={handleChange}
-              error={Boolean(getVisibleFieldError("firstname"))}
-              helperText={getVisibleFieldError("firstname")}
-              autoComplete="given-name"
-              sx={fieldSx}
-            />
-
-            <TextField
-              label="Last name *"
-              name="lastname"
-              value={formData.lastname}
-              onChange={handleChange}
-              error={Boolean(getVisibleFieldError("lastname"))}
-              helperText={getVisibleFieldError("lastname")}
-              autoComplete="family-name"
-              sx={fieldSx}
-            />
-          </div>
-
-          <TextField
-            label="Email address *"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={Boolean(getVisibleFieldError("email"))}
-            helperText={getVisibleFieldError("email")}
-            autoComplete="email"
-            sx={fieldSx}
-          />
-
-          <TextField
-            label="Phone number"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            error={Boolean(getVisibleFieldError("phone"))}
-            helperText={getVisibleFieldError("phone")}
-            autoComplete="tel"
-            sx={fieldSx}
-          />
-        </div>
-      )}
-
-      <div className={styles.stepActions}>
-        {currentStep > 0 && (
-          <Button
-            type="button"
-            variant="outlined"
-            size="large"
-            onClick={handleBackStep}
-            disabled={isSubmitting}
-          >
-            Back
-          </Button>
-        )}
-
-        {!isLastStep ? (
-          <Button
-            type="button"
-            variant="contained"
-            size="large"
-            onClick={handleNextStep}
-          >
-            Continue <ArrowForwardRoundedIcon />
-          </Button>
+      <TextField
+        label="Message (optional)"
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        multiline
+        minRows={3}
+        placeholder="Tell us about stains, odours, access, or anything else helpful."
+        sx={fieldSx}
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        size="large"
+        disabled={isSubmitting}
+      >
+        Submit {isSubmitting ? (
+          <CircularProgress size={18} color="inherit" />
         ) : (
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            disabled={isSubmitting}
-          >
-            Submit{" "}
-            {isSubmitting ? (
-              <CircularProgress size={18} color="inherit" />
-            ) : (
-              <ArrowForwardRoundedIcon />
-            )}
-          </Button>
+          <ArrowForwardRoundedIcon />
         )}
-      </div>
+      </Button>
 
-      {isLastStep && (
-        <div className={styles.privacyNote}>
-          <LockOutlinedIcon aria-hidden="true" />
-          <span>Your details are private. No spam, ever.</span>
-        </div>
-      )}
+      <div className={styles.privacyNote}>
+        <LockOutlinedIcon aria-hidden="true" />
+        <span>Your details are private. No spam, ever.</span>
+      </div>
 
       {submitError && <Alert severity="error">{submitError}</Alert>}
 
@@ -573,7 +365,11 @@ function validateContactField(field, value = "") {
     }
   }
 
-  if (field === "phone" && trimmedValue) {
+  if (field === "phone") {
+    if (!trimmedValue) {
+      return "Please enter your phone number.";
+    }
+
     const digits = trimmedValue.replace(/[^\d]/g, "");
 
     if (digits.length < 7) {
@@ -606,10 +402,7 @@ function buildEmailMessage(formData, tracking) {
     `Last Name: ${formData.lastname}`,
     `Email: ${formData.email}`,
     `Phone Number: ${formData.phone || "Not provided"}`,
-    `Service Required: ${formData.serviceType}`,
-    `Carpeted Areas: ${formData.carpetRooms}`,
     `Property Address/Suburb: ${formData.address || "Not provided"}`,
-    `Preferred Cleaning Date: ${formData.preferredDate || "Not provided"}`,
     `Message: ${formData.message || "Not provided"}`,
     "",
     "Lead Tracking:",

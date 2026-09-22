@@ -33,8 +33,8 @@ const benefits = [
 ];
 
 const steps = [
-  "Tell us the property size",
-  "Choose carpet shampoo if needed",
+  "Share your contact details",
+  "Add any cleaning details (optional)",
   "Get a clear quote fast",
 ];
 
@@ -154,15 +154,19 @@ export default function MoveOutCleaningQuotePage({
             <aside className={styles.formCard} aria-label="Move-out cleaning quote form">
               <div className={styles.formHeader}>
                 <Typography variant="h4" component="h2" className={styles.formTitle}>
-                  Request your move-out quote
+                  Get Your Free Quote
                 </Typography>
                 <Typography
                   variant="body1"
                   component="p"
                   className={`${styles.formDescription} mt-8`}
                 >
-                  We will respond quickly with the next available booking options.
+                  Takes 60 seconds. No obligation whatsoever.
                 </Typography>
+              </div>
+              <div className={styles.formBenefit}>
+                <AccessTimeRoundedIcon aria-hidden="true" />
+                <span>Fast quotes. One team for your clean.</span>
               </div>
               <MoveOutCleaningQuoteForm phoneNumber={phoneNumber} />
             </aside>

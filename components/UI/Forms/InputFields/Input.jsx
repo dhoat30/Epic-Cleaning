@@ -228,9 +228,9 @@ export default function Input({
     return (
       <FormControlStyled
         error={required ? isInvalid : null}
-        style={{ marginTop: "16px" }}
+        style={{ marginBottom: "16px" }}
       >
-        <Typography variant="h6" component="div">
+        <Typography variant="subtitle1" component="div">
           {label}
         </Typography>
         <div

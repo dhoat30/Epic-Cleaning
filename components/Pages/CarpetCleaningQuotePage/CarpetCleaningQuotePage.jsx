@@ -33,8 +33,8 @@ const benefits = [
 ];
 
 const steps = [
-  "Tell us how many carpeted rooms need cleaning",
-  "Add stain, odour, or move-out details",
+  "Share your contact details",
+  "Add any carpet cleaning details (optional)",
   "Get a clear quote fast",
 ];
 
@@ -153,16 +153,19 @@ export default function CarpetCleaningQuotePage({
             <aside className={styles.formCard} aria-label="Carpet cleaning quote form">
               <div className={styles.formHeader}>
                 <Typography variant="h4" component="h2" className={styles.formTitle}>
-                  Request your carpet cleaning quote
+                  Get Your Free Quote
                 </Typography>
                 <Typography
                   variant="body1"
                   component="p"
                   className={`${styles.formDescription} mt-8`}
                 >
-                  We will respond quickly with pricing and the next available
-                  booking options.
+                  Takes 60 seconds. No obligation whatsoever.
                 </Typography>
+              </div>
+              <div className={styles.formBenefit}>
+                <AccessTimeRoundedIcon aria-hidden="true" />
+                <span>Fresh carpets. Fast, local service.</span>
               </div>
               <CarpetCleaningQuoteForm phoneNumber={phoneNumber} />
             </aside>
