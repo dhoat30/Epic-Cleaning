@@ -1,10 +1,10 @@
 "use client";
 import styles from "./USP.module.scss";
-import React from "react";
+import React, { useId } from "react";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
+
 export default function USP({
   title,
   description,
@@ -12,87 +12,74 @@ export default function USP({
   showTitle = false,
   statsArray,
 }) {
+  const titleId = useId();
+  const hasTitle = showTitle && Boolean(title);
+  const hasStats = showTitle && statsArray?.length > 0;
+  const hasHeader = hasTitle || (showTitle && description) || hasStats;
+  const hasCards = cards?.length > 0;
+
+  if (!hasHeader && !hasCards) return null;
+
   return (
-    <Section>
+    <section className={styles.section} aria-labelledby={hasTitle ? titleId : undefined}>
       <Container maxWidth="xl" className={styles.container}>
-        {showTitle && (
-          <div className={styles.titleWrapper}>
-            <div className="section-eyebrow section-eyebrow-dark">Why Epic</div>
-            <Typography variant="h2" component="h2" className={styles.title}>
-              {title}
-            </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              className={styles.description}
-            >
-              {description}
-            </Typography>
-            {statsArray && statsArray.length > 0 && (
-              <div className={styles.statsWrapper}>
+        {hasHeader && (
+          <div className={styles.header}>
+            <div className={styles.titleWrapper}>
+              <p className={styles.eyebrow}><span aria-hidden="true" />Why Epic</p>
+              {hasTitle && (
+                <Typography id={titleId} variant="h2" component="h2" className={styles.title}>
+                  {title}
+                </Typography>
+              )}
+              {description && (
+                <Typography variant="body1" component="p" className={styles.description}>
+                  {description}
+                </Typography>
+              )}
+            </div>
+            {hasStats && (
+              <dl className={styles.statsWrapper}>
                 {statsArray.map((stat, index) => (
-                  <div key={index} className={styles.stat}>
-                    <Typography
-                      variant="h2"
-                      component="div"
-                      className={styles.statValue}
-                    >
-                      {stat.value}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      component="div"
-                      className={styles.statLabel}
-                    >
-                      {stat.label}
-                    </Typography>
+                  <div key={`${stat.label}-${index}`} className={styles.stat}>
+                    <dt className={styles.statLabel}>{stat.label}</dt>
+                    <dd className={styles.statValue}>{stat.value}</dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             )}
           </div>
         )}
-        <div className={styles.cardsWrapper}>
-          {cards &&
-            cards.length > 0 &&
-            cards.map((card, index) => (
-              <div key={index} className={styles.card}>
-                {card.icon?.url && (
-                  <div className={styles.iconWrapper}>
-                    <Image
-                      src={card.icon.url}
-                      alt={card.icon.alt || ""}
-                      width="56"
-                      height="56"
-                      className={styles.image}
-                    />
-                  </div>
-                )}
-                <div className={styles.content}>
-                  <Typography
-                    variant="h6"
-                    component="h3"
-                    className={styles.cardTitle}
-                  >
+        {hasCards && (
+          <div className={styles.cardsWrapper}>
+            {cards.map((card, index) => (
+              <div key={`${card.title}-${index}`} className={styles.card}>
+                <div className={styles.cardHeading}>
+                  {card.icon?.url && (
+                    <div className={styles.iconWrapper}>
+                      <Image
+                        src={card.icon.url}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className={styles.image}
+                      />
+                    </div>
+                  )}
+                  <Typography variant="h6" component="h3" className={styles.cardTitle}>
                     {card.title}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    component="p"
-                    className={styles.cardDescription}
-                  >
+                </div>
+                {card.description && (
+                  <Typography variant="body1" component="p" className={styles.cardDescription}>
                     {card.description}
                   </Typography>
-                </div>
+                )}
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </Container>
-    </Section>
+    </section>
   );
 }
-const Section = ({ className = "", ...props }) =>
-  React.createElement("section", {
-    ...props,
-    className: `${styles.section} ${className}`.trim(),
-  });

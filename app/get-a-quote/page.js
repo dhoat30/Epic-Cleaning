@@ -1,55 +1,65 @@
-import { getOptions, getSinglePostData, getAllPosts, getSingleServicePackage } from '@/utils/fetchData'
-import Layout from '@/components/UI/Layout/Layout'
-import OptimizedHero from '@/components/UI/Hero/OptimizedHero/OptimizedHero'
-import TechLogos from '@/components/UI/TechLogos/TechLogos'
-import USP from '@/components/UI/USP/USP'
+import { getOptions, getSinglePostData } from '@/utils/fetchData'
 import Header from '@/components/UI/Header/Header'
 import Footer from '@/components/UI/Footer/Footer'
-import GetQuotePage from '@/components/Pages/GetQuotePage/GetQuotePage'
+import USP from '@/components/UI/USP/USP'
+import ResidentialQuotePage from '@/components/Pages/GetQuotePage/ResidentialQuotePage'
 import JsonLd from '@/components/UI/Meta/JsonLd'
 import { getWebPageSchema } from '@/utils/schema'
 import { getSeoMetadata } from '@/utils/metadata'
 
+const title = 'House Cleaning Services Tauranga | Free Quote | Epic Cleaning'
+const description = 'House cleaning in Tauranga, Papamoa and Mount Maunganui. Regular cleans, deep cleans, oven, window and carpet cleaning. Get a free, no-obligation quote.'
 
-export async function generateMetadata() {
-  const data = await getSinglePostData("get-a-quote", "/wp-json/wp/v2/pages")
-
-  return getSeoMetadata({
-    seoData: data?.[0]?.yoast_head_json,
-    path: '/get-a-quote',
-  })
+export function generateMetadata() {
+  return getSeoMetadata({ path: '/get-a-quote', title, description })
 }
 
-export default async function Contact() {
+export default async function GetQuoteRoute() {
+  const [options, galleryPage] = await Promise.all([
+    getOptions(),
+    getSinglePostData('gallery', '/wp-json/wp/v2/pages'),
+  ])
+  const gallery = galleryPage?.[0]?.acf?.gallery
+  const beforeAfterItems = getResidentialResults(gallery)
+  const jsonLd = getWebPageSchema({
+    path: '/get-a-quote',
+    name: title,
+    description,
+    type: 'ContactPage',
+  })
 
-    const postData = await getSinglePostData("get-a-quote", "/wp-json/wp/v2/pages")
-    const options = await getOptions()
-    if (!postData) {
-        return {
-            notFound: true,
-        }
-    }
-    const seoData = postData[0]?.yoast_head_json
-    const jsonLd = getWebPageSchema({
-        path: '/get-a-quote',
-        name: seoData?.title,
-        description: seoData?.description,
-        image: seoData?.og_image,
-        type: 'ContactPage',
-    })
+  return (
+    <>
+      <JsonLd data={jsonLd} idPrefix="quote-schema" />
+      <Header />
+      <main>
+        <ResidentialQuotePage stats={options.stats} contactInfo={options.contact_info} beforeAfterItems={beforeAfterItems} />
+        <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
+      </main>
+      <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} showFooterCta={false} />
+    </>
+  )
+}
 
-    return (
-        <>
-            <JsonLd data={jsonLd} idPrefix="quote-schema" />
-            <Header />
-            <main>
-                <GetQuotePage data={postData[0]} />
-                <TechLogos data={options.clients_logos} />
-                <Layout sections={postData[0]?.acf?.sections} />
-                <USP showTitle={true} statsArray={options.stats.items} cards={options.usp.items} title={options.usp.section_title} description={options.usp.section_description} />
+function getResidentialResults(gallery) {
+  if (!Array.isArray(gallery)) return []
 
-            </main>
-            <Footer footerCtaData={options.footer_cta} certifications={options.certifications} contactInfo={options.contact_info} socialData={options.social_links} showFooterCta={false} />
-        </>
+  const services = [
+    { tag: 'oven-cleaning', label: 'Oven cleaning' },
+    { tag: 'shower-treatment', label: 'Shower treatment' },
+    { tag: 'carpet-cleaning', label: 'Carpet cleaning' },
+  ]
+
+  return services.flatMap(({ tag, label }) => {
+    const item = gallery.find((entry) =>
+      entry?.tag?.value === tag && entry?.before_image?.url && entry?.after_image?.url
     )
+    if (!item) return []
+
+    return [{
+      label,
+      beforeImage: { url: item.before_image.url, alt: `${label} — before` },
+      afterImage: { url: item.after_image.url, alt: `${label} — after` },
+    }]
+  })
 }

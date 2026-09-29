@@ -1,0 +1,99 @@
+.beforeAfterSection {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 16px 24px 88px;
+
+  @media (max-width: 600px) {
+    padding: 0 16px 64px;
+  }
+
+  .beforeAfterHeader {
+    max-width: 760px;
+    margin: 0 auto 40px;
+
+    .beforeAfterTitle {
+      color: var(--light-primary);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .beforeAfterDescription {
+      color: var(--light-on-surface-variant);
+    }
+  }
+
+  .beforeAfterGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
+
+    .resultCard {
+      overflow: hidden;
+      border: 1px solid var(--light-outline-variant);
+      border-radius: 8px;
+      background: var(--light-surface-container-lowest);
+      box-shadow: 0 18px 44px color-mix(in srgb, var(--light-primary) 8%, transparent);
+
+      .compareFrame {
+        position: relative;
+        overflow: hidden;
+        background: var(--light-primary);
+
+        .compareSlider {
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          min-height: 280px;
+
+          @media (max-width: 480px) {
+            min-height: 240px;
+          }
+        }
+
+        .resultBadge {
+          position: absolute;
+          top: 14px;
+          z-index: 2;
+          display: inline-flex;
+          align-items: center;
+          min-height: 24px;
+          padding: 5px 8px;
+          border: 1px solid color-mix(in srgb, white 24%, transparent);
+          border-radius: 6px;
+          background: rgba(8, 22, 31, 0.46);
+          color: white;
+          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          line-height: 1;
+          text-transform: uppercase;
+          backdrop-filter: blur(10px);
+        }
+
+        .beforeBadge {
+          left: 14px;
+        }
+
+        .afterBadge {
+          right: 14px;
+          background: rgba(8, 22, 31, 0.46);
+        }
+      }
+
+      .resultCaption {
+        padding: 18px 20px;
+
+        h3 {
+          color: var(--light-primary);
+          font-weight: 800;
+        }
+      }
+    }
+  }
+}

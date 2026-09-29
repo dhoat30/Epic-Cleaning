@@ -7,11 +7,12 @@ import {
   ReactCompareSliderHandle,
   ReactCompareSliderImage,
 } from "react-compare-slider";
-import styles from "./MoveOutCleaningQuotePage.module.scss";
+import styles from "./BeforeAfterResults.module.scss";
 
 export default function BeforeAfterResults({
   items = [],
   title = "See what a proper move clean can include",
+  description,
 }) {
   if (!items.length) return null;
 
@@ -22,19 +23,18 @@ export default function BeforeAfterResults({
         <Typography variant="h3" component="h2" className={styles.beforeAfterTitle}>
           {title}
         </Typography>
-        {/* <Typography
+        {description && <Typography
           variant="body1"
           component="p"
           className={`${styles.beforeAfterDescription} mt-12`}
         >
-          Before-and-after examples from the gallery: ovens, carpets, vinyl
-          floors, showers, dusting, and stain removal.
-        </Typography> */}
+          {description}
+        </Typography>}
       </div>
 
       <div className={`${styles.beforeAfterGrid} grid gap-24`}>
         {items.map((item) => (
-          <article className={styles.resultCard} key={item.label}>
+          <article className={styles.resultCard} key={`${item.label}-${item.beforeImage.url}`} aria-label={item.label}>
             <div className={styles.compareFrame}>
               <ReactCompareSlider
                 className={styles.compareSlider}

@@ -17,8 +17,9 @@ import { useRouter } from 'next/navigation';
 import Typography from "@mui/material/Typography";
 import GoogleMapsLoader from "@/components/GoogleMaps/GoogleMapsLoader";
 import GoogleAutocomplete from "@/components/GoogleMaps/GoogleAutoComplete";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
-export default function GetQuoteForm({ className, formName = "Get a Quote Form", title = "Please fill out a form" }) {
+export default function GetQuoteForm({ className, formName = "Get a Quote Form", title = "Please fill out a form", fullWidthSubmit = false, submitLabel = "Submit now" }) {
     const router = useRouter();
 
     const [formData, setFormData] = useState({
@@ -251,8 +252,15 @@ export default function GetQuoteForm({ className, formName = "Get a Quote Form",
                         <div className="input-wrapper ">
                         
                             {formInputs}
-                            <LoadingBtn newSubmission={newSubmission} onClick={submitHandler} isLoading={isLoading} isSuccess={isSuccess}>
-                                Submit now
+                            <LoadingBtn
+                                newSubmission={newSubmission}
+                                onClick={submitHandler}
+                                isLoading={isLoading}
+                                isSuccess={isSuccess}
+                                fullWidth={fullWidthSubmit}
+                                endIcon={fullWidthSubmit && !isLoading && !isSuccess ? <ArrowForwardRoundedIcon aria-hidden="true" /> : undefined}
+                            >
+                                {submitLabel}
                             </LoadingBtn>
                             {error && <Alert className="my-8" severity='error'>Something went wrong. Please Try again</Alert>}
                         </div>

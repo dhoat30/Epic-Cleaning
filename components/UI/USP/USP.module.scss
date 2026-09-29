@@ -1,200 +1,215 @@
 .section {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: 96px 0;
-  background:
-    radial-gradient(
-      circle at 12% 18%,
-      color-mix(in srgb, var(--light-secondary) 14%, transparent),
-      transparent 34%
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--dark-secondary-container) 88%, black),
-      color-mix(in srgb, var(--dark-surface-container-lowest) 86%, var(--light-primary))
-    );
-
-  @media (max-width: 900px) {
-    padding: 64px 0;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 24px;
-    z-index: -1;
-    border: 1px solid color-mix(in srgb, var(--dark-on-surface) 8%, transparent);
-    pointer-events: none;
-
-    @media (max-width: 700px) {
-      inset: 12px;
-    }
-  }
+  padding: 80px 0;
+  background: var(--light-primary);
+  color: white;
 
   .container {
-    display: grid;
-    grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.35fr);
-    gap: 64px;
-    align-items: start;
+    // Respond to the space available when this section is embedded in a column.
+    container-type: inline-size;
+  }
 
-    @media (max-width: 1200px) {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
+  .header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 40px;
   }
 
   .titleWrapper {
-    max-width: 560px;
+    max-width: 720px;
+  }
 
-    @media (min-width: 1201px) {
-      position: sticky;
-      top: 112px;
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #a9e8cb;
+    font-family: var(--font-inter), "Segoe UI", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
     }
+  }
 
-    .title {
-      color: var(--dark-on-surface);
-      font-family: var(--font-montserrat), "Segoe UI", sans-serif;
-      font-size: clamp(2.7rem, 5vw, 4.5rem);
-      font-weight: 800;
-      line-height: 0.98;
-      letter-spacing: 0;
-    }
+  .title {
+    color: white;
+    font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+    font-size: clamp(2rem, 3.3vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
 
-    .description {
-      max-width: 500px;
-      margin-top: 24px;
-      color: color-mix(in srgb, var(--dark-on-surface) 78%, transparent);
-      font-family: var(--font-inter), "Segoe UI", sans-serif;
-      font-size: 1.08rem;
-      line-height: 1.65;
-    }
+  .description {
+    max-width: 660px;
+    margin-top: 18px;
+    color: #d5e4e9;
+    font-family: var(--font-inter), "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
 
-    .statsWrapper {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      max-width: 420px;
-      margin-top: 36px;
+  .statsWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+    gap: 28px;
+    padding: 28px 32px;
+    border-block: 1px solid rgba(213, 228, 233, 0.25);
+  }
 
-      @media (max-width: 520px) {
-        grid-template-columns: 1fr;
-      }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
 
-      .stat {
-        padding: 20px;
-        border: 1px solid color-mix(in srgb, var(--dark-on-surface) 16%, transparent);
-        border-radius: 8px;
-        background: color-mix(in srgb, var(--dark-surface-container-low) 42%, transparent);
-        box-shadow: inset 0 1px 0 color-mix(in srgb, var(--dark-on-surface) 10%, transparent);
+  .statValue {
+    order: -1;
+    color: #a9e8cb;
+    font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+    font-size: clamp(2.3rem, 3.6vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
 
-        .statValue {
-          color: var(--dark-on-surface);
-          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
-          font-size: clamp(2.4rem, 4vw, 3.4rem);
-          font-weight: 800;
-          line-height: 0.95;
-          letter-spacing: 0;
-        }
-
-        .statLabel {
-          margin-top: 10px;
-          color: color-mix(in srgb, var(--dark-on-surface) 74%, transparent);
-          font-family: var(--font-inter), "Segoe UI", sans-serif;
-          font-size: 0.95rem;
-          font-weight: 700;
-          line-height: 1.3;
-        }
-      }
-    }
+  .statLabel {
+    color: #e3edf0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
   .cardsWrapper {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 20px;
+  }
 
-    @media (max-width: 760px) {
+  .card {
+    min-width: 0;
+    padding: 28px 24px;
+    border: 1px solid #e0e9e6;
+    border-radius: 12px;
+    background: #f9fcfb;
+  }
+
+  .cardHeading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .iconWrapper {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: #e2f3ea;
+  }
+
+  .image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .cardTitle {
+    color: var(--light-primary);
+    font-family: var(--font-montserrat), "Segoe UI", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+  }
+
+  .cardDescription {
+    margin-top: 14px;
+    color: #45555c;
+    font-family: var(--font-inter), "Segoe UI", sans-serif;
+    font-size: 0.94rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  @container (max-width: 1120px) {
+    .header {
       grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .statsWrapper {
+      max-width: 520px;
+      padding: 24px 0;
+    }
+
+    .cardsWrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container (max-width: 560px) {
+    .header {
+      margin-bottom: 28px;
+    }
+
+    .title {
+      font-size: 2rem;
+    }
+
+    .statsWrapper {
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    }
+
+    .cardsWrapper {
+      grid-template-columns: 1fr;
+      gap: 14px;
     }
 
     .card {
-      display: grid;
-      align-content: start;
-      min-height: 292px;
-      padding: 28px;
-      border: 1px solid color-mix(in srgb, var(--dark-on-surface) 18%, transparent);
-      border-radius: 8px;
-      background:
-        linear-gradient(
-          180deg,
-          color-mix(in srgb, var(--dark-on-surface) 7%, transparent),
-          color-mix(in srgb, var(--dark-surface-container-lowest) 10%, transparent)
-        ),
-        color-mix(in srgb, var(--dark-surface-container-low) 52%, transparent);
-      box-shadow:
-        0 24px 64px color-mix(in srgb, black 18%, transparent),
-        inset 0 1px 0 color-mix(in srgb, var(--dark-on-surface) 12%, transparent);
-      transition:
-        border-color 180ms ease,
-        transform 180ms ease,
-        background 180ms ease;
-
-      @media (max-width: 700px) {
-        min-height: auto;
-        padding: 24px;
-      }
-
-      &:hover {
-        border-color: color-mix(in srgb, var(--light-secondary) 70%, transparent);
-        background:
-          linear-gradient(
-            180deg,
-            color-mix(in srgb, var(--light-secondary) 10%, transparent),
-            color-mix(in srgb, var(--dark-surface-container-lowest) 12%, transparent)
-          ),
-          color-mix(in srgb, var(--dark-surface-container-low) 58%, transparent);
-        transform: translateY(-3px);
-      }
-
-      .iconWrapper {
-        display: grid;
-        place-items: center;
-        width: 76px;
-        height: 76px;
-        border: 1px solid color-mix(in srgb, var(--dark-on-surface) 18%, transparent);
-        border-radius: 50%;
-        background: color-mix(in srgb, var(--light-secondary) 72%, white);
-        box-shadow: 0 12px 28px color-mix(in srgb, black 18%, transparent);
-
-        .image {
-          width: 48px;
-          height: 48px;
-          object-fit: contain;
-        }
-      }
-
-      .content {
-        margin-top: 28px;
-
-        .cardTitle {
-          color: var(--dark-on-surface);
-          font-family: var(--font-montserrat), "Segoe UI", sans-serif;
-          font-size: 1.35rem;
-          font-weight: 800;
-          line-height: 1.22;
-          letter-spacing: 0;
-        }
-
-        .cardDescription {
-          margin-top: 12px;
-          color: color-mix(in srgb, var(--dark-on-surface) 76%, transparent);
-          font-family: var(--font-inter), "Segoe UI", sans-serif;
-          font-size: 1rem;
-          font-weight: 500;
-          line-height: 1.58;
-        }
-      }
+      padding: 24px;
     }
+
+    .cardHeading {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .iconWrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+    }
+
+    .image {
+      width: 34px;
+      height: 34px;
+    }
+
+    .cardTitle {
+      font-size: 1.02rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 48px 0;
   }
 }
